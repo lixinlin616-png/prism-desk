@@ -116,25 +116,44 @@ npm run submission -- ^
 | **回测报告须附生成该报告的代码或 notebook，不接受纯截图** | `docs/reports/review.md`（事后判分：235 卡 → 115 主张 → 34 决出，命中率 29.4%，rho -0.138 被系统自标 BLOCKER）**+ 生成它的代码** `prism.mjs`（`npm run review:seed`）与 `scripts/build-seed.mjs`（看板 fixture 连续两次重建 SHA-256 相同） | ✅ 全部为代码生成的 markdown，**零截图** |
 | **X 传播推文链接**（报名表独立字段） | 推文链接 + `docs/X-POSTS.md`（17 / 17 帖 · 86 / 86 检查：#BitgetHackathon、@Bitget_AI、实质性文案 ≥40 权重单位、长度、引用转发官方推文） | ⬜ 草稿与校验已就绪，**待发布后填 URL** |
 
-**还差的四件事只能你来做**（沙箱内无外网，我无法代做）：
+**进度：仓库已发布 ✅，剩下三件事需要你的浏览器**（创建账号 / OAuth 授权只能由本人完成，我无法代做）
 
-1. **建 public GitHub 仓库并推送** —— 仓库已 `git init` 完毕，**108 个文件 / 4.5 MB**（`git add -A --dry-run` 可复核），`.gitignore` 已确认既不会漏掉任何提交材料（含 1.45 MB 的 `data/fixtures/board-seed.json`）、也不会带进运行时状态：
+✅ **1. public GitHub 仓库 —— 已完成**
 
-   ```bash
-   git add -A
-   git commit -m "Prism Desk - Base Camp S2 Track 3 (信息提炼与信号生成)"
-   gh repo create prism-desk --public --source=. --push    # 或在 GitHub 网页建仓后 git remote add origin <url> && git push -u origin main
-   ```
+   **https://github.com/lixinlin616-png/prism-desk**
 
-2. **部署在线 Demo** —— `docs/DEPLOY.md` 给了四条路径，**赶时间选路径 B（Render / Railway）**：Runtime 选 Docker（仓库已有 Dockerfile）、Build Command 留空、Start Command `node server.mjs`、Health Check `/api/status`、环境变量 `PRISM_DATA_MODE=offline` 与 `PRISM_HOST=0.0.0.0`。零依赖所以没有构建失败面。
-3. **发 X 帖** —— 从 `docs/X-POSTS.md` 里挑一条（推荐 `a1` 或 `zh-1`，都是引用转发体），发布后把推文 URL 填进报名表独立字段。
-4. **生成最终清单** —— 把上面三个 URL 传给生成器，粘进表单：
+   109 个文件 / 4.5 MB（`git ls-files` 可复核），public，默认分支 `main`，README 在 GitHub 上正常渲染。`.gitignore` 已核对：既不漏任何提交材料（含 1.45 MB 的 `data/fixtures/board-seed.json`），也不带进运行时状态或任何密钥。
 
-   ```bash
-   npm run submission -- --repo=<repo-url> --demo=<demo-url> --xpost=<x-post-url> [--video=<video-url>] --out=docs/reports/submission-links.txt
-   ```
+⬜ **2. 部署在线 Demo —— 约 3 分钟，基本是一次点击**
 
-   录屏是可选项：Demo 无需登录，官方那条"需登录才必须附视频"不触发。若仍想加，`docs/DEMO-SCRIPT.md` 末尾有现成的 5 分钟评委动线。
+   仓库根目录已放好 `render.yaml` 蓝图，Runtime / Dockerfile / Health Check / 三个环境变量全部自动填好，不用手输任何字段：
+
+   **https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk**
+
+   流程：用 GitHub 登录 → Create → 等构建（零依赖，没有 npm install 这一步，所以没有构建失败面）→ 复制形如 `https://prism-desk-xxxx.onrender.com` 的地址。
+
+   ⚠️ 免费实例 15 分钟无流量会休眠，冷启动 5–10 秒（要载入 41,386 根日 K 的价格库）。**交表前自己先点开一次唤醒**，别把冷启动留给评委。想彻底免掉休眠就升付费实例，这是本项目性价比最高的一笔部署开销。
+
+⬜ **3. 发 X 帖**
+
+   从 `docs/X-POSTS.md` 里挑 `a1` 或 `zh-1`（都是引用转发官方推文的体裁）。17 / 17 帖已通过 86 / 86 项合规检查（#BitgetHackathon、@Bitget_AI、实质性文案 ≥40 权重单位、长度 ≤280、引用转发）。发布后把推文 URL 拿来；同一条 URL 还要另填报名表那个独立的「X 传播推文链接」字段。
+
+⬜ **4.（可选）录屏**
+
+   Demo 无需登录，官方那条"需登录才必须附演示视频"不触发，所以这是加分项不是必需项。要录的话 `docs/DEMO-SCRIPT.md` 末尾的「评委 5 分钟动线」是现成脚本。
+
+**拿到 URL 之后，一条命令生成终稿并粘进报名表：**
+
+```bash
+npm run submission -- ^
+  --repo=https://github.com/lixinlin616-png/prism-desk ^
+  --demo=<你的 onrender.com 地址> ^
+  --xpost=<你的推文地址> ^
+  --out=docs/reports/submission-links.txt
+```
+
+`--video=~ 可选。只要还剩任何 `<...-url>` 占位符，脚本就会在 stderr 打出"不可提交"；它同时会重新校验 14 个仓库路径与 11 个硬数字，对不上就拒绝输出。
+
 
 ---
 

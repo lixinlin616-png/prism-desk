@@ -10,6 +10,20 @@
 
 ---
 
+## 仓库与部署 / Repo & deploy
+
+**GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
+
+自己部署一份（免费，约 3 分钟）—— 仓库根目录的 `render.yaml` 会把所有字段自动填好，不用手输：
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk)
+
+零依赖，所以没有构建失败面：Runtime = Docker、Build Command 留空、Start Command = `node server.mjs`、Health Check = `/api/status`、环境变量 `PRISM_DATA_MODE=offline` 与 `PRISM_HOST=0.0.0.0`（蓝图里已写好）。
+
+> 免费实例 15 分钟无流量会休眠，首次加载约 5–10 秒（要载入 41,386 根日 K 的价格库）。**提交报名表前自己先点一次把实例唤醒**，别把冷启动留给评委。另外三条上线路径（Fly / VPS+Caddy / 临时隧道）见 [`docs/DEPLOY.md`](docs/DEPLOY.md)。
+
+---
+
 ## 为什么做这个 / Why
 
 7×24 的代币化股票（rToken）与每天只开 6.5 小时的美股现金市场之间，存在一个结构性的信息窗口：**信息在现金市场关门时落地，rToken 是唯一能给价格发现的场所。** 但真正的问题不是"能不能读到新闻"，而是：

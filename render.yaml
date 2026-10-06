@@ -1,0 +1,29 @@
+# Render Blueprint - makes deploying this repo a single click.
+#
+#   https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk
+#
+# Render reads this file and pre-fills every field, so there is nothing to type:
+# runtime, Dockerfile path, health check and the three environment variables.
+# Without it the deployer has to know that the start command is `node server.mjs`
+# and that PRISM_HOST must be 0.0.0.0 or the container binds to loopback and the
+# health check fails - which looks like a broken app rather than a missing var.
+#
+# PRISM_DATA_MODE=offline is deliberate: the bundled corpus, price book and MCP
+# fixtures are all committed, so the demo needs no outbound network and is
+# bit-for-bit reproducible. See docs/DEPLOY.md for the other three paths.
+
+services:
+  - type: web
+    name: prism-desk
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/status
+    envVars:
+      - key: PRISM_DATA_MODE
+        value: offline
+      - key: PRISM_HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production

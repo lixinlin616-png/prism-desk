@@ -126,9 +126,13 @@ docker run -d --name prism --restart unless-stopped \
 
 ---
 
-## 4. 路径 B · Render / Railway（无需自己写 Dockerfile）
+## 4. 路径 B（**最省事，推荐**）· Render / Railway
 
-**Render** → New → Web Service → 连 GitHub 仓库：
+仓库根目录有 **`render.yaml` 蓝图**，所以这条路径不需要手填任何字段：
+
+**[▶ 一键部署到 Render](https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk)**
+
+点开后用 GitHub 登录 → Create，蓝图会自动设定 Runtime=Docker、Dockerfile 路径、Health Check=/api/status 以及三个环境变量。若你想手动建（New → Web Service → 连 GitHub 仓库），字段如下：
 
 | 字段 | 填 |
 |---|---|

@@ -10,17 +10,17 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     · 打开即是投研台：点任一场景，可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路与逐条证据账本
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
-    <repo-url>
+    https://github.com/lixinlin616-png/prism-desk
     · 源码 + 真实价格数据 + 179 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，4.5 MB，clone 即可跑
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
 03. [必交] 运行记录｜完整投研任务演示 · 讲解版（提问 → 可用判断）
-    <repo-url>/blob/main/docs/DEMO-SCRIPT.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-SCRIPT.md
     · 七个阶段逐环节拆解：PLAN 路由 / INGEST 取数 / EXTRACT 抽取 / VERIFY 证据账本 / SCORE 五因子打分 / PRESENT 简报 / REVIEW 事后判分
 
 04. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
-    <repo-url>/blob/main/docs/DEMO-TRANSCRIPT.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-TRANSCRIPT.md
     · 944 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
 
 05. [选交] 运行记录｜演示录屏（5 分钟评委动线）
@@ -28,49 +28,49 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     · 与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分
 
 06. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
-    <repo-url>/blob/main/docs/reports/review.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md
     · 235 张卡 → 115 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（95% CI 14.1–44.7%）；打分与实现超额的 Spearman rho = -0.138 被系统自己标为 BLOCKER
 
 07. [必交] 运行记录｜生成上述报表的代码（官方要求"回测报告须附生成该报告的代码，不接受纯截图"）
-    <repo-url>/blob/main/prism.mjs
+    https://github.com/lixinlin616-png/prism-desk/blob/main/prism.mjs
     · 入口 `npm run review:seed`（= `node prism.mjs review --board=data/fixtures/board-seed.json`）。看板 fixture 由 scripts/build-seed.mjs 用 11 个固定 as-of × 6 个场景回放生成，连续两次重建 SHA-256 相同（实测），报表除时间戳行外逐字节可复现
 
 —— 支撑材料 · 研究质量与工程可信度 ——
 
 08. [支撑] 验证数据与关键指标（全部实测数字 + 逐项 caveat + 明确列出「我们没有测的」）
-    <repo-url>/blob/main/docs/VALIDATION.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/VALIDATION.md
     · 一页速览表把每个数字标注为 实测 / 估算 / 目标，并给出各自的复现命令
 
 09. [支撑] 架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）
-    <repo-url>/blob/main/docs/ARCHITECTURE.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ARCHITECTURE.md
     · 含两处常被混淆的账本数字的并列对照表（full-sweep 88.5% vs doctor smoke 84.6%，两轮恰好都是 26 items）
 
 10. [支撑] 复盘闭环说明（三条轴 / 七个方法决定 / 为什么绝不自动调权）
-    <repo-url>/blob/main/docs/REVIEW-LOOP.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/REVIEW-LOOP.md
     · 解释为什么 rho = -0.138 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的
 
 11. [支撑] 真实价格数据研究：宏观传导（25 个真实事件逐条明细）
-    <repo-url>/blob/main/docs/reports/transmission-study.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/transmission-study.md
     · 跑在 25 symbols · 41,386 根真实日 K 上（2019-01-02 → 2025-09-30，Nasdaq 公开 API），是 surprise 权重 0.30 的实证依据；`npm run replay` 可重跑
 
 12. [支撑] 真实价格数据研究：隔夜与休市窗口跳空（15,478 个真实跳空）
-    <repo-url>/blob/main/docs/reports/gap-study.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/gap-study.md
     · 支撑 closed-window 频道；同时报告 naive t 与按日期聚类的 clustered t，并以更保守的 clustered 为准
 
 13. [支撑] 自动校验报表：结构性 / 数据完整性 / 研究质量检查（60 / 60）
-    <repo-url>/blob/main/docs/reports/validation.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/validation.md
     · 由 `npm run validate` 生成，可直接作为 CI 门禁（任何一项失败即退出非零）
 
 14. [支撑] 项目陈述（问题定义 / 人群与非人群 / 实测数据 / 五个真实踩过的坑）
-    <repo-url>/blob/main/docs/PROJECT-STATEMENT.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/PROJECT-STATEMENT.md
     · 含报名表「项目说明」与「大模型在项目中的作用」两个字段的成稿
 
 15. [支撑] 路线图（每一项都挂在一个已实测数字上，含明确的 non-goals）
-    <repo-url>/blob/main/docs/ROADMAP.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ROADMAP.md
     · BLOCKER（打分符号反转）的四步修法，以及性价比最高的一项：把 invalidation 收紧成四字段必填
 
 16. [支撑] 部署说明（四条上线路径，逐项标注本环境验证到什么程度）
-    <repo-url>/blob/main/docs/DEPLOY.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEPLOY.md
     · 含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、以及反向代理会静默缓冲 SSE 流这个本机测不出来的坑
 
 —— 必交 · X 传播 ——
@@ -80,11 +80,11 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     · 同一条链接另填在报名表独立的「X 传播推文链接」字段
 
 18. [支撑] X 传播｜草稿全文与合规校验报表（17 / 17 帖 · 86 / 86 检查）
-    <repo-url>/blob/main/docs/X-POSTS.md
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/X-POSTS.md
     · 按 X 官方 v3 权重（中文/全角 2 · 拉丁 1 · URL 固定 23）逐条校验话题标签、@提及、实质性（≥40 权重单位原创文案）、长度与是否引用转发官方推文；`npm run xpost` 可复现
 
 —— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——
-git clone <repo-url> && cd prism-desk
+git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）
 node prism.mjs demo      # 逐字重建上面那份 944 行逐字稿（as-of 由场景钉死，无需传参）
 npm test                 # 179 / 179 · 0 跳过（全新 clone 亦然）
