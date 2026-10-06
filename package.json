@@ -1,0 +1,45 @@
+{
+  "name": "prism-desk",
+  "version": "1.0.0",
+  "description": "Prism Desk - a natural-language AI trading desk that distills unstructured US-equity / tokenized-equity information into falsifiable, evidence-grounded signal cards.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "prism": "./prism.mjs"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "cli": "node prism.mjs",
+    "demo": "node prism.mjs demo",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate.mjs",
+    "replay": "node scripts/replay.mjs",
+    "prices": "node scripts/fetch-prices.mjs",
+    "record": "node scripts/record-fixtures.mjs",
+    "review": "node prism.mjs review --report",
+    "xpost": "node scripts/xpost.mjs",
+    "doctor": "node prism.mjs doctor",
+    "seed": "node scripts/build-seed.mjs",
+    "review:seed": "node prism.mjs review --board=data/fixtures/board-seed.json --out=docs/reports/review.md --report",
+    "submission": "node scripts/submission-links.mjs",
+    "submission:check": "node scripts/submission-links.mjs --check"
+  },
+  "keywords": [
+    "bitget",
+    "hackathon",
+    "ai-trading-desk",
+    "mcp",
+    "signal-generation",
+    "earnings",
+    "macro",
+    "rtoken",
+    "tokenized-equities",
+    "research-copilot"
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "nwcl-news-agentic-platform",
+    "kind": "news",
+    "title": "Northwind Cloud (NWCL) signs multi-year agentic platform deal with three national banks",
+    "publishedAt": "2025-09-10T13:20:00Z",
+    "source": "demo wire (synthetic scenario)",
+    "tickers": ["NWCL"],
+    "tags": ["news", "software", "ai"],
+    "synthetic": true,
+    "meta": { "priceProxy": "MSFT" },
+    "body": "Northwind Cloud announced multi-year agreements with three national banks to deploy its agentic operations platform across compliance and back-office workflows, a win the company described as the largest initial commitment in the product's history. Management said the deals carry strong demand signals and accelerate the platform's roadmap by two quarters, with the first production workloads expected before year end. Analysts at two firms upgraded the name, citing operating leverage from the platform's shared infrastructure and better-than-expected momentum in the regulated verticals. The company also reported record revenue in its infrastructure segment for the fourth consecutive quarter and said retention remains robust, with net revenue retention above 120 percent. Northwind raised its full-year revenue outlook and cited a tailwind from sovereign cloud programmes in two additional markets. Shares traded higher in pre-market dealings on the news."
+  },
+  {
+    "id": "nwcl-analyst-upgrade",
+    "kind": "analyst-note",
+    "title": "Desk note: NWCL upgrade - regulated verticals re-rate the platform multiple",
+    "publishedAt": "2025-09-10T16:45:00Z",
+    "source": "demo research note (synthetic scenario)",
+    "tickers": ["NWCL"],
+    "tags": ["analyst", "software"],
+    "synthetic": true,
+    "meta": { "priceProxy": "MSFT" },
+    "body": "We upgrade Northwind Cloud and raise our target. The banking agreements matter less for the near-term revenue line than for what they imply about the platform's compliance certification moat, which competitors will find expensive and slow to replicate. We see strong demand in regulated verticals, accelerating expansion into two new sovereign markets, and margin expansion from shared infrastructure. Our revised model embeds better-than-expected growth in platform services and assumes the company outperforms the broader software group on operating leverage. Risks to the view: the initial commitments are back-end weighted, and the tailwind from sovereign programmes could prove lumpy rather than linear. We would add on weakness ahead of the next print."
+  },
+  {
+    "id": "nwcl-news-expansion",
+    "kind": "news",
+    "title": "Northwind Cloud (NWCL) expands sovereign cloud footprint, adds two markets",
+    "publishedAt": "2025-09-11T09:05:00Z",
+    "source": "demo wire (synthetic scenario)",
+    "tickers": ["NWCL"],
+    "tags": ["news", "software", "sovereign"],
+    "synthetic": true,
+    "meta": { "priceProxy": "MSFT" },
+    "body": "Northwind Cloud said it has secured approvals to operate sovereign cloud regions in two additional markets, expanding a pipeline management has described as a durable tailwind. The company reiterated that the regulatory certifications underpinning these regions also apply to its agentic platform, which gives it an advantage in procurement processes that require in-country data residency. Commentary from channel partners points to robust demand and accelerating deal cycles in the public sector. Northwind said it expects the new regions to contribute record revenue in the infrastructure segment within four quarters of launch and that it has capacity to support further expansion without material incremental capital."
+  },
+  {
+    "id": "hlxn-news-downgrade",
+    "kind": "news",
+    "title": "Helion Dynamics (HLXN) cut by two firms after production slowdown",
+    "publishedAt": "2025-09-10T18:30:00Z",
+    "source": "demo wire (synthetic scenario)",
+    "tickers": ["HLXN"],
+    "tags": ["news", "industrials"],
+    "synthetic": true,
+    "meta": { "priceProxy": "CAT" },
+    "body": "Two sell-side firms downgraded Helion Dynamics following the company's decision to reduce fourth-quarter production rates, citing weak demand in construction equipment and a slowdown in industrial automation orders. Analysts pointed to the third consecutive quarter with a book-to-bill below one, an 11 percent decline in backlog, and elevated dealer inventories that they expect will require further markdowns. One note described margin pressure from unfavourable absorption as likely to persist into next year and flagged the restructuring provision as evidence that management is reacting to a deterioration rather than pre-empting it. A second note said the withdrawal of long-term margin framework commentary removes a key support for the current valuation and that pricing pressure in the component business is a headwind the market has not fully discounted. Channel checks suggest continued softness in North American earthmoving and a challenging environment for capital goods into the first half of next year."
+  },
+  {
+    "id": "crvs-analyst-caution",
+    "kind": "analyst-note",
+    "title": "Desk note: CRVS beat is real, but the concentration number is the one to watch",
+    "publishedAt": "2025-09-10T11:15:00Z",
+    "source": "demo research note (synthetic scenario)",
+    "tickers": ["CRVS"],
+    "tags": ["analyst", "semis"],
+    "synthetic": true,
+    "meta": { "priceProxy": "NVDA" },
+    "body": "Corvus beat and raised, and the supply-constrained framing is credible given disclosed lead times. We would not fade the print. What we would monitor is the disclosure that four customers represented 46 percent of revenue, up from 39 percent a year ago. That is a concentration risk, not a demand problem, and it means a single programme deferral has an outsized effect on the quarterly path. Management guided to normalisation as sovereign and enterprise programmes ramp, but no timetable was given. The gross margin bridge also included a one-time 60 basis point inventory reserve release that will not repeat, which puts the underlying run rate below the headline. We keep our constructive stance but would not add ahead of the next print, and we would reduce on any evidence of order slippage among the top four accounts."
+  }
+]

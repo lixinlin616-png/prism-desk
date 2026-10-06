@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+dist/
+.tmp/
+work/
+coverage/
+data/prices/*.json
+# Board state is generated at runtime by `npm run demo` / the web desk.
+data/state/

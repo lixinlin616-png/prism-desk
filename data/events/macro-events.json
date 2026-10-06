@@ -1,0 +1,42 @@
+{
+  "_readme": [
+    "Real US macro releases used by the transmission study (src/research/transmission.mjs).",
+    "Figures are transcribed from the public releases (BLS CPI, BLS employment situation,",
+    "FOMC statements). `side` is derived mechanically as sign(actual - consensus) at run time,",
+    "never hand-picked, so the study cannot be tuned to its own answer.",
+    "Realised prices come from data/prices/*.csv (see scripts/fetch-prices.mjs for provenance).",
+    "`polarity` is +1 unless stated. It encodes whether a HIGHER number means a HOTTER",
+    "surprise. Only metrics whose natural direction is inverted (e.g. projected rate CUTS)",
+    "carry -1. Polarity is declared up front from the metric definition, not fitted.",
+    "If you spot a transcription error, fix it here and re-run: node scripts/replay.mjs"
+  ],
+  "universe": ["NVDA", "TSLA", "PLTR", "COIN", "AMD", "META", "AAPL", "MSFT", "GOOGL", "AMZN", "AVGO", "NFLX", "JPM", "XOM", "WMT", "PFE", "CAT"],
+  "benchmark": "SPY",
+  "events": [
+    { "date": "2022-06-10", "indicator": "cpi",  "label": "CPI y/y (May 2022)",        "actual": 8.6, "consensus": 8.3, "prior": 8.3, "unit": "%",   "source": "BLS" },
+    { "date": "2022-06-15", "indicator": "fomc", "label": "FOMC +75bp",                 "actual": 75,  "consensus": 75,  "prior": 50,  "unit": "bps", "source": "Federal Reserve", "note": "Consensus is the market's expectation ON THE DAY. Fed funds futures had fully repriced to 75bp by 2022-06-13, so the decision itself was not a surprise and the study correctly skips it." },
+    { "date": "2022-07-13", "indicator": "cpi",  "label": "CPI y/y (Jun 2022)",         "actual": 9.1, "consensus": 8.8, "prior": 8.6, "unit": "%",   "source": "BLS" },
+    { "date": "2022-09-13", "indicator": "cpi",  "label": "CPI y/y (Aug 2022)",         "actual": 8.3, "consensus": 8.1, "prior": 8.5, "unit": "%",   "source": "BLS" },
+    { "date": "2022-11-10", "indicator": "cpi",  "label": "CPI y/y (Oct 2022)",         "actual": 7.7, "consensus": 8.0, "prior": 8.2, "unit": "%",   "source": "BLS" },
+    { "date": "2023-01-12", "indicator": "cpi",  "label": "CPI y/y (Dec 2022)",         "actual": 6.5, "consensus": 6.5, "prior": 7.1, "unit": "%",   "source": "BLS" },
+    { "date": "2023-03-10", "indicator": "shock","label": "SVB failure - credit shock", "actual": 1,   "consensus": 0,   "prior": 0,   "unit": "",    "source": "public events", "note": "Risk-off control event: flight to duration, not an inflation print." },
+    { "date": "2023-06-13", "indicator": "cpi",  "label": "CPI y/y (May 2023)",         "actual": 4.0, "consensus": 4.1, "prior": 4.9, "unit": "%",   "source": "BLS" },
+    { "date": "2023-09-13", "indicator": "cpi",  "label": "CPI y/y (Aug 2023)",         "actual": 3.7, "consensus": 3.6, "prior": 3.2, "unit": "%",   "source": "BLS" },
+    { "date": "2023-11-14", "indicator": "cpi",  "label": "CPI y/y (Oct 2023)",         "actual": 3.2, "consensus": 3.3, "prior": 3.7, "unit": "%",   "source": "BLS" },
+    { "date": "2024-01-11", "indicator": "cpi",  "label": "CPI y/y (Dec 2023)",         "actual": 3.4, "consensus": 3.2, "prior": 3.1, "unit": "%",   "source": "BLS" },
+    { "date": "2024-04-10", "indicator": "cpi",  "label": "CPI y/y (Mar 2024)",         "actual": 3.5, "consensus": 3.4, "prior": 3.2, "unit": "%",   "source": "BLS" },
+    { "date": "2024-07-11", "indicator": "cpi",  "label": "CPI y/y (Jun 2024)",         "actual": 3.0, "consensus": 3.1, "prior": 3.3, "unit": "%",   "source": "BLS", "note": "Cool print but mega-cap growth fell anyway - the great rotation. Kept as an honest failure case." },
+    { "date": "2024-08-05", "indicator": "shock","label": "Yen carry unwind",           "actual": 1,   "consensus": 0,   "prior": 0,   "unit": "",    "source": "public events", "note": "Global de-risking control event." },
+    { "date": "2024-09-18", "indicator": "fomc", "label": "FOMC -50bp jumbo cut",       "actual": -50, "consensus": -25, "prior": 0,   "unit": "bps", "source": "Federal Reserve" },
+    { "date": "2024-11-07", "indicator": "fomc", "label": "FOMC -25bp",                 "actual": -25, "consensus": -25, "prior": -50, "unit": "bps", "source": "Federal Reserve" },
+    { "date": "2024-12-18", "indicator": "fomc-cuts", "label": "FOMC 2025 easing projections", "actual": 2, "consensus": 4, "prior": 4, "unit": "cuts", "polarity": -1, "source": "Federal Reserve", "note": "The 25bp cut itself was fully expected. The surprise was the dot plot halving projected 2025 easing. FEWER projected cuts = HAWKISH, hence polarity -1." },
+    { "date": "2025-01-15", "indicator": "core-cpi", "label": "Core CPI y/y (Dec 2024)", "actual": 3.2, "consensus": 3.3, "prior": 3.3, "unit": "%",   "source": "BLS", "note": "Headline CPI was in line at 2.9%; the tradeable surprise was core at 3.2% vs 3.3% expected, which is what drove the rally." },
+    { "date": "2025-02-12", "indicator": "cpi",  "label": "CPI y/y (Jan 2025)",         "actual": 3.0, "consensus": 2.9, "prior": 2.9, "unit": "%",   "source": "BLS" },
+    { "date": "2025-03-12", "indicator": "cpi",  "label": "CPI y/y (Feb 2025)",         "actual": 2.8, "consensus": 2.9, "prior": 3.0, "unit": "%",   "source": "BLS" },
+    { "date": "2025-04-09", "indicator": "shock","label": "Reciprocal tariff pause",    "actual": 1,   "consensus": 0,   "prior": 0,   "unit": "",    "source": "public events", "note": "90-day pause announcement - the largest one-day risk-on dispersion in the sample." },
+    { "date": "2025-06-11", "indicator": "cpi",  "label": "CPI y/y (May 2025)",         "actual": 2.4, "consensus": 2.5, "prior": 2.3, "unit": "%",   "source": "BLS" },
+    { "date": "2025-08-01", "indicator": "nfp",  "label": "Nonfarm payrolls (Jul)",     "actual": 73,  "consensus": 106, "prior": 147, "unit": "k",   "source": "BLS", "note": "Weak print plus large downward revisions to May and June." },
+    { "date": "2025-09-05", "indicator": "nfp",  "label": "Nonfarm payrolls (Aug)",     "actual": 22,  "consensus": 75,  "prior": 79,  "unit": "k",   "source": "BLS" },
+    { "date": "2025-09-11", "indicator": "cpi",  "label": "CPI y/y (Aug 2025)",         "actual": 2.9, "consensus": 3.1, "prior": 2.7, "unit": "%",   "source": "BLS", "note": "Headline cool, core 3.1% vs 3.0% hot - a genuinely two-sided print." }
+  ]
+}

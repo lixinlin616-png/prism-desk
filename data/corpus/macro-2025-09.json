@@ -1,0 +1,94 @@
+[
+  {
+    "id": "nfp-2025-08",
+    "kind": "macro-print",
+    "title": "US employment situation, August 2025: +22k payrolls",
+    "publishedAt": "2025-09-05T12:30:00Z",
+    "source": "Bureau of Labor Statistics (demo reconstruction)",
+    "tickers": ["SPY", "QQQ", "IWM"],
+    "tags": ["macro", "labor", "nfp"],
+    "synthetic": false,
+    "meta": {
+      "indicator": "nfp",
+      "label": "Nonfarm payrolls (Aug 2025)",
+      "actual": 22,
+      "consensus": 75,
+      "prior": 79,
+      "unit": "k",
+      "revisions": -21,
+      "unemploymentRate": 4.3,
+      "avgHourlyEarningsMomPct": 0.3,
+      "nextRelease": "2025-10-03",
+      "releasedOutsideRth": false
+    },
+    "body": "Nonfarm payroll employment rose by 22,000 in August, well below the 75,000 economists had expected and sharply lower than the 79,000 recorded in July. Prior months were revised down by a combined 21,000, leaving the three-month average near zero. The unemployment rate edged up to 4.3 percent as participation rose. Average hourly earnings increased 0.3 percent on the month, holding the year-over-year pace at 3.7 percent, so wage growth is not yet cooling as fast as hiring. Job gains were concentrated in health care and social assistance; manufacturing and professional and business services shed jobs. The household survey was weaker than the establishment survey, with employment falling and the number of unemployed rising. Markets read the report as evidence that the labor market has shifted from slowing to contracting at the margin, which raises the probability of additional policy easing this year while simultaneously increasing recession risk for demand-sensitive cyclicals. Futures moved to price roughly 55 basis points of cumulative easing by the December meeting, up from about 42 basis points before the release."
+  },
+  {
+    "id": "cpi-2025-08",
+    "kind": "macro-print",
+    "title": "US CPI, August 2025: headline 2.9% y/y, core 3.1% y/y",
+    "publishedAt": "2025-09-11T12:30:00Z",
+    "source": "Bureau of Labor Statistics (demo reconstruction)",
+    "tickers": ["SPY", "QQQ", "TLT"],
+    "tags": ["macro", "inflation", "cpi"],
+    "synthetic": false,
+    "meta": {
+      "indicator": "cpi",
+      "label": "CPI y/y (Aug 2025)",
+      "actual": 2.9,
+      "consensus": 3.1,
+      "prior": 2.7,
+      "unit": "%",
+      "coreActual": 3.1,
+      "coreConsensus": 3.0,
+      "corePrior": 3.1,
+      "momActual": 0.4,
+      "momConsensus": 0.3,
+      "shelterMomPct": 0.4,
+      "energyMomPct": 0.7,
+      "nextRelease": "2025-10-15",
+      "releasedOutsideRth": false
+    },
+    "body": "The consumer price index rose 2.9 percent over the twelve months to August, below the 3.1 percent consensus but above the 2.7 percent prior reading, and the monthly increase of 0.4 percent was hotter than the 0.3 percent expected. Core inflation, which excludes food and energy, rose 3.1 percent year over year against a 3.0 percent expectation, leaving the underlying trend running above the committee's target for a fifth consecutive month. Shelter costs advanced 0.4 percent and contributed the largest share of the monthly increase; energy prices rose 0.7 percent. Used vehicle and truck prices rose sharply after several months of decline, and airline fares rebounded. The composition matters more than the headline: the downside surprise came almost entirely from energy and a favourable base effect, while the services component that the committee watches most closely stayed sticky. This is a genuinely two-sided print. It eases the immediate case for a hawkish policy path, which supports long-duration assets, but it does not deliver the disinflation the committee has said it needs before easing further, which caps how much relief the market should extrapolate."
+  },
+  {
+    "id": "fomc-2025-09",
+    "kind": "fomc-statement",
+    "title": "FOMC statement, 17 September 2025: 25bp cut to 4.00-4.25%",
+    "publishedAt": "2025-09-17T18:00:00Z",
+    "source": "Federal Reserve (demo reconstruction)",
+    "tickers": ["SPY", "QQQ", "TLT"],
+    "tags": ["macro", "fomc", "policy"],
+    "synthetic": false,
+    "meta": {
+      "indicator": "fomc",
+      "label": "FOMC target range change",
+      "actual": -25,
+      "consensus": -25,
+      "prior": 0,
+      "unit": "bps",
+      "targetRange": "4.00-4.25%",
+      "dissents": 1,
+      "nextMeeting": "2025-10-29",
+      "releasedOutsideRth": false
+    },
+    "body": "The Committee decided to lower the target range for the federal funds rate by one quarter percentage point to 4.00 to 4.25 percent. Economic activity has continued to expand at a solid pace. Job gains have slowed, and the unemployment rate has edged up but remains low. Inflation has come down over the past year but remains somewhat elevated. The Committee judges that the risks to achieving its employment and inflation goals are roughly balanced, and it moved to a framework that describes policy decisions as meeting-by-meeting rather than committing to a path. One member preferred to hold the target range unchanged at this meeting. In the accompanying projections the median participant saw the policy rate modestly lower by the end of next year, but the dispersion around that median widened, and the Chair emphasised in the press conference that the committee is not signalling a series of reductions and that the pace of further easing will depend on the incoming data. Bond markets treated the delivery of the widely anticipated cut alongside the emphasis on data dependence as a mildly hawkish outcome relative to what had been priced for the following two meetings, and the front end of the curve sold off after the statement."
+  },
+  {
+    "id": "weekend-policy-shock",
+    "kind": "news",
+    "title": "Weekend wire: new tariff framework announced outside market hours",
+    "publishedAt": "2025-09-13T14:05:00Z",
+    "source": "demo wire (synthetic scenario)",
+    "tickers": ["SPY", "QQQ", "XLE", "CAT"],
+    "tags": ["macro", "trade", "weekend", "closed-window"],
+    "synthetic": true,
+    "meta": {
+      "releasedOutsideRth": true,
+      "sessionAtRelease": "weekend",
+      "nextCashOpen": "2025-09-15T13:30:00Z",
+      "affectedThemes": ["importers", "industrials", "energy", "long-duration growth"]
+    },
+    "body": "A new tariff framework was announced on Saturday afternoon, roughly 47 hours before the next US cash open. The framework expands the scope of levies on imported industrial components and consumer electronics, with a stated effective date inside the current quarter. Because the announcement landed while the native share market is shut, there is no cash price for any affected name until Monday morning. Tokenized versions of the same equities continue to trade on crypto venues throughout the weekend, which makes the rToken the only live price discovery mechanism for this information. Historically the weekend gap that follows an announcement of this kind is wide and the first hour of Monday trading is where most of the repricing happens, but the rToken book is materially thinner than the native order book and its prints can dislocate from any level a cash market would clear at. Import-heavy retailers and industrials with long supply chains are the most exposed; domestic energy producers and names with high domestic content are the relative beneficiaries. Traders holding the rToken over the weekend carry a liquidity risk that has no equivalent in the cash market, because there is no cash market to exit into."
+  }
+]

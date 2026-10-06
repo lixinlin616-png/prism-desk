@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "description": "Labelled evaluation set for Prism Desk. Two halves: (1) extraction cases - documents with a known correct reading, used to measure whether the rule extractor finds the right channel, direction and magnitude; (2) ledger cases - evidence items with a known correct verdict, including deliberately hallucinated numbers, used to prove the evidence ledger actually quarantines grounded-failure cards. Every issuer below is fictional. Run with `npm run validate`.",
+  "tolerancePct": 2.0,
+  "extraction": [
+    {
+      "id": "earn-beat-raise",
+      "title": "Clean beat with a raised guide should read long on earnings-gap",
+      "document": {
+        "id": "eval-zeph-release",
+        "kind": "earnings-release",
+        "title": "Zephyr Grid Systems (ZEPH) Q3 results: revenue and EPS above consensus, full-year guide raised",
+        "publishedAt": "2025-09-16T20:10:00Z",
+        "source": "eval fixture (fictional issuer)",
+        "tickers": ["ZEPH"],
+        "synthetic": true,
+        "meta": {
+          "metric": "EPS",
+          "actual": 1.86,
+          "consensus": 1.52,
+          "unit": "USD",
+          "consensusSource": "eval street consensus",
+          "revenueActual": 4.12,
+          "revenueConsensus": 3.71,
+          "revenueUnit": "USD bn",
+          "grossMarginPct": 48.9,
+          "grossMarginPriorPct": 45.2
+        },
+        "body": "Zephyr Grid Systems reported third quarter revenue of 4.12 billion dollars, above the 3.71 billion consensus and up 31 percent year over year, driven by record revenue in the transmission product line. Non-GAAP earnings per share were 1.86 dollars against consensus of 1.52 dollars. Gross margin expanded to 48.9 percent from 45.2 percent on favourable mix and better utilisation. The company raised its full-year outlook and now expects revenue of approximately 16.4 billion dollars, above the prior 15.6 billion guide, citing strong demand and a growing backlog. Management said visibility remains strong, that the pipeline is robust, and that momentum accelerated through the quarter."
+      },
+      "expect": {
+        "channel": "earnings-gap",
+        "ticker": "ZEPH",
+        "direction": "long",
+        "guidanceStance": "raise",
+        "claimContains": ["beat"],
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "earn-miss-lower",
+      "title": "Clean miss with a cut guide should read short on earnings-gap",
+      "document": {
+        "id": "eval-krln-release",
+        "kind": "earnings-release",
+        "title": "Kestrel Logistics (KRLN) Q3 results: revenue miss, guidance lowered, backlog down",
+        "publishedAt": "2025-09-17T20:10:00Z",
+        "source": "eval fixture (fictional issuer)",
+        "tickers": ["KRLN"],
+        "synthetic": true,
+        "meta": {
+          "metric": "EPS",
+          "actual": 0.41,
+          "consensus": 0.68,
+          "unit": "USD",
+          "consensusSource": "eval street consensus",
+          "revenueActual": 2.05,
+          "revenueConsensus": 2.44,
+          "revenueUnit": "USD bn"
+        },
+        "body": "Kestrel Logistics reported third quarter revenue of 2.05 billion dollars, below the 2.44 billion consensus and down 8 percent year over year on softening freight volumes. Non-GAAP earnings per share were 0.41 dollars against consensus of 0.68 dollars. The company lowered its full-year outlook and now expects revenue of approximately 8.3 billion dollars, below the prior 9.1 billion guide. Management said demand has weakened, that visibility has deteriorated, and that the backlog declined sequentially. The company flagged pricing pressure and warned of further headwinds into the fourth quarter."
+      },
+      "expect": {
+        "channel": "earnings-gap",
+        "ticker": "KRLN",
+        "direction": "short",
+        "guidanceStance": "lower",
+        "claimContains": ["miss"],
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "earn-beat-withdraw",
+      "title": "A beat whose guide is withdrawn is not a long - the withdrawal dominates",
+      "document": {
+        "id": "eval-vntr-release",
+        "kind": "earnings-release",
+        "title": "Vantari Materials (VNTR) Q3 results: EPS above consensus, full-year guidance withdrawn",
+        "publishedAt": "2025-09-18T20:10:00Z",
+        "source": "eval fixture (fictional issuer)",
+        "tickers": ["VNTR"],
+        "synthetic": true,
+        "meta": {
+          "metric": "EPS",
+          "actual": 2.14,
+          "consensus": 1.95,
+          "unit": "USD",
+          "consensusSource": "eval street consensus"
+        },
+        "body": "Vantari Materials reported third quarter non-GAAP earnings per share of 2.14 dollars against consensus of 1.95 dollars. Revenue was 3.4 billion dollars. Separately, the company withdrew its full-year outlook and will not provide updated guidance at this time, citing uncertainty in end-market demand and pending resolution of a supply agreement. Management declined to reaffirm its prior framework and said it would revisit guidance once visibility improves. The board deferred its capital allocation update."
+      },
+      "expect": {
+        "channel": "earnings-gap",
+        "ticker": "VNTR",
+        "guidanceStance": "withdraw",
+        "directionNot": "long",
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "macro-cpi-hot",
+      "title": "A hot CPI print should produce a macro-transmission card with side=hot",
+      "document": {
+        "id": "eval-cpi-hot",
+        "kind": "macro-print",
+        "title": "US CPI, August 2025: headline and core both above consensus",
+        "publishedAt": "2025-09-11T12:30:00Z",
+        "source": "eval fixture",
+        "tickers": ["SPY", "QQQ", "TLT"],
+        "synthetic": true,
+        "meta": {
+          "indicator": "cpi",
+          "label": "CPI y/y",
+          "actual": 3.4,
+          "consensus": 3.0,
+          "unit": "%",
+          "coreActual": 3.3,
+          "coreConsensus": 3.0
+        },
+        "body": "The consumer price index rose 3.4 percent year over year in August, above the 3.0 percent consensus and up from 3.1 percent in July. Core inflation, excluding food and energy, rose 3.3 percent against a 3.0 percent expectation. Shelter costs remained the largest contributor. The print complicates the easing path and pushed front-end Treasury yields higher."
+      },
+      "expect": {
+        "channel": "macro-transmission",
+        "directionIn": ["short", "pair", "hedge", "avoid"],
+        "transmissionChainMinHops": 2,
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "macro-nfp-cool",
+      "title": "A cool payrolls print should produce a macro-transmission card with side=cool",
+      "document": {
+        "id": "eval-nfp-cool",
+        "kind": "macro-print",
+        "title": "US employment situation, August 2025: payrolls well below consensus",
+        "publishedAt": "2025-09-05T12:30:00Z",
+        "source": "eval fixture",
+        "tickers": ["SPY", "IWM"],
+        "synthetic": true,
+        "meta": {
+          "indicator": "nfp",
+          "label": "Nonfarm payrolls",
+          "actual": 22,
+          "consensus": 75,
+          "unit": "k"
+        },
+        "body": "Nonfarm payrolls rose by 22 thousand in August, far below the 75 thousand consensus, with the prior two months revised down by 21 thousand combined. The unemployment rate edged higher. Wage growth cooled to 3.7 percent year over year. Markets priced a higher probability of an aggressive easing path after the release."
+      },
+      "expect": {
+        "channel": "macro-transmission",
+        "directionIn": ["long", "pair", "short", "hedge"],
+        "transmissionChainMinHops": 2,
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "fomc-hawkish",
+      "title": "A hawkish FOMC statement should classify as hawkish and transmit through rates",
+      "document": {
+        "id": "eval-fomc-hawk",
+        "kind": "fomc-statement",
+        "title": "FOMC statement: rates held, committee signals fewer cuts ahead",
+        "publishedAt": "2025-09-17T18:00:00Z",
+        "source": "eval fixture",
+        "tickers": ["SPY", "TLT"],
+        "synthetic": true,
+        "meta": { "indicator": "fomc", "label": "FOMC decision" },
+        "body": "The Committee decided to keep the target range for the federal funds rate unchanged. Inflation remains elevated and progress toward the 2 percent objective has stalled. The Committee judged that the risks to both sides of its mandate are skewed toward inflation persistence, and that a more restrictive stance for longer is warranted. Participants removed the prior language about easing bias and indicated fewer reductions than previously signalled."
+      },
+      "expect": {
+        "channel": "macro-transmission",
+        "transmissionChainMinHops": 1,
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "risk-filing",
+      "title": "Adverse language plus ratio anomalies should raise a contrarian risk flag",
+      "document": {
+        "id": "eval-orbt-10q",
+        "kind": "filing",
+        "title": "Orbital Composites (ORBT) 10-Q excerpt - risk factors and receivables note",
+        "publishedAt": "2025-09-15T21:00:00Z",
+        "source": "eval fixture (fictional issuer)",
+        "tickers": ["ORBT"],
+        "synthetic": true,
+        "meta": { "ratioChecks": ["dso-deterioration", "inventory-build", "capex-over-depreciation"] },
+        "body": "The company notes increased customer concentration, with the three largest accounts representing 61 percent of revenue. Days sales outstanding lengthened materially as collections slowed, and management acknowledges elevated credit risk. Inventory built faster than shipments, raising obsolescence concerns. The company disclosed an ongoing regulatory inquiry and cautioned that adverse findings could have a material effect. Litigation reserves were increased. Related-party transactions with an entity controlled by an officer are described in note 9. Going-concern language was not used but the company warned of tightening liquidity and covenant pressure."
+      },
+      "expect": {
+        "channel": "risk-flag",
+        "ticker": "ORBT",
+        "directionIn": ["avoid", "short", "hedge"],
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "news-constructive",
+      "title": "Strongly positive coverage should turn the narrative channel constructive",
+      "document": {
+        "id": "eval-zeph-news",
+        "kind": "news",
+        "title": "Zephyr wins landmark grid contract, analysts upgrade",
+        "publishedAt": "2025-09-19T13:00:00Z",
+        "source": "eval fixture wire",
+        "tickers": ["ZEPH"],
+        "synthetic": true,
+        "meta": {},
+        "body": "Zephyr Grid Systems secured a landmark multi-year contract that analysts called a significant win and a strong validation of its technology. Two brokers upgraded the shares, citing robust momentum, accelerating demand and a record backlog. Sentiment has turned decidedly positive, with the market rewarding the company's breakthrough positioning and favourable outlook. Management described the pipeline as exceptional and the tailwinds as durable."
+      },
+      "expect": {
+        "channel": "narrative-shift",
+        "ticker": "ZEPH",
+        "direction": "long",
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "news-negative",
+      "title": "Strongly negative coverage should turn the narrative channel defensive",
+      "document": {
+        "id": "eval-krln-news",
+        "kind": "news",
+        "title": "Kestrel loses key customer, analysts downgrade on deteriorating outlook",
+        "publishedAt": "2025-09-19T14:00:00Z",
+        "source": "eval fixture wire",
+        "tickers": ["KRLN"],
+        "synthetic": true,
+        "meta": {},
+        "body": "Kestrel Logistics lost its largest customer, a significant blow that analysts called a serious setback and a worrying signal. Two brokers downgraded the shares, citing deteriorating fundamentals, weakening demand and a troubled outlook. Sentiment has turned decidedly negative, with the market punishing the company's disappointing results and elevated risk. Management conceded the headwinds are severe and the guidance is under pressure."
+      },
+      "expect": {
+        "channel": "narrative-shift",
+        "ticker": "KRLN",
+        "direction": "short",
+        "evidencePasses": true
+      }
+    },
+    {
+      "id": "negative-control-bland",
+      "title": "PRECISION CONTROL: a routine housekeeping release must produce no signal at all",
+      "document": {
+        "id": "eval-bland",
+        "kind": "news",
+        "title": "Zephyr Grid Systems announces date of annual shareholder meeting",
+        "publishedAt": "2025-09-20T09:00:00Z",
+        "source": "eval fixture wire",
+        "tickers": ["ZEPH"],
+        "synthetic": true,
+        "meta": {},
+        "body": "Zephyr Grid Systems today announced that its annual meeting of shareholders will be held on November 14 at the company's headquarters. The record date for determining shareholders entitled to notice of and to vote at the meeting is October 6. The agenda includes the election of directors, ratification of the independent auditor, and an advisory vote on executive compensation. Proxy materials will be mailed to shareholders of record and filed on EDGAR."
+      },
+      "expect": {
+        "maxCards": 0,
+        "note": "A signal generator that fires on everything is worse than one that fires rarely. This case exists to measure false positives."
+      }
+    }
+  ],
+  "ledger": [
+    {
+      "id": "metric-correct",
+      "title": "A number that really is in the document passes",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "earnings-gap", "tickers": ["ZEPH"], "direction": "long", "claim": "ZEPH revenue of 4.12bn beat the 3.71bn consensus." },
+      "evidence": [
+        { "id": "E1", "type": "metric", "headline": true, "valueFrom": { "kind": "docMeta", "path": "revenueActual" } }
+      ],
+      "expect": { "status": "pass", "quarantine": false }
+    },
+    {
+      "id": "metric-inflated",
+      "title": "HALLUCINATION: the same number inflated 10x must fail and quarantine the card",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "earnings-gap", "tickers": ["ZEPH"], "direction": "long", "claim": "ZEPH revenue of 41.2bn beat consensus by an order of magnitude." },
+      "evidence": [
+        { "id": "E1", "type": "metric", "headline": true, "valueFrom": { "kind": "docMeta", "path": "revenueActual", "scale": 10 } }
+      ],
+      "expect": { "status": "fail", "quarantine": true }
+    },
+    {
+      "id": "metric-within-tolerance",
+      "title": "A 1% rounding difference is inside the 2% tolerance and still passes",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "earnings-gap", "tickers": ["ZEPH"], "direction": "long", "claim": "ZEPH EPS 1.87 vs consensus 1.52." },
+      "evidence": [
+        { "id": "E1", "type": "metric", "headline": true, "valueFrom": { "kind": "docMeta", "path": "actual", "scale": 1.005 } }
+      ],
+      "expect": { "status": "pass", "quarantine": false }
+    },
+    {
+      "id": "quote-real",
+      "title": "A verbatim sentence from the source passes",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "narrative-shift", "tickers": ["ZEPH"], "direction": "long", "claim": "Management language is constructive." },
+      "evidence": [
+        { "id": "E1", "type": "quote", "headline": true, "quoteFrom": { "kind": "docSentence", "index": 3 } }
+      ],
+      "expect": { "status": "pass", "quarantine": false }
+    },
+    {
+      "id": "quote-fabricated",
+      "title": "HALLUCINATION: a quote the document never said must fail and quarantine",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "narrative-shift", "tickers": ["ZEPH"], "direction": "long", "claim": "Management guided to doubling revenue by 2027." },
+      "evidence": [
+        { "id": "E1", "type": "quote", "headline": true, "quoteFrom": { "kind": "literal", "text": "Management said the company expects revenue to double by fiscal 2027 and committed to a special dividend." } }
+      ],
+      "expect": { "status": "fail", "quarantine": true }
+    },
+    {
+      "id": "price-real",
+      "title": "A price claim matching the bundled OHLCV bar passes",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "closed-window", "tickers": ["NVDA"], "direction": "neutral", "claim": "NVDA closed at the bundled dataset level on 2025-09-30." },
+      "evidence": [
+        { "id": "E1", "type": "price", "headline": true, "symbol": "NVDA", "date": "2025-09-30", "valueFrom": { "kind": "priceBook", "symbol": "NVDA", "date": "2025-09-30", "field": "close" } }
+      ],
+      "expect": { "status": "pass", "quarantine": false }
+    },
+    {
+      "id": "price-tampered",
+      "title": "HALLUCINATION: a price 25% above the real close must fail",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "closed-window", "tickers": ["NVDA"], "direction": "long", "claim": "NVDA closed sharply higher on 2025-09-30." },
+      "evidence": [
+        { "id": "E1", "type": "price", "headline": true, "symbol": "NVDA", "date": "2025-09-30", "valueFrom": { "kind": "priceBook", "symbol": "NVDA", "date": "2025-09-30", "field": "close", "scale": 1.25 } }
+      ],
+      "expect": { "status": "fail", "quarantine": true }
+    },
+    {
+      "id": "unsourced-number",
+      "title": "A number citing a document that does not exist is unverifiable, never pass",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "earnings-gap", "tickers": ["ZEPH"], "direction": "long", "claim": "ZEPH booked 7.5bn of new orders." },
+      "evidence": [
+        { "id": "E1", "type": "metric", "headline": false, "source": "document-that-does-not-exist", "valueFrom": { "kind": "literal", "value": 7.5 } }
+      ],
+      "expect": { "status": "unverifiable", "quarantine": false }
+    },
+    {
+      "id": "computed-recipe-fake",
+      "title": "HALLUCINATION: a computed aggregate the engine cannot reproduce must fail",
+      "docRef": "eval-zeph-release",
+      "card": { "channel": "flow-footprint", "tickers": ["ZEPH"], "direction": "short", "claim": "Nine insiders sold ZEPH last month." },
+      "snapshots": [
+        {
+          "intent": "insiderTrades",
+          "args": { "ticker": "ZEPH" },
+          "origin": "eval-fixture",
+          "value": {
+            "rows": [
+              { "type": "sale", "shares": 1200, "owner": "CFO" },
+              { "type": "sale", "shares": 900, "owner": "Director" },
+              { "type": "purchase", "shares": 5000, "owner": "CEO" }
+            ]
+          }
+        }
+      ],
+      "evidence": [
+        { "id": "E1", "type": "computed", "headline": true, "symbol": "ZEPH", "recipe": "insider-sell-count", "valueFrom": { "kind": "literal", "value": 9 } }
+      ],
+      "expect": { "status": "fail", "quarantine": true }
+    }
+  ]
+}

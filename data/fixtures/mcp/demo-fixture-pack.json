@@ -1,0 +1,157 @@
+[
+  {
+    "intent": "quote",
+    "args": { "ticker": "NVDA" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE. Shape mirrors the documented bitget-mcp-server quote response. In live mode (PRISM_DATA_MODE=live) this file is never read - see scripts/record-fixtures.mjs for how to capture real responses.",
+    "result": { "symbol": "NVDA", "last": 177.11, "change": -1.44, "changePercent": -0.8, "open": 178.6, "high": 179.28, "low": 176.32, "previousClose": 178.55, "volume": 153847200, "marketCap": 4318000000000, "asOf": "2025-09-30T20:00:00Z" }
+  },
+  {
+    "intent": "analystEstimates",
+    "args": { "ticker": "NVDA" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": {
+      "symbol": "NVDA",
+      "period": "quarterly",
+      "current": { "epsConsensus": 1.01, "epsHigh": 1.09, "epsLow": 0.96, "revenueConsensus": 46060000000, "revenueHigh": 47200000000, "revenueLow": 45100000000, "analysts": 52 },
+      "next": { "epsConsensus": 1.18, "revenueConsensus": 52480000000, "analysts": 49 },
+      "forward": { "epsFy1": 4.61, "epsFy2": 6.02, "revenueFy1": 204100000000, "revenueFy2": 258600000000 }
+    }
+  },
+  {
+    "intent": "earningsCalendar",
+    "args": { "ticker": "NVDA" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": { "symbol": "NVDA", "nextEarningsDate": "2025-11-19", "nextEarningsTime": "after-close", "lastEarningsDate": "2025-08-27", "confirmed": true }
+  },
+  {
+    "intent": "incomeStatement",
+    "args": { "ticker": "NVDA", "period": "quarterly" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": {
+      "symbol": "NVDA", "period": "quarterly", "currency": "USD",
+      "rows": [
+        { "period": "2025-07-27", "revenue": 46740000000, "grossProfit": 33410000000, "operatingIncome": 28310000000, "netIncome": 26420000000, "eps": 1.05, "epsDiluted": 1.05 },
+        { "period": "2025-04-27", "revenue": 44060000000, "grossProfit": 30610000000, "operatingIncome": 25320000000, "netIncome": 18780000000, "eps": 0.76, "epsDiluted": 0.76 },
+        { "period": "2025-01-26", "revenue": 39330000000, "grossProfit": 28650000000, "operatingIncome": 24030000000, "netIncome": 22090000000, "eps": 0.89, "epsDiluted": 0.89 }
+      ]
+    }
+  },
+  {
+    "intent": "insiderTrades",
+    "args": { "ticker": "HLXN" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE for a fictional issuer, used to exercise the flow-footprint channel.",
+    "result": {
+      "symbol": "HLXN",
+      "rows": [
+        { "ticker": "HLXN", "insider": "Chief Executive Officer", "transactionType": "Sell", "shares": 42000, "price": 184.2, "value": 7736400, "filed": "2025-09-08" },
+        { "ticker": "HLXN", "insider": "Chief Financial Officer", "transactionType": "Sell", "shares": 28500, "price": 186.5, "value": 5315250, "filed": "2025-09-05" },
+        { "ticker": "HLXN", "insider": "President, Industrial Automation", "transactionType": "Sell", "shares": 19200, "price": 190.1, "value": 3649920, "filed": "2025-09-03" },
+        { "ticker": "HLXN", "insider": "Director", "transactionType": "Sell", "shares": 11000, "price": 191.4, "value": 2105400, "filed": "2025-08-29" },
+        { "ticker": "HLXN", "insider": "Director", "transactionType": "Buy", "shares": 2500, "price": 172.8, "value": 432000, "filed": "2025-07-15" }
+      ]
+    }
+  },
+  {
+    "intent": "institutionalHoldings",
+    "args": { "ticker": "NWCL" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE for a fictional issuer, used to exercise the flow-footprint channel.",
+    "result": {
+      "symbol": "NWCL",
+      "holders": [
+        { "ticker": "NWCL", "holder": "Meridian Capital Management", "shares": 184200000, "changePct": 8.4, "asOf": "2025-06-30" },
+        { "ticker": "NWCL", "holder": "Vantage Trust", "shares": 141900000, "changePct": 12.1, "asOf": "2025-06-30" },
+        { "ticker": "NWCL", "holder": "Northbank Advisors", "shares": 96400000, "changePct": 6.2, "asOf": "2025-06-30" },
+        { "ticker": "NWCL", "holder": "Sable Ridge Asset Mgmt", "shares": 71250000, "changePct": -7.8, "asOf": "2025-06-30" },
+        { "ticker": "NWCL", "holder": "Kestrel Global", "shares": 58700000, "changePct": 2.1, "asOf": "2025-06-30" },
+        { "ticker": "NWCL", "holder": "Ardent Pension Trust", "shares": 44100000, "changePct": -11.3, "asOf": "2025-06-30" }
+      ]
+    }
+  },
+  {
+    "intent": "ratios",
+    "args": { "ticker": "BLWF" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": { "symbol": "BLWF", "currentRatio": 1.42, "quickRatio": 0.88, "dso": 78.4, "dsoPriorYear": 68.4, "inventoryTurns": 3.1, "netDebtToEbitda": 4.6, "grossMarginPct": 61.2, "grossMarginPriorPct": 63.0, "roe": 12.8, "fcfMarginPct": -2.1 }
+  },
+  {
+    "intent": "valuation",
+    "args": { "ticker": "CRVS" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": { "symbol": "CRVS", "peTtm": 41.2, "forwardPe": 30.8, "psTtm": 22.4, "evToEbitda": 27.1, "pegRatio": 1.31, "fcfYieldPct": 2.4 }
+  },
+  {
+    "intent": "news",
+    "args": { "query": "US equities" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": {
+      "items": [
+        { "headline": "Equities close lower as the front end of the curve sells off after the FOMC", "publishedAt": "2025-09-17T21:05:00Z", "sentiment": -0.22, "symbols": ["SPY", "QQQ", "TLT"] },
+        { "headline": "Semiconductor complex holds bid on supply-constrained commentary", "publishedAt": "2025-09-16T18:20:00Z", "sentiment": 0.41, "symbols": ["SMH", "NVDA", "AMD"] },
+        { "headline": "Industrials underperform as order books soften for a third quarter", "publishedAt": "2025-09-15T14:10:00Z", "sentiment": -0.38, "symbols": ["CAT", "IWM"] }
+      ]
+    }
+  },
+  {
+    "intent": "sentiment",
+    "args": {},
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-mcp-server",
+    "synthetic": true,
+    "result": { "marketBreadthPct": 41.5, "advancers": 1180, "decliners": 1690, "vix": 16.4, "putCallRatio": 0.94, "asOf": "2025-09-17T20:00:00Z" }
+  },
+  {
+    "intent": "signal:sentiment-analyst",
+    "args": { "query": "crypto positioning" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-signal:sentiment-analyst",
+    "synthetic": true,
+    "result": {
+      "fearGreed": { "value": 41, "classification": "Fear", "previousClose": 47 },
+      "fundingRate": 0.0081,
+      "longShortRatio": 0.94,
+      "openInterestUsd": 71400000000,
+      "takerBuySellRatio": 0.97,
+      "etfFlowUsd": -184000000,
+      "asOf": "2025-09-17T20:00:00Z"
+    }
+  },
+  {
+    "intent": "signal:macro-analyst",
+    "args": { "query": "fed policy and cross-asset" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-signal:macro-analyst",
+    "synthetic": true,
+    "result": {
+      "policyRateUpperPct": 4.25,
+      "nextMeetingCutProbabilityPct": 82,
+      "us10yPct": 4.14,
+      "us2yPct": 3.55,
+      "curve2s10sBp": 59,
+      "dxy": 97.8,
+      "btcVsNasdaqCorr90d": 0.44,
+      "btcVsDxyCorr90d": -0.31,
+      "asOf": "2025-09-17T20:00:00Z"
+    }
+  }
+]
