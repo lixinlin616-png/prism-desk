@@ -10,9 +10,8 @@
  *
  * So the link list lives HERE as data, and this script refuses to emit it unless
  * (a) every repo-relative path in it exists on disk, and (b) every hard number in
- * it still matches the generated report that is its authority. Same pattern as
- * scripts/xpost.mjs: the artefact and its check share one file, so they cannot
- * drift apart.
+ * it still matches the generated report that is its authority: the artefact and
+ * its check share one file, so they cannot drift apart.
  *
  *   node scripts/submission-links.mjs --check
  *   node scripts/submission-links.mjs \
@@ -38,7 +37,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 211;
+export const TEST_COUNT = 208;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -142,13 +141,6 @@ export const MANIFEST = [
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
-    type: '支撑｜项目陈述（问题定义 / 人群与非人群 / 实测数据 / 十个真实踩过的坑）',
-    target: 'docs/PROJECT-STATEMENT.md',
-    required: '支撑',
-    what: '含报名表「项目说明」与「大模型在项目中的作用」两个字段的成稿',
-  },
-  {
-    section: '支撑材料 · 研究质量与工程可信度',
     type: '支撑｜路线图（每一项都挂在一个已实测数字上，含明确的 non-goals）',
     target: 'docs/ROADMAP.md',
     required: '支撑',
@@ -173,14 +165,7 @@ export const MANIFEST = [
     type: 'X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）',
     target: 'xpost',
     required: '必交',
-    what: '必交且只能由参赛者本人发布：从 docs/X-POSTS.md 取第 1 帖发到 X 并引用转发官方指定推文，发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段；17 帖草稿与 86/86 合规校验见 docs/reports/x-posts.md',
-  },
-  {
-    section: '必交 · X 传播',
-    type: 'X 传播｜草稿全文与合规校验报表（17 / 17 帖 · 86 / 86 检查）',
-    target: 'docs/X-POSTS.md',
-    required: '支撑',
-    what: '按 X 官方 v3 权重（中文/全角 2 · 拉丁 1 · URL 固定 23）逐条校验话题标签、@提及、实质性（≥40 权重单位原创文案）、长度与是否引用转发官方推文；`npm run xpost` 可复现',
+    what: '必交且只能由参赛者本人发布：发到 X 并引用转发官方指定推文，内容需实质介绍本项目（纯转发或无实质介绍 = 提交不完整），发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段',
   },
 ];
 
@@ -195,7 +180,6 @@ const FOOTER = [
   'npm run replay           # 重跑两份真实价格事件研究',
   'npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同',
   'npm run review:seed      # 复现上面那份事后判分报表',
-  'npm run xpost            # 复现 X 帖合规报表',
   'npm run export:static    # 重建上面那个在线演示的静态回放包 -> docs/demo/',
   'node server.mjs          # http://127.0.0.1:4310',
   '',
@@ -225,7 +209,6 @@ export const CLAIMS = [
   { says: '60 项验证检查', from: 'docs/reports/validation.md', kind: 'has', expect: '**60/60 checks passed**' },
   { says: '25 symbols · 41,386 根真实日 K', from: 'docs/reports/validation.md', kind: 'has', expect: '25 symbols, 41386 bars' },
   { says: '15,478 个真实跳空', from: 'docs/reports/gap-study.md', kind: 'has', expect: '15478' },
-  { says: '17 帖', from: 'docs/reports/x-posts.md', kind: 'has', expect: '(17 block(s))' },
   // The published demo is a recording, so its numbers are claims too: if the
   // bundle drifts from the reports it replays, the demo contradicts the repo.
   { says: '在线演示的复盘裁决数', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"decided":34' },
@@ -241,7 +224,6 @@ export const CLAIMS = [
  */
 export const UNVERIFIED_HERE = [
   { says: `${TEST_COUNT} / ${TEST_COUNT} 测试通过`, authority: 'npm test' },
-  { says: '86 / 86 X 帖合规检查', authority: 'npm run xpost' },
   { says: '~60 ms 全频道扫描耗时', authority: 'node prism.mjs demo --only=full-sweep（耗时随机器而异）' },
   { says: '看板 fixture 连续两次重建 SHA-256 相同', authority: 'npm run seed（跑两次比对哈希）' },
 ];

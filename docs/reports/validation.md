@@ -1,6 +1,6 @@
 # Prism Desk - validation report
 
-Generated 2026-10-07T11:33:03.412Z by `npm run validate` in 602ms.
+Generated 2026-10-07T12:58:20.271Z by `npm run validate` in 591ms.
 
 **60/60 checks passed**. Node v24.21.0, data mode `offline`, extractor `rules`.
 

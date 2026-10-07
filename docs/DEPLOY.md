@@ -53,7 +53,7 @@
 
 ```bash
 node prism.mjs doctor                 # 数据接线自检
-npm test                              # 211 / 211
+npm test                              # 208 / 208
 npm run validate                      # 结构性 / 数据 / 研究质量检查
 node server.mjs                       # 另开一个终端
 ```
@@ -365,5 +365,5 @@ curl -s $D/api/export/review.md | head -20
 ## 12. 与提交材料的关系
 
 - 表单「提交材料链接」第 1 项 = 按本文部署出来的**公网 URL**
-- 部署完成后，把 URL 回填进 `SUBMISSION-FORM.md` §4 与 `X-POSTS.md` §6 的自回复
+- 部署完成后，把 URL 回填进报名表「提交材料链接」与 X 帖的自回复
 - 三处 URL 必须是**同一个**：表单、X 帖回复、README 顶部

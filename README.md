@@ -131,7 +131,7 @@ node prism.mjs help                      # 帮助
 
 > `demo` 默认**先清空看板再跑**，这正是 `docs/DEMO-TRANSCRIPT.md` 能被裸跑逐字重建的前提 —— 否则先跑过 `doctor` 或 `ask` 的人会得到一份对不上的逐字稿。`tests/wiring.test.mjs` 连跑两遍并逐行比对，钉住这条幂等性。
 
-npm 脚本：`npm start` · `npm run dev` · `npm test` · `npm run validate` · `npm run replay` · `npm run demo` · `npm run seed` · `npm run review:seed` · `npm run xpost` · `npm run doctor` · `npm run export:static` · `npm run submission` · `npm run submission:check`
+npm 脚本：`npm start` · `npm run dev` · `npm test` · `npm run validate` · `npm run replay` · `npm run demo` · `npm run seed` · `npm run review:seed` · `npm run doctor` · `npm run export:static` · `npm run submission` · `npm run submission:check`
 
 ### HTTP API
 
@@ -222,12 +222,11 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 211 个测试（node:test，无第三方依赖）
+npm test           # 208 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
 npm run review:seed # 从该 fixture 复现复盘报表 -> docs/reports/review.md
-npm run xpost      # 校验 X 帖草稿合规 -> docs/reports/x-posts.md
 npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ --serve 可本机预览）
 ```
 
@@ -264,13 +263,10 @@ npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ -
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | 管线、频道、账本、打分细则 |
 | [`docs/VALIDATION.md`](docs/VALIDATION.md) | 两份事件研究的实测数字与 caveat |
 | [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md) | 复盘闭环：三条轴、七个方法决定、以及我们 **10 胜 24 负**的实测判分 |
-| [`docs/PROJECT-STATEMENT.md`](docs/PROJECT-STATEMENT.md) | 报名表"项目说明"六段（中文） |
-| [`docs/SUBMISSION-FORM.md`](docs/SUBMISSION-FORM.md) | 报名表逐字段填写内容；「提交材料链接」那一框由 `npm run submission` **生成**，不手写 |
-| [`docs/X-POSTS.md`](docs/X-POSTS.md) | X 传播推文草稿 |
 | [`docs/DEPLOY.md`](docs/DEPLOY.md) | 让 Demo 可公开访问（含本项目实际采用的 GitHub Pages 静态回放） |
 | [`docs/demo/`](docs/demo/) | 发布在 Pages 上的**静态回放演示包**：真实引擎的录像，勿手改，用 `npm run export:static` 重建 |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | 后续路线 |
-| [`docs/reports/`](docs/reports/) | 自动生成的验证与研究报表（`validation.md` · `review.md` · `transmission-study.md` · `gap-study.md` · `x-posts.md` · `submission-links.txt`），全部可由 `npm run validate` / `review:seed` / `replay` / `xpost` / `submission` 重建 |
+| [`docs/reports/`](docs/reports/) | 自动生成的验证与研究报表（`validation.md` · `review.md` · `transmission-study.md` · `gap-study.md` · `submission-links.txt`），全部可由 `npm run validate` / `review:seed` / `replay` / `submission` 重建 |
 
 ---
 
@@ -292,10 +288,10 @@ src/
   research/          transmission, gap-study, factors, report
   review/            adjudicate（三轴裁决）, report（markdown 渲染）
 web/                 index.html + app.js + styles.css + static-adapter.js（零构建）
-scripts/             validate, replay, build-seed, fetch-prices, record-fixtures, xpost,
+scripts/             validate, replay, build-seed, fetch-prices, record-fixtures,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               211 个 node:test 用例
+tests/               208 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 

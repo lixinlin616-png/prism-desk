@@ -214,47 +214,6 @@ test('an inert AgentKey leaves the desk output untouched', async () => {
   assert.deepEqual(shape(after.cards), shape(baseline.cards), 'adding a disabled provider changed the cards');
 });
 
-// ------------------------------------------------- platform-independent gates
-
-test('the X-post length gate charges the same on a CRLF checkout as on an LF one', async () => {
-  /**
-   * Regression: weightedLength() counted the \r in a CRLF line ending, so three
-   * posts that sat within 4 units of the 280 limit FAILed on Windows and PASSed
-   * on Linux for identical copy. That gate guards a mandatory submission item,
-   * and the natural response to a spurious FAIL is deleting real content.
-   */
-  const { weightedLength } = await import('../scripts/xpost.mjs');
-  const lf = '第一行\nsecond line\nhttps://example.com/some/long/path';
-  const crlf = lf.replace(/\n/g, '\r\n');
-  assert.equal(weightedLength(crlf).weighted, weightedLength(lf).weighted, 'CRLF measured longer than LF');
-  assert.equal(weightedLength(crlf).plain, weightedLength(lf).plain);
-  // A link still collapses to the flat t.co budget regardless of its real length.
-  assert.equal(weightedLength('x https://example.com/a/very/long/path').weighted, weightedLength('x https://example.com/b').weighted);
-});
-
-test('the committed X-post drafts reach the same verdict with LF and with CRLF', async () => {
-  /**
-   * The end-to-end form of the regression above, against the real document: the
-   * compliance verdict must not depend on how git happened to check the file out.
-   */
-  const { runXPostCheck } = await import('../scripts/xpost.mjs');
-  const doc = readFileSync(join(ROOT, 'docs', 'X-POSTS.md'), 'utf8');
-  const lf = doc.replace(/\r\n?/g, '\n');
-  const crlf = lf.replace(/\n/g, '\r\n');
-
-  const a = runXPostCheck(lf);
-  const b = runXPostCheck(crlf);
-  assert.equal(a.ok, true, `the committed drafts fail their own gate: ${a.posts.filter((p) => !p.checks.every((c) => c.ok)).map((p) => p.id).join(', ')}`);
-  assert.equal(b.ok, a.ok, 'the verdict changed when only the line endings did');
-  assert.deepEqual(
-    b.posts.map((p) => [p.id, p.weighted]),
-    a.posts.map((p) => [p.id, p.weighted]),
-    'a post measured a different length under CRLF',
-  );
-});
-
-// --------------------------------------------- published demo vs live backend
-
 test('the published static demo describes the same wiring as the live backend', async () => {
   /**
    * Regression: server.mjs and scripts/export-static.mjs each hand-rolled the
@@ -358,21 +317,3 @@ test('a provider reports its own fixtures, not the whole shared pack', async () 
     `doctor still prints an ambiguous fixture count: ${line}`);
   assert.ok(!/fixtures=\d/.test(line), 'the ambiguous "fixtures=N" label is back');
 });
-
-test('importing a script for its exports does not rewrite a committed report', () => {
-  /**
-   * Regression: scripts/xpost.mjs called main() unconditionally, so the
-   * `await import('../scripts/xpost.mjs')` in the two tests above re-ran the
-   * whole compliance check and rewrote docs/reports/x-posts.md. `npm test`
-   * therefore left a committed artefact dirty on its timestamp line, in a repo
-   * whose headline claim is that a judge can run it and see no drift.
-   */
-  const report = join(ROOT, 'docs', 'reports', 'x-posts.md');
-  const before = readFileSync(report);
-  execFileSync(process.execPath, ['--input-type=module', '-e', "await import('./scripts/xpost.mjs')"], {
-    cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
-  });
-  assert.deepEqual(readFileSync(report), before,
-    'importing scripts/xpost.mjs rewrote docs/reports/x-posts.md');
-});
-

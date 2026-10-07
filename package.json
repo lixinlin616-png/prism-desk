@@ -22,7 +22,6 @@
     "prices": "node scripts/fetch-prices.mjs",
     "record": "node scripts/record-fixtures.mjs",
     "review": "node prism.mjs review --report",
-    "xpost": "node scripts/xpost.mjs",
     "doctor": "node prism.mjs doctor",
     "seed": "node scripts/build-seed.mjs",
     "export:static": "node scripts/export-static.mjs",
