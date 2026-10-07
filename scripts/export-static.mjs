@@ -263,7 +263,7 @@ async function main() {
   const { createHash } = await import('node:crypto');
   const stamp = (file) => createHash('sha256').update(readFileSync(join(OUT, file))).digest('hex').slice(0, 10);
   for (const [file, attr] of [['styles.css', 'href'], ['static-adapter.js', 'src'], ['app.js', 'src']]) {
-    siteHtml = siteHtml.split(`${attr}="./${file}"`).join(`${attr}="./${file}?v=${stamp(file)}`);
+    siteHtml = siteHtml.split(`${attr}="./${file}"`).join(`${attr}="./${file}?v=${stamp(file)}"`);
   }
   writeFileSync(join(OUT, 'index.html'), siteHtml, 'utf8');
   writeFileSync(join(OUT, '.nojekyll'), '', 'utf8');

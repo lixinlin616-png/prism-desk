@@ -140,8 +140,13 @@ async function readFrames(res) {
 
 test('the published page loads the adapter before the app', () => {
   const html = readFileSync(join(DEMO, 'index.html'), 'utf8');
-  const adapterAt = html.indexOf('<script src="./static-adapter.js"></script>');
-  const appAt = html.indexOf('<script type="module" src="./app.js"></script>');
+  // The exporter stamps each asset with a content hash (?v=...) so stale
+  // caches heal on a plain reload; match the prefix, not the exact URL.
+  const adapterAt = html.indexOf('<script src="./static-adapter.js');
+  const appAt = html.indexOf('<script type="module" src="./app.js');
+  for (const asset of ['app.js', 'styles.css', 'static-adapter.js']) {
+    assert.ok(new RegExp(`${asset.replace('.', '\\.')}\\?v=[0-9a-f]{10}`).test(html), asset + ' must carry a content-hash stamp');
+  }
   assert.ok(adapterAt > 0, 'docs/demo/index.html must load ./static-adapter.js');
   assert.ok(appAt > adapterAt, 'the adapter must be wired before app.js or the real fetch wins');
   assert.ok(existsSync(join(DEMO, '.nojekyll')), 'docs/demo/.nojekyll keeps Pages from running Jekyll over the bundle');
