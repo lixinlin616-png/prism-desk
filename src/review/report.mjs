@@ -67,7 +67,7 @@ export function renderReviewReport(review) {
   L.push(`| won | ${s.hits} |`);
   L.push(`| lost | ${s.misses} |`);
   L.push(`| inconclusive (inside the materiality band) | ${s.inconclusive} |`);
-  L.push(`| **hit rate** | **${pct(s.hitPct)}**${s.hitPctCi95 ? ` (95% CI ${s.hitPctCi95[0]}-${s.hitPctCi95[1]}%)` : ' (n too small for an interval)'} |`);
+  L.push(`| **hit rate** | **${pct(s.hitPct)}**${s.hitPctCi95 ? ` (Wilson 95% CI ${s.hitPctCi95[0]}-${s.hitPctCi95[1]}%${s.hitPctCi95ClopperPearson ? `; exact Clopper-Pearson ${s.hitPctCi95ClopperPearson[0]}-${s.hitPctCi95ClopperPearson[1]}%` : ''})` : ' (n too small for an interval)'} |`);
   L.push(`| mean signed benchmark-excess | ${pct(s.meanSignedExcessPct, 3)} |`);
   L.push(`| median signed benchmark-excess | ${pct(s.medianSignedExcessPct, 3)} |`);
   L.push(`| falsification condition fired | ${s.invalidationFired} |`);
@@ -157,7 +157,7 @@ export function renderReviewReport(review) {
 
   L.push('## Caveats, stated plainly');
   L.push('');
-  L.push(`- **The sample is tiny.** ${s.decided} decided claims from ${cal.clusters} information dates. The 95% interval on the hit rate is ${s.hitPctCi95 ? `${s.hitPctCi95[0]}-${s.hitPctCi95[1]}%` : 'not computable at this n'}, which is wider than any effect it could measure. **No conclusion about profitability should be drawn from this report.**`);
+  L.push(`- **The sample is tiny.** ${s.decided} decided claims from ${cal.clusters} information dates. The Wilson 95% interval on the hit rate is ${s.hitPctCi95 ? `${s.hitPctCi95[0]}-${s.hitPctCi95[1]}%` : 'not computable at this n'}${s.hitPctCi95ClopperPearson ? ` (exact Clopper-Pearson ${s.hitPctCi95ClopperPearson[0]}-${s.hitPctCi95ClopperPearson[1]}%)` : ''}, which is wider than any effect it could measure. **No conclusion about profitability should be drawn from this report.**`);
   L.push('- **Claims are not independent.** Several come from the same document on the same date, and all share one benchmark and one macro regime. The rho and the hit rate are descriptions of this board, not estimates of a population parameter.');
   L.push('- **Demo issuers are measured through proxies.** Fictional issuers have no listed price; where they declare one, they are measured through that real proxy series, and the substitution is flagged on the row. Those verdicts describe the proxy, not the issuer.');
   L.push('- **Daily bars cannot order intraday events.** Stop-versus-target ties are resolved pessimistically. On intraday data the hit rate would be different, and probably higher.');

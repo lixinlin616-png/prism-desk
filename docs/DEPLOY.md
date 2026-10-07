@@ -53,7 +53,7 @@
 
 ```bash
 node prism.mjs doctor                 # 数据接线自检
-npm test                              # 208 / 208
+npm test                              # 211 / 211
 npm run validate                      # 结构性 / 数据 / 研究质量检查
 node server.mjs                       # 另开一个终端
 ```
@@ -260,8 +260,8 @@ npm run export:static -- --serve   # 顺便在本机 4321 端口预览，看到�
 |---|---|
 | 六个预置场景的全链路回放（PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT），trace 逐帧到达 | 跑一个**全新**的自由提问：没有引擎，只能回放最接近的预录任务，并在左下角提示"这是替换、匹配度多少" |
 | 卡片档案与逐条证据账本、隔离原因、失效条件 | 写入：粘贴文档 / 清空看板返回 **409** 并说明理由，**不假装成功** |
-| 看板（235 张卡 = 已提交 fixture）、watchlist、冲突标记 | 改 as-of 时钟：回放的永远是录制时钉死的那个 as-of，改了会提示被忽略 |
-| 复盘面板（34 条已裁决 / 29.4% 命中 / rho −0.138，与 `docs/reports/review.md` 逐条一致） | LLM 双通道抽取（录像走的是确定性规则路径，和文档里的所有数字同源） |
+| 看板（312 张卡 = 已提交 fixture）、watchlist、冲突标记 | 改 as-of 时钟：回放的永远是录制时钉死的那个 as-of，改了会提示被忽略 |
+| 复盘面板（34 条已裁决 / 29.4% 命中 / rho −0.137，与 `docs/reports/review.md` 逐条一致） | LLM 双通道抽取（录像走的是确定性规则路径，和文档里的所有数字同源） |
 | 两份真实价格事件研究、导出 board.csv / brief.md / review.md | 任何需要联网的实时数据 |
 
 页面左下角有一枚**永久** `static replay` 徽标，写着数据来自真实引擎的离线录制、以及实时后端怎么起。一段录像最不能做的事就是冒充实时引擎，所以每一次替换、每一次拒绝都会显式说出来。
@@ -284,8 +284,8 @@ curl -X POST -H "Authorization: Bearer $GITHUB_TOKEN" \
 
 - 服务端每个 `/api/*` 路由，录像必须**要么回答、要么显式拒绝**（路由表从 `server.mjs` 源码里提取，加路由不改适配器就红）；
 - 录下来的 `scenarios` 必须与 `server.mjs` 导出的 `SCENARIOS` **深度相等**；
-- 录下来的看板必须等于 `data/fixtures/board-seed.json`（235 张卡）；
-- 录下来的复盘数字必须等于 `docs/reports/review.md` headline 表里的数字（235 / 115 / 34 / 29.4% / −0.138，直接从报表里正则读出来对比）；
+- 录下来的看板必须等于 `data/fixtures/board-seed.json`（312 张卡）；
+- 录下来的复盘数字必须等于 `docs/reports/review.md` headline 表里的数字（312 / 148 / 34 / 29.4% / −0.137，直接从报表里正则读出来对比）；
 - 适配器在一个 40 行的 DOM stub 里真跑一遍：SSE 帧数、stage 顺序、卡片数、账本数字、导出内容、409 拒绝、404 未知路由、非 API 请求放行。
 
 录像里带导出时刻的字段（run id、`ms` 耗时、帧间隔、`review.summary.generatedAt`）在 `docs/demo/data/manifest.json` 的 `volatileFields` 里列全了；其余语义字段逐字节确定。

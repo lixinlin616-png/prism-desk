@@ -523,7 +523,15 @@ export class RuleExtractor {
       if (!snap) continue;
       if (snap.intent === 'insiderTrades') cards.push(...this.fromInsider(snap, asOf));
       if (snap.intent === 'institutionalHoldings') cards.push(...this.fromInstitutional(snap, asOf));
-      if (String(snap.intent || '').startsWith('signal:') || snap.skill) cards.push(...this.fromCryptoSignal(snap, asOf));
+      if (snap.skill === 'market-intel' || snap.intent === 'signal:market-intel') {
+        cards.push(...this.fromMarketIntel(snap, asOf));
+      } else if (snap.skill === 'technical-analysis' || snap.intent === 'signal:technical-analysis') {
+        cards.push(...this.fromTechnicalAnalysis(snap, asOf));
+      } else if (snap.skill === 'news-briefing' || snap.intent === 'signal:news-briefing') {
+        cards.push(...this.fromNewsBriefing(snap, asOf));
+      } else if (String(snap.intent || '').startsWith('signal:') || snap.skill) {
+        cards.push(...this.fromCryptoSignal(snap, asOf));
+      }
     }
     return cards;
   }
@@ -631,6 +639,115 @@ export class RuleExtractor {
       })],
       invalidation: { condition: 'Fear & Greed returns inside the 35-65 band and funding normalises, i.e. the crypto complex stops driving marginal rToken liquidity.', level: 'F&G in [35,65]', recheckAt: addDays(asOf, 1) },
       risks: ['Crypto sentiment is a liquidity proxy, not an equity fundamental.', 'The correlation between crypto regime and rToken mispricing is stable in stress and absent in calm.'],
+      provenance: { extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin] },
+    })];
+  }
+
+  /** market-intel skill -> flow-footprint: the cross-market flow footprint. */
+  fromMarketIntel(snap, asOf) {
+    const v = snap.value;
+    if (!v || typeof v !== 'object') return [];
+    const fmtUsd = (n) => {
+      const sign = n < 0 ? '-' : '';
+      const abs = Math.abs(n);
+      if (abs >= 1e9) return `${sign}$${(abs / 1e9).toFixed(2)}B`;
+      if (abs >= 1e6) return `${sign}$${(abs / 1e6).toFixed(0)}M`;
+      return `${sign}$${abs.toFixed(0)}`;
+    };
+    const bits = [];
+    if (v.spotBtcEtfFlowUsd !== undefined) bits.push(`spot BTC ETF ${fmtUsd(v.spotBtcEtfFlowUsd)}`);
+    if (v.spotEthEtfFlowUsd !== undefined) bits.push(`spot ETH ETF ${fmtUsd(v.spotEthEtfFlowUsd)}`);
+    if (v.stablecoinChange24hUsd !== undefined) bits.push(`stablecoin supply 24h ${fmtUsd(v.stablecoinChange24hUsd)}`);
+    if (v.whaleNetFlowUsd !== undefined) bits.push(`whale net ${fmtUsd(v.whaleNetFlowUsd)}`);
+    if (!bits.length) return [];
+    // A one-day flow print is context (a footprint), not a directional claim.
+    return [emptyCard({
+      channel: 'flow-footprint',
+      title: `Cross-market flow footprint: ${bits.slice(0, 2).join(' | ')}`,
+      claim: `The cross-market flow footprint reads ${bits.join(', ')}. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.`,
+      direction: 'neutral',
+      horizon: 'days',
+      instruments: ['crypto', 'rtoken'],
+      tickers: ['BTC', 'ETH'],
+      conviction: 30,
+      evidence: [evidence({
+        id: 'E1', type: 'sentiment', source: snap.origin, locator: 'market-intel',
+        quote: bits.join('; '), value: v.spotBtcEtfFlowUsd ?? null, headline: true,
+        snapshotIntent: 'signal:market-intel',
+      })],
+      invalidation: {
+        condition: 'ETF flows reverse for two consecutive sessions and stablecoin supply contracts, i.e. the footprint flips from mixed/defensive to risk-off (or risk-on) rather than a one-day print.',
+        level: '2-session flow reversal', recheckAt: addDays(asOf, 3),
+      },
+      risks: ['ETF flow and whale-flow series are noisy and partly time-zone shifted.', 'Stablecoin supply growth is not the same as equity buying.'],
+      provenance: { extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin] },
+    })];
+  }
+
+  /** technical-analysis skill -> risk-flag: a stretched-tape risk watch. */
+  fromTechnicalAnalysis(snap, asOf) {
+    const v = snap.value;
+    if (!v || typeof v !== 'object') return [];
+    const symbol = String(v.symbol || snap.args?.query || '').toUpperCase();
+    const rsi = Number(v.rsi14);
+    const stretch = Number(v.priceVs200DmaPct);
+    if (!Number.isFinite(rsi) && !Number.isFinite(stretch)) return [];
+    const extended = rsi >= 70 || stretch >= 25;
+    const bits = [];
+    if (Number.isFinite(rsi)) bits.push(`RSI(14) ${rsi}`);
+    if (Number.isFinite(stretch)) bits.push(`${stretch > 0 ? '+' : ''}${stretch}% vs 200-DMA`);
+    if (v.nearestSupport !== undefined) bits.push(`support ${v.nearestSupport}`);
+    if (v.nearestResistance !== undefined) bits.push(`resistance ${v.nearestResistance}`);
+    return [emptyCard({
+      channel: 'risk-flag',
+      title: `${symbol}: stretched tape (${bits.slice(0, 2).join(', ')})`,
+      claim: `Technical read for ${symbol}: ${bits.join(', ')}. ${extended ? 'The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.' : 'The technical picture is elevated but not yet extreme.'}`,
+      direction: 'neutral',
+      horizon: 'days',
+      instruments: ['native-equity'],
+      tickers: [symbol],
+      conviction: extended ? 46 : 26,
+      evidence: [evidence({
+        id: 'E1', type: 'technical', source: snap.origin, locator: `technical-analysis(${symbol})`,
+        quote: bits.join('; '), value: Number.isFinite(rsi) ? rsi : stretch, headline: true,
+        snapshotIntent: 'signal:technical-analysis', symbol,
+      })],
+      invalidation: {
+        condition: 'RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown.',
+        level: 'RSI < 70 and price re-tests 50-DMA', recheckAt: addDays(asOf, 10),
+      },
+      risks: ['Momentum can stay overbought far longer than mean reversion expects.', 'Daily technical indicators lag the intraday exit a risk plan would actually use.'],
+      provenance: { extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin] },
+    })];
+  }
+
+  /** news-briefing skill -> narrative-shift: the trending narrative temperature. */
+  fromNewsBriefing(snap, asOf) {
+    const v = snap.value;
+    if (!v || typeof v !== 'object') return [];
+    const trending = Array.isArray(v.trending) ? v.trending : [];
+    if (!trending.length) return [];
+    const top = trending.slice(0, 3).map((t) => t.topic);
+    const avgSent = trending.reduce((a, t) => a + (Number(t.sentiment) || 0), 0) / trending.length;
+    return [emptyCard({
+      channel: 'narrative-shift',
+      title: `Trending narrative: ${top[0]}`,
+      claim: `The trending board reads ${top.join('; ')}. Narrative temperature is ${avgSent >= 0.1 ? 'tilted constructive' : avgSent <= -0.1 ? 'tilted cautious' : 'mixed'}; a shift in which topics dominate often leads the fundamentals, but the signal is a change of tone, not a directional forecast.`,
+      direction: 'neutral',
+      horizon: 'days',
+      instruments: ['crypto', 'rtoken'],
+      tickers: ['BTC', 'ETH'],
+      conviction: 32,
+      evidence: [evidence({
+        id: 'E1', type: 'sentiment', source: snap.origin, locator: 'news-briefing',
+        quote: top.join(' | '), value: round(Number(trending[0].sentiment) || 0, 2), headline: true,
+        snapshotIntent: 'signal:news-briefing',
+      })],
+      invalidation: {
+        condition: 'The top three trending topics roll off within two sessions and are replaced by a coherent opposing theme, i.e. the narrative regime actually changes rather than the news cycle simply rotating.',
+        level: 'top-3 topic turnover with opposing sentiment', recheckAt: addDays(asOf, 3),
+      },
+      risks: ['Trending boards over-weight the loudest voices, not the largest positions.', 'Narrative sentiment is contrarian at extremes and uninformative in the middle.'],
       provenance: { extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin] },
     })];
   }

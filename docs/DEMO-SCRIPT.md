@@ -156,8 +156,8 @@ node prism.mjs demo --only=full-sweep   # as-of 2025-09-19T20:00Z 由场景自�
 ```
 
 **问题：** `Full desk sweep across every channel - what is actually tradeable right now?`
-**耗时：** ~60ms（离线，纯规则抽取器；本机 6 次实测 60–64 ms。耗时随机器而异，其余数字不随机器变化）
-**证据账本：** 26 items · pass 23 · **fail 0** · unverifiable 3 · **pass rate 88.5%** · 0 张卡被隔离
+**耗时：** ~80ms（离线，纯规则抽取器；本机实测 77–83 ms。耗时随机器而异，其余数字不随机器变化）
+**证据账本：** 29 items · pass 27 · **fail 0** · unverifiable 2 · **pass rate 93.1%** · 0 张卡被隔离
 
 | # | 方向 | 频道 | 标的 | 分数 | 等级 | horizon | 核验率 |
 |---:|---|---|---|---:|---|---|---|
@@ -235,7 +235,7 @@ node prism.mjs demo --only=full-sweep   # as-of 2025-09-19T20:00Z 由场景自�
 2. **`node server.mjs` → http://127.0.0.1:4310**（1 分钟）—— Web 投研台里输入问题，看 SSE 流式 trace 逐阶段滚出来。
 3. **跑 `closed-window` 场景**（2 分钟）—— 讲 SPY vs ASTR 的对照：**同一个周末，一个有实证先验所以发布，一个没有所以被挡在门槛外。** 这是全项目最能说明"信息提炼与信号生成"含金量的一步。
 4. **打开任意一张卡的档案**（1 分钟）—— 指着证据账本的 ✅/⚠️ 和打分表的"why"列：**每个数字都有出处，每个分数都有书面理由。**
-5. **`npm run validate` + `npm test`**（30 秒）—— 60/60 检查、208/208 测试。
+5. **`npm run validate` + `npm test`**（30 秒）—— 60/60 检查、211/211 测试。
 
 **一句话收尾：** 我们不追求让 AI 说出更多，而是让 AI 说的每一句都能被追溯、被打分、被证伪。
 

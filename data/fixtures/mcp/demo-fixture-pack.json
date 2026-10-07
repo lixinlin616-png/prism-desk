@@ -153,5 +153,57 @@
       "btcVsDxyCorr90d": -0.31,
       "asOf": "2025-09-17T20:00:00Z"
     }
+  },
+  {
+    "intent": "signal:market-intel",
+    "args": { "query": "etf and on-chain capital flows" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-signal:market-intel",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE. Shape mirrors the documented market-intel skill output (spot ETF flows, stablecoin supply, DeFi TVL, whale flow). Feeds the flow-footprint channel as a cross-market flow footprint.",
+    "result": {
+      "spotBtcEtfFlowUsd": -184000000,
+      "spotEthEtfFlowUsd": 62000000,
+      "stablecoinTotalMcapUsd": 256400000000,
+      "stablecoinChange24hUsd": 1100000000,
+      "defiTvlUsd": 92800000000,
+      "whaleNetFlowUsd": -740000000,
+      "asOf": "2025-09-17T20:00:00Z"
+    }
+  },
+  {
+    "intent": "signal:technical-analysis",
+    "args": { "query": "technical levels and overextension for CRVS" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-signal:technical-analysis",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE. Shape mirrors the documented technical-analysis skill output (RSI, distance from 200-DMA, ATR, support/resistance). Feeds the risk-flag channel as a stretched-tape risk watch.",
+    "result": {
+      "symbol": "CRVS",
+      "rsi14": 78.6,
+      "priceVs200DmaPct": 34.2,
+      "atr14Pct": 3.8,
+      "nearestSupport": 214.5,
+      "nearestResistance": 246.0,
+      "trend": "above 200-DMA, stretched",
+      "asOf": "2025-09-19T20:00:00Z"
+    }
+  },
+  {
+    "intent": "signal:news-briefing",
+    "args": { "query": "trending narratives and morning brief" },
+    "recordedAt": "2025-09-30T20:00:00Z",
+    "source": "bitget-signal:news-briefing",
+    "synthetic": true,
+    "_note": "DEMO FIXTURE. Shape mirrors the documented news-briefing skill output (trending boards, narrative synthesis, morning brief). Feeds the narrative-shift channel.",
+    "result": {
+      "trending": [
+        { "topic": "Fed September cut fully priced, December path in doubt", "weight": 0.82, "sentiment": -0.12 },
+        { "topic": "Stablecoin legislation clears committee", "weight": 0.74, "sentiment": 0.36 },
+        { "topic": "Tokenized U.S. equity volume reaches record", "weight": 0.61, "sentiment": 0.44 }
+      ],
+      "morningBrief": "Markets price one cut; tokenized-equity activity is the fastest-growing on-chain equity venue.",
+      "asOf": "2025-09-17T20:00:00Z"
+    }
   }
 ]

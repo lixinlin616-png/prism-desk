@@ -44,6 +44,30 @@ const SWEEP_TERMS = ['desk sweep', 'full sweep', 'sweep', 'every channel', 'all 
 const STOPWORDS = new Set(['THE', 'AND', 'FOR', 'WITH', 'WHAT', 'WHY', 'HOW', 'IS', 'ARE', 'CAN', 'SHOULD', 'WOULD', 'THIS', 'THAT', 'FROM', 'INTO', 'AFTER', 'BEFORE', 'ABOUT', 'GIVE', 'SHOW', 'ME', 'MY', 'YOU', 'ALL', 'ANY', 'NOT', 'BUT', 'NOW', 'TODAY', 'WEEK', 'MONTH', 'YEAR', 'EPS', 'CPI', 'FOMC', 'GDP', 'NFP', 'PMI', 'IPO', 'ETF', 'AI', 'US', 'USA', 'VS', 'PER', 'ITS', 'THEIR', 'OUR', 'HAS', 'HAVE', 'HAD', 'BEEN', 'BEING', 'WAS', 'WERE', 'WILL', 'DID', 'DOES', 'MACRO', 'STOCK', 'STOCKS', 'SHARE', 'SHARES', 'PRICE', 'PRICES', 'NEWS', 'CALL', 'GUIDE', 'RATES', 'RATE']);
 
 /**
+ * Deterministic normalisation of common misspellings before keyword routing.
+ *
+ * Not fuzzy matching - that would trade the auditable routing this desk is built
+ * on for guesswork. This is a small, explicit, test-pinned map of the typos a
+ * trader actually makes (transposed / dropped / doubled letters), applied on
+ * word boundaries. It can only ADD a correct route, never silently remove one,
+ * and the substitution is visible in the plan trace.
+ */
+const TYPO_ALIASES = {
+  earinngs: 'earnings', earningss: 'earnings', ernings: 'earnings', earings: 'earnings',
+  earnigns: 'earnings', earnngs: 'earnings',
+  iflation: 'inflation', inflatoin: 'inflation', inflationn: 'inflation', inflaton: 'inflation',
+  recesion: 'recession', ressesion: 'recession', recesison: 'recession',
+  payrol: 'payroll', payrroll: 'payroll',
+  insder: 'insider', insiider: 'insider',
+  wekeend: 'weekend', weekdend: 'weekend', weekand: 'weekend',
+  rtokne: 'rtoken', rtoke: 'rtoken',
+};
+function normalizeAsk(q) {
+  const lower = String(q || '').toLowerCase();
+  return lower.replace(/[a-z][a-z'-]{3,}/g, (word) => TYPO_ALIASES[word] || word);
+}
+
+/**
  * Which bitget-signal skills each channel needs, and why.
  *
  * This map is the single source of truth for BOTH the ingest loop below and
@@ -59,6 +83,9 @@ const STOPWORDS = new Set(['THE', 'AND', 'FOR', 'WITH', 'WHAT', 'WHY', 'HOW', 'I
 export const SKILL_TRIGGERS = [
   { skill: 'sentiment-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fear & Greed / funding / long-short ratio decide who is awake to trade the rToken outside cash hours' },
   { skill: 'macro-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fed policy and BTC-vs-DXY/Nasdaq correlation frame how a US macro print transmits into a tokenized equity' },
+  { skill: 'market-intel', channels: ['flow-footprint'], why: 'Spot ETF flows, stablecoin supply and whale flow are the cross-market footprint behind position changes' },
+  { skill: 'technical-analysis', channels: ['risk-flag'], why: 'RSI, distance from the 200-DMA and support/resistance flag a stretched tape as a risk, independent of the narrative' },
+  { skill: 'news-briefing', channels: ['narrative-shift'], why: 'Trending boards and narrative synthesis detect when the story is turning before fundamentals confirm it' },
 ];
 
 /** Skills the plan should invoke for a set of channels. De-duplicated, order-stable. */
@@ -86,7 +113,7 @@ export function planQuestion(question, { asOf = null } = {}) {
   // tickers ("Full desk sweep" yields FULL, DESK, SWEEP), so runTask() filters
   // them against the symbols the desk actually has data for before use.
   const tickerCandidates = [...new Set([...upper.matchAll(TICKER_RE)].map((m) => m[1]).filter((t) => !STOPWORDS.has(t) && t.length <= 6))];
-  const lower = q.toLowerCase();
+  const lower = normalizeAsk(q);
 
   const channels = new Set();
   const intents = new Set();
@@ -160,6 +187,13 @@ export function planQuestion(question, { asOf = null } = {}) {
     sweepRequested,
     /** True when the spectrum was opened because nothing matched, not because it was asked for. */
     widened: matched.length === 0 && !sweepRequested,
+    /**
+     * True when nothing matched AND no ticker was named - i.e. the input reads
+     * off-domain (gibberish, small talk, an unrelated question), not a thinly
+     * specified research ask. The desk says so out loud and offers concrete
+     * things to ask rather than passing the seven-channel scan off as an answer.
+     */
+    offDomain: (matched.length === 0 && !sweepRequested) && tickerCandidates.length === 0,
     intents: INTENTS.filter((i) => intents.has(i)),
     indicators: [...indicators],
     session,
@@ -220,6 +254,14 @@ export class Pipeline {
     const rejected = plan.tickers.filter((t) => !known.has(t));
     plan.tickersResolved = resolved;
     plan.tickersRejected = rejected;
+    // Refine off-domain now that candidates have been tested against symbols the
+    // desk can actually price. planQuestion can only see letter shapes, so an
+    // uppercase nonsense word ("HELLO", "ASDKJH") looks like a ticker until this
+    // resolution rejects it. A genuinely off-domain input is one where the
+    // planner fell back AND not one named symbol resolved. Explicit channel
+    // selection (recorded scenarios) is never off-domain by construction.
+    const explicitChannels = channels?.length > 0;
+    plan.offDomain = !explicitChannels && plan.widened && resolved.length === 0;
     let dataTickers = resolved;
     emit('plan', {
       plan: { ...plan, session: plan.session },
@@ -450,6 +492,7 @@ export class Pipeline {
         channels: plan.channels,
         sweepRequested: plan.sweepRequested,
         widened: plan.widened,
+        offDomain: plan.offDomain,
         intentsRequested: plan.intents,
         intentsServed: snapshots.filter((s) => !s.skill).map((s) => s.intent).filter((v, i, a) => a.indexOf(v) === i),
         intentsMissing: intentRequests.filter((r) => !r.served).map((r) => ({ intent: r.intent, reason: r.reason })),

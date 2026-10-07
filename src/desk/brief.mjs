@@ -102,7 +102,19 @@ export function renderBrief({ cards, quarantined = [], belowThreshold = [], cont
   L.push('');
 
   const plan = context.plan || null;
-  if (plan?.widened) {
+  if (plan?.offDomain) {
+    L.push('## Outside what this desk covers');
+    L.push('');
+    L.push('I could not map that to an issuer, an event or any of the seven research channels, so I will not dress a seven-channel scan up as an answer. Prism covers US-equity and tokenized-equity research - earnings expectation gaps, macro transmission, insider and 13F flows, the weekend rToken window, narrative shifts and risk flags. Try one of:');
+    L.push('');
+    L.push('- `Walk me through the earnings expectation gaps in scope.`');
+    L.push('- `The August CPI came in cool - map the transmission and who is most exposed.`');
+    L.push('- `Any insider selling clusters or 13F changes I should know about?`');
+    L.push('- `周末休市期间 rToken 怎么定价？`');
+    L.push('');
+    L.push('A clearly-labelled scan of what is currently in scope follows anyway, so the question is not answered with silence.');
+    L.push('');
+  } else if (plan?.widened) {
     L.push('## How I read this question');
     L.push('');
     L.push('No channel keyword matched, so the desk opened all seven and let the corpus decide. **Read what follows as a scan of what is currently in scope, not as an answer to a specific ask.** Name a ticker, an event or a channel (earnings / CPI / insider flows / weekend rToken window / risk) and the desk will narrow to it.');

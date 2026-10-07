@@ -16,7 +16,7 @@
 
 **GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
 
-演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以点开 `full-sweep` 后那一轮的 9 张卡、26 条核验项 / 88.5% 通过率，以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.138，都是引擎真实产出（右侧看板栏另有 11 张 active，来自 235 张的已提交 fixture，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的 14 项检查专门盯这个漂移）。
+演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以点开 `full-sweep` 后那一轮的 12 张卡、29 条核验项 / 93.1% 通过率，以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.137，都是引擎真实产出（右侧看板栏另有 13 张 active，来自 312 张的已提交 fixture，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的检查专门盯这个漂移）。
 
 有两件事静态页面**做不到**，而且它会明说、绝不假装成功：跑一个全新的自由提问（回放最接近的预录任务，并提示这是替换）、写入看板（粘贴文档 / 清空看板返回 409 并说明原因）。页面左下角有一枚永久的 `static replay` 徽标。
 
@@ -197,7 +197,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 
 **6. 统计结论带明确的 caveat。** 传导研究的样本只有 19/25 个事件，t 值按朴素独立假设计算，我们在报告里写明了这一点；跳空研究同时报告 **naive t 与按日期聚类的 clustered t**，并以 clustered 为准（更保守）。详见 [`docs/VALIDATION.md`](docs/VALIDATION.md)。
 
-**7. 我们公开了自己的判分记录，包括难看的那部分。** 复盘闭环拿真实价格回头裁决已发布的卡片：**235 张卡 → 115 个独立主张 → 34 条决出胜负，10 胜 24 负，命中率 29.4%（95% CI 14.1–44.7%）**。更要紧的是打分与实现超额收益的 Spearman rho = **-0.138**，A 级卡命中率（22.2%）**低于** C 级卡（42.9%）——也就是**分数越高、实现越差**，报告把这一条标成 **BLOCKER**。这些数字全部在 [`docs/reports/review.md`](docs/reports/review.md) 里，由 `npm run review:seed` 从一个**已提交的看板 fixture** 复现——除生成时间戳那一行外**逐字节相同（实测）**。机制与全部 caveat 见 [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md)。
+**7. 我们公开了自己的判分记录，包括难看的那部分。** 复盘闭环拿真实价格回头裁决已发布的卡片：**312 张卡 → 148 个独立主张 → 34 条决出胜负，10 胜 24 负，命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）**。更要紧的是打分与实现超额收益的 Spearman rho = **-0.137**，A 级卡命中率（22.2%）**低于** C 级卡（50%）——也就是**分数越高、实现越差**，报告把这一条标成 **BLOCKER**。这些数字全部在 [`docs/reports/review.md`](docs/reports/review.md) 里，由 `npm run review:seed` 从一个**已提交的看板 fixture** 复现——除生成时间戳那一行外**逐字节相同（实测）**。机制与全部 caveat 见 [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md)。
 
 **8. 不是投资建议。** Prism Desk 输出的是**带证据和失效条件的研究判断**，不是下单指令。
 
@@ -212,8 +212,8 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 | 宏观事件 | 25 events | date / indicator / actual / consensus |
 | 离线 MCP fixture | 12 | Bitget MCP 与 Signal Skills 的录制响应 |
 | 评测集 | 10 extraction + 9 ledger cases | 含阴性对照与故意幻觉样本 |
-| 看板 fixture | 235 cards · 11 replay dates × 6 scenarios | `npm run seed` 重建，两次 SHA-256 相同（**实测**）——复盘报表据此复现 |
-| Demo 逐字记录 | 951 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
+| 看板 fixture | 312 cards · 11 replay dates × 6 scenarios | `npm run seed` 重建，两次 SHA-256 相同（**实测**）——复盘报表据此复现 |
+| Demo 逐字记录 | 1031 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
 
 **三种数据模式**（`PRISM_DATA_MODE`）：
 
@@ -222,7 +222,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 208 个测试（node:test，无第三方依赖）
+npm test           # 211 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
@@ -291,7 +291,7 @@ web/                 index.html + app.js + styles.css + static-adapter.js（零�
 scripts/             validate, replay, build-seed, fetch-prices, record-fixtures,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               208 个 node:test 用例
+tests/               211 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 

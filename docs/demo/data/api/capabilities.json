@@ -266,10 +266,12 @@
    ],
    "needsPython": false,
    "resolved": null,
-   "fixture": false,
-   "wired": false,
-   "invokedBy": [],
-   "why": "declared by bitget-signal but not called by any channel yet"
+   "fixture": true,
+   "wired": true,
+   "invokedBy": [
+    "flow-footprint"
+   ],
+   "why": "Spot ETF flows, stablecoin supply and whale flow are the cross-market footprint behind position changes"
   },
   {
    "id": "sentiment-analyst",
@@ -317,10 +319,12 @@
    ],
    "needsPython": true,
    "resolved": null,
-   "fixture": false,
-   "wired": false,
-   "invokedBy": [],
-   "why": "declared by bitget-signal but not called by any channel yet"
+   "fixture": true,
+   "wired": true,
+   "invokedBy": [
+    "risk-flag"
+   ],
+   "why": "RSI, distance from the 200-DMA and support/resistance flag a stretched tape as a risk, independent of the narrative"
   },
   {
    "id": "news-briefing",
@@ -338,10 +342,12 @@
    ],
    "needsPython": false,
    "resolved": null,
-   "fixture": false,
-   "wired": false,
-   "invokedBy": [],
-   "why": "declared by bitget-signal but not called by any channel yet"
+   "fixture": true,
+   "wired": true,
+   "invokedBy": [
+    "narrative-shift"
+   ],
+   "why": "Trending boards and narrative synthesis detect when the story is turning before fundamentals confirm it"
   }
  ],
  "agentKey": {

@@ -170,3 +170,57 @@ export function maxDrawdown(equity) {
   }
   return mdd * 100;
 }
+
+/**
+ * Wilson score interval for a binomial proportion.
+ *
+ * Returns the [low, high] bounds as fractions in [0, 1].
+ *
+ * Why Wilson and not the Wald interval p ± z sqrt(p(1-p)/n): the Wald interval
+ * assumes a symmetric normal approximation and is known to undercover badly for
+ * small n or proportions away from 0.5 - exactly the regime a small event study
+ * lives in. The Wilson interval inverts the score test instead, stays within
+ * [0, 1], and keeps close to nominal coverage even at the sample sizes here. It
+ * is the standard recommended interval for binomial proportions (Brown, Cai &
+ * DasGupta, 2001).
+ *
+ * @param {number} k successes
+ * @param {number} n trials
+ * @param {number} [z=1.959964] critical value (default ~95%)
+ * @returns {[number, number]}
+ */
+export function wilsonCi(k, n, z = 1.959964) {
+  if (!(n > 0)) return [NaN, NaN];
+  const p = k / n;
+  const z2 = z * z;
+  const denom = 1 + z2 / n;
+  const centre = (p + z2 / (2 * n)) / denom;
+  const half = (z * Math.sqrt((p * (1 - p) / n) + (z2 / (4 * n * n)))) / denom;
+  return [Math.max(0, centre - half), Math.min(1, centre + half)];
+}
+
+/** Invert the regularized incomplete beta (the beta CDF) by bisection. */
+function betaQuantile(p, a, b) {
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 100; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (ibeta(a, b, mid) < p) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+/**
+ * Exact Clopper-Pearson interval for a binomial proportion, in fractions.
+ *
+ * Conservative (it guarantees at least (1-alpha) coverage) and wider than
+ * Wilson. Kept alongside wilsonCi so a report can show both and a reader can see
+ * the headline does not hinge on one interval choice.
+ */
+export function clopperPearsonCi(k, n, alpha = 0.05) {
+  if (!(n > 0)) return [NaN, NaN];
+  const lo = k === 0 ? 0 : betaQuantile(alpha / 2, k, n - k + 1);
+  const hi = k === n ? 1 : betaQuantile(1 - alpha / 2, k + 1, n - k);
+  return [lo, hi];
+}

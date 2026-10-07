@@ -1,6 +1,6 @@
 # Prism Desk - demo transcript
 
-Generated 2026-10-07T11:26:07.308Z - data mode `offline`, extractor `rules`, LLM not configured (deterministic rule extractor).
+Generated 2026-10-07T13:51:48.754Z - data mode `auto`, extractor `rules`, LLM not configured (deterministic rule extractor).
 
 Corpus 14 documents / 2599 words. Price book 25 symbols, 41386 bars, 2019-01-02 to 2025-09-30.
 
@@ -10,7 +10,7 @@ Corpus 14 documents / 2599 words. Price book 25 symbols, 41386 bars, 2019-01-02 
 
 > Full desk sweep across every channel - what is actually tradeable right now?
 
-_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, macro-transmission, narrative-shift, flow-footprint, closed-window, cross-asset, risk-flag - 57ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, macro-transmission, narrative-shift, flow-footprint, closed-window, cross-asset, risk-flag - 87ms - extractor rules_
 
 **What it demonstrates.** Exercises all seven channels in one pass. Best first thing to run.
 
@@ -34,12 +34,14 @@ No card was produced for **CAT**. That means nothing in scope cleared the eviden
 | 1 | SHORT | 财报预期差 | HLXN | 75.5 | A | days | 75% |
 | 2 | LONG | 财报预期差 | CRVS | 70.6 | B | days | 75% |
 | 3 | PAIR | 宏观传导链路 | AMD TSLA COIN PFE XOM WMT | 68 | B | days | 100% |
-| 4 | SHORT | 财报预期差 | ASTR | 63.4 | B | intraday | 75% |
+| 4 | SHORT | 财报预期差 | ASTR | 67.9 | B | intraday | 100% |
 | 5 | PAIR | 宏观传导链路 | COIN TSLA PLTR PFE XOM WMT | 61.3 | C | days | 100% |
 | 6 | AVOID | 反向风险旗 | BLWF | 59.4 | C | weeks | 100% |
-| 7 | LONG | 叙事转向 | NWCL | 54.9 | C | weeks | 100% |
-| 8 | SHORT | 叙事转向 | HLXN | 53.3 | C | weeks | 100% |
-| 9 | WATCH | 跨资产联动 | BTC ETH | 49 | C | intraday | 100% |
+| 7 | WATCH | 资金足迹 | BTC ETH | 55.7 | C | days | 100% |
+| 8 | LONG | 叙事转向 | NWCL | 54.9 | C | weeks | 100% |
+| 9 | SHORT | 叙事转向 | HLXN | 53.3 | C | weeks | 100% |
+| 10 | WATCH | 跨资产联动 | BTC ETH | 49 | C | intraday | 100% |
+| 11 | WATCH | 反向风险旗 | CRVS | 46.7 | D | days | 100% |
 
 ## Dossiers
 
@@ -167,7 +169,7 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources cpi-2025-08_
 ---
 
 ### SHORT · ASTR: EPS miss, guide withdraw
-`SIG-MFR9KE80-002` · Earnings Expectation Gap (财报预期差) · score **63.4/100** (B) · conviction 36 · horizon intraday · tickers ASTR
+`SIG-MFR9KE80-002` · Earnings Expectation Gap (财报预期差) · score **67.9/100** (B) · conviction 36 · horizon intraday · tickers ASTR
 
 **Claim.** ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.
 
@@ -188,9 +190,9 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources cpi-2025-08_
 - ✅ `E1` metric (headline) — astr-guidance-withdrawal @ meta.actual
   > EPS reported: 0.58
   - checked against: astr-guidance-withdrawal meta$.actual
-- ⚠️ `E2` estimate (headline) — demo street consensus @ meta.consensus
+- ✅ `E2` estimate (headline) — demo street consensus @ meta.consensus
   > EPS consensus: 0.61
-  - note: no document or snapshot available to check this number against
+  - checked against: fixture $.trending[2].weight
 - ✅ `E3` quote — astr-guidance-withdrawal @ chars 159-387 (matched "guidance")
   > The company withdrew its full-year outlook, stating that it is unable to provide guidance at this time because of unusual uncertainty around consumer demand and the effect of newly announced import levies on landed product cost.
   - checked against: astr-guidance-withdrawal (exact @159)
@@ -269,9 +271,13 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources blwf-10q-excerpt_
 
 ---
 
+## Below publish threshold
+
+- ⏸ `SIG-MFR9KE80-016` Trending narrative: Fed September cut fully priced, December path in doubt — score 41.8 (D)
+
 ## Ledger
 
-Items checked 26 · pass 23 · fail 0 · unverifiable 3 · pass rate 88.5% · cards quarantined 0
+Items checked 29 · pass 27 · fail 0 · unverifiable 2 · pass rate 93.1% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -281,7 +287,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Walk me through the earnings expectation gaps in scope. Which print is wide enough versus consensus to actually reprice the name, and which is already discounted?
 
-_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, risk-flag - 32ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, risk-flag - 35ms - extractor rules_
 
 **What it demonstrates.** Shows consensus-vs-actual, guidance stance classification and the beat-but-ugly case.
 
@@ -306,11 +312,12 @@ No card was produced for **CAT**. That means nothing in scope cleared the eviden
 | 2 | LONG | 财报预期差 | CRVS | 70.6 | B | days | 75% |
 | 3 | SHORT | 财报预期差 | ASTR | 63.4 | B | intraday | 75% |
 | 4 | AVOID | 反向风险旗 | BLWF | 59.4 | C | weeks | 100% |
+| 5 | WATCH | 反向风险旗 | CRVS | 46.7 | D | days | 100% |
 
 ## Dossiers
 
 ### SHORT · HLXN: EPS miss, guide lower
-`SIG-MFR9KE80-021` · Earnings Expectation Gap (财报预期差) · score **75.5/100** (A) · conviction 60 · horizon days · tickers HLXN
+`SIG-MFR9KE80-024` · Earnings Expectation Gap (财报预期差) · score **75.5/100** (A) · conviction 60 · horizon days · tickers HLXN
 
 **Claim.** HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.
 
@@ -356,7 +363,7 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources hlxn-q2-release_
 ---
 
 ### LONG · CRVS: EPS beat, guide raise
-`SIG-MFR9KE80-023` · Earnings Expectation Gap (财报预期差) · score **70.6/100** (B) · conviction 84 · horizon days · tickers CRVS
+`SIG-MFR9KE80-026` · Earnings Expectation Gap (财报预期差) · score **70.6/100** (B) · conviction 84 · horizon days · tickers CRVS
 
 **Claim.** CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.
 
@@ -393,7 +400,7 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources crvs-q2-release_
 ---
 
 ### SHORT · ASTR: EPS miss, guide withdraw
-`SIG-MFR9KE80-015` · Earnings Expectation Gap (财报预期差) · score **63.4/100** (B) · conviction 36 · horizon intraday · tickers ASTR
+`SIG-MFR9KE80-018` · Earnings Expectation Gap (财报预期差) · score **63.4/100** (B) · conviction 36 · horizon intraday · tickers ASTR
 
 **Claim.** ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.
 
@@ -430,7 +437,7 @@ _expires 2025-09-20 04:00 UTC · extractor rules · sources astr-guidance-withdr
 ---
 
 ### AVOID · BLWF: 14 contrarian risk flag(s)
-`SIG-MFR9KE80-024` · Contrarian Risk Flag (反向风险旗) · score **59.4/100** (C) · conviction 75 · horizon weeks · tickers BLWF
+`SIG-MFR9KE80-027` · Contrarian Risk Flag (反向风险旗) · score **59.4/100** (C) · conviction 75 · horizon weeks · tickers BLWF
 
 **Claim.** BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.
 
@@ -459,9 +466,29 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources blwf-10q-excerpt_
 
 ---
 
+### WATCH · CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)
+`SIG-MFR9KE80-029` · Contrarian Risk Flag (反向风险旗) · score **46.7/100** (D) · conviction 46 · horizon days · tickers CRVS
+
+**Claim.** Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.
+
+**What would make this wrong.** RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown. Observable level: `RSI < 70 and price re-tests 50-DMA`. Recheck: 2025-09-29T20:00:00.000Z.
+
+**Bear case.**
+- Momentum can stay overbought far longer than mean reversion expects.
+- Daily technical indicators lag the intraday exit a risk plan would actually use.
+
+**Evidence ledger.**
+- ✅ `E1` technical (headline) — fixture @ technical-analysis(CRVS)
+  > RSI(14) 78.6; +34.2% vs 200-DMA; support 214.5; resistance 246
+  - checked against: fixture $.rsi14
+
+_expires 2025-09-24 20:00 UTC · extractor rules · sources n/a_
+
+---
+
 ## Ledger
 
-Items checked 42 · pass 36 · fail 0 · unverifiable 6 · pass rate 85.7% · cards quarantined 0
+Items checked 46 · pass 41 · fail 0 · unverifiable 5 · pass rate 89.1% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -471,7 +498,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > The August CPI print came in cool on the headline but hot on core. Map the transmission chain and tell me who is most exposed cross-sectionally.
 
-_as-of 2025-09-19T20:00:00.000Z - channels macro-transmission - 31ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels macro-transmission - 34ms - extractor rules_
 
 **What it demonstrates.** The ranking is computed from measured 252-session OLS betas, not asserted.
 
@@ -498,7 +525,7 @@ No card was produced for **CAT, ASTR**. That means nothing in scope cleared the 
 ## Dossiers
 
 ### PAIR · CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower
-`SIG-MFR9KE80-028` · Macro Transmission Chain (宏观传导链路) · score **68/100** (B) · conviction 60 · horizon days · tickers AMD, TSLA, COIN, PFE, XOM, WMT
+`SIG-MFR9KE80-032` · Macro Transmission Chain (宏观传导链路) · score **68/100** (B) · conviction 60 · horizon days · tickers AMD, TSLA, COIN, PFE, XOM, WMT
 
 **Claim.** CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.
 
@@ -547,7 +574,7 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources cpi-2025-08_
 ---
 
 ### PAIR · NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.
-`SIG-MFR9KE80-037` · Macro Transmission Chain (宏观传导链路) · score **61.3/100** (C) · conviction 55 · horizon days · tickers COIN, TSLA, PLTR, PFE, XOM, WMT
+`SIG-MFR9KE80-041` · Macro Transmission Chain (宏观传导链路) · score **61.3/100** (C) · conviction 55 · horizon days · tickers COIN, TSLA, PLTR, PFE, XOM, WMT
 
 **Claim.** Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.
 
@@ -584,7 +611,7 @@ _expires 2025-09-24 20:00 UTC · extractor rules · sources nfp-2025-08_
 
 ## Ledger
 
-Items checked 46 · pass 40 · fail 0 · unverifiable 6 · pass rate 87% · cards quarantined 0
+Items checked 50 · pass 45 · fail 0 · unverifiable 5 · pass rate 90% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -594,7 +621,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > A tariff framework just landed on a Saturday afternoon. The cash market is shut for 47 hours but the rToken still trades. How should I think about pricing that gap?
 
-_as-of 2025-09-13T15:00:00.000Z - channels closed-window, cross-asset - 34ms - extractor rules_
+_as-of 2025-09-13T15:00:00.000Z - channels closed-window, cross-asset - 35ms - extractor rules_
 
 **What it demonstrates.** The core S2 scenario: 7x24 tokenized equity versus a 6.5-hour cash session.
 
@@ -621,7 +648,7 @@ No card was produced for **CAT**. That means nothing in scope cleared the eviden
 ## Dossiers
 
 ### WATCH · closed window: SPY has no cash price discovery
-`SIG-MFIE7HC0-052` · Closed-Window Pricing (休市窗口定价) · score **58.3/100** (C) · conviction 55 · horizon intraday · tickers SPY
+`SIG-MFIE7HC0-056` · Closed-Window Pricing (休市窗口定价) · score **58.3/100** (C) · conviction 55 · horizon intraday · tickers SPY
 
 **Claim.** The US cash session is closed (weekend) but the SPY rToken still trades. Information from "Weekend wire: new tariff framework announced outside market hours" can only be priced on the rToken until the next open. Across 44 comparable historical gaps in SPY, the gap direction continued 45.5% of the time and reverted 45.5% of the time; the median |gap| was 1.23%.
 
@@ -662,7 +689,7 @@ _expires 2025-09-13 23:00 UTC · extractor rules · sources weekend-policy-shock
 ---
 
 ### WATCH · Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000
-`SIG-MFIE7HC0-053` · Cross-Asset Linkage (跨资产联动) · score **49/100** (C) · conviction 28 · horizon intraday · tickers BTC, ETH
+`SIG-MFIE7HC0-057` · Cross-Asset Linkage (跨资产联动) · score **49/100** (C) · conviction 28 · horizon intraday · tickers BTC, ETH
 
 **Claim.** Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.
 
@@ -683,11 +710,11 @@ _expires 2025-09-13 23:00 UTC · extractor rules · sources n/a_
 
 ## Below publish threshold
 
-- ⏸ `SIG-MFIE7HC0-051` closed window: ASTR has no cash price discovery — score 44.9 (D)
+- ⏸ `SIG-MFIE7HC0-055` closed window: ASTR has no cash price discovery — score 44.9 (D)
 
 ## Ledger
 
-Items checked 53 · pass 46 · fail 0 · unverifiable 7 · pass rate 86.8% · cards quarantined 0
+Items checked 57 · pass 51 · fail 0 · unverifiable 6 · pass rate 89.5% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -697,7 +724,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Any insider selling clusters or 13F position changes I should know about?
 
-_as-of 2025-09-19T20:00:00.000Z - channels flow-footprint - 38ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels flow-footprint - 35ms - extractor rules_
 
 **What it demonstrates.** Aggregates are recomputed from the raw snapshot by the evidence ledger.
 
@@ -712,19 +739,49 @@ No card was produced for **CAT, ASTR**. That means nothing in scope cleared the 
 
 ## Headline
 
-**HLXN: 4 insider sale(s) vs 1 purchase(s)** — WATCH, score 52.1/100.
+**Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M** — WATCH, score 55.7/100.
 
 ## Ranked cards
 
 | # | direction | channel | tickers | score | grade | horizon | verified |
 |---:|---|---|---|---:|---|---|---|
-| 1 | WATCH | 资金足迹 | HLXN | 52.1 | C | weeks | 100% |
-| 2 | WATCH | 资金足迹 | NWCL | 47.6 | D | weeks | 100% |
+| 1 | WATCH | 资金足迹 | BTC ETH | 55.7 | C | days | 100% |
+| 2 | WATCH | 资金足迹 | HLXN | 52.1 | C | weeks | 100% |
+| 3 | WATCH | 资金足迹 | NWCL | 47.6 | D | weeks | 100% |
 
 ## Dossiers
 
+### WATCH · Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M
+`SIG-MFR9KE80-074` · Flow Footprint (资金足迹) · score **55.7/100** (C) · conviction 30 · horizon days · tickers BTC, ETH
+
+**Claim.** The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.
+
+**What would make this wrong.** ETF flows reverse for two consecutive sessions and stablecoin supply contracts, i.e. the footprint flips from mixed/defensive to risk-off (or risk-on) rather than a one-day print. Observable level: `2-session flow reversal`. Recheck: 2025-09-22T20:00:00.000Z.
+
+**Bear case.**
+- ETF flow and whale-flow series are noisy and partly time-zone shifted.
+- Stablecoin supply growth is not the same as equity buying.
+
+**Evidence ledger.**
+- ✅ `E1` sentiment (headline) — fixture @ market-intel
+  > spot BTC ETF -$184M; spot ETH ETF $62M; stablecoin supply 24h $1.10B; whale net -$740M
+  - checked against: fixture $.spotBtcEtfFlowUsd
+
+**Score breakdown.**
+| factor | score | weight | contribution | why |
+|---|---:|---:|---:|---|
+| surprise | 72 | 0.3 | 21.6 | Flow channel has no consensus series; scaled from 184000000 net transaction(s) pointing the same way. |
+| corroboration | 70 | 0.22 | 15.4 | 1/1 items verified (100%) -> 62; single source: no independent corroboration (+0); +8 headline evidence cleared the ledger |
+| tradability | 15.1 | 0.18 | 2.72 | best instrument crypto (liquidity 0.6) x large-cap coverage 0.55 -> 23; no trade sketch: the trader has to build the execution plan from scratch (+0); -8 rToken-only: thinner book, and mint/redeem arb can close the gap without you |
+| asymmetry | 30 | 0.2 | 6 | No trade sketch - asymmetry unknown, floored at 30 rather than rewarded. |
+| freshness | 100 | 0.1 | 10 | underlying information is 0h old (source stamped 2025-09-19T20:00) against a 720h half-life for flow-footprint -> decay weight 1 |
+
+_expires 2025-09-24 20:00 UTC · extractor rules · sources n/a_
+
+---
+
 ### WATCH · HLXN: 4 insider sale(s) vs 1 purchase(s)
-`SIG-MFR9KE80-067` · Flow Footprint (资金足迹) · score **52.1/100** (C) · conviction 58 · horizon weeks · tickers HLXN
+`SIG-MFR9KE80-071` · Flow Footprint (资金足迹) · score **52.1/100** (C) · conviction 58 · horizon weeks · tickers HLXN
 
 **Claim.** Insider activity in HLXN shows 4 dispositions against 1 acquisitions in the reported window. Clustered selling is a weak but persistent negative; isolated selling is usually tax planning.
 
@@ -739,21 +796,12 @@ No card was produced for **CAT, ASTR**. That means nothing in scope cleared the 
   > 4 sells / 1 buys, aggregate disposition value 18,806,970
   - checked against: recounted insiderTrades(HLXN): 4 sells / 1 buys
 
-**Score breakdown.**
-| factor | score | weight | contribution | why |
-|---|---:|---:|---:|---|
-| surprise | 46 | 0.3 | 13.8 | Flow channel has no consensus series; scaled from 4 net transaction(s) pointing the same way. |
-| corroboration | 70 | 0.22 | 15.4 | 1/1 items verified (100%) -> 62; single source: no independent corroboration (+0); +8 headline evidence cleared the ledger |
-| tradability | 38.5 | 0.18 | 6.93 | best instrument native-equity (liquidity 1) x large-cap coverage 0.55 -> 39; no trade sketch: the trader has to build the execution plan from scratch (+0) |
-| asymmetry | 30 | 0.2 | 6 | No trade sketch - asymmetry unknown, floored at 30 rather than rewarded. |
-| freshness | 100 | 0.1 | 10 | underlying information is 0h old (source stamped 2025-09-19T20:00) against a 720h half-life for flow-footprint -> decay weight 1 |
-
 _expires 2025-10-10 20:00 UTC · extractor rules · sources n/a_
 
 ---
 
 ### WATCH · NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)
-`SIG-MFR9KE80-069` · Flow Footprint (资金足迹) · score **47.6/100** (D) · conviction 30 · horizon weeks · tickers NWCL
+`SIG-MFR9KE80-073` · Flow Footprint (资金足迹) · score **47.6/100** (D) · conviction 30 · horizon weeks · tickers NWCL
 
 **Claim.** Of 6 reporting 13F holders of NWCL, 3 increased by more than 5% and 2 trimmed by more than 5%. 13F is a 45-day-lagged snapshot, so this confirms a thesis rather than starting one.
 
@@ -774,7 +822,7 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources n/a_
 
 ## Ledger
 
-Items checked 55 · pass 48 · fail 0 · unverifiable 7 · pass rate 87.3% · cards quarantined 0
+Items checked 60 · pass 54 · fail 0 · unverifiable 6 · pass rate 90% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -784,7 +832,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Run the contrarian screen. Where is the language softening and where do the accounting ratios diverge from the narrative?
 
-_as-of 2025-09-19T20:00:00.000Z - channels narrative-shift, risk-flag - 29ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels narrative-shift, risk-flag - 37ms - extractor rules_
 
 **What it demonstrates.** Adverse-language and ratio-anomaly flags. Demo issuers are fictional by design.
 
@@ -815,11 +863,12 @@ No card was produced for **CAT, ASTR**. That means nothing in scope cleared the 
 | 1 | AVOID | 反向风险旗 | BLWF | 59.4 | C | weeks | 100% |
 | 2 | LONG | 叙事转向 | NWCL | 54.9 | C | weeks | 100% |
 | 3 | SHORT | 叙事转向 | HLXN | 53.3 | C | weeks | 100% |
+| 4 | WATCH | 反向风险旗 | CRVS | 46.7 | D | days | 100% |
 
 ## Dossiers
 
 ### AVOID · BLWF: 14 contrarian risk flag(s)
-`SIG-MFR9KE80-080` · Contrarian Risk Flag (反向风险旗) · score **59.4/100** (C) · conviction 75 · horizon weeks · tickers BLWF
+`SIG-MFR9KE80-085` · Contrarian Risk Flag (反向风险旗) · score **59.4/100** (C) · conviction 75 · horizon weeks · tickers BLWF
 
 **Claim.** BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.
 
@@ -858,7 +907,7 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources blwf-10q-excerpt_
 ---
 
 ### LONG · NWCL: narrative turning constructive
-`SIG-MFR9KE80-076` · Narrative Shift (叙事转向) · score **54.9/100** (C) · conviction 80 · horizon weeks · tickers NWCL
+`SIG-MFR9KE80-081` · Narrative Shift (叙事转向) · score **54.9/100** (C) · conviction 80 · horizon weeks · tickers NWCL
 
 **Claim.** demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.
 
@@ -887,7 +936,7 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources nwcl-news-agentic-pl
 ---
 
 ### SHORT · HLXN: narrative turning negative
-`SIG-MFR9KE80-074` · Narrative Shift (叙事转向) · score **53.3/100** (C) · conviction 74 · horizon weeks · tickers HLXN
+`SIG-MFR9KE80-079` · Narrative Shift (叙事转向) · score **53.3/100** (C) · conviction 74 · horizon weeks · tickers HLXN
 
 **Claim.** demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.
 
@@ -911,9 +960,33 @@ _expires 2025-10-10 20:00 UTC · extractor rules · sources hlxn-news-downgrade,
 
 ---
 
+### WATCH · CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)
+`SIG-MFR9KE80-087` · Contrarian Risk Flag (反向风险旗) · score **46.7/100** (D) · conviction 46 · horizon days · tickers CRVS
+
+**Claim.** Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.
+
+**What would make this wrong.** RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown. Observable level: `RSI < 70 and price re-tests 50-DMA`. Recheck: 2025-09-29T20:00:00.000Z.
+
+**Bear case.**
+- Momentum can stay overbought far longer than mean reversion expects.
+- Daily technical indicators lag the intraday exit a risk plan would actually use.
+
+**Evidence ledger.**
+- ✅ `E1` technical (headline) — fixture @ technical-analysis(CRVS)
+  > RSI(14) 78.6; +34.2% vs 200-DMA; support 214.5; resistance 246
+  - checked against: fixture $.rsi14
+
+_expires 2025-09-24 20:00 UTC · extractor rules · sources n/a_
+
+---
+
+## Below publish threshold
+
+- ⏸ `SIG-MFR9KE80-088` Trending narrative: Fed September cut fully priced, December path in doubt — score 41.8 (D)
+
 ## Ledger
 
-Items checked 64 · pass 57 · fail 0 · unverifiable 7 · pass rate 89.1% · cards quarantined 0
+Items checked 71 · pass 65 · fail 0 · unverifiable 6 · pass rate 91.5% · cards quarantined 0
 
 _Prism produces research inputs. A human takes the trade._
 
@@ -922,30 +995,37 @@ _Prism produces research inputs. A human takes the trade._
 ## Accumulated board
 
 ```
-total 23 cards | active 10 | quarantined 0 | expired 2 | conflicts 0 | avg active score 60.6
+total 30 cards | active 12 | quarantined 0 | expired 2 | conflicts 0 | avg active score 59
 ```
 
 id,createdAt,expiresAt,status,channel,direction,horizon,tickers,instruments,score,grade,conviction,verifiedPct,quarantined,gapMetric,gapDeltaPct,gapSigma,extractor,claim,invalidation,conflicts
 SIG-MFR9KE80-008,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,earnings-gap,short,days,HLXN,native-equity rtoken,75.5,A,60,75,no,EPS,-17.01,,rules,"HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.","HLXN reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
-SIG-MFR9KE80-021,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,earnings-gap,short,days,HLXN,native-equity rtoken,75.5,A,60,75,no,EPS,-17.01,,rules,"HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.","HLXN reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
+SIG-MFR9KE80-024,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,earnings-gap,short,days,HLXN,native-equity rtoken,75.5,A,60,75,no,EPS,-17.01,,rules,"HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.","HLXN reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
 SIG-MFR9KE80-010,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,earnings-gap,long,days,CRVS,native-equity rtoken,70.6,B,84,75,no,EPS,14.52,,rules,"CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.","Post-print follow-through fails: CRVS gives back the gap and closes below the prior close, or management walks back the guide on the next appearance.",0
-SIG-MFR9KE80-023,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,earnings-gap,long,days,CRVS,native-equity rtoken,70.6,B,84,75,no,EPS,14.52,,rules,"CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.","Post-print follow-through fails: CRVS gives back the gap and closes below the prior close, or management walks back the guide on the next appearance.",0
+SIG-MFR9KE80-026,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,earnings-gap,long,days,CRVS,native-equity rtoken,70.6,B,84,75,no,EPS,14.52,,rules,"CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.","Post-print follow-through fails: CRVS gives back the gap and closes below the prior close, or management walks back the guide on the next appearance.",0
 SIG-MFR9KE80-003,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,macro-transmission,pair,days,AMD TSLA COIN PFE XOM WMT,native-equity etf rtoken,68,B,60,100,no,CPI y/y (Aug 2025),-6.45,-1.33,rules,"CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
-SIG-MFR9KE80-028,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,macro-transmission,pair,days,AMD TSLA COIN PFE XOM WMT,native-equity etf rtoken,68,B,60,100,no,CPI y/y (Aug 2025),-6.45,-1.33,rules,"CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
-SIG-MFR9KE80-002,2025-09-19T20:00:00.000Z,2025-09-20T04:00:00.000Z,superseded,earnings-gap,short,intraday,ASTR,native-equity rtoken,63.4,B,36,75,no,EPS,-4.92,,rules,"ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.","ASTR reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
-SIG-MFR9KE80-015,2025-09-19T20:00:00.000Z,2025-09-20T04:00:00.000Z,active,earnings-gap,short,intraday,ASTR,native-equity rtoken,63.4,B,36,75,no,EPS,-4.92,,rules,"ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.","ASTR reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
+SIG-MFR9KE80-032,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,macro-transmission,pair,days,AMD TSLA COIN PFE XOM WMT,native-equity etf rtoken,68,B,60,100,no,CPI y/y (Aug 2025),-6.45,-1.33,rules,"CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
+SIG-MFR9KE80-002,2025-09-19T20:00:00.000Z,2025-09-20T04:00:00.000Z,superseded,earnings-gap,short,intraday,ASTR,native-equity rtoken,67.9,B,36,100,no,EPS,-4.92,,rules,"ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.","ASTR reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
+SIG-MFR9KE80-018,2025-09-19T20:00:00.000Z,2025-09-20T04:00:00.000Z,active,earnings-gap,short,intraday,ASTR,native-equity rtoken,63.4,B,36,75,no,EPS,-4.92,,rules,"ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.","ASTR reclaims the pre-print close within two sessions and holds, showing the miss was already discounted.",0
 SIG-MFR9KE80-012,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,macro-transmission,pair,days,COIN TSLA PLTR PFE XOM WMT,native-equity etf rtoken,61.3,C,55,100,no,Nonfarm payrolls (Aug 2025),-70.67,-0.88,rules,"Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
-SIG-MFR9KE80-037,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,macro-transmission,pair,days,COIN TSLA PLTR PFE XOM WMT,native-equity etf rtoken,61.3,C,55,100,no,Nonfarm payrolls (Aug 2025),-70.67,-0.88,rules,"Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
+SIG-MFR9KE80-041,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,macro-transmission,pair,days,COIN TSLA PLTR PFE XOM WMT,native-equity etf rtoken,61.3,C,55,100,no,Nonfarm payrolls (Aug 2025),-70.67,-0.88,rules,"Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.","The transmission does not show up cross-sectionally: within two sessions the least-exposed basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.",0
 SIG-MFR9KE80-011,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,superseded,risk-flag,avoid,weeks,BLWF,native-equity,59.4,C,75,100,no,,,,rules,"BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.","The flagged item is explicitly resolved by the company (restatement cleared, weakness remediated, provision released) and the ratio normalises for two consecutive quarters.",0
-SIG-MFR9KE80-024,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,superseded,risk-flag,avoid,weeks,BLWF,native-equity,59.4,C,75,100,no,,,,rules,"BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.","The flagged item is explicitly resolved by the company (restatement cleared, weakness remediated, provision released) and the ratio normalises for two consecutive quarters.",0
-SIG-MFR9KE80-080,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,risk-flag,avoid,weeks,BLWF,native-equity,59.4,C,75,100,no,,,,rules,"BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.","The flagged item is explicitly resolved by the company (restatement cleared, weakness remediated, provision released) and the ratio normalises for two consecutive quarters.",0
-SIG-MFIE7HC0-052,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,expired,closed-window,neutral,intraday,SPY,rtoken,58.3,C,55,100,no,,,,rules,"The US cash session is closed (weekend) but the SPY rToken still trades. Information from ""Weekend wire: new tariff framework announced outside market hours"" can only be priced on the rToken until the next open. Across 44 comparable historical gaps in SPY, the gap direction continued 45.5% of the time and reverted 45.5% of the time; the median |gap| was 1.23%.","The rToken premium/dislocation to the last cash close collapses before the open, meaning the information was already fully priced by the token market.",0
+SIG-MFR9KE80-027,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,superseded,risk-flag,avoid,weeks,BLWF,native-equity,59.4,C,75,100,no,,,,rules,"BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.","The flagged item is explicitly resolved by the company (restatement cleared, weakness remediated, provision released) and the ratio normalises for two consecutive quarters.",0
+SIG-MFR9KE80-085,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,risk-flag,avoid,weeks,BLWF,native-equity,59.4,C,75,100,no,,,,rules,"BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.","The flagged item is explicitly resolved by the company (restatement cleared, weakness remediated, provision released) and the ratio normalises for two consecutive quarters.",0
+SIG-MFIE7HC0-056,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,expired,closed-window,neutral,intraday,SPY,rtoken,58.3,C,55,100,no,,,,rules,"The US cash session is closed (weekend) but the SPY rToken still trades. Information from ""Weekend wire: new tariff framework announced outside market hours"" can only be priced on the rToken until the next open. Across 44 comparable historical gaps in SPY, the gap direction continued 45.5% of the time and reverted 45.5% of the time; the median |gap| was 1.23%.","The rToken premium/dislocation to the last cash close collapses before the open, meaning the information was already fully priced by the token market.",0
+SIG-MFR9KE80-014,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,flow-footprint,neutral,days,BTC ETH,crypto rtoken,55.7,C,30,100,no,,,,rules,"The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.","ETF flows reverse for two consecutive sessions and stablecoin supply contracts, i.e. the footprint flips from mixed/defensive to risk-off (or risk-on) rather than a one-day print.",0
+SIG-MFR9KE80-074,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,flow-footprint,neutral,days,BTC ETH,crypto rtoken,55.7,C,30,100,no,,,,rules,"The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.","ETF flows reverse for two consecutive sessions and stablecoin supply contracts, i.e. the footprint flips from mixed/defensive to risk-off (or risk-on) rather than a one-day print.",0
 SIG-MFR9KE80-007,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,superseded,narrative-shift,long,weeks,NWCL,native-equity rtoken,54.9,C,80,100,no,,,,rules,"demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.","Two or more subsequent documents on NWCL score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
-SIG-MFR9KE80-076,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,narrative-shift,long,weeks,NWCL,native-equity rtoken,54.9,C,80,100,no,,,,rules,"demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.","Two or more subsequent documents on NWCL score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
+SIG-MFR9KE80-081,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,narrative-shift,long,weeks,NWCL,native-equity rtoken,54.9,C,80,100,no,,,,rules,"demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.","Two or more subsequent documents on NWCL score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
 SIG-MFR9KE80-005,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,superseded,narrative-shift,short,weeks,HLXN,native-equity rtoken,53.3,C,74,100,no,,,,rules,"demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.","Two or more subsequent documents on HLXN score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
-SIG-MFR9KE80-074,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,narrative-shift,short,weeks,HLXN,native-equity rtoken,53.3,C,74,100,no,,,,rules,"demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.","Two or more subsequent documents on HLXN score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
-SIG-MFR9KE80-067,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,flow-footprint,neutral,weeks,HLXN,native-equity,52.1,C,58,100,no,,,,rules,Insider activity in HLXN shows 4 dispositions against 1 acquisitions in the reported window. Clustered selling is a weak but persistent negative; isolated selling is usually tax planning.,"A cluster of open-market purchases by two or more officers, or disclosure that the sales were executed under a pre-existing 10b5-1 plan adopted before the information event.",0
+SIG-MFR9KE80-079,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,narrative-shift,short,weeks,HLXN,native-equity rtoken,53.3,C,74,100,no,,,,rules,"demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.","Two or more subsequent documents on HLXN score with the opposite sign, or price makes a lower low (for the constructive read) within five sessions.",0
+SIG-MFR9KE80-071,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,flow-footprint,neutral,weeks,HLXN,native-equity,52.1,C,58,100,no,,,,rules,Insider activity in HLXN shows 4 dispositions against 1 acquisitions in the reported window. Clustered selling is a weak but persistent negative; isolated selling is usually tax planning.,"A cluster of open-market purchases by two or more officers, or disclosure that the sales were executed under a pre-existing 10b5-1 plan adopted before the information event.",0
 SIG-MFR9KE80-013,2025-09-19T20:00:00.000Z,2025-09-20T04:00:00.000Z,superseded,cross-asset,neutral,intraday,BTC ETH,rtoken crypto,49,C,28,100,no,,,,rules,"Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.","Fear & Greed returns inside the 35-65 band and funding normalises, i.e. the crypto complex stops driving marginal rToken liquidity.",0
-SIG-MFIE7HC0-053,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,expired,cross-asset,neutral,intraday,BTC ETH,rtoken crypto,49,C,28,100,no,,,,rules,"Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.","Fear & Greed returns inside the 35-65 band and funding normalises, i.e. the crypto complex stops driving marginal rToken liquidity.",0
-SIG-MFR9KE80-069,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,flow-footprint,neutral,weeks,NWCL,native-equity,47.6,D,30,100,no,,,,rules,"Of 6 reporting 13F holders of NWCL, 3 increased by more than 5% and 2 trimmed by more than 5%. 13F is a 45-day-lagged snapshot, so this confirms a thesis rather than starting one.",The next 13F cycle reverses the direction of the majority of the top-10 holders.,0
-SIG-MFIE7HC0-051,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,draft,closed-window,neutral,intraday,ASTR,rtoken,44.9,D,55,66.7,no,,,,rules,"The US cash session is closed (weekend) but the ASTR rToken still trades. Information from ""Aster Retail Group (ASTR) withdraws full-year outlook ahead of holiday peak"" can only be priced on the rToken until the next open. No comparable historical gap in ASTR is recorded in the bundled price book, so there is no empirical prior for this name; read the closed-window argument as structural rather than statistical.","The rToken premium/dislocation to the last cash close collapses before the open, meaning the information was already fully priced by the token market.",0
+SIG-MFIE7HC0-057,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,expired,cross-asset,neutral,intraday,BTC ETH,rtoken crypto,49,C,28,100,no,,,,rules,"Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.","Fear & Greed returns inside the 35-65 band and funding normalises, i.e. the crypto complex stops driving marginal rToken liquidity.",0
+SIG-MFR9KE80-073,2025-09-19T20:00:00.000Z,2025-10-10T20:00:00.000Z,active,flow-footprint,neutral,weeks,NWCL,native-equity,47.6,D,30,100,no,,,,rules,"Of 6 reporting 13F holders of NWCL, 3 increased by more than 5% and 2 trimmed by more than 5%. 13F is a 45-day-lagged snapshot, so this confirms a thesis rather than starting one.",The next 13F cycle reverses the direction of the majority of the top-10 holders.,0
+SIG-MFR9KE80-015,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,risk-flag,neutral,days,CRVS,native-equity,46.7,D,46,100,no,,,,rules,"Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.","RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown.",0
+SIG-MFR9KE80-029,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,superseded,risk-flag,neutral,days,CRVS,native-equity,46.7,D,46,100,no,,,,rules,"Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.","RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown.",0
+SIG-MFR9KE80-087,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,active,risk-flag,neutral,days,CRVS,native-equity,46.7,D,46,100,no,,,,rules,"Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.","RSI(14) works back below 70 and the price consolidates toward the 50-DMA without a lower high, i.e. the stretch unwinds through time rather than through a drawdown.",0
+SIG-MFIE7HC0-055,2025-09-13T15:00:00.000Z,2025-09-13T23:00:00.000Z,draft,closed-window,neutral,intraday,ASTR,rtoken,44.9,D,55,66.7,no,,,,rules,"The US cash session is closed (weekend) but the ASTR rToken still trades. Information from ""Aster Retail Group (ASTR) withdraws full-year outlook ahead of holiday peak"" can only be priced on the rToken until the next open. No comparable historical gap in ASTR is recorded in the bundled price book, so there is no empirical prior for this name; read the closed-window argument as structural rather than statistical.","The rToken premium/dislocation to the last cash close collapses before the open, meaning the information was already fully priced by the token market.",0
+SIG-MFR9KE80-016,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,draft,narrative-shift,neutral,days,BTC ETH,crypto rtoken,41.8,D,32,100,no,,,,rules,"The trending board reads Fed September cut fully priced, December path in doubt; Stablecoin legislation clears committee; Tokenized U.S. equity volume reaches record. Narrative temperature is tilted constructive; a shift in which topics dominate often leads the fundamentals, but the signal is a change of tone, not a directional forecast.","The top three trending topics roll off within two sessions and are replaced by a coherent opposing theme, i.e. the narrative regime actually changes rather than the news cycle simply rotating.",0
+SIG-MFR9KE80-088,2025-09-19T20:00:00.000Z,2025-09-24T20:00:00.000Z,draft,narrative-shift,neutral,days,BTC ETH,crypto rtoken,41.8,D,32,100,no,,,,rules,"The trending board reads Fed September cut fully priced, December path in doubt; Stablecoin legislation clears committee; Tokenized U.S. equity volume reaches record. Narrative temperature is tilted constructive; a shift in which topics dominate often leads the fundamentals, but the signal is a change of tone, not a directional forecast.","The top three trending topics roll off within two sessions and are replaced by a coherent opposing theme, i.e. the narrative regime actually changes rather than the news cycle simply rotating.",0

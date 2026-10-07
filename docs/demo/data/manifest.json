@@ -1,6 +1,6 @@
 {
  "builtBy": "scripts/export-static.mjs",
- "exportedAt": "2026-10-07T12:58:21.817Z",
+ "exportedAt": "2026-10-07T14:07:03.801Z",
  "engine": {
   "dataMode": "offline",
   "extractor": "rules",
@@ -73,14 +73,14 @@
    "runs": 66,
    "note": "Committed fixture. node prism.mjs review --board=data/fixtures/board-seed.json reproduces docs/reports/review.md from a fresh clone."
   },
-  "total": 235,
+  "total": 312,
   "byStatus": {
-   "superseded": 221,
-   "draft": 2,
+   "superseded": 274,
+   "draft": 24,
    "expired": 1,
-   "active": 11
+   "active": 13
   },
-  "activeAvgScore": 57.7,
+  "activeAvgScore": 56.7,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -88,67 +88,67 @@
  "runs": [
   {
    "scenarioId": "full-sweep",
-   "runId": "RUN-MUY45EX0",
+   "runId": "RUN-MUY6LRC6",
    "asOf": "2025-09-19T20:00:00Z",
-   "cards": 9,
-   "published": 9,
+   "cards": 12,
+   "published": 11,
    "quarantined": 0,
-   "ms": 59
+   "ms": 105
   },
   {
    "scenarioId": "earnings-gap",
-   "runId": "RUN-MUY45EXY",
+   "runId": "RUN-MUY6LRDK",
    "asOf": "2025-09-19T20:00:00Z",
-   "cards": 4,
-   "published": 4,
+   "cards": 5,
+   "published": 5,
    "quarantined": 0,
-   "ms": 31
+   "ms": 39
   },
   {
    "scenarioId": "macro-transmission",
-   "runId": "RUN-MUY45EYV",
+   "runId": "RUN-MUY6LREO",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 2,
    "published": 2,
    "quarantined": 0,
-   "ms": 30
+   "ms": 36
   },
   {
    "scenarioId": "closed-window",
-   "runId": "RUN-MUY45EZT",
+   "runId": "RUN-MUY6LRFV",
    "asOf": "2025-09-13T15:00:00Z",
    "cards": 3,
    "published": 2,
    "quarantined": 0,
-   "ms": 32
+   "ms": 39
   },
   {
    "scenarioId": "flows",
-   "runId": "RUN-MUY45F0W",
-   "asOf": "2025-09-19T20:00:00Z",
-   "cards": 2,
-   "published": 2,
-   "quarantined": 0,
-   "ms": 37
-  },
-  {
-   "scenarioId": "risk",
-   "runId": "RUN-MUY45F1W",
+   "runId": "RUN-MUY6LRGY",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
+   "quarantined": 0,
+   "ms": 35
+  },
+  {
+   "scenarioId": "risk",
+   "runId": "RUN-MUY6LRHZ",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 5,
+   "published": 4,
    "quarantined": 0,
    "ms": 34
   }
  ],
  "review": {
   "asOf": "2025-09-30T23:59:59.000Z",
-  "cardsOnBoard": 235,
-  "distinctClaims": 115,
-  "judged": 64,
+  "cardsOnBoard": 312,
+  "distinctClaims": 148,
+  "judged": 91,
   "decided": 34,
   "hitPct": 29.4,
-  "scoreVsOutcomeRho": -0.138,
+  "scoreVsOutcomeRho": -0.137,
   "report": "docs/reports/review.md"
  },
  "routes": [

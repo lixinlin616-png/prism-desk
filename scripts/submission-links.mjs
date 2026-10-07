@@ -37,7 +37,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 208;
+export const TEST_COUNT = 211;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -74,7 +74,7 @@ export const MANIFEST = [
     type: '运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）',
     target: 'docs/DEMO-TRANSCRIPT.md',
     required: '必交',
-    what: '951 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
+    what: '1031 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -88,7 +88,7 @@ export const MANIFEST = [
     type: '运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）',
     target: 'docs/reports/review.md',
     required: '必交',
-    what: '235 张卡 → 115 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（95% CI 14.1–44.7%）；打分与实现超额的 Spearman rho = -0.138 被系统自己标为 BLOCKER',
+    what: '312 张卡 → 148 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -109,14 +109,14 @@ export const MANIFEST = [
     type: '支撑｜架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）',
     target: 'docs/ARCHITECTURE.md',
     required: '支撑',
-    what: '含两处常被混淆的账本数字的并列对照表（full-sweep 88.5% vs doctor smoke 84.6%，两轮恰好都是 26 items）',
+    what: '含两处常被混淆的账本数字的并列对照表（full-sweep 93.1% vs doctor smoke 89.7%，两轮恰好都是 29 items）',
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
     type: '支撑｜复盘闭环说明（三条轴 / 七个方法决定 / 为什么绝不自动调权）',
     target: 'docs/REVIEW-LOOP.md',
     required: '支撑',
-    what: '解释为什么 rho = -0.138 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的',
+    what: '解释为什么 rho = -0.137 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的',
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
@@ -173,7 +173,7 @@ export const MANIFEST = [
 const FOOTER = [
   '—— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——',
   'git clone <repo-url> && cd prism-desk',
-  'node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）',
+  'node prism.mjs doctor    # 数据接线自检 + smoke run（12 张卡，账本 29 items / pass 26 / fail 0）',
   'node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）',
   `npm test                 # ${TEST_COUNT} / ${TEST_COUNT} · 0 跳过（全新 clone 亦然）`,
   'npm run validate         # 60 / 60 -> docs/reports/validation.md',
@@ -199,21 +199,21 @@ const FOOTER = [
  * 41,386 / 15,478 / en-dash form. Both sides are normalised before comparison.
  */
 export const CLAIMS = [
-  { says: '951 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 951 },
-  { says: '235 张卡的看板 fixture', from: 'data/fixtures/board-seed.json', kind: 'cards', expect: 235 },
+  { says: '1031 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 1031 },
+  { says: '312 张卡的看板 fixture', from: 'data/fixtures/board-seed.json', kind: 'cards', expect: 312 },
   { says: '11 个固定 as-of × 6 个场景 = 66 次回放', from: 'data/fixtures/board-seed.json', kind: 'replay', expect: [11, 6, 66] },
-  { says: '115 个独立主张', from: 'docs/reports/review.md', kind: 'has', expect: '| distinct claims | 115 |' },
+  { says: '148 个独立主张', from: 'docs/reports/review.md', kind: 'has', expect: '| distinct claims | 148 |' },
   { says: '34 条决出胜负', from: 'docs/reports/review.md', kind: 'has', expect: '| decided (won / lost) | **34** |' },
   { says: '命中率 29.4%', from: 'docs/reports/review.md', kind: 'has', expect: '**29.4%**' },
-  { says: 'rho = -0.138 (n=45)', from: 'docs/reports/review.md', kind: 'has', expect: '**-0.138** (n=45)' },
+  { says: 'rho = -0.137 (n=45)', from: 'docs/reports/review.md', kind: 'has', expect: '**-0.137** (n=45)' },
   { says: '60 项验证检查', from: 'docs/reports/validation.md', kind: 'has', expect: '**60/60 checks passed**' },
   { says: '25 symbols · 41,386 根真实日 K', from: 'docs/reports/validation.md', kind: 'has', expect: '25 symbols, 41386 bars' },
   { says: '15,478 个真实跳空', from: 'docs/reports/gap-study.md', kind: 'has', expect: '15478' },
   // The published demo is a recording, so its numbers are claims too: if the
   // bundle drifts from the reports it replays, the demo contradicts the repo.
   { says: '在线演示的复盘裁决数', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"decided":34' },
-  { says: '在线演示的 Spearman rho', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"scoreVsOutcomeRho":-0.138' },
-  { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 88.5' },
+  { says: '在线演示的 Spearman rho', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"scoreVsOutcomeRho":-0.137' },
+  { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 93.1' },
   { says: '在线演示录满 6 个场景', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "risk"' },
 ];
 

@@ -1,14 +1,14 @@
 {
  "ok": true,
  "status": {
-  "total": 235,
+  "total": 312,
   "byStatus": {
-   "superseded": 221,
-   "draft": 2,
+   "superseded": 274,
+   "draft": 24,
    "expired": 1,
-   "active": 11
+   "active": 13
   },
-  "activeAvgScore": 57.7,
+  "activeAvgScore": 56.7,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -42,14 +42,15 @@
   },
   {
    "ticker": "CRVS",
-   "cards": 1,
+   "cards": 2,
    "long": 1,
    "short": 0,
    "hedge": 0,
    "avoid": 0,
    "bestScore": 67.9,
    "channels": [
-    "earnings-gap"
+    "earnings-gap",
+    "risk-flag"
    ],
    "conflict": false,
    "directions": {},
@@ -191,6 +192,38 @@
    "netRead": "defensive"
   },
   {
+   "ticker": "BTC",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 55.7,
+   "channels": [
+    "flow-footprint",
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ETH",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 55.7,
+   "channels": [
+    "flow-footprint",
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
    "ticker": "NWCL",
    "cards": 2,
    "long": 1,
@@ -205,36 +238,6 @@
    "conflict": false,
    "directions": {},
    "netRead": "constructive"
-  },
-  {
-   "ticker": "BTC",
-   "cards": 1,
-   "long": 0,
-   "short": 0,
-   "hedge": 0,
-   "avoid": 0,
-   "bestScore": 49,
-   "channels": [
-    "cross-asset"
-   ],
-   "conflict": false,
-   "directions": {},
-   "netRead": "mixed"
-  },
-  {
-   "ticker": "ETH",
-   "cards": 1,
-   "long": 0,
-   "short": 0,
-   "hedge": 0,
-   "avoid": 0,
-   "bestScore": 49,
-   "channels": [
-    "cross-asset"
-   ],
-   "conflict": false,
-   "directions": {},
-   "netRead": "mixed"
   }
  ],
  "cards": []

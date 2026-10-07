@@ -1,8 +1,8 @@
 # Prism Desk - validation report
 
-Generated 2026-10-07T12:58:20.271Z by `npm run validate` in 591ms.
+Generated 2026-10-07T14:13:59.587Z by `npm run validate` in 688ms.
 
-**60/60 checks passed**. Node v24.21.0, data mode `offline`, extractor `rules`.
+**60/60 checks passed**. Node v22.23.2, data mode `offline`, extractor `rules`.
 
 | suite | checks | passed |
 | --- | ---: | ---: |
@@ -47,19 +47,19 @@ Generated 2026-10-07T12:58:20.271Z by `npm run validate` in 591ms.
 
 | | id | check | detail |
 | --- | --- | --- | --- |
-| PASS | `produces-cards` | a full sweep produces cards | 7 cards |
-| PASS | `spans-channels` | a full sweep spans multiple channels | channels: earnings-gap, macro-transmission, narrative-shift, cross-asset |
-| PASS | `ledger-clean` | no evidence item fails verification on a clean run | 0 failures of 20 checks |
+| PASS | `produces-cards` | a full sweep produces cards | 10 cards |
+| PASS | `spans-channels` | a full sweep spans multiple channels | channels: earnings-gap, macro-transmission, flow-footprint, narrative-shift, cross-asset, risk-flag |
+| PASS | `ledger-clean` | no evidence item fails verification on a clean run | 0 failures of 23 checks |
 | PASS | `schema-valid` | every card passes the schema validator |  |
 | PASS | `falsifiable` | every card states the condition that would prove it wrong |  |
 | PASS | `evidenced` | every card carries at least one evidence item |  |
 | PASS | `no-pending` | no evidence item is left unadjudicated |  |
 | PASS | `scored` | every card carries a numeric score |  |
 | PASS | `explained` | every score factor carries an auditable written reason |  |
-| PASS | `publish-floor` | no card is published below the configured threshold | threshold 45, lowest published 49 |
-| PASS | `quarantine-respected` | no quarantined card is marked active | 7 published, 0 quarantined among them |
+| PASS | `publish-floor` | no card is published below the configured threshold | threshold 45, lowest published 46.7 |
+| PASS | `quarantine-respected` | no quarantined card is marked active | 9 published, 0 quarantined among them |
 | PASS | `coverage-reported` | the run reports names it stayed silent on | 1 silent name(s) reported |
-| PASS | `brief-rendered` | the brief renders as markdown | 16301 chars of markdown with its heading |
+| PASS | `brief-rendered` | the brief renders as markdown | 16152 chars of markdown with its heading |
 
 ## determinism
 
@@ -83,16 +83,16 @@ Generated 2026-10-07T12:58:20.271Z by `npm run validate` in 591ms.
 
 | | id | check | detail |
 | --- | --- | --- | --- |
-| PASS | `runs` | the review adjudicates every card it is given | 7 cards -> 7 distinct claims (0 restatements collapsed), 1 decided |
-| PASS | `dedupes` | restatements of one claim collapse into a single observation | 7 stored cards are 7 distinct claims - without this the hit rate would carry false precision |
+| PASS | `runs` | the review adjudicates every card it is given | 10 cards -> 10 distinct claims (0 restatements collapsed), 1 decided |
+| PASS | `dedupes` | restatements of one claim collapse into a single observation | 10 stored cards are 10 distinct claims - without this the hit rate would carry false precision |
 | PASS | `three-axes` | every judged claim reports falsification, risk path and realised excess separately | 3 judged claims, each carrying all three axes so "was the thesis right" is never confused with "would the trade have hurt" |
-| PASS | `honest-denominator` | unmeasurable and non-directional claims never enter the win/loss denominator | 1 decided = 0 won + 1 lost; 2 unmeasurable and 0 non-directional are reported separately, not counted as losses |
+| PASS | `honest-denominator` | unmeasurable and non-directional claims never enter the win/loss denominator | 1 decided = 0 won + 1 lost; 4 unmeasurable and 1 non-directional are reported separately, not counted as losses |
 | PASS | `benchmark-adjusted` | single-name claims are measured against the benchmark, not in raw terms | excess is against SPY, so a rising tape is not credited to the desk as skill |
 | PASS | `anchored-on-issuance` | the measurement window is anchored on issuance, not on the information date | all 3 judged claims open their window at or before issuance and at or after the information date, so the levels a card was struck at sit inside its own window |
-| PASS | `auditable` | every adjudicated claim carries a written basis | 7 claims, each with a human-readable basis naming the test that produced the verdict |
+| PASS | `auditable` | every adjudicated claim carries a written basis | 10 claims, each with a human-readable basis naming the test that produced the verdict |
 | PASS | `lessons-cite-numbers` | every finding cites the measurement that produced it | 7 findings, each with a numeric evidence string and a concrete action |
 | PASS | `small-sample-flagged` | a sample too small to support a conclusion is flagged as a blocker | 1 decided claims - the report leads with a sample-too-small blocker rather than quoting the hit rate as a result |
-| PASS | `report-renders` | the review report renders as markdown with its caveats intact | 10787 characters; states plainly that it is not a backtest and that no costs are netted out |
+| PASS | `report-renders` | the review report renders as markdown with its caveats intact | 11168 characters; states plainly that it is not a backtest and that no costs are netted out |
 | PASS | `deterministic` | the same board at the same date gives the same verdicts | verdicts are reproducible, so a judge can regenerate this report from a clean clone |
 | PASS | `read-only-by-default` | reviewing never mutates stored card state unless asked | the default pass is read-only, so running the review cannot corrupt the demo board |
 
@@ -106,22 +106,25 @@ Generated 2026-10-07T12:58:20.271Z by `npm run validate` in 591ms.
 | PASS | `macro-events` | 25 macro events carry date, indicator, actual and consensus |  |
 | PASS | `corpus-shape` | 14 corpus documents are well formed and disclose their provenance |  |
 | PASS | `price-proxy-disclosed` | every fictional issuer that borrows a real price series discloses the proxy | BLWF->PFE, CRVS->NVDA, CRVS->NVDA, HLXN->CAT, CRVS->NVDA, NWCL->MSFT, NWCL->MSFT, HLXN->CAT, NWCL->MSFT, ASTR->WMT |
-| PASS | `fixtures` | 12 offline MCP fixtures are well formed |  |
+| PASS | `fixtures` | 15 offline MCP fixtures are well formed |  |
 | PASS | `offline-boot` | the hub boots with zero network access | market state offline |
 
 ## Reference run
 
-Full desk sweep as of 2025-09-19T20:00:00Z: 7 cards, 7 published, 0 quarantined, 0 below threshold. Ledger checked 20 items with a 85% pass rate and 0 failures.
+Full desk sweep as of 2025-09-19T20:00:00Z: 10 cards, 9 published, 0 quarantined, 1 below threshold. Ledger checked 23 items with a 91.3% pass rate and 0 failures.
 
 | score | grade | channel | dir | tickers | claim |
 | ---: | --- | --- | --- | --- | --- |
 | 75.5 | A | earnings-gap | short | HLXN | HLXN: EPS miss, guide lower |
 | 70.6 | B | earnings-gap | long | CRVS | CRVS: EPS beat, guide raise |
 | 68 | B | macro-transmission | pair | AMD TSLA COIN PFE XOM WMT | CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower |
-| 63.4 | B | earnings-gap | short | ASTR | ASTR: EPS miss, guide withdraw |
+| 67.9 | B | earnings-gap | short | ASTR | ASTR: EPS miss, guide withdraw |
+| 55.7 | C | flow-footprint | neutral | BTC ETH | Cross-market flow footprint: spot BTC ETF -$184M \| spot ETH ETF $62M |
 | 54.9 | C | narrative-shift | long | NWCL | NWCL: narrative turning constructive |
 | 53.3 | C | narrative-shift | short | HLXN | HLXN: narrative turning negative |
 | 49 | C | cross-asset | neutral | BTC ETH | Crypto regime: Fear & Greed 41 (Fear) \| BTC funding 0.0081 \| US spot BTC ETF flow -184000000 |
+| 46.7 | D | risk-flag | neutral | CRVS | CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA) |
+| 41.8 | D | narrative-shift | neutral | BTC ETH | Trending narrative: Fed September cut fully priced, December path in doubt |
 
 ## What these suites are for
 

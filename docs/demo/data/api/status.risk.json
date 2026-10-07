@@ -11,7 +11,7 @@
    "resolvedIntents": 0,
    "totalIntents": 20,
    "fixtures": 10,
-   "fixtureEntries": 12,
+   "fixtureEntries": 15,
    "calls": 22
   },
   "signal": {
@@ -29,7 +29,7 @@
      "id": "market-intel",
      "zh": "链上与机构情报",
      "tool": null,
-     "fixture": false
+     "fixture": true
     },
     {
      "id": "sentiment-analyst",
@@ -41,16 +41,16 @@
      "id": "technical-analysis",
      "zh": "技术分析",
      "tool": null,
-     "fixture": false
+     "fixture": true
     },
     {
      "id": "news-briefing",
      "zh": "新闻聚合与叙事合成",
      "tool": null,
-     "fixture": false
+     "fixture": true
     }
    ],
-   "calls": 4
+   "calls": 11
   },
   "corpus": {
    "documents": 14,
@@ -160,23 +160,23 @@
   }
  },
  "ledger": {
-  "cardsAudited": 3,
-  "itemsChecked": 9,
-  "pass": 9,
+  "cardsAudited": 5,
+  "itemsChecked": 11,
+  "pass": 11,
   "fail": 0,
   "unverifiable": 0,
   "passRate": 100,
   "cardsQuarantined": 0
  },
  "board": {
-  "total": 235,
+  "total": 312,
   "byStatus": {
-   "superseded": 221,
-   "draft": 2,
+   "superseded": 274,
+   "draft": 24,
    "expired": 1,
-   "active": 11
+   "active": 13
   },
-  "activeAvgScore": 57.7,
+  "activeAvgScore": 56.7,
   "conflicts": 0,
   "events": 200,
   "persisted": true

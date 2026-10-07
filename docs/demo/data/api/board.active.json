@@ -1,14 +1,14 @@
 {
  "ok": true,
  "status": {
-  "total": 235,
+  "total": 312,
   "byStatus": {
-   "superseded": 221,
-   "draft": 2,
+   "superseded": 274,
+   "draft": 24,
    "expired": 1,
-   "active": 11
+   "active": 13
   },
-  "activeAvgScore": 57.7,
+  "activeAvgScore": 56.7,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -16,7 +16,7 @@
  "byChannel": {
   "earnings-gap": [
    {
-    "id": "SIG-MG6ZERK0-819",
+    "id": "SIG-MG6ZERK0-892",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -35,7 +35,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-821",
+    "id": "SIG-MG6ZERK0-894",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -54,7 +54,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-813",
+    "id": "SIG-MG6ZERK0-886",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -75,7 +75,7 @@
   ],
   "macro-transmission": [
    {
-    "id": "SIG-MG6ZERK0-826",
+    "id": "SIG-MG6ZERK0-900",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -99,7 +99,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-835",
+    "id": "SIG-MG6ZERK0-909",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -125,7 +125,7 @@
   ],
   "narrative-shift": [
    {
-    "id": "SIG-MG6ZERK0-871",
+    "id": "SIG-MG6ZERK0-946",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -144,7 +144,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-869",
+    "id": "SIG-MG6ZERK0-944",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -165,7 +165,27 @@
   ],
   "flow-footprint": [
    {
-    "id": "SIG-MG6ZERK0-862",
+    "id": "SIG-MG6ZERK0-939",
+    "channel": "flow-footprint",
+    "channelName": "Flow Footprint",
+    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+    "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "BTC",
+     "ETH"
+    ],
+    "conviction": 30,
+    "score": 55.7,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-936",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -184,7 +204,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-864",
+    "id": "SIG-MG6ZERK0-938",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -206,7 +226,7 @@
   "closed-window": [],
   "cross-asset": [
    {
-    "id": "SIG-MG6ZERK0-848",
+    "id": "SIG-MG6ZERK0-922",
     "channel": "cross-asset",
     "channelName": "Cross-Asset Linkage",
     "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -228,7 +248,7 @@
   ],
   "risk-flag": [
    {
-    "id": "SIG-MG6ZERK0-875",
+    "id": "SIG-MG6ZERK0-950",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -243,6 +263,25 @@
     "status": "active",
     "createdAt": "2025-09-30T20:00:00.000Z",
     "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-952",
+    "channel": "risk-flag",
+    "channelName": "Contrarian Risk Flag",
+    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
+    "claim": "Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "CRVS"
+    ],
+    "conviction": 46,
+    "score": 46.7,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
     "verifiedRatio": 1,
     "hasInvalidation": true
    }
@@ -268,14 +307,15 @@
   },
   {
    "ticker": "CRVS",
-   "cards": 1,
+   "cards": 2,
    "long": 1,
    "short": 0,
    "hedge": 0,
    "avoid": 0,
    "bestScore": 67.9,
    "channels": [
-    "earnings-gap"
+    "earnings-gap",
+    "risk-flag"
    ],
    "conflict": false,
    "directions": {},
@@ -417,6 +457,38 @@
    "netRead": "defensive"
   },
   {
+   "ticker": "BTC",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 55.7,
+   "channels": [
+    "flow-footprint",
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ETH",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 55.7,
+   "channels": [
+    "flow-footprint",
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
    "ticker": "NWCL",
    "cards": 2,
    "long": 1,
@@ -431,41 +503,11 @@
    "conflict": false,
    "directions": {},
    "netRead": "constructive"
-  },
-  {
-   "ticker": "BTC",
-   "cards": 1,
-   "long": 0,
-   "short": 0,
-   "hedge": 0,
-   "avoid": 0,
-   "bestScore": 49,
-   "channels": [
-    "cross-asset"
-   ],
-   "conflict": false,
-   "directions": {},
-   "netRead": "mixed"
-  },
-  {
-   "ticker": "ETH",
-   "cards": 1,
-   "long": 0,
-   "short": 0,
-   "hedge": 0,
-   "avoid": 0,
-   "bestScore": 49,
-   "channels": [
-    "cross-asset"
-   ],
-   "conflict": false,
-   "directions": {},
-   "netRead": "mixed"
   }
  ],
  "cards": [
   {
-   "id": "SIG-MG6ZERK0-819",
+   "id": "SIG-MG6ZERK0-892",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -484,7 +526,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-821",
+   "id": "SIG-MG6ZERK0-894",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -503,7 +545,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-826",
+   "id": "SIG-MG6ZERK0-900",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -527,7 +569,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-835",
+   "id": "SIG-MG6ZERK0-909",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -551,7 +593,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-813",
+   "id": "SIG-MG6ZERK0-886",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -570,7 +612,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-875",
+   "id": "SIG-MG6ZERK0-950",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -589,7 +631,27 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-862",
+   "id": "SIG-MG6ZERK0-939",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-936",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -608,7 +670,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-871",
+   "id": "SIG-MG6ZERK0-946",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -627,7 +689,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-869",
+   "id": "SIG-MG6ZERK0-944",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -646,7 +708,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-848",
+   "id": "SIG-MG6ZERK0-922",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -666,7 +728,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-864",
+   "id": "SIG-MG6ZERK0-938",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -681,6 +743,25 @@
    "status": "active",
    "createdAt": "2025-09-30T20:00:00.000Z",
    "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-952",
+   "channel": "risk-flag",
+   "channelName": "Contrarian Risk Flag",
+   "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
+   "claim": "Technical read for CRVS: RSI(14) 78.6, +34.2% vs 200-DMA, support 214.5, resistance 246. The tape is stretched versus both momentum and trend, which raises mean-reversion risk even while the fundamental story is intact - a risk to an entry, not a reason to short.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "CRVS"
+   ],
+   "conviction": 46,
+   "score": 46.7,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   }

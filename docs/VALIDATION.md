@@ -9,25 +9,25 @@
 
 | 指标 | 数值 | 类型 | 复现方式 |
 |---|---|---|---|
-| 单元/集成测试 | **208 / 208 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
+| 单元/集成测试 | **211 / 211 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过** | 实测 | `npm run validate` |
 | 价格数据集 | 25 symbols · **41,386** 根日 K · 2019-01-02 → 2025-09-30 | 实测 | `data/prices/*.csv` |
 | 语料 | 14 篇文档 · 2,599 词 | 实测 | `data/corpus/` |
 | 宏观事件 | 25 个（date / indicator / actual / consensus） | 实测 | `data/events/macro-events.json` |
-| 离线 MCP fixture | 12 个 | 实测 | `data/fixtures/mcp/` |
+| 离线 MCP fixture | 15 个 | 实测 | `data/fixtures/mcp/` |
 | 标注评测集 | 10 个抽取用例 + 9 个账本用例 | 实测 | `data/eval/extraction-eval.json` |
-| 全频道扫描耗时（离线，纯规则） | **~60 ms** 出 9 张卡（6 次实测 60–64 ms，随机器而异） | 实测 | `node prism.mjs demo --only=full-sweep` |
-| 该轮证据账本 | 26 items · pass 23 · **fail 0** · unverifiable 3 · **pass rate 88.5%** · 隔离 0 | 实测 | 同上 |
-| `doctor` smoke run 账本 | 26 items · pass 22 · **fail 0** · unverifiable 4 · **pass rate 84.6%** · 9 张卡（8 发布 / 1 低于阈值） | 实测 | `node prism.mjs doctor`（as-of 2025-09-13T15:00Z 钉死） |
+| 全频道扫描耗时（离线，纯规则） | **约 80 ms** 出 12 张卡（实测 77–83 ms，随机器而异） | 实测 | `node prism.mjs demo --only=full-sweep` |
+| 该轮证据账本 | 29 items · pass 27 · **fail 0** · unverifiable 2 · **pass rate 93.1%** · 隔离 0 | 实测 | 同上 |
+| `doctor` smoke run 账本 | 29 items · pass 26 · **fail 0** · unverifiable 3 · **pass rate 89.7%** · 12 张卡（10 发布 / 2 低于阈值） | 实测 | `node prism.mjs doctor`（as-of 钉死） |
 | 第三方依赖 | **0** | 实测 | `package.json` `"dependencies": {}` |
-| 在线演示（GitHub Pages 静态回放） | 6 场景录像 · **258** 份卡片档案 · 2.87 MB · 0.7 s 生成 | 实测 | `npm run export:static` 重建 -> `docs/demo/` |
+| 在线演示（GitHub Pages 静态回放） | 6 场景录像 · **342** 份卡片档案 · 3.49 MB · 约 1 s 生成 | 实测 | `npm run export:static` 重建 -> `docs/demo/` |
 | 演示包与引擎不漂移 | **14 项检查**（路由覆盖 / 场景一致 / 看板 = fixture / 复盘数字 = 报表 / SSE 回放） | 实测 | `npm test` -> `tests/static-demo.test.mjs` |
-| 复盘裁决样本 | 235 卡 → **115** 独立主张 → **34** 决出胜负 | 实测 | `npm run review:seed` |
-| **方向命中率**（对 SPY，±1% 实质性带） | **29.4%**（95% CI **14.1–44.7%**） | 实测 | 同上 · 见 §4 |
-| Spearman rho（分数 vs 实现超额） | **-0.138**（n=45）→ 标为 **BLOCKER** | 实测 | 同上 |
+| 复盘裁决样本 | 312 卡 → **148** 独立主张 → **34** 决出胜负 | 实测 | `npm run review:seed` |
+| **方向命中率**（对 SPY，±1% 实质性带） | **29.4%**（Wilson 95% CI **16.8–46.2%**；精确 Clopper–Pearson 15.1–47.5%） | 实测 | 同上 · 见 §4 |
+| Spearman rho（分数 vs 实现超额） | **-0.137**（n=45）→ 标为 **BLOCKER** | 实测 | 同上 |
 | 信号**扣费后净收益** | **未测量** | — | 见 §6「我们没有测的」 |
 
-> 上面两行账本**恰好都是 26 items，但不是同一轮运行**：full-sweep 用 as-of 2025-09-19T20:00Z（问题里带 "what is actually tradeable right now?"），doctor 的 smoke run 用 2025-09-13T15:00Z 那个周六下午。时点与问题文本不同，卡片组合就不同 —— 26 相同是巧合，逐项对照见 [`ARCHITECTURE.md`](ARCHITECTURE.md) 的 VERIFY 一节。
+> 上面两行账本**恰好都是 29 items，但不是同一轮运行**：full-sweep 用 as-of 2025-09-19T20:00Z（问题里带 "what is actually tradeable right now?"），doctor 的 smoke run 用 2025-09-13T15:00Z 那个周六下午。时点与问题文本不同，卡片组合就不同 —— 29 相同是巧合，逐项对照见 [`ARCHITECTURE.md`](ARCHITECTURE.md) 的 VERIFY 一节。
 
 ---
 
@@ -162,26 +162,26 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 
 | 指标 | 数值 |
 |---|---:|
-| 看板卡片 → 独立主张 | 235 → **115**（按 `claimKey` 折叠 120 次重述） |
-| 窗口已关 / 仍开（不判） | 64 / 51 |
+| 看板卡片 → 独立主张 | 312 → **148**（按 `claimKey` 折叠 164 次重述） |
+| 窗口已关 / 仍开（不判） | 91 / 57 |
 | 已裁决 / 决出胜负 | 45 / **34** |
 | 胜 / 负 | **10 / 24** |
 | 落在 ±1% 带内（`inconclusive`） | 11 |
-| **方向命中率** | **29.4%**（95% CI **14.1–44.7%**） |
+| **方向命中率** | **29.4%**（Wilson 95% CI **16.8–46.2%**；精确 Clopper–Pearson 15.1–47.5%） |
 | 平均 / 中位带符号超额 | **-0.832% / -0.745%** |
 | 失效条件确实被触发 | 12 |
 | 失效条件只有文字、无法机器验证 | **24**（可测的只有 21） |
-| 不可测（价格库无该序列）/ 非方向性 | 13 / 6 |
-| 经声明的 demo 价格代理测量 | 35 |
-| **Spearman rho（分数 vs 实现超额）** | **-0.138**（n=45，来自 6 个信息日期） |
+| 不可测（价格库无该序列）/ 非方向性 | 31 / 15 |
+| 经声明的 demo 价格代理测量 | 44 |
+| **Spearman rho（分数 vs 实现超额）** | **-0.137**（n=45，来自 6 个信息日期） |
 
 ### 4.1 打分规则不排序 —— BLOCKER
 
 | grade | 主张 | 决出 | 命中率 | 平均超额 |
 |---|---:|---:|---:|---:|
 | A（≥75） | 10 | 9 | **22.2%** | -1.358% |
-| B（62–75） | 27 | 18 | 27.8% | -0.372% |
-| C（48–62） | 8 | 7 | **42.9%** | -1.724% |
+| B（62–75） | 28 | 19 | 26.3% | -0.378% |
+| C（48–62） | 7 | 6 | **50%** | -1.896% |
 
 **A 级卡的命中率低于 C 级卡。** 按方向拆：**short 1/12（8.3%）** vs long 5/9（55.6%）；按频道：`risk-flag` 2/2 最好，`macro-transmission` 2/11 最差。
 
@@ -189,10 +189,10 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 
 ### 4.2 这些数字为什么不能当结论
 
-- **样本太小。** 34 条决出胜负的主张；命中率的 95% 区间是 14.1–44.7%，**比任何它可能测出的效应都宽**。报告的第一句 caveat 就是「不应从本报告得出任何关于盈利能力的结论」。
+- **样本太小。** 34 条决出胜负的主张；命中率的 Wilson 95% 区间是 16.8–46.2%（精确 CP 15.1–47.5%），**比任何它可能测出的效应都宽**。报告的第一句 caveat 就是「不应从本报告得出任何关于盈利能力的结论」。
 - **不含任何成本。** 没有佣金、价差、借券费、滑点，也没有组合层面的聚合。一次「命中」是一个**方向**，不是一笔利润。
 - **主张之间不独立。** rho 与命中率是对**这一块看板**的描述，不是对某个总体参数的估计。
-- **35 条是透过代理测的。** 虚构发行主体没有上市价格，用其显式声明的 `priceProxy` 序列测量。这些裁决描述的是**代理**，不是 issuer。
+- **44 条是透过代理测的。** 虚构发行主体没有上市价格，用其显式声明的 `priceProxy` 序列测量。这些裁决描述的是**代理**，不是 issuer。
 - **窗口很短。** 中位 3 个交易日（区间 1–15），分不开「好判断」和「运气好的两周」。
 - **这不是回测。** 它审计的是「已发布的判断有没有活过它们自己写下的证伪测试」。
 
@@ -229,7 +229,7 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 | 项 | 状态 |
 |---|---|
 | 信号的**扣费后净收益** | **未测量。** 三份研究都不含交易成本，也没有做组合层面的回测。在这一层补上之前，本项目**永远不会**发布任何 Sharpe / 回撤数字 |
-| 方向命中率 | **已测量，但不足以当结论。** 34 条决出胜负，29.4%（95% CI 14.1–44.7%），见 §4 |
+| 方向命中率 | **已测量，但不足以当结论。** 34 条决出胜负，29.4%（Wilson 95% CI 16.8–46.2%），见 §4 |
 | 复盘样本的**独立性** | **不足。** 45 条已裁决主张只来自 6 个信息日期。扩到 ≥20 个日期、≥150 条决出主张之前，不对外引用任何单个校准数字 |
 | LLM 抽取路径 vs 规则路径的**质量对比** | **未测量。** 双抽取器与对账逻辑已实现并有测试，但我们没有在标注集上系统对比两条路径的准确率 |
 | rToken 真实盘口的**流动性与滑点** | **未测量。** rToken 流动性系数 0.45 是**保守估计值（估算）**，不是从真实盘口测出来的 |
@@ -249,7 +249,7 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 ## 7. 一键复现
 
 ```bash
-npm test            # 208 / 208
+npm test            # 211 / 211
 npm run validate    # 60 / 60 -> docs/reports/validation.md
 npm run replay      # 两份研究 -> docs/reports/transmission-study.md, gap-study.md
 npm run seed        # 重建看板 fixture（逐字节确定）-> data/fixtures/board-seed.json

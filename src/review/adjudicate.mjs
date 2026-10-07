@@ -41,7 +41,7 @@ import { config } from '../config.mjs';
 import { logger } from '../util/log.mjs';
 import { round } from '../util/num.mjs';
 import { toDateStr, parseDate } from '../util/time.mjs';
-import { mean, median, stdev, spearman } from '../util/stats.mjs';
+import { mean, median, stdev, spearman, wilsonCi, clopperPearsonCi } from '../util/stats.mjs';
 import { diffDays } from '../util/time.mjs';
 
 const log = logger('review');
@@ -477,14 +477,21 @@ export function summariseRows(rows) {
     medianSignedExcessPct: excess.length ? round(median(excess), 3) : null,
     sdSignedExcessPct: excess.length > 1 ? round(stdev(excess), 3) : null,
     /**
-     * A normal-approximation 95% interval on the hit rate. At the sample sizes a
+     * A 95% interval on the hit rate, Wilson score form. At the sample sizes a
      * demo board produces, this interval is usually wider than the effect it is
-     * trying to measure - which is exactly why it is printed.
+     * trying to measure - which is exactly why it is printed. Wilson is used
+     * rather than the Wald interval p ± 1.96 sqrt(p(1-p)/n): that normal
+     * interval undercovers badly at small n / proportions away from 0.5, whereas
+     * Wilson inverts the score test and keeps close to nominal coverage.
      */
     hitPctCi95: n >= 5 ? (() => {
-      const p = hits.length / n;
-      const se = Math.sqrt((p * (1 - p)) / n);
-      return [round(Math.max(0, p - 1.96 * se) * 100, 1), round(Math.min(1, p + 1.96 * se) * 100, 1)];
+      const [wLo, wHi] = wilsonCi(hits.length, n);
+      return [round(wLo * 100, 1), round(wHi * 100, 1)];
+    })() : null,
+    /** Conservative exact Clopper-Pearson 95% bound, so the result does not hinge on one interval choice. */
+    hitPctCi95ClopperPearson: n >= 5 ? (() => {
+      const [cLo, cHi] = clopperPearsonCi(hits.length, n);
+      return [round(cLo * 100, 1), round(cHi * 100, 1)];
     })() : null,
   };
 }

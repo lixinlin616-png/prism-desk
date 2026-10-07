@@ -29,7 +29,7 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 设计上的三条硬约束：
 
 1. **零依赖。** 只用 Node ≥ 20 标准库。没有 `npm install`，没有构建步骤，评委 clone 下来就能跑。Web 前端是原生 HTML/CSS/JS。
-2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 208 个测试和 60 项验证检查成为可能。
+2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 211 个测试和 60 项验证检查成为可能。
 3. **LLM 不享有豁免权。** 配了 key 之后，LLM 抽取的卡片和规则抽取的卡片走**同一个证据账本、同一套打分规则**。模型说错数字，账本照样拦。
 
 ---
@@ -104,14 +104,14 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 
 **隔离规则：** 若某张卡的**头条证据（`headline: true`）fail**，且 `PRISM_STRICT_VERIFY=true`（默认），整张卡进隔离区，**永不发布**。`unverifiable` 不会触发隔离，但会**扣 corroboration 分**，并在卡片档案里如实显示 —— 系统承认"这个数字我没能独立核对"，而不是悄悄放行。
 
-账本汇总每次运行都会输出。**两个常被引用的实测值来自不同的运行**，而且恰好都是 26 items，极易混淆，所以并列写清：
+账本汇总每次运行都会输出。**两个常被引用的实测值来自不同的运行**，而且恰好都是 29 items，极易混淆，所以并列写清：
 
 | 命令 | as-of | 账本实测 |
 |---|---|---|
-| `node prism.mjs demo --only=full-sweep` | 2025-09-19T20:00Z（场景钉死） | `26 items · pass 23 · fail 0 · unverifiable 3 · 88.5%` · 9 张卡全部发布 |
-| `node prism.mjs doctor` 的 smoke run | 2025-09-13T15:00Z（钉死） | `26 items · pass 22 · fail 0 · unverifiable 4 · 84.6%` · 9 张卡（8 发布，1 低于阈值） |
+| `node prism.mjs demo --only=full-sweep` | 2025-09-19T20:00Z（场景钉死，周五现金盘开盘） | `29 items · pass 27 · fail 0 · unverifiable 2 · 93.1%` · 12 张卡（11 发布，1 低于阈值） |
+| `node prism.mjs doctor` 的 smoke run | 钉死在周六下午（现金盘关闭） | `29 items · pass 26 · fail 0 · unverifiable 3 · 89.7%` · 12 张卡（10 发布，2 低于阈值） |
 
-问题文本与时点不同，卡片组合就不同 —— 两边都是 26 items 属于巧合。3 个 unverifiable 是 HLXN / CRVS / ASTR 三张财报卡的 consensus `estimate`（`E2`），账本给出的理由原文是 `no document or snapshot available to check this number against`；doctor 多出的第 4 个是 ASTR 闭窗卡的 `computed` `E3`（44.9/D，低于发布阈值，理由是 `computed claim without a re-executable recipe`）。两轮 `fail` 均为 0、`quarantined` 均为 0：unverifiable 不触发隔离，只扣 corroboration 分并如实显示。
+问题文本与时点不同，卡片组合就不同 —— 两边都是 29 items 属于巧合。两条共同的 unverifiable 是 HLXN / CRVS 两张虚构主体财报卡引用的 consensus `estimate`，账本给出的理由原文是 `no document or snapshot available to check this number against`；doctor 多出的第 3 个是 ASTR 闭窗卡的 `computed` 证据（44.9/D，低于发布阈值，理由是 `computed claim without a re-executable recipe`）——该卡只在现金盘关闭时出现，full-sweep 跑在现金盘开盘的周五，因此没有这一项。两轮 `fail` 均为 0、`quarantined` 均为 0：unverifiable 不触发隔离，只扣 corroboration 分并如实显示。
 
 > 评测集的 ledger 部分**故意掺入了编造的数字**（`data/eval/extraction-eval.json`），用来证明账本真的会拦截，而不是永远绿灯。
 
@@ -245,7 +245,7 @@ CLI `node prism.mjs review`（`--board` / `--as-of` / `--materiality` / `--json`
 ## 测试与验证
 
 ```bash
-npm test          # 208 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
+npm test          # 211 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
 npm run validate  # 60 项检查 -> docs/reports/validation.md
 npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 ```
@@ -260,7 +260,7 @@ npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-
 | `determinism` | 2 | 同样输入跑两遍产出**逐字节相同**的结果 |
 | `studies` | 6 | 研究质量：样本量足够、报告 **clustered t**（不只是 naive t）、传导研究按 surprise 分桶且**单调** |
 | `review` | 12 | 复盘的方法学不变量：每张卡都被裁决、重述被折叠、**三条轴分开报告**、不可测与非方向性**不进胜负分母**、单名按基准调整、窗口锚定**发行时刻**、每条裁决带书面依据、**每条 finding 都引用产生它的数字**、样本过小被标成 BLOCKER、报表渲染后 caveat 仍在、同日期同看板给出同裁决、**默认只读不改存储状态** |
-| `data` | 8 | 25 个价格序列可解析且日期有序、open/close 落在 `[low, high]` 内 ≥99.9%、跨多年覆盖、25 个宏观事件字段齐全、14 份语料披露出处、**每个借用真实价格序列的虚构主体都披露了 `priceProxy`**、12 个 fixture 结构合法、零网络可启动 |
+| `data` | 8 | 25 个价格序列可解析且日期有序、open/close 落在 `[low, high]` 内 ≥99.9%、跨多年覆盖、25 个宏观事件字段齐全、14 份语料披露出处、**每个借用真实价格序列的虚构主体都披露了 `priceProxy`**、15 个 fixture 结构合法、零网络可启动 |
 
 ---
 
