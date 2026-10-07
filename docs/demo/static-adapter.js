@@ -33,13 +33,21 @@
   const state = { lastRun: null, lastScenario: null, replayed: [] };
 
   /** Bundle files are immutable once published, so cache the promise, not a copy. */
+  async function read(res, rel) {
+    const text = await res.text();
+    return /\.json$/i.test(rel) ? JSON.parse(text) : text;
+  }
+
   function load(rel) {
     if (!cache.has(rel)) {
       cache.set(rel, realFetch(DATA + rel, { cache: 'force-cache' })
         .then(async (res) => {
-          if (!res.ok) throw new Error(`static bundle is missing ${rel} (HTTP ${res.status}) - re-run npm run export:static`);
-          const text = await res.text();
-          return /\.json$/i.test(rel) ? JSON.parse(text) : text;
+          if (res.ok) return read(res, rel);
+          // force-cache would replay a stored failure forever (a 404 cached
+          // while the site was still building, say), so escape it once.
+          const fresh = await realFetch(DATA + rel, { cache: 'reload' });
+          if (!fresh.ok) throw new Error(`static bundle is missing ${rel} (HTTP ${fresh.status}) - re-run npm run export:static`);
+          return read(fresh, rel);
         })
         .catch((err) => { cache.delete(rel); throw err; }));
     }

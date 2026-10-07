@@ -1,6 +1,6 @@
 {
  "builtBy": "scripts/export-static.mjs",
- "exportedAt": "2026-10-06T13:58:00.303Z",
+ "exportedAt": "2026-10-07T01:34:11.082Z",
  "engine": {
   "dataMode": "offline",
   "extractor": "rules",
@@ -88,34 +88,34 @@
  "runs": [
   {
    "scenarioId": "full-sweep",
-   "runId": "RUN-MUWQU9HR",
+   "runId": "RUN-MUXFPK18",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 9,
    "published": 9,
    "quarantined": 0,
-   "ms": 57
+   "ms": 56
   },
   {
    "scenarioId": "earnings-gap",
-   "runId": "RUN-MUWQU9IO",
+   "runId": "RUN-MUXFPK25",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 4,
    "published": 4,
    "quarantined": 0,
-   "ms": 29
+   "ms": 30
   },
   {
    "scenarioId": "macro-transmission",
-   "runId": "RUN-MUWQU9JL",
+   "runId": "RUN-MUXFPK30",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 2,
    "published": 2,
    "quarantined": 0,
-   "ms": 30
+   "ms": 29
   },
   {
    "scenarioId": "closed-window",
-   "runId": "RUN-MUWQU9KJ",
+   "runId": "RUN-MUXFPK3X",
    "asOf": "2025-09-13T15:00:00Z",
    "cards": 3,
    "published": 2,
@@ -124,7 +124,7 @@
   },
   {
    "scenarioId": "flows",
-   "runId": "RUN-MUWQU9LD",
+   "runId": "RUN-MUXFPK4S",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 2,
    "published": 2,
@@ -133,7 +133,7 @@
   },
   {
    "scenarioId": "risk",
-   "runId": "RUN-MUWQU9M9",
+   "runId": "RUN-MUXFPK5N",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,

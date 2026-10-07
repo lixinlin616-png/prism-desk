@@ -181,12 +181,34 @@ async function boot() {
     await refreshBoard();
     toast(`Desk online - ${caps.corpus?.documents ?? 0} documents, ${caps.prices?.symbols ?? 0} symbols, ${(caps.intents || []).length} MCP intents wired`, 'ok');
   } catch (err) {
+    renderBootError(err);
     toast(`Desk did not start: ${err.message}`, 'err');
     $('#pillData').textContent = 'data offline';
     $('#pillData').className = 'pill bad';
   }
   // keep the wiring panel honest as provider state changes
   setInterval(refreshStatus, 20000);
+}
+
+/**
+ * A silent empty desk reads as "broken demo", so a failed boot gets a
+ * permanent, actionable panel instead of a toast that fades in seven seconds.
+ */
+function renderBootError(err) {
+  const thread = $('#thread');
+  thread.textContent = '';
+  const message = String(err && err.message ? err.message : err);
+  thread.append(el('div', { class: 'empty boot-error' }, [
+    el('h1', { text: 'The desk could not start.' }),
+    el('p', { text: message }),
+    el('p', {
+      class: 'dim',
+      text: 'On the GitHub Pages static replay this almost always means the replay bundle failed to load once and that failure got cached - the site was still building, or a request was blocked. The button re-fetches it; a hard refresh (Ctrl+Shift+R / Cmd+Shift+R) does the same by hand.',
+    }),
+    el('div', { class: 'boot-error-actions' }, [
+      el('button', { class: 'btn primary', text: 'retry', onclick: () => boot() }),
+    ]),
+  ]));
 }
 
 async function refreshStatus() {

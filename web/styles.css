@@ -225,6 +225,9 @@ body {
 .empty h1 { font-size: 23px; color: var(--text); margin: 0 0 12px; font-weight: 600; letter-spacing: -0.3px; }
 .empty p { font-size: 13px; line-height: 1.65; margin: 0 0 10px; }
 .empty .dim { color: var(--text-faint); font-size: 12px; }
+.boot-error h1 { color: var(--warn, #ffd9a0); }
+.boot-error-actions { margin-top: 8px; }
+.boot-error-actions .btn { margin: 0 6px; }
 
 .turn { margin-bottom: 26px; }
 
