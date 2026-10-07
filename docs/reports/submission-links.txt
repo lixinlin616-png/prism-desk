@@ -7,11 +7,11 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 01. [必交] 项目链接｜在线 Demo（可直接访问，无需登录 / 无需安装 / 无需 API key）
     https://lixinlin616-png.github.io/prism-desk/demo
-    · 打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏），页面左下角永久标注 static replay；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml
+    · 打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏）；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 208 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 211 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -21,7 +21,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 04. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-TRANSCRIPT.md
-    · 951 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
+    · 1031 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
 
 05. [选交] 运行记录｜演示录屏（5 分钟评委动线）
     <video-url>
@@ -29,7 +29,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 06. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md
-    · 235 张卡 → 115 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（95% CI 14.1–44.7%）；打分与实现超额的 Spearman rho = -0.138 被系统自己标为 BLOCKER
+    · 312 张卡 → 148 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER
 
 07. [必交] 运行记录｜生成上述报表的代码（官方要求"回测报告须附生成该报告的代码，不接受纯截图"）
     https://github.com/lixinlin616-png/prism-desk/blob/main/prism.mjs
@@ -43,11 +43,11 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 09. [支撑] 架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ARCHITECTURE.md
-    · 含两处常被混淆的账本数字的并列对照表（full-sweep 88.5% vs doctor smoke 84.6%，两轮恰好都是 26 items）
+    · 含两处常被混淆的账本数字的并列对照表（full-sweep 93.1% vs doctor smoke 89.7%，两轮恰好都是 29 items）
 
 10. [支撑] 复盘闭环说明（三条轴 / 七个方法决定 / 为什么绝不自动调权）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/REVIEW-LOOP.md
-    · 解释为什么 rho = -0.138 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的
+    · 解释为什么 rho = -0.137 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的
 
 11. [支撑] 真实价格数据研究：宏观传导（25 个真实事件逐条明细）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/transmission-study.md
@@ -81,9 +81,9 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 —— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
-node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）
-node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 208 / 208 · 0 跳过（全新 clone 亦然）
+node prism.mjs doctor    # 数据接线自检 + smoke run（12 张卡，账本 29 items / pass 26 / fail 0）
+node prism.mjs demo      # 逐字重建上面那份 1031 行逐字稿（as-of 由场景钉死，无需传参）
+npm test                 # 211 / 211 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同

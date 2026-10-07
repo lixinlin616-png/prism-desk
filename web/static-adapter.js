@@ -24,6 +24,10 @@
 (function staticReplayAdapter() {
   'use strict';
 
+  // app.js uses this to tell "adapter ran, bundle still loading" apart from
+  // "adapter script never ran" without needing any visible UI of its own.
+  window.PRISM_STATIC_ADAPTER = true;
+
   const HERE = new URL('./', (document.currentScript && document.currentScript.src) || document.baseURI).href;
   const DATA = HERE + 'data/';
   const realFetch = window.fetch.bind(window);
@@ -63,44 +67,19 @@
 
   // ------------------------------------------------------------------- notice
   // The one thing a replay must never do is pass itself off as a live engine,
-  // so the badge is permanent and every substitution is announced.
-
-  function mount() {
-    const style = document.createElement('style');
-    style.textContent = [
-      '.prism-static{position:fixed;left:12px;bottom:12px;z-index:9999;max-width:min(540px,calc(100vw - 24px));',
-      'font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#e8e8e8;',
-      'background:rgba(16,18,22,.94);border:1px solid rgba(255,255,255,.18);border-radius:10px;',
-      'padding:8px 11px;box-shadow:0 6px 22px rgba(0,0,0,.45)}',
-      '.prism-static b{color:#8fd3ff;font-weight:600}',
-      '.prism-static a{color:#9be29b}',
-      '.prism-static code{color:#ffd9a0}',
-      '.prism-static .note{margin-top:5px;padding-top:5px;border-top:1px dashed rgba(255,255,255,.2);',
-      'color:#ffd9a0;transition:opacity .6s}',
-      '.prism-static .note.gone{opacity:0}',
-    ].join('');
-    document.head.appendChild(style);
-
-    const badge = document.createElement('div');
-    badge.className = 'prism-static';
-    badge.innerHTML = '<b>&#9682; static replay</b> &middot; recorded from real offline runs of the same engine '
-      + '&middot; free-text questions replay the closest recorded task '
-      + '&middot; <a href="https://github.com/lixinlin616-png/prism-desk" target="_blank" rel="noopener">repo</a> '
-      + '&middot; live backend: <code>node server.mjs</code>';
-    document.body.appendChild(badge);
-
-    return function note(message, ms = 9000) {
-      const n = document.createElement('div');
-      n.className = 'note';
-      n.textContent = message;
-      badge.appendChild(n);
-      while (badge.querySelectorAll('.note').length > 3) badge.querySelector('.note').remove();
-      setTimeout(() => { n.classList.add('gone'); setTimeout(() => n.remove(), 700); }, ms);
-    };
-  }
-  let note = () => {};
-  if (document.body) note = mount();
-  else document.addEventListener('DOMContentLoaded', () => { note = mount(); }, { once: true });
+  // so every substitution and every refused write is announced. The notices
+  // ride the desk's own toast UI through a custom event (app.js listens) and
+  // the console, and each replayed trace carries a replayNote frame. There is
+  // deliberately no permanent corner badge - a fixed box in that spot covered
+  // the composer and could not be moved out of the way.
+  const note = (message) => {
+    console.info(`[prism static replay] ${message}`);
+    // The test harness boots the adapter against a minimal window shim with no
+    // event bus; the console line is the fallback there.
+    if (typeof window.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
+      window.dispatchEvent(new CustomEvent('prism-static-note', { detail: { message } }));
+    }
+  };
 
   // -------------------------------------------------------------------- replay
 

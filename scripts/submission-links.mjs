@@ -53,7 +53,7 @@ export const MANIFEST = [
     type: '项目链接｜在线 Demo（可直接访问，无需登录 / 无需安装 / 无需 API key）',
     target: 'demo',
     required: '必交',
-    what: '打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏），页面左下角永久标注 static replay；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml',
+    what: '打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏）；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml',
   },
   {
     section: '必交 · 项目链接',

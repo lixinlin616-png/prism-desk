@@ -209,7 +209,7 @@ async function boot() {
  */
 function rehydrateStaticAdapter() {
   const tag = document.querySelector('script[src*="static-adapter"]');
-  if (!tag || window.PRISM_STATIC_BUNDLE || document.querySelector('.prism-static')) return Promise.resolve();
+  if (!tag || window.PRISM_STATIC_BUNDLE || window.PRISM_STATIC_ADAPTER) return Promise.resolve();
   return new Promise((resolve, reject) => {
     const src = new URL(tag.getAttribute('src'), document.baseURI);
     src.searchParams.set('retry', String(Date.now()));
@@ -1495,6 +1495,11 @@ function toast(message, kind = '') {
     setTimeout(() => node.remove(), 450);
   }, kind === 'err' ? 7000 : 4200);
 }
+
+// The static replay adapter announces substitutions and ignored as-of clocks
+// through this event, so those notices share the desk's toast UI instead of a
+// corner badge of their own.
+window.addEventListener('prism-static-note', (ev) => toast(String(ev.detail?.message || ''), 'warn'));
 
 // ------------------------------------------------------------------------- wiring
 
