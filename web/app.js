@@ -160,11 +160,17 @@ async function askStream(payload, onFrame) {
 
 // --------------------------------------------------------------------------- boot
 
+let wiredOnce = false;
+
 async function boot() {
-  wireEvents();
-  startClock();
-  setAsOfNow();
+  if (!wiredOnce) {
+    wireEvents();
+    startClock();
+    setAsOfNow();
+    wiredOnce = true;
+  }
   try {
+    $('#thread .boot-error')?.remove();
     const [status, caps, scenarios] = await Promise.all([
       api('/api/status'),
       api('/api/capabilities'),
@@ -194,6 +200,35 @@ async function boot() {
  * A silent empty desk reads as "broken demo", so a failed boot gets a
  * permanent, actionable panel instead of a toast that fades in seven seconds.
  */
+/**
+ * The replay engine is a classic <script>; if that one request died (site still
+ * building, blocked request, poisoned cache) no amount of retrying fetches can
+ * bring it back - the tag has to be re-injected. Only meaningful on the static
+ * bundle: web/index.html (the live server) ships no such tag.
+ */
+function rehydrateStaticAdapter() {
+  const tag = document.querySelector('script[src*="static-adapter"]');
+  if (!tag || window.PRISM_STATIC_BUNDLE || document.querySelector('.prism-static')) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const src = new URL(tag.getAttribute('src'), document.baseURI);
+    src.searchParams.set('retry', String(Date.now()));
+    const s = el('script', { src: src.href });
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('static-adapter.js still fails to load - hard-refresh (Ctrl+Shift+R) or check the network to this host'));
+    document.head.append(s);
+  });
+}
+
+async function retryBoot() {
+  try {
+    await rehydrateStaticAdapter();
+  } catch (err) {
+    renderBootError(err);
+    return;
+  }
+  await boot();
+}
+
 function renderBootError(err) {
   const thread = $('#thread');
   thread.textContent = '';
@@ -206,7 +241,16 @@ function renderBootError(err) {
       text: 'On the GitHub Pages static replay this almost always means the replay bundle failed to load once and that failure got cached - the site was still building, or a request was blocked. The button re-fetches it; a hard refresh (Ctrl+Shift+R / Cmd+Shift+R) does the same by hand.',
     }),
     el('div', { class: 'boot-error-actions' }, [
-      el('button', { class: 'btn primary', text: 'retry', onclick: () => boot() }),
+      el('button', {
+        class: 'btn primary',
+        text: 'retry',
+        onclick: (ev) => {
+          const btn = ev.currentTarget;
+          btn.disabled = true;
+          btn.textContent = 'retrying…';
+          retryBoot();
+        },
+      }),
     ]),
   ]));
 }
