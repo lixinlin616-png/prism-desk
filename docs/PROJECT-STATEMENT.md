@@ -50,7 +50,7 @@
 
 | 指标 | 数值 | 复现命令 |
 |---|---|---|
-| 单元/集成测试 | **208 / 208 通过 · 0 跳过** | `npm test` |
+| 单元/集成测试 | **211 / 211 通过 · 0 跳过** | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过**（7 个 suite） | `npm run validate` |
 | 第三方依赖 | **0**（纯 Node ≥20 标准库，clone 即可跑，无需 `npm install`） | `package.json` |
 | 全频道扫描耗时 | **~60 ms** 产出 9 张卡（离线、纯规则路径；本机 6 次实测 60–64 ms，耗时随机器而异） | `node prism.mjs demo --only=full-sweep` |
@@ -110,7 +110,7 @@
 - **可复现性**：`--as-of` 冻结桌面时钟精确复现历史时点，**六个 demo 场景各自钉死 as-of**，所以 `node prism.mjs demo` 不带参数也能逐字重建 `DEMO-TRANSCRIPT.md`（仅生成时间戳与 6 处耗时行不同，实测）；确定性检查保证同输入同输出；**看板 fixture 可逐字节重建** —— `npm run seed` 用 11 个固定 as-of × 6 个场景回放，连续两次产出 SHA-256 相同（实测），`npm run review:seed` 据此复现复盘报表，**所以全新 clone 也能复现已发布的判分数字**
 - **X 帖合规校验**：`npm run xpost` 按 X 官方 v3 权重（中文/全角 2 · 拉丁 1 · 任意 URL 固定 23）逐条校验草稿的话题标签、@提及、**实质性**（去掉强制 token 后仍需 ≥40 权重单位原创文案，即"非纯转发"的机器化表达）、长度与"是否引用转发官方推文"；草稿与校验规则**共用同一个文件**，所以不可能悄悄漂移。当前 **17/17 帖、86/86 检查通过**（实测）
 
-**遇到的问题与解法（九个真实的坑）**
+**遇到的问题与解法（十个真实的坑）**
 
 1. **freshness 一开始是假因子。** 最初按卡片生成时间（墙上时钟）衰减，结果所有历史场景复现时 freshness 永远是满分 —— 因子形同虚设，`--as-of` 也无法真正生效。**解法：** 改为按**源文档发布时间** `informationAt` 衰减，并给每张卡打上运行时 `as-of`。改完之后 `--as-of` 场景复现才真正work，freshness 也成了实际起作用的因子（代价是头条分数全部变化，所有文档数字重新生成）。`validate.mjs` 里加了 `as-of-matters` 检查防止回归。
 2. **缺数据时系统会输出 `null%`。** 虚构标的在价格库里没有跳空样本时，closed-window 卡片会把 null 直接插值成 `"continued null% of the time"`。**这是我们自己在 demo 逐字稿里发现的真实缺陷。解法：** 改为自然语言承认无知（"该标的无可比历史跳空，无实证先验，请按结构性而非统计性理解"），同时改写风险条目为"跳空幅度无锚，减半仓位或不做"，并**在 `tests/extract.test.mjs` 加了回归测试钉住**（断言任何卡片都不得出现 `null% / undefined% / NaN%`）。
@@ -131,6 +131,11 @@
 9. **两个"同一份东西存在两份"的缺陷 —— 一个是跨平台的，一个是发布物与后端的。**
    - **X 帖合规闸门在 Windows 上会误判。** `scripts/xpost.mjs` 的 `weightedLength()` 逐字符计权，于是 CRLF 检出里的 `\r` 每行被算作 1 个权重单位。实测同一段文案 LF 计 29、CRLF 计 31；而 `a1` / `a2` / `zh-5` 三条帖子距 280 上限只差 2–4 个单位，结果是**完全相同的文案在 Windows 上 FAIL、在 Linux 上 PASS**（本机实测 `npm run xpost` 83/86，切成 LF 后 86/86）。这道闸门守的是**必交项**"合规 X 帖链接"，而作者看到 FAIL 的自然反应是去删内容 —— 也就是一条平台相关的假阳性会诱导作者把本来合规的帖子改短。**解法：** 计长前把 `\r\n?` 归一为 `\n`（X 对一个换行收 1 个字符，对回车不收）；`tests/wiring.test.mjs` 直接拿**仓库里真实的 `docs/X-POSTS.md`** 跑 LF 与 CRLF 两遍，断言结论与每条帖子的计长逐一相同。顺带补 `.gitattributes`（`* text=auto eol=lf`）：仓库对外声称"两次重建 SHA-256 相同"，而 `core.autocrlf=true` 的 Windows clone 检出的是 CRLF、生成器写的是 LF，字节级宣称会因与引擎无关的原因失效。`render.yaml` 与 `scripts/submission-links.mjs` 的已提交 blob 本来就是混合换行，一并归一。
    - **发布出去的 demo 与后端对不上。** `server.mjs` 和 `scripts/export-static.mjs` 各自手抄了一份 `/api/capabilities` 的构造逻辑，然后漂了：GitHub Pages 上那份（**评委真正会打开的那个产物**）没有 `fixture` / `wired` / `invokedBy`，也完全没有 agentKey 段，左栏因此显示 `signal skills 0/5`，而实时后端如实报 2 个已接线。**解法：** 抽出唯一的 `src/desk/capabilities.mjs`，两处共用；`tests/wiring.test.mjs` 把 `docs/demo/data/api/capabilities.json` 与实时构造器的输出逐项比对（频道 / intent 的 resolved+fixture / skill 的 resolved+fixture+wired+invokedBy / agentKey 状态），谁再漂谁就红。
+
+10. **第三轮评审：三处"数字比接线说得响"的地方 —— 全部只在跑起来之后才看得见。**
+   - **`--as-of` 冻结了卡片与账本，却没冻结会话时钟。** `planQuestion()` 里写的是 `sessionState()`（无参 → 取机器当前时间），而 `rules.mjs` 早就写的是 `sessionState(asOf)`。后果有两层：（a）`closed-window` 场景钉死在 2025-09-13T15:00Z 那个**周六下午**，简报第一行却印着 `US cash session pre-market · Wed` —— 这个频道存在的全部理由就是"现金盘关着、rToken 是唯一的价格发现场所"，而它自己的抬头说现金盘快开了；（b）`nyMinutes` 是墙上时钟，于是每重新导出一次静态 demo，录制包里就会变一个数，"确定性录制"名不副实。**解法：** `planQuestion(question, { asOf })` → `sessionState(asOf ?? new Date())`，`runTask` 把已经钉死的 `asOf` 传下去；`tests/wiring.test.mjs` 钉住"冻结时钟必须冻结会话"，`tests/static-demo.test.mjs` 钉住"录制包里的 session 必须等于场景钉死 as-of 的 session，且 closed-window 必须落在周末"。修完 `closed-window` 抬头变成 `closed (weekend) · Sat`，逐字稿仍是 951 行，除生成时间戳与 6 处耗时外只多了 6 行 session 修正，其余逐字节不变。
+   - **`doctor` 把共享 fixture 包的总数，报成了行情源自己的覆盖率。** 离线 fixture 包由 bitget-market 与 bitget-signal 共用（10 个行情 intent + 2 个 `signal:*` 技能录制 = 12 条），而 `doctor` 在行情那一行印 `resolved=0/20 fixtures=12`，紧挨着"20 个 intent"—— 读起来就是"20 个里有 12 个有离线数据"，而 `/api/capabilities` 如实写的是 10 个。**赛道三评的正是"数据源 / Skill 集成的数量与有效性"，同一个接线在两处给出两个数字，等于自己给自己扣分。解法：** `FixtureStore.countFor(intents)`，行情源只报自己那 10 条，另报包内总条数；`doctor` 现在印 `fixture-backed=10/20 intents (pack: 12 entries, 2 of them signal skills)`，并有测试断言它必须等于 capabilities 里 `fixture:true` 的 intent 数。
+   - **`npm test` 会改写一份已提交的报表。** `scripts/xpost.mjs` 末尾无条件调用 `main()`，而 `tests/wiring.test.mjs` 为了验证长度闸门跨平台一致必须 `import` 它 —— 于是每跑一次测试就重写一遍 `docs/reports/x-posts.md`（时间戳行），`npm test` 之后 `git status` 不干净；更要紧的是 `main()` 会设 `process.exitCode`，X 帖校验一旦失败，测试进程会以一个与测试无关的理由退出。**解法：** 补上仓库里 `prism.mjs` / `server.mjs` / `scripts/submission-links.mjs` 早就在用的入口守卫（`invokedDirectly`），并加一条测试：`import` 该脚本前后，报表字节必须不变。
 
 **尚未完成**
 
@@ -170,7 +175,7 @@
 git clone <repo> && cd prism-desk
 node prism.mjs doctor     # 数据接线自检 + smoke run
 node prism.mjs demo       # 逐字重建 docs/DEMO-TRANSCRIPT.md（as-of 由场景钉死，无需传参）
-npm test                  # 208 / 208 · 0 跳过
+npm test                  # 211 / 211 · 0 跳过
 npm run validate          # 60 / 60
 npm run replay            # 三份研究里的两份事件研究
 npm run seed              # 重建看板 fixture（逐字节确定）
@@ -185,7 +190,7 @@ node server.mjs           # http://127.0.0.1:4310
 
 **1. 在投研场景里，大模型的价值不在"生成更多"，而在"能被追责"。** 我们做这个项目最大的认知转变是：让 LLM 自由发挥地产出交易观点，技术上很容易，产品上很难成立 —— 因为用户无法判断该不该信，而错的代价是真金白银。所以我们把架构反过来设计：**模型可以说任何话，但它说的每一个数字都要过证据账本；账本对不上，要么隔离，要么降分并在卡片上如实标注。** 模型不享有豁免权。这套设计跑出来的效果是可见的：一轮扫描 26 个证据项，23 pass / **0 fail** / 3 unverifiable，而那 3 个 unverifiable 全部被如实标注、并压低了相应卡片的分数，其中一张因此被挡在发布门槛之外。
 
-**2. 确定性路径不是"降级方案"，是基线。** Prism 不配任何 key 也能完整运行（纯规则抽取器，208 个测试全部基于这条路径）。这不是为了省事：**一个无法在没有模型时运行的投研工具，你没法测试它的模型部分到底贡献了什么。** 有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
+**2. 确定性路径不是"降级方案"，是基线。** Prism 不配任何 key 也能完整运行（纯规则抽取器，211 个测试全部基于这条路径）。这不是为了省事：**一个无法在没有模型时运行的投研工具，你没法测试它的模型部分到底贡献了什么。** 有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
 
 **3. 对 Bitget AI 工具的体验与建议。** MCP Server 把美股/ETF 行情、财报日历、分析师预期做成只读工具集，这个抽象层次是对的 —— 投研 Agent 需要的是"可查询的事实"，不是"可执行的下单"。Signal Skills（sentiment-analyst / macro-analyst）提供的是**已加工的观点**，我们把它当作 cross-asset 频道的一个**独立信源**接入，并让它和规则路径的结论互相印证，而不是直接采信 —— 这正好是 corroboration 因子要量的东西。**两条建议：**（a）MCP 若能提供 rToken 的**盘口深度与成交明细**，closed-window 频道就能把当前 0.45 这个保守估算的流动性系数换成实测值，这是本项目最想接的一个数据；（b）Signal Skills 若能带上**观点的时间戳与历史修正记录**，就可以对信源本身做命中率统计，让 corroboration 从"来源数量"升级到"来源质量"。
 

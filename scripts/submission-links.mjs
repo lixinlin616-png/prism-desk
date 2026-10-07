@@ -38,7 +38,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 208;
+export const TEST_COUNT = 211;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -142,7 +142,7 @@ export const MANIFEST = [
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
-    type: '支撑｜项目陈述（问题定义 / 人群与非人群 / 实测数据 / 五个真实踩过的坑）',
+    type: '支撑｜项目陈述（问题定义 / 人群与非人群 / 实测数据 / 十个真实踩过的坑）',
     target: 'docs/PROJECT-STATEMENT.md',
     required: '支撑',
     what: '含报名表「项目说明」与「大模型在项目中的作用」两个字段的成稿',

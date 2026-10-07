@@ -71,8 +71,15 @@ export function skillsForChannels(channels = []) {
   return out;
 }
 
-/** Question -> { tickers, channels, indicators, intents, intent }. */
-export function planQuestion(question) {
+/**
+ * Question -> { tickers, channels, indicators, intents, intent, session }.
+ *
+ * @param {string} question
+ * @param {{asOf?: string|Date|null}} [opts] the desk clock to read the session
+ *   off. Omit it and the session is read off now, which is right for a live
+ *   question and wrong for every frozen-clock run.
+ */
+export function planQuestion(question, { asOf = null } = {}) {
   const q = String(question || '');
   const upper = q.toUpperCase();
   // These are CANDIDATES. Uppercase words in a question look exactly like
@@ -138,7 +145,12 @@ export function planQuestion(question) {
   }
   if (!intents.size) { intents.add('quote'); intents.add('news'); }
 
-  const session = sessionState();
+  // The session belongs to the task's clock, not to the machine's. rules.mjs
+  // already reads it this way; the planner did not, so a scenario pinned to
+  // Saturday reported "pre-market, Wed" - the exact opposite of the closed
+  // window the scenario exists to demonstrate - and nyMinutes leaked wall-clock
+  // time into the exported demo bundle.
+  const session = sessionState(asOf ?? new Date());
   return {
     question: q,
     tickers: tickerCandidates,
@@ -198,7 +210,7 @@ export class Pipeline {
     };
 
     // ---- PLAN -------------------------------------------------------------
-    const plan = planQuestion(question);
+    const plan = planQuestion(question, { asOf });
     if (channels?.length) plan.channels = CHANNEL_IDS.filter((c) => channels.includes(c));
     if (tickers?.length) plan.tickers = [...new Set([...plan.tickerCandidates, ...tickers.map((t) => t.toUpperCase())])];
 

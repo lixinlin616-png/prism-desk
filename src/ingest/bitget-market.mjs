@@ -209,7 +209,8 @@ export class BitgetMarketProvider {
       liveTools: this.client.toolNames().length,
       resolvedIntents: this.resolution.size,
       totalIntents: INTENTS.length,
-      fixtures: this.fixtures.count(),
+      fixtures: this.fixtures.countFor(INTENTS),
+      fixtureEntries: this.fixtures.count(),
       calls: this.callLog.length,
     };
   }

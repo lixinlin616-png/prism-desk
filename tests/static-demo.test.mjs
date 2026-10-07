@@ -19,6 +19,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+import { sessionState } from '../src/util/time.mjs';
+
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEMO = join(ROOT, 'docs', 'demo');
 const DATA = join(DEMO, 'data');
@@ -383,5 +385,19 @@ test('every recorded run replays end to end', async () => {
     // run.asOf is normalised to milliseconds by the engine; the scenario pin is not.
     assert.equal(new Date(run.asOf).getTime(), new Date(entry.asOf).getTime(),
       entry.scenarioId + ': the clock must stay pinned to the fixture window');
+    /**
+     * The session is the first thing the brief says, and it used to be read off
+     * the machine that recorded the bundle: the closed-window scenario, pinned to
+     * Saturday 2025-09-13T15:00Z, introduced itself as "pre-market, Wed". Pinning
+     * asOf has to pin the session with it, or the recording also drifts with the
+     * time of day it was exported at.
+     */
+    assert.deepEqual(run.plan.session, sessionState(entry.asOf),
+      entry.scenarioId + ': the recorded session is not the session at the pinned as-of');
+    if (entry.scenarioId === 'closed-window') {
+      assert.equal(run.plan.session.state, 'closed', 'the closed-window scenario must be recorded in a closed window');
+      assert.ok(['Sat', 'Sun'].includes(run.plan.session.weekday),
+        'the closed-window scenario must be recorded on a weekend, got ' + run.plan.session.weekday);
+    }
   }
 });

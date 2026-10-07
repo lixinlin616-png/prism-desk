@@ -11,7 +11,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 208 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 211 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -61,7 +61,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/validation.md
     · 由 `npm run validate` 生成，可直接作为 CI 门禁（任何一项失败即退出非零）
 
-14. [支撑] 项目陈述（问题定义 / 人群与非人群 / 实测数据 / 五个真实踩过的坑）
+14. [支撑] 项目陈述（问题定义 / 人群与非人群 / 实测数据 / 十个真实踩过的坑）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/PROJECT-STATEMENT.md
     · 含报名表「项目说明」与「大模型在项目中的作用」两个字段的成稿
 
@@ -91,7 +91,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）
 node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 208 / 208 · 0 跳过（全新 clone 亦然）
+npm test                 # 211 / 211 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同

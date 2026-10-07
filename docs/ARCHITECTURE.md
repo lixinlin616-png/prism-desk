@@ -29,7 +29,7 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 设计上的三条硬约束：
 
 1. **零依赖。** 只用 Node ≥ 20 标准库。没有 `npm install`，没有构建步骤，评委 clone 下来就能跑。Web 前端是原生 HTML/CSS/JS。
-2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 208 个测试和 60 项验证检查成为可能。
+2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 211 个测试和 60 项验证检查成为可能。
 3. **LLM 不享有豁免权。** 配了 key 之后，LLM 抽取的卡片和规则抽取的卡片走**同一个证据账本、同一套打分规则**。模型说错数字，账本照样拦。
 
 ---
@@ -192,9 +192,11 @@ npm run review:seed  # 从 data/fixtures/board-seed.json 复现 docs/reports/rev
 
 连续两次 `npm run seed` 产出的文件 **SHA-256 相同（实测）**。要做到这一点修掉了三个真实漏洞：卡片 id 曾用 `Date.now()` 打戳（`--as-of` 冻结了 `createdAt` 却没冻结身份）、账本 `verifiedAt` 曾用墙上时钟、`npm test` 曾把卡片写进真看板。现在 id 由 `stampTime()` 按运行时钟重打（`rebaseCardId`），`verifiedAt` 取 `card.createdAt`，测试与验证脚本各自钉死到自己的 scratch 状态文件。
 
-**另外还有两处同类的可复现性缺陷。** 第四处是 demo 本身：六个场景在 `server.mjs` 的 `SCENARIOS` 里各自带一个钉死的 `asOf`（`closed-window` 是 2025-09-13T15:00Z 那个周六下午，其余五个是 2025-09-19T20:00Z）。内置语料与价格库是固定的 2025 年 9 月窗口，让桌面时钟默认取"现在"，等于同一条命令在不同日期产出不同卡片。钉死之后 `node prism.mjs demo` 不带参数即可逐字重建 `docs/DEMO-TRANSCRIPT.md`（仅生成时间戳与 6 处 `ms` 耗时不同，实测）；命令行 `--as-of` 与 Web 时钟框仍优先于场景默认值（`tests/server.test.mjs` 有一条断言钉住"每个场景都必须带 as-of"，防止将来被悄悄改掉）。
+**另外还有三处同类的可复现性缺陷。** 第四处是 demo 本身：六个场景在 `server.mjs` 的 `SCENARIOS` 里各自带一个钉死的 `asOf`（`closed-window` 是 2025-09-13T15:00Z 那个周六下午，其余五个是 2025-09-19T20:00Z）。内置语料与价格库是固定的 2025 年 9 月窗口，让桌面时钟默认取"现在"，等于同一条命令在不同日期产出不同卡片。钉死之后 `node prism.mjs demo` 不带参数即可逐字重建 `docs/DEMO-TRANSCRIPT.md`（仅生成时间戳与 6 处 `ms` 耗时不同，实测）；命令行 `--as-of` 与 Web 时钟框仍优先于场景默认值（`tests/server.test.mjs` 有一条断言钉住"每个场景都必须带 as-of"，防止将来被悄悄改掉）。
 
 第五处更隐蔽：`tests/review.test.mjs` 里那条"跑一遍真实看板"的测试原本写着 `{ skip: !existsSync('data/state/board.json') }`。而 `data/state/` 是 gitignored 的 —— 也就是说**全新 clone 上它永远跳过**，`npm test` 实际是 177 通过 + 1 跳过，而所有文档都写着 178/178。跳过的检查不等于通过的检查。现在它改为跑**已提交的** `data/fixtures/board-seed.json`（即 `npm run review:seed` 用的那份看板），并断言 `decided > 0` 以免退化成空测试，所以现在 **179 / 179 · 0 跳过**在干净 checkout 上也是真的（实测；比当时多出的那一条，钉住"提交材料清单不得指向仓库里不存在的文件"）。
+
+第六处是**会话时钟**：`planQuestion()` 里写的是 `sessionState()`（无参 → 取机器当前时间），而 `rules.mjs` 早就写的是 `sessionState(asOf)`。于是 `--as-of` 冻结了卡片、账本与 freshness，却没冻结简报抬头上的美股现金盘状态：钉死在 2025-09-13T15:00Z（周六下午）的 `closed-window` 场景，第一行印的是 `US cash session pre-market · Wed` —— 而这个频道存在的全部前提就是"现金盘关着"。同时 `nyMinutes` 是墙上时钟，每重新导出一次静态 demo，录制包就变一个数。现在 `planQuestion(question, { asOf })` 把已经钉死的时钟传下去，`closed-window` 抬头变成 `closed (weekend) · Sat`；`tests/wiring.test.mjs` 钉住"冻结时钟必须冻结会话"，`tests/static-demo.test.mjs` 钉住"录制包里的 session 必须等于场景 as-of 的 session，且 closed-window 必须落在周末"。
 
 详见 [`REVIEW-LOOP.md`](REVIEW-LOOP.md)。
 
@@ -243,7 +245,7 @@ CLI `node prism.mjs review`（`--board` / `--as-of` / `--materiality` / `--json`
 ## 测试与验证
 
 ```bash
-npm test          # 208 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
+npm test          # 211 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
 npm run validate  # 60 项检查 -> docs/reports/validation.md
 npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 ```

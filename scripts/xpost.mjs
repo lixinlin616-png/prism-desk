@@ -298,4 +298,16 @@ function main(argv) {
   process.exitCode = result.ok ? 0 : 1;
 }
 
-main(process.argv.slice(2));
+/**
+ * Only run when invoked as a script. tests/wiring.test.mjs imports
+ * weightedLength() and runXPostCheck() from here to prove the length gate is
+ * platform-independent, and an unconditional main() made that import rewrite
+ * docs/reports/x-posts.md - so `npm test` left a committed artefact dirty on a
+ * timestamp line, and main()'s process.exitCode could fail the test run for a
+ * reason that has nothing to do with the tests. Same guard prism.mjs,
+ * server.mjs and scripts/submission-links.mjs already use.
+ */
+const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url));
+if (invokedDirectly) {
+  main(process.argv.slice(2));
+}

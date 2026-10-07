@@ -10,7 +10,8 @@
    "liveTools": 0,
    "resolvedIntents": 0,
    "totalIntents": 20,
-   "fixtures": 12,
+   "fixtures": 10,
+   "fixtureEntries": 12,
    "calls": 0
   },
   "signal": {

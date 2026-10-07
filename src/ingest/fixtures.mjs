@@ -77,6 +77,20 @@ export class FixtureStore {
     this.load();
     return this.entries.length;
   }
+
+  /**
+   * How many entries belong to the given intents.
+   *
+   * The pack is shared: it holds bitget-market intents and `signal:*` skill
+   * recordings side by side. A provider that reports `count()` as its own
+   * coverage is claiming the other provider's fixtures, and the number lands on
+   * a line next to `resolved=0/20` where it reads as intent coverage.
+   */
+  countFor(intents) {
+    this.load();
+    const own = new Set(intents);
+    return this.entries.filter((e) => own.has(e.intent)).length;
+  }
 }
 
 export function readFixtureMeta(dir) {
