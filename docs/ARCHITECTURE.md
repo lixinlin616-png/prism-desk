@@ -29,7 +29,7 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 设计上的三条硬约束：
 
 1. **零依赖。** 只用 Node ≥ 20 标准库。没有 `npm install`，没有构建步骤，评委 clone 下来就能跑。Web 前端是原生 HTML/CSS/JS。
-2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 179 个测试和 60 项验证检查成为可能。
+2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 193 个测试和 60 项验证检查成为可能。
 3. **LLM 不享有豁免权。** 配了 key 之后，LLM 抽取的卡片和规则抽取的卡片走**同一个证据账本、同一套打分规则**。模型说错数字，账本照样拦。
 
 ---
@@ -242,7 +242,7 @@ CLI `node prism.mjs review`（`--board` / `--as-of` / `--materiality` / `--json`
 ## 测试与验证
 
 ```bash
-npm test          # 179 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server
+npm test          # 193 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
 npm run validate  # 60 项检查 -> docs/reports/validation.md
 npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 ```

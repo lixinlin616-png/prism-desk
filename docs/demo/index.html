@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prism Desk — information in, falsifiable signals out</title>
+<meta name="description" content="Prism Desk distils earnings, macro and news into evidence-grounded, falsifiable signal cards for US equities and tokenized equities." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>◣</text></svg>" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="prism" aria-hidden="true">◣</span>
+    <span class="wordmark">Prism<span class="dim">Desk</span></span>
+    <span class="tagline">信息提炼与信号生成 · information in, falsifiable signals out</span>
+  </div>
+  <div class="status-cluster" id="statusCluster">
+    <span class="pill" id="pillSession" title="US cash equity session state">session —</span>
+    <span class="pill" id="pillClock" title="Current UTC time">--:--:-- UTC</span>
+    <span class="pill" id="pillData" title="Data provider mode and state">data —</span>
+    <span class="pill" id="pillLlm" title="LLM extractor configuration">extractor —</span>
+    <span class="pill" id="pillLedger" title="Evidence ledger totals">ledger —</span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ------------------------------------------------------------ left rail -->
+  <nav class="rail" aria-label="Channels">
+    <h2 class="rail-title">Spectrum</h2>
+    <ul class="channel-list" id="channelList"></ul>
+    <div class="rail-section">
+      <h2 class="rail-title">Data wiring</h2>
+      <dl class="wiring" id="wiringList"></dl>
+    </div>
+    <div class="rail-section">
+      <h2 class="rail-title">Validation</h2>
+      <div class="rail-buttons">
+        <button class="btn ghost" id="btnTransmission">Transmission study</button>
+        <button class="btn ghost" id="btnGaps">Gap study</button>
+      </div>
+      <p class="hint">Real-price event studies that calibrate the rubric. Runs on the bundled dataset.</p>
+    </div>
+    <div class="rail-section">
+      <h2 class="rail-title">Signal review</h2>
+      <div class="rail-buttons">
+        <button class="btn ghost" id="btnReview">Score the board</button>
+      </div>
+      <p class="hint">Adjudicates closed cards against what actually happened, then reports whether the score predicts the outcome.</p>
+    </div>
+  </nav>
+
+  <!-- ------------------------------------------------------------- centre LUI -->
+  <section class="desk">
+    <div class="scenarios" id="scenarios" aria-label="Demo scenarios"></div>
+
+    <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Research thread">
+      <div class="empty" id="emptyState">
+        <h1>Ask the desk a question.</h1>
+        <p>Prism reads the corpus, pulls Bitget MCP data, extracts structured signal cards, grounds every number in the evidence ledger, scores them against a transparent rubric, and ranks what is actually tradeable.</p>
+        <p class="dim">Nothing here is a recommendation. Every card carries the condition that would prove it wrong.</p>
+      </div>
+    </div>
+
+    <form class="composer" id="composer">
+      <div class="composer-row">
+        <textarea id="question" rows="2" placeholder="e.g. The August CPI came in cool on the headline but hot on core — map the transmission and tell me who is most exposed." aria-label="Research question"></textarea>
+        <button class="btn primary" type="submit" id="askBtn">Run<span class="kbd">⏎</span></button>
+      </div>
+      <div class="composer-meta">
+        <label class="meta-field" title="Freeze the desk clock. Essential for reproducing a demo scenario.">
+          as-of <input type="datetime-local" id="asOf" />
+        </label>
+        <button type="button" class="btn tiny ghost" id="btnNow" title="Reset to the current time">now</button>
+        <label class="meta-field check"><input type="checkbox" id="toggleTrace" checked /> show trace</label>
+        <label class="meta-field check"><input type="checkbox" id="toggleQuarantine" checked /> show quarantined</label>
+        <span class="spacer"></span>
+        <button type="button" class="btn tiny ghost" id="btnExportMd">export brief.md</button>
+        <button type="button" class="btn tiny ghost" id="btnExportCsv">export board.csv</button>
+        <button type="button" class="btn tiny ghost" id="btnPaste">paste document</button>
+        <button type="button" class="btn tiny ghost danger" id="btnReset" title="Clear the board">reset board</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ------------------------------------------------------------- right rail -->
+  <aside class="board" aria-label="Signal board">
+    <div class="board-head">
+      <h2>Signal board</h2>
+      <div class="board-filters" id="boardFilters">
+        <button class="chip active" data-status="active">active</button>
+        <button class="chip" data-status="quarantined">quarantined</button>
+        <button class="chip" data-status="all">all</button>
+      </div>
+    </div>
+    <div class="board-stats" id="boardStats"></div>
+    <ol class="board-list" id="boardList"></ol>
+    <div class="board-section">
+      <h3>Watchlist</h3>
+      <table class="watch" id="watchlist"></table>
+    </div>
+  </aside>
+</main>
+
+<!-- ------------------------------------------------------------- card drawer -->
+<div class="drawer-scrim" id="drawerScrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Card dossier">
+  <header class="drawer-head">
+    <h2 id="drawerTitle">Card</h2>
+    <button class="btn tiny ghost" id="drawerClose" aria-label="Close">✕</button>
+  </header>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- ------------------------------------------------------------ paste dialog -->
+<div class="modal-scrim" id="modalScrim" hidden>
+  <div class="modal" role="dialog" aria-label="Paste a document">
+    <h2>Paste a document into the corpus</h2>
+    <p class="hint">Drop in a real transcript, release or note and Prism will distil it on the next run. Nothing leaves this server.</p>
+    <label class="field"><span>title</span><input id="pasteTitle" placeholder="Corvus Q2 call transcript" /></label>
+    <label class="field"><span>kind</span>
+      <select id="pasteKind">
+        <option value="earnings-call">earnings-call</option>
+        <option value="earnings-release">earnings-release</option>
+        <option value="guidance">guidance</option>
+        <option value="macro-print">macro-print</option>
+        <option value="fomc-statement">fomc-statement</option>
+        <option value="news" selected>news</option>
+        <option value="filing">filing</option>
+        <option value="analyst-note">analyst-note</option>
+        <option value="other">other</option>
+      </select>
+    </label>
+    <label class="field"><span>tickers (comma separated)</span><input id="pasteTickers" placeholder="CRVS, NVDA" /></label>
+    <label class="field"><span>published at (ISO)</span><input id="pasteDate" placeholder="2025-09-12T21:00:00Z" /></label>
+    <label class="field"><span>body</span><textarea id="pasteBody" rows="10" placeholder="Paste the text here..."></textarea></label>
+    <div class="modal-actions">
+      <button class="btn ghost" id="pasteCancel">cancel</button>
+      <button class="btn primary" id="pasteSave">add to corpus</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-host" id="toastHost" aria-live="polite"></div>
+
+<!-- static replay: answers /api/* from ./data, recorded by scripts/export-static.mjs -->
+<script src="./static-adapter.js"></script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

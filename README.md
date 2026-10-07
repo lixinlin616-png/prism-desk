@@ -10,17 +10,30 @@
 
 ---
 
-## 仓库与部署 / Repo & deploy
+## 仓库与演示 / Repo & demo
+
+**在线演示（点开即用 · 无需登录 / 无需安装 / 无需 key）：** https://lixinlin616-png.github.io/prism-desk/demo/
 
 **GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
 
-自己部署一份（免费，约 3 分钟）—— 仓库根目录的 `render.yaml` 会把所有字段自动填好，不用手输：
+演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以页面上那 9 张卡、26 条核验项 / 88.5% 通过率、以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.138，都是引擎真实产出，与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的 14 项检查专门盯这个漂移）。
+
+有两件事静态页面**做不到**，而且它会明说、绝不假装成功：跑一个全新的自由提问（回放最接近的预录任务，并提示这是替换）、写入看板（粘贴文档 / 清空看板返回 409 并说明原因）。页面左下角有一枚永久的 `static replay` 徽标。
+
+要一个**能自由提问**的实时后端，两条路：
+
+```bash
+git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
+node server.mjs          # -> http://127.0.0.1:4310（零依赖，不需要 npm install）
+```
+
+或者一键部署到 Render（免费，约 3 分钟）—— 仓库根目录的 `render.yaml` 会把所有字段自动填好，不用手输：
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk)
 
 零依赖，所以没有构建失败面：Runtime = Docker、Build Command 留空、Start Command = `node server.mjs`、Health Check = `/api/status`、环境变量 `PRISM_DATA_MODE=offline` 与 `PRISM_HOST=0.0.0.0`（蓝图里已写好）。
 
-> 免费实例 15 分钟无流量会休眠，首次加载约 5–10 秒（要载入 41,386 根日 K 的价格库）。**提交报名表前自己先点一次把实例唤醒**，别把冷启动留给评委。另外三条上线路径（Fly / VPS+Caddy / 临时隧道）见 [`docs/DEPLOY.md`](docs/DEPLOY.md)。
+> 免费实例 15 分钟无流量会休眠，首次加载约 5–10 秒（要载入 41,386 根日 K 的价格库）。**提交报名表前自己先点一次把实例唤醒**，别把冷启动留给评委。另外四条上线路径（Pages / Fly / VPS+Caddy / 临时隧道）见 [`docs/DEPLOY.md`](docs/DEPLOY.md)。
 
 ---
 
@@ -116,7 +129,7 @@ node prism.mjs help                      # 帮助
 
 常用选项：`--as-of=<ISO>`（冻结桌面时钟，精确复现场景）· `--channels=<a,b>` · `--tickers=<A,B>` · `--json` · `--no-trace` · `--no-persist` · `--out=<file>`
 
-npm 脚本：`npm start` · `npm run dev` · `npm test` · `npm run validate` · `npm run replay` · `npm run demo` · `npm run seed` · `npm run review:seed` · `npm run xpost` · `npm run doctor` · `npm run submission` · `npm run submission:check`
+npm 脚本：`npm start` · `npm run dev` · `npm test` · `npm run validate` · `npm run replay` · `npm run demo` · `npm run seed` · `npm run review:seed` · `npm run xpost` · `npm run doctor` · `npm run export:static` · `npm run submission` · `npm run submission:check`
 
 ### HTTP API
 
@@ -207,12 +220,13 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 179 个测试（node:test，无第三方依赖）
+npm test           # 193 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
 npm run review:seed # 从该 fixture 复现复盘报表 -> docs/reports/review.md
 npm run xpost      # 校验 X 帖草稿合规 -> docs/reports/x-posts.md
+npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ --serve 可本机预览）
 ```
 
 ---
@@ -250,7 +264,8 @@ npm run xpost      # 校验 X 帖草稿合规 -> docs/reports/x-posts.md
 | [`docs/PROJECT-STATEMENT.md`](docs/PROJECT-STATEMENT.md) | 报名表"项目说明"六段（中文） |
 | [`docs/SUBMISSION-FORM.md`](docs/SUBMISSION-FORM.md) | 报名表逐字段填写内容；「提交材料链接」那一框由 `npm run submission` **生成**，不手写 |
 | [`docs/X-POSTS.md`](docs/X-POSTS.md) | X 传播推文草稿 |
-| [`docs/DEPLOY.md`](docs/DEPLOY.md) | 让 Demo 可公开访问 |
+| [`docs/DEPLOY.md`](docs/DEPLOY.md) | 让 Demo 可公开访问（含本项目实际采用的 GitHub Pages 静态回放） |
+| [`docs/demo/`](docs/demo/) | 发布在 Pages 上的**静态回放演示包**：真实引擎的录像，勿手改，用 `npm run export:static` 重建 |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | 后续路线 |
 | [`docs/reports/`](docs/reports/) | 自动生成的验证与研究报表（`validation.md` · `review.md` · `transmission-study.md` · `gap-study.md` · `x-posts.md` · `submission-links.txt`），全部可由 `npm run validate` / `review:seed` / `replay` / `xpost` / `submission` 重建 |
 
@@ -272,11 +287,12 @@ src/
   desk/              pipeline（PLAN）, board（状态机）, brief（渲染）
   research/          transmission, gap-study, factors, report
   review/            adjudicate（三轴裁决）, report（markdown 渲染）
-web/                 index.html + app.js + styles.css（零构建）
-scripts/             validate, replay, build-seed, fetch-prices, record-fixtures, xpost
+web/                 index.html + app.js + styles.css + static-adapter.js（零构建）
+scripts/             validate, replay, build-seed, fetch-prices, record-fixtures, xpost,
+                     submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               179 个 node:test 用例
-docs/                上述文档
+tests/               193 个 node:test 用例
+docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 
 ---

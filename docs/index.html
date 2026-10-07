@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prism Desk - 信息提炼与信号生成</title>
+<meta name="description" content="Prism Desk: 把财报、宏观与新闻提炼成可证伪、带证据账本的信号卡。Bitget AI Base Camp S2 - AI Trading Desk." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>%E2%97%A3</text></svg>" />
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 48px 20px 64px; background: #0b0d10; color: #e8e8e8;
+    font: 15px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+  main { max-width: 780px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  h1 .dim { color: #8a9099; font-weight: 400; }
+  p.sub { color: #a8aeb6; margin: 0 0 28px; }
+  a.btn { display: inline-block; padding: 11px 18px; border-radius: 9px; text-decoration: none;
+    background: #2f81f7; color: #fff; font-weight: 600; margin: 0 10px 10px 0; }
+  a.btn.ghost { background: transparent; border: 1px solid #3a4048; color: #d6dae0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: #8a9099; margin: 34px 0 10px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin: 6px 0; }
+  code { background: #161a1f; border: 1px solid #262c33; border-radius: 5px; padding: 1px 5px; font-size: 13px; }
+  a { color: #8fd3ff; }
+  .note { border-left: 2px solid #3a4048; padding: 2px 0 2px 14px; color: #a8aeb6; margin: 26px 0 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>&#9682; Prism<span class="dim">Desk</span></h1>
+  <p class="sub">信息提炼与信号生成 &middot; information in, falsifiable signals out<br />
+  Bitget AI Base Camp Hackathon S2 &mdash; Track 3 AI Trading Desk</p>
+
+  <a class="btn" href="./demo/">打开演示 &middot; Open the demo</a>
+  <a class="btn ghost" href="https://github.com/lixinlin616-png/prism-desk">GitHub 仓库</a>
+
+  <h2>这个演示是什么</h2>
+  <ul>
+    <li>演示页是 <b>静态回放</b>：所有接口响应都由 <code>scripts/export-static.mjs</code> 在导出时驱动<b>真实离线引擎</b>录制（含 SSE 逐帧节奏），浏览器端 <code>web/static-adapter.js</code> 原样回放。不是 mock，也不是手写数据。</li>
+    <li>看板与复盘用仓库里已提交的 <code>data/fixtures/board-seed.json</code>（11 个固定 as-of &times; 6 个场景 = 66 次回放），所以页面上的复盘数字与 <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md">docs/reports/review.md</a> 完全一致。</li>
+    <li>静态页面确实做不到两件事：跑一个<b>全新</b>的自由提问、写入看板。遇到这两种情况页面会明说，不会假装成功。要实时后端：<code>git clone</code> 之后 <code>node server.mjs</code>（零依赖，不需要 npm install）。</li>
+  </ul>
+
+  <h2>建议的观看顺序</h2>
+  <ul>
+    <li><a href="./demo/">演示台</a> &mdash; 先点 <b>Full desk sweep / 全频道扫描</b>，看 PLAN &rarr; INGEST &rarr; EXTRACT &rarr; VERIFY &rarr; SCORE &rarr; PRESENT 全流程；再点右侧看板任意一张卡，看它的证据账本与失效条件。</li>
+    <li>左栏 <b>Score the board</b> &mdash; 窗口已关闭的卡用真实价格回头裁决，并报告"分数是否真的预测了结果"。</li>
+    <li><a href="https://github.com/lixinlin616-png/prism-desk#readme">README</a> &middot; <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ARCHITECTURE.md">ARCHITECTURE</a> &middot; <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/PROJECT-STATEMENT.md">PROJECT-STATEMENT</a> &middot; <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/VALIDATION.md">VALIDATION</a></li>
+    <li><a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/validation.md">验证报告</a> &middot; <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md">复盘报告</a> &middot; <a href="https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/submission-links.txt">提交材料逐条对照</a></li>
+  </ul>
+
+  <p class="note">Nothing here is investment advice. Every card carries the condition that would prove it wrong.<br />
+  演示中的发行人为虚构，价格为真实历史日线；本页不构成任何投资建议。</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,213 @@
+{
+ "ok": true,
+ "stats": {
+  "documents": 14,
+  "byKind": {
+   "macro-print": 2,
+   "filing": 1,
+   "earnings-release": 2,
+   "earnings-call": 1,
+   "analyst-note": 2,
+   "news": 4,
+   "guidance": 1,
+   "fomc-statement": 1
+  },
+  "tickers": [
+   "ASTR",
+   "BLWF",
+   "CAT",
+   "CRVS",
+   "HLXN",
+   "IWM",
+   "NWCL",
+   "QQQ",
+   "SPY",
+   "TLT",
+   "XLE"
+  ],
+  "range": {
+   "from": "2025-09-05",
+   "to": "2025-09-17"
+  },
+  "words": 2599
+ },
+ "documents": [
+  {
+   "id": "nfp-2025-08",
+   "kind": "macro-print",
+   "title": "US employment situation, August 2025: +22k payrolls",
+   "tickers": [
+    "SPY",
+    "QQQ",
+    "IWM"
+   ],
+   "publishedAt": "2025-09-05T12:30:00Z",
+   "source": "Bureau of Labor Statistics (demo reconstruction)",
+   "synthetic": false,
+   "words": 174
+  },
+  {
+   "id": "blwf-10q-excerpt",
+   "kind": "filing",
+   "title": "Bellwether Pharma (BLWF) 10-Q excerpt - risk factors and revenue recognition note",
+   "tickers": [
+    "BLWF"
+   ],
+   "publishedAt": "2025-09-08T21:40:00Z",
+   "source": "Bellwether Pharma filing (fictional demo issuer)",
+   "synthetic": true,
+   "words": 261
+  },
+  {
+   "id": "crvs-q2-release",
+   "kind": "earnings-release",
+   "title": "Corvus Semiconductor (CRVS) Q2 FY25 results: revenue and EPS above consensus, Q3 guide raised",
+   "tickers": [
+    "CRVS"
+   ],
+   "publishedAt": "2025-09-09T20:05:00Z",
+   "source": "Corvus Semiconductor IR (fictional demo issuer)",
+   "synthetic": true,
+   "words": 237
+  },
+  {
+   "id": "crvs-q2-call",
+   "kind": "earnings-call",
+   "title": "Corvus Semiconductor (CRVS) Q2 FY25 earnings call - prepared remarks and Q&A excerpt",
+   "tickers": [
+    "CRVS"
+   ],
+   "publishedAt": "2025-09-09T21:10:00Z",
+   "source": "Corvus Semiconductor IR (fictional demo issuer)",
+   "synthetic": true,
+   "words": 273
+  },
+  {
+   "id": "hlxn-q2-release",
+   "kind": "earnings-release",
+   "title": "Helion Dynamics (HLXN) Q2 results: revenue miss, guidance lowered, backlog down",
+   "tickers": [
+    "HLXN"
+   ],
+   "publishedAt": "2025-09-10T11:00:00Z",
+   "source": "Helion Dynamics IR (fictional demo issuer)",
+   "synthetic": true,
+   "words": 224
+  },
+  {
+   "id": "crvs-analyst-caution",
+   "kind": "analyst-note",
+   "title": "Desk note: CRVS beat is real, but the concentration number is the one to watch",
+   "tickers": [
+    "CRVS"
+   ],
+   "publishedAt": "2025-09-10T11:15:00Z",
+   "source": "demo research note (synthetic scenario)",
+   "synthetic": true,
+   "words": 137
+  },
+  {
+   "id": "nwcl-news-agentic-platform",
+   "kind": "news",
+   "title": "Northwind Cloud (NWCL) signs multi-year agentic platform deal with three national banks",
+   "tickers": [
+    "NWCL"
+   ],
+   "publishedAt": "2025-09-10T13:20:00Z",
+   "source": "demo wire (synthetic scenario)",
+   "synthetic": true,
+   "words": 135
+  },
+  {
+   "id": "nwcl-analyst-upgrade",
+   "kind": "analyst-note",
+   "title": "Desk note: NWCL upgrade - regulated verticals re-rate the platform multiple",
+   "tickers": [
+    "NWCL"
+   ],
+   "publishedAt": "2025-09-10T16:45:00Z",
+   "source": "demo research note (synthetic scenario)",
+   "synthetic": true,
+   "words": 111
+  },
+  {
+   "id": "hlxn-news-downgrade",
+   "kind": "news",
+   "title": "Helion Dynamics (HLXN) cut by two firms after production slowdown",
+   "tickers": [
+    "HLXN"
+   ],
+   "publishedAt": "2025-09-10T18:30:00Z",
+   "source": "demo wire (synthetic scenario)",
+   "synthetic": true,
+   "words": 149
+  },
+  {
+   "id": "nwcl-news-expansion",
+   "kind": "news",
+   "title": "Northwind Cloud (NWCL) expands sovereign cloud footprint, adds two markets",
+   "tickers": [
+    "NWCL"
+   ],
+   "publishedAt": "2025-09-11T09:05:00Z",
+   "source": "demo wire (synthetic scenario)",
+   "synthetic": true,
+   "words": 104
+  },
+  {
+   "id": "cpi-2025-08",
+   "kind": "macro-print",
+   "title": "US CPI, August 2025: headline 2.9% y/y, core 3.1% y/y",
+   "tickers": [
+    "SPY",
+    "QQQ",
+    "TLT"
+   ],
+   "publishedAt": "2025-09-11T12:30:00Z",
+   "source": "Bureau of Labor Statistics (demo reconstruction)",
+   "synthetic": false,
+   "words": 183
+  },
+  {
+   "id": "astr-guidance-withdrawal",
+   "kind": "guidance",
+   "title": "Aster Retail Group (ASTR) withdraws full-year outlook ahead of holiday peak",
+   "tickers": [
+    "ASTR"
+   ],
+   "publishedAt": "2025-09-12T20:15:00Z",
+   "source": "Aster Retail Group IR (fictional demo issuer)",
+   "synthetic": true,
+   "words": 207
+  },
+  {
+   "id": "weekend-policy-shock",
+   "kind": "news",
+   "title": "Weekend wire: new tariff framework announced outside market hours",
+   "tickers": [
+    "SPY",
+    "QQQ",
+    "XLE",
+    "CAT"
+   ],
+   "publishedAt": "2025-09-13T14:05:00Z",
+   "source": "demo wire (synthetic scenario)",
+   "synthetic": true,
+   "words": 198
+  },
+  {
+   "id": "fomc-2025-09",
+   "kind": "fomc-statement",
+   "title": "FOMC statement, 17 September 2025: 25bp cut to 4.00-4.25%",
+   "tickers": [
+    "SPY",
+    "QQQ",
+    "TLT"
+   ],
+   "publishedAt": "2025-09-17T18:00:00Z",
+   "source": "Federal Reserve (demo reconstruction)",
+   "synthetic": false,
+   "words": 206
+  }
+ ]
+}

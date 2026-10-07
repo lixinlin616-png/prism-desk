@@ -38,7 +38,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 179;
+export const TEST_COUNT = 193;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -54,14 +54,14 @@ export const MANIFEST = [
     type: '项目链接｜在线 Demo（可直接访问，无需登录 / 无需安装 / 无需 API key）',
     target: 'demo',
     required: '必交',
-    what: '打开即是投研台：点任一场景，可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路与逐条证据账本',
+    what: '打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏），页面左下角永久标注 static replay；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml',
   },
   {
     section: '必交 · 项目链接',
     type: '项目链接｜GitHub 仓库（public，含完整 README）',
     target: 'repo',
     required: '必交',
-    what: `源码 + 真实价格数据 + ${TEST_COUNT} 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，4.5 MB，clone 即可跑`,
+    what: `源码 + 真实价格数据 + ${TEST_COUNT} 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）`,
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -156,10 +156,17 @@ export const MANIFEST = [
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
-    type: '支撑｜部署说明（四条上线路径，逐项标注本环境验证到什么程度）',
+    type: '支撑｜在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）',
+    target: 'scripts/export-static.mjs',
+    required: '支撑',
+    what: 'npm run export:static 用真实离线引擎跑完六个场景，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/；web/static-adapter.js 在浏览器里回放，web/app.js 一行未改。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表',
+  },
+  {
+    section: '支撑材料 · 研究质量与工程可信度',
+    type: '支撑｜部署说明（五条上线路径，逐项标注本环境验证到什么程度）',
     target: 'docs/DEPLOY.md',
     required: '支撑',
-    what: '含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、以及反向代理会静默缓冲 SSE 流这个本机测不出来的坑',
+    what: '含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、反向代理会静默缓冲 SSE 流这个本机测不出来的坑，以及第 7 节 GitHub Pages 静态回放的完整能与不能对照表',
   },
   {
     section: '必交 · X 传播',
@@ -189,6 +196,7 @@ const FOOTER = [
   'npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同',
   'npm run review:seed      # 复现上面那份事后判分报表',
   'npm run xpost            # 复现 X 帖合规报表',
+  'npm run export:static    # 重建上面那个在线演示的静态回放包 -> docs/demo/',
   'node server.mjs          # http://127.0.0.1:4310',
   '',
   '说明：demo 里的发行主体（CRVS / HLXN / ASTR / BLWF / NWCL）是虚构的，语料由我们自己撰写，',
@@ -218,6 +226,12 @@ export const CLAIMS = [
   { says: '25 symbols · 41,386 根真实日 K', from: 'docs/reports/validation.md', kind: 'has', expect: '25 symbols, 41386 bars' },
   { says: '15,478 个真实跳空', from: 'docs/reports/gap-study.md', kind: 'has', expect: '15478' },
   { says: '17 帖', from: 'docs/reports/x-posts.md', kind: 'has', expect: '(17 block(s))' },
+  // The published demo is a recording, so its numbers are claims too: if the
+  // bundle drifts from the reports it replays, the demo contradicts the repo.
+  { says: '在线演示的复盘裁决数', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"decided":34' },
+  { says: '在线演示的 Spearman rho', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"scoreVsOutcomeRho":-0.138' },
+  { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 88.5' },
+  { says: '在线演示录满 6 个场景', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "risk"' },
 ];
 
 /**

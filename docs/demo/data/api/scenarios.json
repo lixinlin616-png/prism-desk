@@ -1,0 +1,72 @@
+{
+ "ok": true,
+ "scenarios": [
+  {
+   "id": "full-sweep",
+   "label": "Full desk sweep",
+   "zh": "全频道扫描",
+   "question": "Full desk sweep across every channel - what is actually tradeable right now?",
+   "channels": null,
+   "asOf": "2025-09-19T20:00:00Z",
+   "note": "Exercises all seven channels in one pass. Best first thing to run."
+  },
+  {
+   "id": "earnings-gap",
+   "label": "Earnings expectation gaps",
+   "zh": "财报预期差",
+   "question": "Walk me through the earnings expectation gaps in scope. Which print is wide enough versus consensus to actually reprice the name, and which is already discounted?",
+   "channels": [
+    "earnings-gap",
+    "risk-flag"
+   ],
+   "asOf": "2025-09-19T20:00:00Z",
+   "note": "Shows consensus-vs-actual, guidance stance classification and the beat-but-ugly case."
+  },
+  {
+   "id": "macro-transmission",
+   "label": "CPI transmission",
+   "zh": "CPI 传导链路",
+   "question": "The August CPI print came in cool on the headline but hot on core. Map the transmission chain and tell me who is most exposed cross-sectionally.",
+   "channels": [
+    "macro-transmission"
+   ],
+   "asOf": "2025-09-19T20:00:00Z",
+   "note": "The ranking is computed from measured 252-session OLS betas, not asserted."
+  },
+  {
+   "id": "closed-window",
+   "label": "Weekend rToken window",
+   "zh": "周末 rToken 窗口",
+   "question": "A tariff framework just landed on a Saturday afternoon. The cash market is shut for 47 hours but the rToken still trades. How should I think about pricing that gap?",
+   "channels": [
+    "closed-window",
+    "cross-asset"
+   ],
+   "asOf": "2025-09-13T15:00:00Z",
+   "note": "The core S2 scenario: 7x24 tokenized equity versus a 6.5-hour cash session."
+  },
+  {
+   "id": "flows",
+   "label": "Insider and 13F flows",
+   "zh": "内部人与 13F 资金",
+   "question": "Any insider selling clusters or 13F position changes I should know about?",
+   "channels": [
+    "flow-footprint"
+   ],
+   "asOf": "2025-09-19T20:00:00Z",
+   "note": "Aggregates are recomputed from the raw snapshot by the evidence ledger."
+  },
+  {
+   "id": "risk",
+   "label": "Bear case hunt",
+   "zh": "反向风险扫描",
+   "question": "Run the contrarian screen. Where is the language softening and where do the accounting ratios diverge from the narrative?",
+   "channels": [
+    "risk-flag",
+    "narrative-shift"
+   ],
+   "asOf": "2025-09-19T20:00:00Z",
+   "note": "Adverse-language and ratio-anomaly flags. Demo issuers are fictional by design."
+  }
+ ]
+}

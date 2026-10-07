@@ -1,0 +1,688 @@
+{
+ "ok": true,
+ "status": {
+  "total": 235,
+  "byStatus": {
+   "superseded": 221,
+   "draft": 2,
+   "expired": 1,
+   "active": 11
+  },
+  "activeAvgScore": 57.7,
+  "conflicts": 0,
+  "events": 200,
+  "persisted": true
+ },
+ "byChannel": {
+  "earnings-gap": [
+   {
+    "id": "SIG-MG6ZERK0-819",
+    "channel": "earnings-gap",
+    "channelName": "Earnings Expectation Gap",
+    "title": "HLXN: EPS miss, guide lower",
+    "claim": "HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.",
+    "direction": "short",
+    "horizon": "days",
+    "tickers": [
+     "HLXN"
+    ],
+    "conviction": 60,
+    "score": 72.7,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 0.75,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-821",
+    "channel": "earnings-gap",
+    "channelName": "Earnings Expectation Gap",
+    "title": "CRVS: EPS beat, guide raise",
+    "claim": "CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.",
+    "direction": "long",
+    "horizon": "days",
+    "tickers": [
+     "CRVS"
+    ],
+    "conviction": 84,
+    "score": 67.9,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 0.75,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-813",
+    "channel": "earnings-gap",
+    "channelName": "Earnings Expectation Gap",
+    "title": "ASTR: EPS miss, guide withdraw",
+    "claim": "ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.",
+    "direction": "short",
+    "horizon": "intraday",
+    "tickers": [
+     "ASTR"
+    ],
+    "conviction": 36,
+    "score": 60.1,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-01T04:00:00.000Z",
+    "verifiedRatio": 0.75,
+    "hasInvalidation": true
+   }
+  ],
+  "macro-transmission": [
+   {
+    "id": "SIG-MG6ZERK0-826",
+    "channel": "macro-transmission",
+    "channelName": "Macro Transmission Chain",
+    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
+    "claim": "CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.",
+    "direction": "pair",
+    "horizon": "days",
+    "tickers": [
+     "AMD",
+     "TSLA",
+     "COIN",
+     "PFE",
+     "XOM",
+     "WMT"
+    ],
+    "conviction": 60,
+    "score": 65.5,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-835",
+    "channel": "macro-transmission",
+    "channelName": "Macro Transmission Chain",
+    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
+    "claim": "Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.",
+    "direction": "pair",
+    "horizon": "days",
+    "tickers": [
+     "COIN",
+     "TSLA",
+     "PLTR",
+     "PFE",
+     "XOM",
+     "WMT"
+    ],
+    "conviction": 55,
+    "score": 60.3,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ],
+  "narrative-shift": [
+   {
+    "id": "SIG-MG6ZERK0-871",
+    "channel": "narrative-shift",
+    "channelName": "Narrative Shift",
+    "title": "NWCL: narrative turning constructive",
+    "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+    "direction": "long",
+    "horizon": "weeks",
+    "tickers": [
+     "NWCL"
+    ],
+    "conviction": 80,
+    "score": 52.1,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-869",
+    "channel": "narrative-shift",
+    "channelName": "Narrative Shift",
+    "title": "HLXN: narrative turning negative",
+    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+    "direction": "short",
+    "horizon": "weeks",
+    "tickers": [
+     "HLXN"
+    ],
+    "conviction": 74,
+    "score": 50.5,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ],
+  "flow-footprint": [
+   {
+    "id": "SIG-MG6ZERK0-862",
+    "channel": "flow-footprint",
+    "channelName": "Flow Footprint",
+    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
+    "claim": "Insider activity in HLXN shows 4 dispositions against 1 acquisitions in the reported window. Clustered selling is a weak but persistent negative; isolated selling is usually tax planning.",
+    "direction": "neutral",
+    "horizon": "weeks",
+    "tickers": [
+     "HLXN"
+    ],
+    "conviction": 58,
+    "score": 52.1,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-864",
+    "channel": "flow-footprint",
+    "channelName": "Flow Footprint",
+    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
+    "claim": "Of 6 reporting 13F holders of NWCL, 3 increased by more than 5% and 2 trimmed by more than 5%. 13F is a 45-day-lagged snapshot, so this confirms a thesis rather than starting one.",
+    "direction": "neutral",
+    "horizon": "weeks",
+    "tickers": [
+     "NWCL"
+    ],
+    "conviction": 30,
+    "score": 47.6,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ],
+  "closed-window": [],
+  "cross-asset": [
+   {
+    "id": "SIG-MG6ZERK0-848",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
+    "claim": "Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.",
+    "direction": "neutral",
+    "horizon": "intraday",
+    "tickers": [
+     "BTC",
+     "ETH"
+    ],
+    "conviction": 28,
+    "score": 49,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-01T04:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ],
+  "risk-flag": [
+   {
+    "id": "SIG-MG6ZERK0-875",
+    "channel": "risk-flag",
+    "channelName": "Contrarian Risk Flag",
+    "title": "BLWF: 14 contrarian risk flag(s)",
+    "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
+    "direction": "avoid",
+    "horizon": "weeks",
+    "tickers": [
+     "BLWF"
+    ],
+    "conviction": 75,
+    "score": 57.3,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-21T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ]
+ },
+ "watchlist": [
+  {
+   "ticker": "HLXN",
+   "cards": 3,
+   "long": 0,
+   "short": 2,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 72.7,
+   "channels": [
+    "earnings-gap",
+    "flow-footprint",
+    "narrative-shift"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "CRVS",
+   "cards": 1,
+   "long": 1,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 67.9,
+   "channels": [
+    "earnings-gap"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "constructive"
+  },
+  {
+   "ticker": "AMD",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "TSLA",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "COIN",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "PFE",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "XOM",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "WMT",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "PLTR",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 60.3,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ASTR",
+   "cards": 1,
+   "long": 0,
+   "short": 1,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 60.1,
+   "channels": [
+    "earnings-gap"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "BLWF",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 1,
+   "bestScore": 57.3,
+   "channels": [
+    "risk-flag"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "NWCL",
+   "cards": 2,
+   "long": 1,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 52.1,
+   "channels": [
+    "narrative-shift",
+    "flow-footprint"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "constructive"
+  },
+  {
+   "ticker": "BTC",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 49,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ETH",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 49,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  }
+ ],
+ "cards": [
+  {
+   "id": "SIG-MG6ZERK0-819",
+   "channel": "earnings-gap",
+   "channelName": "Earnings Expectation Gap",
+   "title": "HLXN: EPS miss, guide lower",
+   "claim": "HLXN EPS 1.61 vs 1.94 consensus (-17.0% surprise, very large) guidance lower - the expectation gap, not the headline, is what reprices the name.",
+   "direction": "short",
+   "horizon": "days",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 60,
+   "score": 72.7,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 0.75,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-821",
+   "channel": "earnings-gap",
+   "channelName": "Earnings Expectation Gap",
+   "title": "CRVS: EPS beat, guide raise",
+   "claim": "CRVS EPS 1.42 vs 1.24 consensus (+14.5% surprise, large) guidance raise - the expectation gap, not the headline, is what reprices the name.",
+   "direction": "long",
+   "horizon": "days",
+   "tickers": [
+    "CRVS"
+   ],
+   "conviction": 84,
+   "score": 67.9,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 0.75,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-826",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
+   "claim": "CPI y/y (Aug 2025) printed 2.9 vs 3.1 consensus (-1.33 sigma). Cooler inflation pulls the terminal policy rate lower, cutting the discount rate and re-rating long-dated cash flows. Measured exposure ranking puts AMD, TSLA, COIN most exposed and PFE, XOM, WMT best positioned.",
+   "direction": "pair",
+   "horizon": "days",
+   "tickers": [
+    "AMD",
+    "TSLA",
+    "COIN",
+    "PFE",
+    "XOM",
+    "WMT"
+   ],
+   "conviction": 60,
+   "score": 65.5,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-835",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
+   "claim": "Nonfarm payrolls (Aug 2025) printed 22 vs 75 consensus (-0.88 sigma). A cooling labor market raises easing odds but also recession risk - a two-sided shock. Measured exposure ranking puts COIN, TSLA, PLTR most exposed and PFE, XOM, WMT best positioned.",
+   "direction": "pair",
+   "horizon": "days",
+   "tickers": [
+    "COIN",
+    "TSLA",
+    "PLTR",
+    "PFE",
+    "XOM",
+    "WMT"
+   ],
+   "conviction": 55,
+   "score": 60.3,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-813",
+   "channel": "earnings-gap",
+   "channelName": "Earnings Expectation Gap",
+   "title": "ASTR: EPS miss, guide withdraw",
+   "claim": "ASTR EPS 0.58 vs 0.61 consensus (-4.9% surprise, meaningful) guidance withdraw - the expectation gap, not the headline, is what reprices the name.",
+   "direction": "short",
+   "horizon": "intraday",
+   "tickers": [
+    "ASTR"
+   ],
+   "conviction": 36,
+   "score": 60.1,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-01T04:00:00.000Z",
+   "verifiedRatio": 0.75,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-875",
+   "channel": "risk-flag",
+   "channelName": "Contrarian Risk Flag",
+   "title": "BLWF: 14 contrarian risk flag(s)",
+   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
+   "direction": "avoid",
+   "horizon": "weeks",
+   "tickers": [
+    "BLWF"
+   ],
+   "conviction": 75,
+   "score": 57.3,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-862",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
+   "claim": "Insider activity in HLXN shows 4 dispositions against 1 acquisitions in the reported window. Clustered selling is a weak but persistent negative; isolated selling is usually tax planning.",
+   "direction": "neutral",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 58,
+   "score": 52.1,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-871",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 52.1,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-869",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 74,
+   "score": 50.5,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-848",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
+   "claim": "Crypto-side positioning reads Fear & Greed 41 (Fear), BTC funding 0.0081, US spot BTC ETF flow -184000000. Because tokenized US equities settle on crypto rails, an unremarkable crypto regime changes who is awake to trade the rToken when US macro lands outside cash hours.",
+   "direction": "neutral",
+   "horizon": "intraday",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 28,
+   "score": 49,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-01T04:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-864",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
+   "claim": "Of 6 reporting 13F holders of NWCL, 3 increased by more than 5% and 2 trimmed by more than 5%. 13F is a 45-day-lagged snapshot, so this confirms a thesis rather than starting one.",
+   "direction": "neutral",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 30,
+   "score": 47.6,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  }
+ ]
+}

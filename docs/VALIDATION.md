@@ -9,7 +9,7 @@
 
 | 指标 | 数值 | 类型 | 复现方式 |
 |---|---|---|---|
-| 单元/集成测试 | **179 / 179 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
+| 单元/集成测试 | **193 / 193 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过** | 实测 | `npm run validate` |
 | 价格数据集 | 25 symbols · **41,386** 根日 K · 2019-01-02 → 2025-09-30 | 实测 | `data/prices/*.csv` |
 | 语料 | 14 篇文档 · 2,599 词 | 实测 | `data/corpus/` |
@@ -20,6 +20,8 @@
 | 该轮证据账本 | 26 items · pass 23 · **fail 0** · unverifiable 3 · **pass rate 88.5%** · 隔离 0 | 实测 | 同上 |
 | `doctor` smoke run 账本 | 26 items · pass 22 · **fail 0** · unverifiable 4 · **pass rate 84.6%** · 9 张卡（8 发布 / 1 低于阈值） | 实测 | `node prism.mjs doctor`（as-of 2025-09-13T15:00Z 钉死） |
 | 第三方依赖 | **0** | 实测 | `package.json` `"dependencies": {}` |
+| 在线演示（GitHub Pages 静态回放） | 6 场景录像 · **258** 份卡片档案 · 2.87 MB · 0.7 s 生成 | 实测 | `npm run export:static` 重建 -> `docs/demo/` |
+| 演示包与引擎不漂移 | **14 项检查**（路由覆盖 / 场景一致 / 看板 = fixture / 复盘数字 = 报表 / SSE 回放） | 实测 | `npm test` -> `tests/static-demo.test.mjs` |
 | 复盘裁决样本 | 235 卡 → **115** 独立主张 → **34** 决出胜负 | 实测 | `npm run review:seed` |
 | **方向命中率**（对 SPY，±1% 实质性带） | **29.4%**（95% CI **14.1–44.7%**） | 实测 | 同上 · 见 §4 |
 | Spearman rho（分数 vs 实现超额） | **-0.138**（n=45）→ 标为 **BLOCKER** | 实测 | 同上 |
@@ -247,7 +249,7 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 ## 7. 一键复现
 
 ```bash
-npm test            # 179 / 179
+npm test            # 193 / 193
 npm run validate    # 60 / 60 -> docs/reports/validation.md
 npm run replay      # 两份研究 -> docs/reports/transmission-study.md, gap-study.md
 npm run seed        # 重建看板 fixture（逐字节确定）-> data/fixtures/board-seed.json
@@ -260,3 +262,5 @@ node prism.mjs doctor   # 数据接线自检 + smoke run
 全部离线、零依赖、零 key。同样输入产出逐字节相同的结果（由 `determinism` suite 的 2 项检查断言）。
 
 **已知的两处非确定性**，都只影响时间、不影响任何结论：`DEMO-TRANSCRIPT.md` 的生成时间戳那一行与 6 处 `ms` 耗时；`review.md` 的生成时间戳那一行。除此之外逐字节相同（实测）。
+
+静态演示包 `docs/demo/` 同理：语义字段（卡片、分数、账本、复盘裁决）逐字节确定，带导出时刻的只有 run id、`ms` 耗时、SSE 帧间隔与 `review.summary.generatedAt` —— 全部列在 `docs/demo/data/manifest.json` 的 `volatileFields` 里，不靠记忆。

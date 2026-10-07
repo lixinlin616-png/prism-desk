@@ -68,7 +68,7 @@
 >
 > **刻意不做（2）模型不决定是否发布。** 发布由五因子加权打分（surprise 0.30 / corroboration 0.22 / asymmetry 0.20 / tradability 0.18 / freshness 0.10）与 45/100 门槛决定，**每个因子都返回一句可审计的书面理由**。此外 `hydrate()` 会**强制钳制模型的越界输出**：非法的 direction / horizon / instruments / conviction 被改写成合法值，超长 quote 被截断 —— 有专门的测试钉住这个行为。
 >
-> **二、架构：双抽取器 + 对账。** 确定性规则抽取器与 LLM 抽取器并行运行，由 `src/extract/index.mjs` 对账去重。**不配任何 key 时系统走纯规则路径，完整可运行**（179 个测试全部基于这条路径，`npm run validate` 60 项检查全绿）。这是刻意的：一个无法在没有模型时运行的投研工具，你没法测量它的模型部分究竟贡献了什么。有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
+> **二、架构：双抽取器 + 对账。** 确定性规则抽取器与 LLM 抽取器并行运行，由 `src/extract/index.mjs` 对账去重。**不配任何 key 时系统走纯规则路径，完整可运行**（193 个测试全部基于这条路径，`npm run validate` 60 项检查全绿）。这是刻意的：一个无法在没有模型时运行的投研工具，你没法测量它的模型部分究竟贡献了什么。有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
 >
 > **三、用了哪些模型 / 接口。** 模型层是 **OpenAI 兼容端点**，可插拔：默认 `gpt-4o-mini`；通过 `PRISM_LLM_BASE_URL` / `PRISM_LLM_API_KEY` / `PRISM_LLM_MODEL` 三个环境变量切换到任意兼容模型。数据层接 **Bitget MCP Server**（`https://agent.bitget.com/mcp`，美股/ETF 行情、财报日历、分析师预期）与 **Bitget Signal Skills**（sentiment-analyst、macro-analyst），三种数据模式 `auto / live / offline`，每个数据快照都标注 origin，可追溯是实时端点还是录制 fixture。价格数据来自 Nasdaq 公开 chart API（25 symbols / 41,386 根真实日 K）。
 >
@@ -89,7 +89,7 @@
 **这一栏不再手写 —— 它是生成的。** 链接清单与它的校验规则共用同一个文件（和 `scripts/xpost.mjs` 一个套路：草稿与校验放在一起，所以不可能悄悄漂移）：
 
 ```bash
-npm run submission:check    # 校验：14 个仓库路径是否都存在、11 个硬数字是否还与生成报表一致
+npm run submission:check    # 校验：15 个仓库路径是否都存在、15 个硬数字是否还与生成报表一致
 
 npm run submission -- ^
   --repo=https://github.com/<you>/prism-desk ^
@@ -103,7 +103,7 @@ npm run submission -- ^
 
 `scripts/submission-links.mjs` 会**拒绝输出**两类清单：指向仓库里不存在的文件的，以及数字与仓库自己生成的报表相矛盾的。`--check` 还会**主动列出它无法从磁盘验证的数字**并注明各自的权威命令（测试数看 `npm test`、X 帖合规看 `npm run xpost`、耗时看 `demo`、fixture 哈希看 `npm run seed` 跑两次）—— 一个没被检查却写得像被检查过的数字，比一个老实标注"未检查"的数字更糟。
 
-当前模板输出已生成在 [`docs/reports/submission-links.txt`](reports/submission-links.txt)：**18 条链接，逐行注明类型与必交 / 选交 / 支撑**，末尾附评委可自行验证的一键复现命令。
+当前模板输出已生成在 [`docs/reports/submission-links.txt`](reports/submission-links.txt)：**19 条链接，逐行注明类型与必交 / 选交 / 支撑**，末尾附评委可自行验证的一键复现命令。
 
 **填表时把该文件全文粘进「提交材料链接」这一个框即可。** 四个 `<...-url>` 占位符由上面四个参数一次性替换；只要还剩占位符，脚本就会在 stderr 打出"不可提交"。
 
@@ -111,48 +111,56 @@ npm run submission -- ^
 
 | 官方必交材料（原文要点） | 本项目对应 | 状态 |
 |---|---|---|
-| **项目链接**：可访问的 Demo 或项目地址；GitHub 仓库须为 **public** 且含**完整 README**；若项目需登录才能访问，则必须另附演示视频 | 在线 Demo（**无需登录 / 无需 key**，因此不触发"必须另附视频"这条）+ public 仓库，`README.md` 含 30 秒上手、六场景表、命令表、HTTP API、架构概览、**诚实性声明 8 条**、数据与可复现性、文档索引、目录结构 | ⬜ 仓库内容已就绪，**待部署 / 建仓后填 URL** |
+| **项目链接**：可访问的 Demo 或项目地址；GitHub 仓库须为 **public** 且含**完整 README**；若项目需登录才能访问，则必须另附演示视频 | 在线 Demo（**无需登录 / 无需 key**，因此不触发"必须另附视频"这条）+ public 仓库，`README.md` 含 30 秒上手、六场景表、命令表、HTTP API、架构概览、**诚实性声明 8 条**、数据与可复现性、文档索引、目录结构 | ✅ 仓库已 public；在线 Demo 已发布在 GitHub Pages（静态回放，无需登录，因此不触发"必须另附视频"这条） |
 | **运行记录**：AI Trading Desk 交**完整投研任务的演示或录屏** | `docs/DEMO-SCRIPT.md`（讲解版：提问 → PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT → REVIEW 逐环节拆解）+ `docs/DEMO-TRANSCRIPT.md`（944 行原始逐字稿，机器生成非手写，裸跑 `node prism.mjs demo` 可逐字重建）+ 录屏（选交） | ✅ |
 | **回测报告须附生成该报告的代码或 notebook，不接受纯截图** | `docs/reports/review.md`（事后判分：235 卡 → 115 主张 → 34 决出，命中率 29.4%，rho -0.138 被系统自标 BLOCKER）**+ 生成它的代码** `prism.mjs`（`npm run review:seed`）与 `scripts/build-seed.mjs`（看板 fixture 连续两次重建 SHA-256 相同） | ✅ 全部为代码生成的 markdown，**零截图** |
 | **X 传播推文链接**（报名表独立字段） | 推文链接 + `docs/X-POSTS.md`（17 / 17 帖 · 86 / 86 检查：#BitgetHackathon、@Bitget_AI、实质性文案 ≥40 权重单位、长度、引用转发官方推文） | ⬜ 草稿与校验已就绪，**待发布后填 URL** |
 
-**进度：仓库已发布 ✅，剩下三件事需要你的浏览器**（创建账号 / OAuth 授权只能由本人完成，我无法代做）
+**进度：仓库 ✅ · 在线 Demo ✅（两件必交的项目链接都已发布）。剩下 1 件必交（发 X 帖）+ 2 件可选，需要你的浏览器。**
 
-✅ **1. public GitHub 仓库 —— 已完成**
+✅ **1. public GitHub 仓库 —— 已发布**
 
    **https://github.com/lixinlin616-png/prism-desk**
 
-   109 个文件 / 4.5 MB（`git ls-files` 可复核），public，默认分支 `main`，README 在 GitHub 上正常渲染。`.gitignore` 已核对：既不漏任何提交材料（含 1.45 MB 的 `data/fixtures/board-seed.json`），也不带进运行时状态或任何密钥。
+   __FILES__ 个文件 / __SIZE__ MB（`git ls-files` 可复核），public，默认分支 `main`，README 在 GitHub 上正常渲染。`.gitignore` 已核对：既不漏任何提交材料（含 1.45 MB 的 `data/fixtures/board-seed.json` 与 2.87 MB 的 `docs/demo/` 演示包），也不带进运行时状态或任何密钥。
 
-⬜ **2. 部署在线 Demo —— 约 3 分钟，基本是一次点击**
+✅ **2. 在线 Demo —— 已发布（GitHub Pages · 静态回放）**
+
+   **https://lixinlin616-png.github.io/prism-desk/demo/**
+
+   点开即用：无需登录、无需安装、无需 API key、**不会休眠**（静态托管没有冷启动，也不用担心评委点开时实例正在睡）。建议动线：左栏点 **Full desk sweep / 全频道扫描** → 看 trace 逐帧到达（PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT）→ 点右侧看板任意一张卡看逐条证据账本与失效条件 → 左栏 **Score the board** 看事后复盘（34 条已裁决 / 29.4% 命中 / rho −0.138，与 `docs/reports/review.md` 逐条一致）。
+
+   **它是录像，不是引擎，而且页面会自己这么说**：左下角有永久 `static replay` 徽标；自由提问会回放最接近的预录任务并提示匹配度；写入类操作（粘贴文档 / 清空看板）返回 409 并说明理由，不假装成功。录像由 `npm run export:static` 驱动真实离线引擎生成，`tests/static-demo.test.mjs` 的 14 项检查保证它不与引擎漂移（改了场景 / fixture / 路由而忘记重新导出，`npm test` 直接红）。
+
+⬜ **3.（可选，加分）要一个能自由提问的实时后端 —— 约 3 分钟，基本是一次点击**
 
    仓库根目录已放好 `render.yaml` 蓝图，Runtime / Dockerfile / Health Check / 三个环境变量全部自动填好，不用手输任何字段：
 
    **https://render.com/deploy?repo=https://github.com/lixinlin616-png/prism-desk**
 
-   流程：用 GitHub 登录 → Create → 等构建（零依赖，没有 npm install 这一步，所以没有构建失败面）→ 复制形如 `https://prism-desk-xxxx.onrender.com` 的地址。
+   流程：用 GitHub 登录 → Create → 等构建（零依赖，没有 npm install 这一步，所以没有构建失败面）→ 复制形如 `https://prism-desk-xxxx.onrender.com` 的地址 → 重跑一次 `npm run submission` 把它作为第二条项目链接加进材料框。
 
-   ⚠️ 免费实例 15 分钟无流量会休眠，冷启动 5–10 秒（要载入 41,386 根日 K 的价格库）。**交表前自己先点开一次唤醒**，别把冷启动留给评委。想彻底免掉休眠就升付费实例，这是本项目性价比最高的一笔部署开销。
+   ⚠️ 免费实例 15 分钟无流量会休眠，冷启动 5–10 秒（要载入 41,386 根日 K 的价格库）。**交表前自己先点开一次唤醒**，别把冷启动留给评委。
 
-⬜ **3. 发 X 帖**
+⬜ **4. 发 X 帖（必交）**
 
    从 `docs/X-POSTS.md` 里挑 `a1` 或 `zh-1`（都是引用转发官方推文的体裁）。17 / 17 帖已通过 86 / 86 项合规检查（#BitgetHackathon、@Bitget_AI、实质性文案 ≥40 权重单位、长度 ≤280、引用转发）。发布后把推文 URL 拿来；同一条 URL 还要另填报名表那个独立的「X 传播推文链接」字段。
 
-⬜ **4.（可选）录屏**
+⬜ **5.（可选）录屏**
 
    Demo 无需登录，官方那条"需登录才必须附演示视频"不触发，所以这是加分项不是必需项。要录的话 `docs/DEMO-SCRIPT.md` 末尾的「评委 5 分钟动线」是现成脚本。
 
-**拿到 URL 之后，一条命令生成终稿并粘进报名表：**
+**拿到剩余 URL 之后，一条命令生成终稿并粘进报名表：**
 
 ```bash
 npm run submission -- ^
   --repo=https://github.com/lixinlin616-png/prism-desk ^
-  --demo=<你的 onrender.com 地址> ^
+  --demo=https://lixinlin616-png.github.io/prism-desk/demo/ ^
   --xpost=<你的推文地址> ^
   --out=docs/reports/submission-links.txt
 ```
 
-`--video=~ 可选。只要还剩任何 `<...-url>` 占位符，脚本就会在 stderr 打出"不可提交"；它同时会重新校验 14 个仓库路径与 11 个硬数字，对不上就拒绝输出。
+`--video=` 可选，`--demo=` 已发布可原样复用。只要还剩任何 `<...-url>` 占位符，脚本就会在 stderr 打出"不可提交"；它同时会重新校验 15 个仓库路径与 15 个硬数字，对不上就拒绝输出。
 
 
 ---
@@ -214,10 +222,11 @@ npm run submission -- ^
 - [ ] 赛道选 🟧 AI Trading Desk，子主题选「信息提炼与信号生成」
 
 **链接可用性（这是无效提交的最大来源）**
-- [ ] 在线 Demo 用**无痕窗口 + 手机流量**各打开一次，确认可访问、能提问、有响应
-- [ ] GitHub 仓库为 **public**，且上述 7 个文档路径逐一点击确认 200
-- [ ] Demo 冷启动时间可接受（首次加载别超过 ~10 秒），必要时在链接旁注明「首次加载约 N 秒」
-- [ ] 所有 `<...>` 占位符已替换，全文搜索一遍 `<` 确认无残留
+- [ ] 在线 Demo（https://lixinlin616-png.github.io/prism-desk/demo/）用**无痕窗口 + 手机流量**各打开一次：左栏点 **Full desk sweep** 看 trace 是否逐帧到达、右侧看板有卡、点开一张卡能看到证据账本、**Score the board** 出复盘数字
+- [ ] 页面左下角的 `static replay` 徽标在（它是诚实性的一部分，别把它当成 bug 删掉）
+- [ ] GitHub 仓库为 **public**，且材料框里 15 个仓库路径逐一点击确认 200
+- [ ] 静态演示没有冷启动；**若另部署了 Render**，其实例 15 分钟会休眠、冷启动 5–10 秒 —— 交表前自己先点开一次唤醒，必要时在链接旁注明「首次加载约 N 秒」
+- [ ] 所有 `<...>` 占位符已替换，全文搜索一遍 `<` 确认无残留（当前只剩 `--xpost=` 与可选的 `--video=`）
 
 **X 帖**
 - [ ] `npm run xpost` 全绿（当前 **17/17 帖、86/86 检查**）
@@ -232,7 +241,8 @@ npm run submission -- ^
 **可复现性（这是本项目最容易在评委手上翻车的地方）**
 - [ ] `npm run seed` 跑两次，`data/fixtures/board-seed.json` 的 SHA-256 **相同**
 - [ ] `npm run review:seed` 产出的 `docs/reports/review.md` headline 数字与仓库里已提交的那份**一致**
-- [ ] 线上 Demo 的 `/api/review` headline 数字也与仓库一致（不一致说明线上看板累积过其它请求，清空 `data/state/` 重启）
+- [ ] 线上 Demo 的复盘数字与仓库一致：静态演示看 `docs/demo/data/api/review.json`（由 `tests/static-demo.test.mjs` 自动比对报表 headline）；若另部署了 Render，看它的 `/api/review`，对不上说明那块看板累积过其它请求，清空 `data/state/` 重启
+- [ ] 改过引擎 / 场景 / 看板 fixture 之后，`npm run export:static` 已重跑并且 `npm test` 全绿（否则演示包与仓库自相矛盾，static-demo 那 14 项会红）
 - [ ] `npm test` 跑完后 `data/state/board.json` **没有变大**（测试已隔离到自己的 scratch 状态文件）
 - [ ] 推文 URL 已填入「X 传播推文链接」字段
 

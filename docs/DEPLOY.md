@@ -1,6 +1,8 @@
 # Deploy / 让 Demo 可公开访问
 
-**赛道三必交项：Demo 可访问。** 本文给出从「本机跑通」到「公网可访问」的四条路径，按推荐顺序排列。
+**赛道三必交项：Demo 可访问。** 本文给出从「本机跑通」到「公网可访问」的五条路径。
+
+**本项目实际发布的是第 7 节那条** —— GitHub Pages 上的静态回放演示：https://lixinlin616-png.github.io/prism-desk/demo/ （点开即用，无需登录 / 安装 / key，也不会休眠）。第 3–6 节是带后端的完整实时版（能自由提问、能写入看板），其中第 4 节的 Render 一键部署最省事。
 
 ---
 
@@ -15,7 +17,11 @@
 | SSE 反代不缓冲（`X-Accel-Buffering: no`） | ✅ 响应头**已实测发出**；上游代理是否尊重它 **未验证**（无外网） |
 | `Dockerfile` 能否 build | ⚠️ **未验证** —— 构建环境没有 docker |
 | Fly / Render / Railway 实际部署 | ⚠️ **未验证** —— 构建环境无外网 |
-| cloudflared / ngrok 隧道 | ⚠️ **未验证** —— 同上 |
+| cloudflared / ngrok 隧道 | ⚠️ **未验证** —— 同上；本机另试过 localhost.run：隧道能建、URL 能拿到，但访问被中断，**不作为提交材料** |
+| `npm run export:static` 生成静态回放包 -> `docs/demo/` | ✅ **实测通过**（6 个场景 / 258 份卡片档案 / 2.87 MB，0.7 s 生成） |
+| 静态回放包与引擎不漂移 | ✅ **实测通过**（`tests/static-demo.test.mjs` 14 项：路由覆盖、场景一致、看板 = fixture、复盘数字 = 已提交报表） |
+| 静态回放包在真实 DOM 里跑得起来 | ✅ **实测通过**（本机 jsdom + 真实 HTTP 的 34 项端到端检查：启动 / 场景回放 / 卡片档案 / 复盘面板 / 两份研究 / 未知问题的替换提示 / 写入被拒；该脚手架是临时的，**未入库**） |
+| GitHub Pages 实际发布（main + `/docs`） | ✅ **已发布** https://lixinlin616-png.github.io/prism-desk/demo/ |
 
 这不是免责声明，是**你上线前必须自己走一遍的清单**。下面每条路径都附了验证命令与预期输出。
 
@@ -47,7 +53,7 @@
 
 ```bash
 node prism.mjs doctor                 # 数据接线自检
-npm test                              # 179 / 179
+npm test                              # 193 / 193
 npm run validate                      # 结构性 / 数据 / 研究质量检查
 node server.mjs                       # 另开一个终端
 ```
@@ -237,13 +243,56 @@ ngrok http 4310
 
 ---
 
-## 7. 静态托管不行 —— 直接说明
+## 7. 路径 E（**本项目实际采用的**）· GitHub Pages 静态回放
 
-**GitHub Pages / Vercel Static / Netlify Static / Cloudflare Pages 都不能当 Demo。**
+**已发布：** https://lixinlin616-png.github.io/prism-desk/demo/
 
-`web/app.js` 调用 `/api/ask`、`/api/board`、`/api/card/:id`、`/api/review`，是同源 HTTP API + SSE 流。纯静态托管没有后端：页面能加载，一提问就失败。
+本文这一节原来写的是「静态托管不行」。那句话对**引擎**成立，对**录像**不成立 —— 而演示需要的恰恰是一段录像。所以现在的做法是：
 
-**兜底方案（不是替代方案）：** 把 `docs/DEMO-TRANSCRIPT.md`（六个场景的完整原始输出，自动生成）挂在 GitHub 上，在表单里注明「若 Demo 暂时不可达，完整逐字输出见此」。这能防止"链接挂了 = 材料缺失"，但**赛道三要求 Demo 可访问，静态稿不能替代**。
+```bash
+npm run export:static              # 用真实离线引擎跑完六个场景 -> docs/demo/（已提交）
+npm run export:static -- --serve   # 顺便在本机 4321 端口预览，看到的就是 Pages 会发的东西
+```
+
+`scripts/export-static.mjs` 启动的正是 `server.mjs` 启动的那条管线（同一个 hub、同一份语料、同一本价格库、同一块 `data/fixtures/board-seed.json` 看板），把每条 `/api/*` 路由**本来会返回的字节**录下来，包括 SSE 的每一个 stage 帧和帧间隔。`web/static-adapter.js` 在浏览器里拦下 `window.fetch`，用这份录像回答 `/api/*`，其余请求原样放行 —— 所以 `web/app.js` 一行都没改，它分不出差别。
+
+| 静态回放**能**做 | 静态回放**做不到**（页面会明说） |
+|---|---|
+| 六个预置场景的全链路回放（PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT），trace 逐帧到达 | 跑一个**全新**的自由提问：没有引擎，只能回放最接近的预录任务，并在左下角提示"这是替换、匹配度多少" |
+| 卡片档案与逐条证据账本、隔离原因、失效条件 | 写入：粘贴文档 / 清空看板返回 **409** 并说明理由，**不假装成功** |
+| 看板（235 张卡 = 已提交 fixture）、watchlist、冲突标记 | 改 as-of 时钟：回放的永远是录制时钉死的那个 as-of，改了会提示被忽略 |
+| 复盘面板（34 条已裁决 / 29.4% 命中 / rho −0.138，与 `docs/reports/review.md` 逐条一致） | LLM 双通道抽取（录像走的是确定性规则路径，和文档里的所有数字同源） |
+| 两份真实价格事件研究、导出 board.csv / brief.md / review.md | 任何需要联网的实时数据 |
+
+页面左下角有一枚**永久** `static replay` 徽标，写着数据来自真实引擎的离线录制、以及实时后端怎么起。一段录像最不能做的事就是冒充实时引擎，所以每一次替换、每一次拒绝都会显式说出来。
+
+**发布（一次设置，之后每次 push 自动更新）：**
+
+```bash
+npm run export:static
+git add docs web scripts tests && git commit -m "..." && git push
+# 仓库 Settings -> Pages -> Source: Deploy from a branch -> main + /docs -> Save
+# 或者用 API：
+curl -X POST -H "Authorization: Bearer $GITHUB_TOKEN" \
+  https://api.github.com/repos/<owner>/prism-desk/pages \
+  -d '{"source":{"branch":"main","path":"/docs"}}'
+```
+
+`docs/.nojekyll` 与 `docs/demo/.nojekyll` 必须存在（已提交）：少了它 Pages 会用 Jekyll 处理站点，下划线开头的目录会被吃掉。站点根 `docs/index.html` 是一页导航，裸地址 `.../prism-desk/` 落在那里，`.../prism-desk/demo/` 才是演示台。
+
+**防漂移。** 录像是会过期的：改了场景、换了 fixture、加了路由，而忘记重新导出，演示就开始和仓库自相矛盾 —— 对这个项目来说是最难看的一种失败。所以 `tests/static-demo.test.mjs` 把这件事变成 `npm test` 的一部分：
+
+- 服务端每个 `/api/*` 路由，录像必须**要么回答、要么显式拒绝**（路由表从 `server.mjs` 源码里提取，加路由不改适配器就红）；
+- 录下来的 `scenarios` 必须与 `server.mjs` 导出的 `SCENARIOS` **深度相等**；
+- 录下来的看板必须等于 `data/fixtures/board-seed.json`（235 张卡）；
+- 录下来的复盘数字必须等于 `docs/reports/review.md` headline 表里的数字（235 / 115 / 34 / 29.4% / −0.138，直接从报表里正则读出来对比）；
+- 适配器在一个 40 行的 DOM stub 里真跑一遍：SSE 帧数、stage 顺序、卡片数、账本数字、导出内容、409 拒绝、404 未知路由、非 API 请求放行。
+
+录像里带导出时刻的字段（run id、`ms` 耗时、帧间隔、`review.summary.generatedAt`）在 `docs/demo/data/manifest.json` 的 `volatileFields` 里列全了；其余语义字段逐字节确定。
+
+> ⚠️ **它不替代后端。** 赛道三要求的是"完整投研任务的演示"，录像满足"演示"；但评委想**自己提一个问题**，就必须有第 3–6 节里任意一条带后端的路径。报名表里两者都给。
+
+**兜底方案仍然保留：** `docs/DEMO-TRANSCRIPT.md`（六个场景的完整原始输出，自动生成）挂在仓库里，万一演示地址不可达，表单里注明「完整逐字输出见此」。
 
 ---
 

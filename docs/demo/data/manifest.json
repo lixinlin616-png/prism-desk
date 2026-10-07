@@ -1,0 +1,182 @@
+{
+ "builtBy": "scripts/export-static.mjs",
+ "exportedAt": "2026-10-06T13:58:00.303Z",
+ "engine": {
+  "dataMode": "offline",
+  "extractor": "rules",
+  "llm": "not configured (deterministic rule extractor)",
+  "corpus": {
+   "documents": 14,
+   "byKind": {
+    "macro-print": 2,
+    "filing": 1,
+    "earnings-release": 2,
+    "earnings-call": 1,
+    "analyst-note": 2,
+    "news": 4,
+    "guidance": 1,
+    "fomc-statement": 1
+   },
+   "tickers": [
+    "ASTR",
+    "BLWF",
+    "CAT",
+    "CRVS",
+    "HLXN",
+    "IWM",
+    "NWCL",
+    "QQQ",
+    "SPY",
+    "TLT",
+    "XLE"
+   ],
+   "range": {
+    "from": "2025-09-05",
+    "to": "2025-09-17"
+   },
+   "words": 2599
+  },
+  "prices": {
+   "symbols": 25,
+   "bars": 41386,
+   "from": "2019-01-02",
+   "to": "2025-09-30"
+  }
+ },
+ "board": {
+  "fixture": "data/fixtures/board-seed.json",
+  "seedProvenance": {
+   "builtBy": "scripts/build-seed.mjs",
+   "dataMode": "offline",
+   "extractor": "rules",
+   "replayDates": [
+    "2025-09-05T20:00:00Z",
+    "2025-09-08T12:30:00Z",
+    "2025-09-10T20:00:00Z",
+    "2025-09-12T20:00:00Z",
+    "2025-09-13T15:00:00Z",
+    "2025-09-16T12:30:00Z",
+    "2025-09-17T18:00:00Z",
+    "2025-09-19T20:00:00Z",
+    "2025-09-23T20:00:00Z",
+    "2025-09-26T20:00:00Z",
+    "2025-09-30T20:00:00Z"
+   ],
+   "scenarios": [
+    "full-sweep",
+    "earnings-gap",
+    "macro-transmission",
+    "closed-window",
+    "flows",
+    "risk"
+   ],
+   "runs": 66,
+   "note": "Committed fixture. node prism.mjs review --board=data/fixtures/board-seed.json reproduces docs/reports/review.md from a fresh clone."
+  },
+  "total": 235,
+  "byStatus": {
+   "superseded": 221,
+   "draft": 2,
+   "expired": 1,
+   "active": 11
+  },
+  "activeAvgScore": 57.7,
+  "conflicts": 0,
+  "events": 200,
+  "persisted": true
+ },
+ "runs": [
+  {
+   "scenarioId": "full-sweep",
+   "runId": "RUN-MUWQU9HR",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 9,
+   "published": 9,
+   "quarantined": 0,
+   "ms": 57
+  },
+  {
+   "scenarioId": "earnings-gap",
+   "runId": "RUN-MUWQU9IO",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 4,
+   "published": 4,
+   "quarantined": 0,
+   "ms": 29
+  },
+  {
+   "scenarioId": "macro-transmission",
+   "runId": "RUN-MUWQU9JL",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 2,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 30
+  },
+  {
+   "scenarioId": "closed-window",
+   "runId": "RUN-MUWQU9KJ",
+   "asOf": "2025-09-13T15:00:00Z",
+   "cards": 3,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 32
+  },
+  {
+   "scenarioId": "flows",
+   "runId": "RUN-MUWQU9LD",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 2,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 28
+  },
+  {
+   "scenarioId": "risk",
+   "runId": "RUN-MUWQU9M9",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 3,
+   "published": 3,
+   "quarantined": 0,
+   "ms": 29
+  }
+ ],
+ "review": {
+  "asOf": "2025-09-30T23:59:59.000Z",
+  "cardsOnBoard": 235,
+  "distinctClaims": 115,
+  "judged": 64,
+  "decided": 34,
+  "hitPct": 29.4,
+  "scoreVsOutcomeRho": -0.138,
+  "report": "docs/reports/review.md"
+ },
+ "routes": [
+  "GET /api/status",
+  "GET /api/capabilities",
+  "GET /api/scenarios",
+  "GET /api/corpus",
+  "GET /api/board",
+  "GET /api/card/:id",
+  "GET /api/research/transmission",
+  "GET /api/research/gaps",
+  "GET /api/review",
+  "GET /api/runs",
+  "GET /api/export/board.csv",
+  "GET /api/export/brief.md",
+  "GET /api/export/review.md",
+  "POST /api/ask"
+ ],
+ "refused": [
+  "POST /api/corpus (read-only bundle)",
+  "POST /api/board/reset (read-only bundle)"
+ ],
+ "volatileFields": [
+  "manifest.exportedAt",
+  "run ids (RUN-<base36 wall clock>)",
+  "run ms timings",
+  "SSE frame dt gaps",
+  "review.summary.generatedAt / review.summary.ms"
+ ],
+ "note": "Replaying, not simulating: every payload was produced by the offline pipeline at export time. Re-run `npm run export:static` after any change to the engine, the corpus or the board fixture."
+}

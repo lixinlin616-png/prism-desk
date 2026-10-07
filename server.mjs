@@ -411,12 +411,38 @@ export function serialiseRun(run) {
   };
 }
 
+/**
+ * Bind the HTTP server.
+ *
+ * Two different situations hide behind the same EADDRINUSE:
+ *
+ *   1. A container PaaS injected PORT and something else already holds it. That
+ *      is fatal and must be fatal: silently moving to another port means the
+ *      platform's health check never finds us and the deploy "succeeds" into a
+ *      black hole.
+ *   2. Somebody ran `npm start` on a laptop where the default port is squatted.
+ *      This is not rare - 4310 belongs to Tencent's QQ components on Windows,
+ *      5000 to AirPlay on macOS - and the failure mode used to be an unhandled
+ *      EADDRINUSE stack trace with no hint about PRISM_PORT. A judge should get
+ *      a desk, not a crash.
+ *
+ * So: fall back to the next free port only when the port was ours to choose,
+ * and explain loudly when it was not.
+ */
+const PORT_FALLBACKS = 20;
+
 export async function start() {
   const handler = await buildApp();
   const server = createServer(handler);
-  return new Promise((resolveStart) => {
-    server.listen(config.server.port, config.server.host, () => {
-      const url = `http://${config.server.host}:${config.server.port}`;
+  const explicitPort = process.env.PRISM_PORT !== undefined || process.env.PORT !== undefined;
+  let port = config.server.port;
+
+  return new Promise((resolveStart, rejectStart) => {
+    const onListening = () => {
+      server.removeListener('error', onError);
+      server.removeListener('listening', onListening);
+      const bound = server.address();
+      const url = `http://${config.server.host}:${bound?.port ?? port}`;
       log.info('');
       log.info('  Prism Desk');
       log.info(`  ${url}`);
@@ -427,7 +453,41 @@ export async function start() {
       log.info('  Ask a question in the UI, or: curl -X POST ' + url + '/api/ask -H "Content-Type: application/json" -d \'{"question":"full desk sweep","stream":false}\'');
       log.info('');
       resolveStart(server);
-    });
+    };
+
+    const onError = (err) => {
+      if (err.code !== 'EADDRINUSE') {
+        server.removeListener('error', onError);
+        server.removeListener('listening', onListening);
+        rejectStart(err);
+        return;
+      }
+      const next = port + 1;
+      if (!explicitPort && next - config.server.port <= PORT_FALLBACKS) {
+        log.warn(`port ${port} on ${config.server.host} is already in use (a squatter, not Prism) - trying ${next}`);
+        port = next;
+        server.listen(port, config.server.host);
+        return;
+      }
+      server.removeListener('error', onError);
+      server.removeListener('listening', onListening);
+      log.error('');
+      log.error(`  cannot bind ${config.server.host}:${port} - that port is already in use.`);
+      log.error('');
+      log.error('  Start on another port instead:');
+      log.error('');
+      log.error('    PRISM_PORT=4400 npm start        # bash / macOS / Linux');
+      log.error('    $env:PRISM_PORT=4400; npm start  # PowerShell');
+      log.error('');
+      log.error(`  Who owns it:  netstat -ano | findstr :${port}   (Windows)`);
+      log.error(`                lsof -i :${port}                  (macOS / Linux)`);
+      log.error('');
+      rejectStart(err);
+    };
+
+    server.on('error', onError);
+    server.on('listening', onListening);
+    server.listen(port, config.server.host);
   });
 }
 
@@ -435,5 +495,10 @@ import { fileURLToPath } from 'node:url';
 
 const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url));
 if (invokedDirectly) {
-  start().catch((err) => { log.error(err.stack || err.message); process.exit(1); });
+  start().catch((err) => {
+    // EADDRINUSE has already been explained above; a stack trace on top of it
+    // just buries the one line that tells the reader what to do.
+    if (err?.code !== 'EADDRINUSE') log.error(err.stack || err.message);
+    process.exit(1);
+  });
 }

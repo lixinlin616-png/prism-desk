@@ -1,0 +1,179 @@
+{
+ "ok": true,
+ "hub": {
+  "mode": "offline",
+  "market": {
+   "mode": "offline",
+   "state": "offline",
+   "url": "https://agent.bitget.com/mcp",
+   "error": null,
+   "liveTools": 0,
+   "resolvedIntents": 0,
+   "totalIntents": 20,
+   "fixtures": 12,
+   "calls": 0
+  },
+  "signal": {
+   "state": "offline",
+   "url": "https://agent.bitget.com/mcp",
+   "error": null,
+   "skills": [
+    {
+     "id": "macro-analyst",
+     "zh": "宏观与跨资产分析",
+     "tool": null,
+     "fixture": true
+    },
+    {
+     "id": "market-intel",
+     "zh": "链上与机构情报",
+     "tool": null,
+     "fixture": false
+    },
+    {
+     "id": "sentiment-analyst",
+     "zh": "情绪与持仓分析",
+     "tool": null,
+     "fixture": true
+    },
+    {
+     "id": "technical-analysis",
+     "zh": "技术分析",
+     "tool": null,
+     "fixture": false
+    },
+    {
+     "id": "news-briefing",
+     "zh": "新闻聚合与叙事合成",
+     "tool": null,
+     "fixture": false
+    }
+   ],
+   "calls": 0
+  },
+  "corpus": {
+   "documents": 14,
+   "byKind": {
+    "macro-print": 2,
+    "filing": 1,
+    "earnings-release": 2,
+    "earnings-call": 1,
+    "analyst-note": 2,
+    "news": 4,
+    "guidance": 1,
+    "fomc-statement": 1
+   },
+   "tickers": [
+    "ASTR",
+    "BLWF",
+    "CAT",
+    "CRVS",
+    "HLXN",
+    "IWM",
+    "NWCL",
+    "QQQ",
+    "SPY",
+    "TLT",
+    "XLE"
+   ],
+   "range": {
+    "from": "2025-09-05",
+    "to": "2025-09-17"
+   },
+   "words": 2599
+  },
+  "prices": {
+   "symbols": 25,
+   "bars": 41386,
+   "from": "2019-01-02",
+   "to": "2025-09-30",
+   "list": [
+    "AAPL",
+    "AMD",
+    "AMZN",
+    "AVGO",
+    "CAT",
+    "COIN",
+    "GOOGL",
+    "IWM",
+    "JPM",
+    "META",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "PFE",
+    "PLTR",
+    "QQQ",
+    "SMH",
+    "SPY",
+    "TLT",
+    "TSLA",
+    "WMT",
+    "XLE",
+    "XLF",
+    "XLK",
+    "XOM"
+   ]
+  },
+  "chainbase": {
+   "enabled": false
+  },
+  "llm": {
+   "enabled": false,
+   "model": "gpt-4o-mini",
+   "baseUrl": null
+  },
+  "intents": 20,
+  "signalSkills": 5
+ },
+ "extractor": {
+  "mode": "rules",
+  "stats": {
+   "runs": 0,
+   "ruleCards": 0,
+   "llmCards": 0,
+   "merged": 0,
+   "conflicts": 0,
+   "llmFailures": 0
+  },
+  "llm": {
+   "available": false,
+   "model": "gpt-4o-mini",
+   "baseUrl": null,
+   "calls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "lastError": null
+  }
+ },
+ "ledger": {
+  "cardsAudited": 0,
+  "itemsChecked": 0,
+  "pass": 0,
+  "fail": 0,
+  "unverifiable": 0,
+  "passRate": 0,
+  "cardsQuarantined": 0
+ },
+ "board": {
+  "total": 235,
+  "byStatus": {
+   "superseded": 221,
+   "draft": 2,
+   "expired": 1,
+   "active": 11
+  },
+  "activeAvgScore": 57.7,
+  "conflicts": 0,
+  "events": 200,
+  "persisted": true
+ },
+ "runs": 0,
+ "config": {
+  "dataMode": "offline",
+  "mcpUrl": "https://agent.bitget.com/mcp",
+  "minScore": 45
+ }
+}

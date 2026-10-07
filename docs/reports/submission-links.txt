@@ -6,12 +6,12 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 —— 必交 · 项目链接 ——
 
 01. [必交] 项目链接｜在线 Demo（可直接访问，无需登录 / 无需安装 / 无需 API key）
-    <demo-url>
-    · 打开即是投研台：点任一场景，可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路与逐条证据账本
+    https://lixinlin616-png.github.io/prism-desk/demo
+    · 打开即是投研台（GitHub Pages，无需登录 / 安装 / key，不会休眠）：点任一场景可看到「提问 → 计划 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路、逐条证据账本、看板与事后复盘。它是**静态回放**：由 npm run export:static 驱动真实离线引擎录制（含 SSE 逐帧节奏），页面左下角永久标注 static replay；自由提问会回放最接近的预录任务并明说，写入类操作直接返回 409 而不是假装成功。要能自由提问的实时后端见下一行仓库里的 node server.mjs / render.yaml
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 179 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，4.5 MB，clone 即可跑
+    · 源码 + 真实价格数据 + 193 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -69,17 +69,21 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ROADMAP.md
     · BLOCKER（打分符号反转）的四步修法，以及性价比最高的一项：把 invalidation 收紧成四字段必填
 
-16. [支撑] 部署说明（四条上线路径，逐项标注本环境验证到什么程度）
+16. [支撑] 在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）
+    https://github.com/lixinlin616-png/prism-desk/blob/main/scripts/export-static.mjs
+    · npm run export:static 用真实离线引擎跑完六个场景，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/；web/static-adapter.js 在浏览器里回放，web/app.js 一行未改。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
+
+17. [支撑] 部署说明（五条上线路径，逐项标注本环境验证到什么程度）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEPLOY.md
-    · 含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、以及反向代理会静默缓冲 SSE 流这个本机测不出来的坑
+    · 含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、反向代理会静默缓冲 SSE 流这个本机测不出来的坑，以及第 7 节 GitHub Pages 静态回放的完整能与不能对照表
 
 —— 必交 · X 传播 ——
 
-17. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
+18. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
     <xpost-url>
     · 同一条链接另填在报名表独立的「X 传播推文链接」字段
 
-18. [支撑] X 传播｜草稿全文与合规校验报表（17 / 17 帖 · 86 / 86 检查）
+19. [支撑] X 传播｜草稿全文与合规校验报表（17 / 17 帖 · 86 / 86 检查）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/X-POSTS.md
     · 按 X 官方 v3 权重（中文/全角 2 · 拉丁 1 · URL 固定 23）逐条校验话题标签、@提及、实质性（≥40 权重单位原创文案）、长度与是否引用转发官方推文；`npm run xpost` 可复现
 
@@ -87,12 +91,13 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）
 node prism.mjs demo      # 逐字重建上面那份 944 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 179 / 179 · 0 跳过（全新 clone 亦然）
+npm test                 # 193 / 193 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同
 npm run review:seed      # 复现上面那份事后判分报表
 npm run xpost            # 复现 X 帖合规报表
+npm run export:static    # 重建上面那个在线演示的静态回放包 -> docs/demo/
 node server.mjs          # http://127.0.0.1:4310
 
 说明：demo 里的发行主体（CRVS / HLXN / ASTR / BLWF / NWCL）是虚构的，语料由我们自己撰写，

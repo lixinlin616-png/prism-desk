@@ -1,0 +1,241 @@
+{
+ "ok": true,
+ "status": {
+  "total": 235,
+  "byStatus": {
+   "superseded": 221,
+   "draft": 2,
+   "expired": 1,
+   "active": 11
+  },
+  "activeAvgScore": 57.7,
+  "conflicts": 0,
+  "events": 200,
+  "persisted": true
+ },
+ "byChannel": {
+  "earnings-gap": [],
+  "macro-transmission": [],
+  "narrative-shift": [],
+  "flow-footprint": [],
+  "closed-window": [],
+  "cross-asset": [],
+  "risk-flag": []
+ },
+ "watchlist": [
+  {
+   "ticker": "HLXN",
+   "cards": 3,
+   "long": 0,
+   "short": 2,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 72.7,
+   "channels": [
+    "earnings-gap",
+    "flow-footprint",
+    "narrative-shift"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "CRVS",
+   "cards": 1,
+   "long": 1,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 67.9,
+   "channels": [
+    "earnings-gap"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "constructive"
+  },
+  {
+   "ticker": "AMD",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "TSLA",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "COIN",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "PFE",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "XOM",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "WMT",
+   "cards": 2,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 65.5,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "PLTR",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 60.3,
+   "channels": [
+    "macro-transmission"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ASTR",
+   "cards": 1,
+   "long": 0,
+   "short": 1,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 60.1,
+   "channels": [
+    "earnings-gap"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "BLWF",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 1,
+   "bestScore": 57.3,
+   "channels": [
+    "risk-flag"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "defensive"
+  },
+  {
+   "ticker": "NWCL",
+   "cards": 2,
+   "long": 1,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 52.1,
+   "channels": [
+    "narrative-shift",
+    "flow-footprint"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "constructive"
+  },
+  {
+   "ticker": "BTC",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 49,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  },
+  {
+   "ticker": "ETH",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 49,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
+  }
+ ],
+ "cards": []
+}

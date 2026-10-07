@@ -25,6 +25,8 @@
     "xpost": "node scripts/xpost.mjs",
     "doctor": "node prism.mjs doctor",
     "seed": "node scripts/build-seed.mjs",
+    "export:static": "node scripts/export-static.mjs",
+    "export:static:serve": "node scripts/export-static.mjs --serve",
     "review:seed": "node prism.mjs review --board=data/fixtures/board-seed.json --out=docs/reports/review.md --report",
     "submission": "node scripts/submission-links.mjs",
     "submission:check": "node scripts/submission-links.mjs --check"

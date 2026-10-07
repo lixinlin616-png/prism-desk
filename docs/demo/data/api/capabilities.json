@@ -1,0 +1,385 @@
+{
+ "ok": true,
+ "channels": [
+  {
+   "id": "earnings-gap",
+   "name": "Earnings Expectation Gap",
+   "zh": "财报预期差",
+   "colour": "#5eead4",
+   "question": "What did the print/call actually say versus what was priced in?",
+   "inputs": [
+    "earnings-release",
+    "earnings-call",
+    "consensus-estimates",
+    "guidance"
+   ],
+   "halfLifeHours": 240
+  },
+  {
+   "id": "macro-transmission",
+   "name": "Macro Transmission Chain",
+   "zh": "宏观传导链路",
+   "colour": "#a78bfa",
+   "question": "A macro print moved - which discount rate / cash flow channel does it hit, and who is most exposed?",
+   "inputs": [
+    "cpi",
+    "ppi",
+    "nfp",
+    "fomc",
+    "retail-sales",
+    "yields"
+   ],
+   "halfLifeHours": 120
+  },
+  {
+   "id": "narrative-shift",
+   "name": "Narrative Shift",
+   "zh": "叙事转向",
+   "colour": "#fbbf24",
+   "question": "Is the story the market tells about this name changing, and has sentiment turned with it?",
+   "inputs": [
+    "news",
+    "social",
+    "sentiment"
+   ],
+   "halfLifeHours": 168
+  },
+  {
+   "id": "flow-footprint",
+   "name": "Flow Footprint",
+   "zh": "资金足迹",
+   "colour": "#60a5fa",
+   "question": "What are insiders, institutions and ETF creations doing with real money?",
+   "inputs": [
+    "13f",
+    "insider-trading",
+    "etf-flows",
+    "institutional-holdings"
+   ],
+   "halfLifeHours": 720
+  },
+  {
+   "id": "closed-window",
+   "name": "Closed-Window Pricing",
+   "zh": "休市窗口定价",
+   "colour": "#f472b6",
+   "question": "Native equity is closed, information is not - how should the rToken price the gap before the cash open?",
+   "inputs": [
+    "session-state",
+    "overnight-news",
+    "rtoken-quote",
+    "native-last-close"
+   ],
+   "halfLifeHours": 16
+  },
+  {
+   "id": "cross-asset",
+   "name": "Cross-Asset Linkage",
+   "zh": "跨资产联动",
+   "colour": "#34d399",
+   "question": "Is a crypto-side regime shift (funding, ETF flow, fear/greed) leaking into the equity complex, or vice versa?",
+   "inputs": [
+    "crypto-sentiment",
+    "etf-flows",
+    "funding-rates",
+    "equity-vol"
+   ],
+   "halfLifeHours": 96
+  },
+  {
+   "id": "risk-flag",
+   "name": "Contrarian Risk Flag",
+   "zh": "反向风险旗",
+   "colour": "#fb7185",
+   "question": "What is the bear case the consensus is not pricing? Where is the language softening?",
+   "inputs": [
+    "earnings-call",
+    "filings",
+    "insider-selling",
+    "accounting-ratios"
+   ],
+   "halfLifeHours": 504
+  }
+ ],
+ "intents": [
+  {
+   "id": "quote",
+   "description": "Real-time last price, change, volume for a US equity / ETF",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "history",
+   "description": "Historical OHLCV candles",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "profile",
+   "description": "Company profile, sector, industry, description",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "management",
+   "description": "Executive team and leadership",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "earningsCalendar",
+   "description": "Upcoming / past earnings report dates",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "incomeStatement",
+   "description": "Income statement (revenue, EPS, margins)",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "balanceSheet",
+   "description": "Balance sheet (cash, debt, equity)",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "cashFlow",
+   "description": "Cash flow statement (OCF, FCF, capex)",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "ratios",
+   "description": "Financial ratios (ROE, current ratio, leverage)",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "valuation",
+   "description": "Valuation multiples (P/E, EV/EBITDA, P/S)",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "dividends",
+   "description": "Dividend history and yield",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "insiderTrades",
+   "description": "Insider (Form 4) buy/sell transactions",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "institutionalHoldings",
+   "description": "13F institutional holders and position changes",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "analystEstimates",
+   "description": "Consensus forward EPS / revenue / EBITDA estimates",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "analystTargetPrice",
+   "description": "Analyst price targets and ratings distribution",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "news",
+   "description": "Company and market news headlines",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "sentiment",
+   "description": "Market sentiment indicators",
+   "resolved": null,
+   "fixture": true
+  },
+  {
+   "id": "etfInfo",
+   "description": "ETF metadata, expense ratio, AUM",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "etfHoldings",
+   "description": "ETF constituent holdings and weights",
+   "resolved": null,
+   "fixture": false
+  },
+  {
+   "id": "marketMovers",
+   "description": "Top gainers / losers / most active",
+   "resolved": null,
+   "fixture": false
+  }
+ ],
+ "skills": [
+  {
+   "id": "macro-analyst",
+   "zh": "宏观与跨资产分析",
+   "capabilities": [
+    "Fed policy",
+    "FOMC news",
+    "yield curve",
+    "BTC vs DXY / Nasdaq / Gold / S&P / 10Y correlation"
+   ],
+   "intents": [
+    "fed-policy",
+    "yield-curve",
+    "cross-asset-correlation"
+   ],
+   "needsPython": false,
+   "resolved": null
+  },
+  {
+   "id": "market-intel",
+   "zh": "链上与机构情报",
+   "capabilities": [
+    "On-chain capital flows",
+    "ETF flows",
+    "DeFi TVL",
+    "Cycle indicators",
+    "Whale movement"
+   ],
+   "intents": [
+    "etf-flows",
+    "whale-flow",
+    "defi-tvl",
+    "cycle-indicator"
+   ],
+   "needsPython": false,
+   "resolved": null
+  },
+  {
+   "id": "sentiment-analyst",
+   "zh": "情绪与持仓分析",
+   "capabilities": [
+    "Fear & Greed Index",
+    "Long/short ratio",
+    "Open interest",
+    "Funding rates",
+    "Taker ratio",
+    "Reddit signals"
+   ],
+   "intents": [
+    "fear-greed",
+    "long-short-ratio",
+    "open-interest",
+    "funding-rate",
+    "taker-ratio"
+   ],
+   "needsPython": false,
+   "resolved": null
+  },
+  {
+   "id": "technical-analysis",
+   "zh": "技术分析",
+   "capabilities": [
+    "23 indicators across 6 categories",
+    "Trend",
+    "Volatility",
+    "Oscillator",
+    "Volume",
+    "Momentum",
+    "Support/resistance"
+   ],
+   "intents": [
+    "indicator",
+    "support-resistance"
+   ],
+   "needsPython": true,
+   "resolved": null
+  },
+  {
+   "id": "news-briefing",
+   "zh": "新闻聚合与叙事合成",
+   "capabilities": [
+    "44 RSS/Atom feeds",
+    "Social trending boards",
+    "Narrative synthesis",
+    "Morning brief"
+   ],
+   "intents": [
+    "crypto-news",
+    "trending",
+    "narrative"
+   ],
+   "needsPython": false,
+   "resolved": null
+  }
+ ],
+ "corpus": {
+  "documents": 14,
+  "byKind": {
+   "macro-print": 2,
+   "filing": 1,
+   "earnings-release": 2,
+   "earnings-call": 1,
+   "analyst-note": 2,
+   "news": 4,
+   "guidance": 1,
+   "fomc-statement": 1
+  },
+  "tickers": [
+   "ASTR",
+   "BLWF",
+   "CAT",
+   "CRVS",
+   "HLXN",
+   "IWM",
+   "NWCL",
+   "QQQ",
+   "SPY",
+   "TLT",
+   "XLE"
+  ],
+  "range": {
+   "from": "2025-09-05",
+   "to": "2025-09-17"
+  },
+  "words": 2599
+ },
+ "prices": {
+  "symbols": 25,
+  "bars": 41386,
+  "from": "2019-01-02",
+  "to": "2025-09-30",
+  "list": [
+   "AAPL",
+   "AMD",
+   "AMZN",
+   "AVGO",
+   "CAT",
+   "COIN",
+   "GOOGL",
+   "IWM",
+   "JPM",
+   "META",
+   "MSFT",
+   "NFLX",
+   "NVDA",
+   "PFE",
+   "PLTR",
+   "QQQ",
+   "SMH",
+   "SPY",
+   "TLT",
+   "TSLA",
+   "WMT",
+   "XLE",
+   "XLF",
+   "XLK",
+   "XOM"
+  ]
+ }
+}
