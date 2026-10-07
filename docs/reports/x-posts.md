@@ -1,6 +1,6 @@
 # X post compliance report
 
-Generated 2026-10-07T02:49:55.561Z by `node scripts/xpost.mjs`. Source of truth: `docs/X-POSTS.md`.
+Generated 2026-10-07T10:52:07.561Z by `node scripts/xpost.mjs`. Source of truth: `docs/X-POSTS.md`.
 
 ## Rules being enforced
 

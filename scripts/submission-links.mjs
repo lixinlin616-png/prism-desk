@@ -38,7 +38,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 193;
+export const TEST_COUNT = 208;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -75,7 +75,7 @@ export const MANIFEST = [
     type: '运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）',
     target: 'docs/DEMO-TRANSCRIPT.md',
     required: '必交',
-    what: '944 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
+    what: '951 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -189,7 +189,7 @@ const FOOTER = [
   '—— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——',
   'git clone <repo-url> && cd prism-desk',
   'node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）',
-  'node prism.mjs demo      # 逐字重建上面那份 944 行逐字稿（as-of 由场景钉死，无需传参）',
+  'node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）',
   `npm test                 # ${TEST_COUNT} / ${TEST_COUNT} · 0 跳过（全新 clone 亦然）`,
   'npm run validate         # 60 / 60 -> docs/reports/validation.md',
   'npm run replay           # 重跑两份真实价格事件研究',
@@ -215,7 +215,7 @@ const FOOTER = [
  * 41,386 / 15,478 / en-dash form. Both sides are normalised before comparison.
  */
 export const CLAIMS = [
-  { says: '944 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 944 },
+  { says: '951 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 951 },
   { says: '235 张卡的看板 fixture', from: 'data/fixtures/board-seed.json', kind: 'cards', expect: 235 },
   { says: '11 个固定 as-of × 6 个场景 = 66 次回放', from: 'data/fixtures/board-seed.json', kind: 'replay', expect: [11, 6, 66] },
   { says: '115 个独立主张', from: 'docs/reports/review.md', kind: 'has', expect: '| distinct claims | 115 |' },

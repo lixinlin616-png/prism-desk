@@ -64,16 +64,26 @@ const TCO_LEN = 23;
  * Weighted length in X "characters". URLs become a flat 23-unit placeholder
  * first, because t.co shortens every link to the same budget no matter how long
  * the original is.
+ *
+ * Line endings are normalised before counting. X charges one character for a
+ * line break and none for a carriage return, but this file is read from a git
+ * checkout: with core.autocrlf=true every line of a multi-line post arrives as
+ * CRLF, and counting the \r made the same post measure one unit longer per line.
+ * Three posts sat within 4 units of the 280 limit, so the compliance gate that
+ * guards a MANDATORY submission item returned FAIL on Windows and PASS on Linux
+ * for identical copy - and the natural response to that FAIL is deleting real
+ * content from a post that was never over the limit.
  */
 export function weightedLength(text) {
   const urls = [];
-  const flat = String(text ?? '').replace(URL_RE, (m) => {
+  const normalised = String(text ?? '').replace(/\r\n?/g, '\n');
+  const flat = normalised.replace(URL_RE, (m) => {
     urls.push(m);
     return ' '.repeat(TCO_LEN);
   });
   let units = 0;
   for (const ch of flat) units += unitWeight(ch.codePointAt(0));
-  return { weighted: units / 100, urls, plain: [...String(text ?? '')].length };
+  return { weighted: units / 100, urls, plain: [...normalised].length };
 }
 
 // ------------------------------------------------------------------ parsing

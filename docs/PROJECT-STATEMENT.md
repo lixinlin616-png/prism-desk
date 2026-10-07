@@ -50,7 +50,7 @@
 
 | 指标 | 数值 | 复现命令 |
 |---|---|---|
-| 单元/集成测试 | **193 / 193 通过 · 0 跳过** | `npm test` |
+| 单元/集成测试 | **208 / 208 通过 · 0 跳过** | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过**（7 个 suite） | `npm run validate` |
 | 第三方依赖 | **0**（纯 Node ≥20 标准库，clone 即可跑，无需 `npm install`） | `package.json` |
 | 全频道扫描耗时 | **~60 ms** 产出 9 张卡（离线、纯规则路径；本机 6 次实测 60–64 ms，耗时随机器而异） | `node prism.mjs demo --only=full-sweep` |
@@ -110,7 +110,7 @@
 - **可复现性**：`--as-of` 冻结桌面时钟精确复现历史时点，**六个 demo 场景各自钉死 as-of**，所以 `node prism.mjs demo` 不带参数也能逐字重建 `DEMO-TRANSCRIPT.md`（仅生成时间戳与 6 处耗时行不同，实测）；确定性检查保证同输入同输出；**看板 fixture 可逐字节重建** —— `npm run seed` 用 11 个固定 as-of × 6 个场景回放，连续两次产出 SHA-256 相同（实测），`npm run review:seed` 据此复现复盘报表，**所以全新 clone 也能复现已发布的判分数字**
 - **X 帖合规校验**：`npm run xpost` 按 X 官方 v3 权重（中文/全角 2 · 拉丁 1 · 任意 URL 固定 23）逐条校验草稿的话题标签、@提及、**实质性**（去掉强制 token 后仍需 ≥40 权重单位原创文案，即"非纯转发"的机器化表达）、长度与"是否引用转发官方推文"；草稿与校验规则**共用同一个文件**，所以不可能悄悄漂移。当前 **17/17 帖、86/86 检查通过**（实测）
 
-**遇到的问题与解法（五个真实的坑）**
+**遇到的问题与解法（九个真实的坑）**
 
 1. **freshness 一开始是假因子。** 最初按卡片生成时间（墙上时钟）衰减，结果所有历史场景复现时 freshness 永远是满分 —— 因子形同虚设，`--as-of` 也无法真正生效。**解法：** 改为按**源文档发布时间** `informationAt` 衰减，并给每张卡打上运行时 `as-of`。改完之后 `--as-of` 场景复现才真正work，freshness 也成了实际起作用的因子（代价是头条分数全部变化，所有文档数字重新生成）。`validate.mjs` 里加了 `as-of-matters` 检查防止回归。
 2. **缺数据时系统会输出 `null%`。** 虚构标的在价格库里没有跳空样本时，closed-window 卡片会把 null 直接插值成 `"continued null% of the time"`。**这是我们自己在 demo 逐字稿里发现的真实缺陷。解法：** 改为自然语言承认无知（"该标的无可比历史跳空，无实证先验，请按结构性而非统计性理解"），同时改写风险条目为"跳空幅度无锚，减半仓位或不做"，并**在 `tests/extract.test.mjs` 加了回归测试钉住**（断言任何卡片都不得出现 `null% / undefined% / NaN%`）。
@@ -118,7 +118,19 @@
 
 4. **我们最想拿出来当卖点的那份报表，自己复现不出来。** 三个各自很小、合起来致命的可复现性漏洞：（a）卡片 id 用 `Date.now()` 打戳 —— `--as-of` 冻结了 `createdAt`，却**没冻结卡片的身份**，同一回放在不同日期产出不同 id；（b）证据账本的 `verifiedAt` 用墙上时钟，于是同一次 `--as-of` 回放每跑一遍就写出一个**不同的**看板文件；（c）**`npm test` 会写真看板** —— `POST /api/ask` 默认 persist，测试套件每跑一次就往 `data/state/board.json` 追加卡片，而 `data/state/` 是 gitignored 的，所以**全新 clone 上的看板是空的、`review` 会裁决 0 条主张，而 `docs/reports/review.md` 里写着一堆数字**。**对一个以"每个数字都能被追责"为卖点的项目，这是最讽刺的一类缺陷 —— 而且它是在给复盘报表做可复现性验证时自己撞出来的。解法：** id 改由 `stampTime()` 按运行时钟重打（`rebaseCardId()`，序号后缀保留所以唯一性不变）；`verifiedAt` 改取 `card.createdAt`；测试与验证脚本各自用 `PRISM_STATE_FILE` 钉死到自己的 scratch 文件、并在 `after` 里删除；看板本身做成**已提交的 fixture**，由固定回放计划重建，连续两次 SHA-256 相同（实测）。顺带产出三个部署必需的修正：`PRISM_STATE_FILE`（只读根文件系统 / 挂卷）、服务端识别 `HOST`/`PORT`（所有容器 PaaS 注入的就是这两个名字，原来只认 `PRISM_*`）、以及 SSE 响应补上 `X-Accel-Buffering: no`（否则反向代理会把流式 trace 缓冲成一次性输出 —— **Demo 里最直观的那个效果会静默失效，而且本机测不出来**）。
 
-5. **`npm test` 在全新 clone 上其实是 177 通过 + 1 跳过，而每一份文档都写着 178/178。** `tests/review.test.mjs` 里那条"在真实看板上把复盘跑一遍"的测试带着 `{ skip: !existsSync('data/state/board.json') }`，而 `data/state/` 是 gitignored 的 —— 干净 checkout 上它**永远跳过**。**跳过的检查不等于通过的检查**，而且被跳过的恰好是唯一一条"复盘能在真实看板上跑通"的端到端检查。**解法：** 改为跑**已提交的** `data/fixtures/board-seed.json`（就是 `npm run review:seed` 用的那份看板），并断言 `decided > 0`，防止它退化成一条永真的空测试；现在 **179 / 179 · 0 跳过**在干净 checkout 上也是真的（实测；比当时多出的那一条，钉住"提交材料清单不得指向仓库里不存在的文件"）。同一轮排查还发现：六个 demo 场景里**只有 `closed-window` 钉死了 as-of**，其余五个跟着墙上时钟走，所以 `node prism.mjs demo` 在不同日期会产出不同卡片、`DEMO-TRANSCRIPT.md` 根本复现不出来。**解法：** 六个场景在 `SCENARIOS` 里全部钉死 as-of（对齐内置语料与价格窗口），命令行 `--as-of` 与 Web 时钟框仍优先；`tests/server.test.mjs` 加了断言防止将来被悄悄改掉。修完之后 `node prism.mjs demo` **不带任何参数**即可逐字重建 `docs/DEMO-TRANSCRIPT.md`（实测：944 行中仅生成时间戳 1 行与 6 处 `ms` 耗时不同）。
+5. **`npm test` 在全新 clone 上其实是 177 通过 + 1 跳过，而每一份文档都写着 178/178。** `tests/review.test.mjs` 里那条"在真实看板上把复盘跑一遍"的测试带着 `{ skip: !existsSync('data/state/board.json') }`，而 `data/state/` 是 gitignored 的 —— 干净 checkout 上它**永远跳过**。**跳过的检查不等于通过的检查**，而且被跳过的恰好是唯一一条"复盘能在真实看板上跑通"的端到端检查。**解法：** 改为跑**已提交的** `data/fixtures/board-seed.json`（就是 `npm run review:seed` 用的那份看板），并断言 `decided > 0`，防止它退化成一条永真的空测试；修完当时是 **179 / 179 · 0 跳过**，在干净 checkout 上也是真的（实测；比 177+1 多出的那一条，钉住"提交材料清单不得指向仓库里不存在的文件"）。当前测试总数以 `docs/VALIDATION.md` 的实测行为准。同一轮排查还发现：六个 demo 场景里**只有 `closed-window` 钉死了 as-of**，其余五个跟着墙上时钟走，所以 `node prism.mjs demo` 在不同日期会产出不同卡片、`DEMO-TRANSCRIPT.md` 根本复现不出来。**解法：** 六个场景在 `SCENARIOS` 里全部钉死 as-of（对齐内置语料与价格窗口），命令行 `--as-of` 与 Web 时钟框仍优先；`tests/server.test.mjs` 加了断言防止将来被悄悄改掉。修完之后 `node prism.mjs demo` **不带任何参数**即可逐字重建 `docs/DEMO-TRANSCRIPT.md`（实测：951 行中仅生成时间戳 1 行与 6 处 `ms` 耗时不同）。
+6. **`node prism.mjs demo` 跑第二遍就不再逐字可复现 —— 而 README 让评委裸跑的正是这条命令。** 看板会 autosave 到 `data/state/board.json`，`cmdDemo` 却从不清空它。于是先跑过 `doctor` 或 `ask`（"30 秒上手"两条都推荐）再跑 `demo`，结尾那份看板 dump 就会比已提交的逐字稿多出一批 superseded 重复卡（实测 total 23 → 25），"除时间戳与 6 处 ms 外逐字节相同（实测）"这句话对**最有可能去验证它的那个评委**恰好失效。**解法：** `cmdDemo` 默认先 `board.clear()` 再跑，新增 `--keep-board` 给确实想往手工看板上追加的人；`tests/wiring.test.mjs` 用独立的 `PRISM_STATE_FILE` 连跑两遍 `demo`、忽略时间戳行与 ms 行后逐行比对，把幂等性钉死。
+
+7. **`CHAINBASE_AGENT_KEY` 是一个假开关。** `config.chainbase` 读了这个 key，`/api/status` 在 key 存在时如实报告 `{ enabled: true }`，而**整个仓库没有任何一行代码消费它** —— 没有 provider、没有请求、没有数据。Chainbase AgentKey 是本届官方列出的外部 Partner 数据源（行情 / 链上 / 新闻 / 社媒），出现在 `.env.example` 里并不奇怪；奇怪的是一个以"每个数字都要对回出处"为卖点的项目，会在自己的状态接口里报告一个**接不出数据的数据源**。**解法：** 补上真正的 `src/ingest/chainbase.mjs`（复用现成的 `McpClient`；工具名一律走 `tools/list` 发现 + 模糊解析，不硬编码、不猜端点）。没有 key 时状态是 `disabled` 且**一个请求都不发**；有 key 没端点时状态是 `error` 并把原因写出来（端点随 key 一起发放，仓库刻意不设默认值 —— 不替别人的基础设施编一个 URL）。doctor / `/api/status` / `/api/capabilities` / Web 左栏一律如实显示 `no key · optional partner source, inert`。`tests/wiring.test.mjs` 钉住两件事：禁用路径既不发请求也不编值；**接上一个禁用的 provider 之后卡片输出逐条不变**（离线 demo 与看板 fixture 因此完全不受影响）。
+
+8. **四处"能力被低报、缺口被静默"的接线问题 —— 全部由本轮评审在跑通测试之后发现。** 测试全绿不等于接线正确：
+   - `closed-window` 频道**从不取加密侧数据**，而它产出的卡片正文正在论证"rToken 在加密轨道上定价、现金盘关门时它是唯一的价格发现场所"。论证所依赖的数据没有被取（bitget-signal 的 Skill 原先只在 `cross-asset` 命中时调用）。**解法：** 抽出 `SKILL_TRIGGERS` 作为唯一的接线真相源，`closed-window` 与 `cross-asset` 都会触发；六个固定场景的输出逐条不变（实测），变的只有自由提问。
+   - 规划器解析失败时会**静默扩到全部 7 个频道**，与"用户明确要求全扫"产出完全相同的计划与简报 —— 一句乱码也能拿回一份自信的七频道简报。**解法：** `plan.matched / sweepRequested / widened` 三个字段把两种情况分开，`widened` 时 trace 多一条 `plan:widened`、简报开头多一节"How I read this question"明说这是扫描不是回答；显式全扫（含中文"全频道扫描"）不会被误报成解析失败。
+   - 计划请求了 `balanceSheet` / `cashFlow`，离线拿不到，trace 里却**完全不提** —— `ingest:data` 只列成功返回的 intent。**解法：** 逐 intent 记录 requested / served / missing（含原因），简报新增一节"Data I asked for and did not get"。risk 场景的逐字稿现在会自己承认这两个 intent 没取到（逐字稿因此从 944 行变成 951 行）。
+   - Web 左栏把 signal skills 显示成 `0/5`（离线时 `resolved` 全为 null），**低报**了真实接线；`/api/capabilities` 也只给 `resolved`，不给"是否有离线数据"和"被哪个频道调用"。**解法：** capabilities 补 `fixture / wired / invokedBy / why` 四个字段，左栏与 intents 行同构显示 `live N · fixture M`。
+9. **两个"同一份东西存在两份"的缺陷 —— 一个是跨平台的，一个是发布物与后端的。**
+   - **X 帖合规闸门在 Windows 上会误判。** `scripts/xpost.mjs` 的 `weightedLength()` 逐字符计权，于是 CRLF 检出里的 `\r` 每行被算作 1 个权重单位。实测同一段文案 LF 计 29、CRLF 计 31；而 `a1` / `a2` / `zh-5` 三条帖子距 280 上限只差 2–4 个单位，结果是**完全相同的文案在 Windows 上 FAIL、在 Linux 上 PASS**（本机实测 `npm run xpost` 83/86，切成 LF 后 86/86）。这道闸门守的是**必交项**"合规 X 帖链接"，而作者看到 FAIL 的自然反应是去删内容 —— 也就是一条平台相关的假阳性会诱导作者把本来合规的帖子改短。**解法：** 计长前把 `\r\n?` 归一为 `\n`（X 对一个换行收 1 个字符，对回车不收）；`tests/wiring.test.mjs` 直接拿**仓库里真实的 `docs/X-POSTS.md`** 跑 LF 与 CRLF 两遍，断言结论与每条帖子的计长逐一相同。顺带补 `.gitattributes`（`* text=auto eol=lf`）：仓库对外声称"两次重建 SHA-256 相同"，而 `core.autocrlf=true` 的 Windows clone 检出的是 CRLF、生成器写的是 LF，字节级宣称会因与引擎无关的原因失效。`render.yaml` 与 `scripts/submission-links.mjs` 的已提交 blob 本来就是混合换行，一并归一。
+   - **发布出去的 demo 与后端对不上。** `server.mjs` 和 `scripts/export-static.mjs` 各自手抄了一份 `/api/capabilities` 的构造逻辑，然后漂了：GitHub Pages 上那份（**评委真正会打开的那个产物**）没有 `fixture` / `wired` / `invokedBy`，也完全没有 agentKey 段，左栏因此显示 `signal skills 0/5`，而实时后端如实报 2 个已接线。**解法：** 抽出唯一的 `src/desk/capabilities.mjs`，两处共用；`tests/wiring.test.mjs` 把 `docs/demo/data/api/capabilities.json` 与实时构造器的输出逐项比对（频道 / intent 的 resolved+fixture / skill 的 resolved+fixture+wired+invokedBy / agentKey 状态），谁再漂谁就红。
 
 **尚未完成**
 
@@ -142,7 +154,7 @@
 | 1 | **在线 Demo** | 可公开访问的 Web 投研台，打开即可提问，无需安装、无需 key | ✅ **Demo 可访问（必填）** |
 | 2 | **GitHub 仓库** | 完整源码 + 数据 + 测试。零第三方依赖，`git clone` 后 `node server.mjs` 直接可跑 | ✅ |
 | 3 | **完整投研任务演示** `docs/DEMO-SCRIPT.md` | 赛道三必填项。以「周末 rToken 窗口」为主任务，把 提问 → PLAN → INGEST → EXTRACT → VERIFY → SCORE → 可用判断 **全链路逐环节拆开**，含 SPY（有实证先验，58.3 分发布）vs ASTR（无先验，44.9 分不发布）的关键对照 | ✅ **完整投研任务（必填）** |
-| 4 | **Demo 逐字稿** `docs/DEMO-TRANSCRIPT.md` | 六个场景的完整原始输出（自动生成，非手写），含每张卡的 claim / 预期差 / trade sketch / 失效条件 / bear case / 证据账本 / 打分理由。六个场景各自钉死 as-of，所以**裸跑 `node prism.mjs demo`（不带任何参数）即可从空看板逐字重建**：全文 944 行中仅 1 行生成时间戳与 6 处 ms 计时不同，其余**逐字节相同（实测）** | ✅ 佐证 |
+| 4 | **Demo 逐字稿** `docs/DEMO-TRANSCRIPT.md` | 六个场景的完整原始输出（自动生成，非手写），含每张卡的 claim / 预期差 / trade sketch / 失效条件 / bear case / 证据账本 / 打分理由。六个场景各自钉死 as-of，所以**裸跑 `node prism.mjs demo`（不带任何参数）即可从空看板逐字重建**：全文 951 行中仅 1 行生成时间戳与 6 处 ms 计时不同，其余**逐字节相同（实测）** | ✅ 佐证 |
 | 5 | **验证数据** `docs/VALIDATION.md` | 全部实测数字 + 逐项 caveat + **明确列出「我们没有测的」** | ✅ 第 3 段支撑 |
 | 6 | **架构说明** `docs/ARCHITECTURE.md` | 七阶段管线（含复盘回路）、7 频道、账本核验策略、五因子与半衰期、看板状态机 | ✅ |
 | 7 | **研究报表** `docs/reports/` | `transmission-study.md`（25 个真实宏观事件逐事件明细）、`gap-study.md`（15,478 个真实跳空）、**`review.md`（复盘裁决：235 卡 → 115 主张 → 34 决出，10 胜 24 负，rho -0.138 标为 BLOCKER）**、`validation.md`（60 项检查）、`x-posts.md`（X 帖合规 86/86） | ✅ 研究质量佐证 |
@@ -158,7 +170,7 @@
 git clone <repo> && cd prism-desk
 node prism.mjs doctor     # 数据接线自检 + smoke run
 node prism.mjs demo       # 逐字重建 docs/DEMO-TRANSCRIPT.md（as-of 由场景钉死，无需传参）
-npm test                  # 193 / 193 · 0 跳过
+npm test                  # 208 / 208 · 0 跳过
 npm run validate          # 60 / 60
 npm run replay            # 三份研究里的两份事件研究
 npm run seed              # 重建看板 fixture（逐字节确定）
@@ -173,7 +185,7 @@ node server.mjs           # http://127.0.0.1:4310
 
 **1. 在投研场景里，大模型的价值不在"生成更多"，而在"能被追责"。** 我们做这个项目最大的认知转变是：让 LLM 自由发挥地产出交易观点，技术上很容易，产品上很难成立 —— 因为用户无法判断该不该信，而错的代价是真金白银。所以我们把架构反过来设计：**模型可以说任何话，但它说的每一个数字都要过证据账本；账本对不上，要么隔离，要么降分并在卡片上如实标注。** 模型不享有豁免权。这套设计跑出来的效果是可见的：一轮扫描 26 个证据项，23 pass / **0 fail** / 3 unverifiable，而那 3 个 unverifiable 全部被如实标注、并压低了相应卡片的分数，其中一张因此被挡在发布门槛之外。
 
-**2. 确定性路径不是"降级方案"，是基线。** Prism 不配任何 key 也能完整运行（纯规则抽取器，193 个测试全部基于这条路径）。这不是为了省事：**一个无法在没有模型时运行的投研工具，你没法测试它的模型部分到底贡献了什么。** 有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
+**2. 确定性路径不是"降级方案"，是基线。** Prism 不配任何 key 也能完整运行（纯规则抽取器，208 个测试全部基于这条路径）。这不是为了省事：**一个无法在没有模型时运行的投研工具，你没法测试它的模型部分到底贡献了什么。** 有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
 
 **3. 对 Bitget AI 工具的体验与建议。** MCP Server 把美股/ETF 行情、财报日历、分析师预期做成只读工具集，这个抽象层次是对的 —— 投研 Agent 需要的是"可查询的事实"，不是"可执行的下单"。Signal Skills（sentiment-analyst / macro-analyst）提供的是**已加工的观点**，我们把它当作 cross-asset 频道的一个**独立信源**接入，并让它和规则路径的结论互相印证，而不是直接采信 —— 这正好是 corroboration 因子要量的东西。**两条建议：**（a）MCP 若能提供 rToken 的**盘口深度与成交明细**，closed-window 频道就能把当前 0.45 这个保守估算的流动性系数换成实测值，这是本项目最想接的一个数据；（b）Signal Skills 若能带上**观点的时间戳与历史修正记录**，就可以对信源本身做命中率统计，让 corroboration 从"来源数量"升级到"来源质量"。
 

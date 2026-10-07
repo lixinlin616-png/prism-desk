@@ -168,7 +168,7 @@ Zero deps. Clone and run.
 
 它只报告。45 条样本、rho 只有 -0.138，就去调五个权重等于把噪声拟合进去。
 
-零第三方依赖，Node ≥ 20。clone 下来 node server.mjs 就能跑，全程离线可复现，193 个测试 + 60 项验证检查全绿。
+零第三方依赖，Node ≥ 20。clone 下来 node server.mjs 就能跑，全程离线可复现，208 个测试 + 60 项验证检查全绿。
 
 Demo 与代码链接在评论区 👇
 ```
@@ -220,7 +220,7 @@ Spearman rho, score vs excess: -0.138. A-grade cards hit LESS often than C-grade
 ```xpost id=en-7 lang=en kind=thread-post thread=en tokens=off
 The review never edits the scoring rules automatically - it only reports. Re-tuning five weights on 45 claims at rho -0.138 is fitting noise.
 
-Zero deps, Node >= 20: clone it, run node server.mjs, fully offline. 193 tests, 60 checks green.
+Zero deps, Node >= 20: clone it, run node server.mjs, fully offline. 208 tests, 60 checks green.
 
 Demo and code in the replies 👇
 ```

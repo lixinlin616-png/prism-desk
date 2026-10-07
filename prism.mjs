@@ -30,6 +30,7 @@ import { renderTransmissionReport, renderGapReport } from './src/research/report
 import { runReview } from './src/review/adjudicate.mjs';
 import { renderReviewReport } from './src/review/report.mjs';
 import { start as startServer, SCENARIOS } from './server.mjs';
+import { SKILL_TRIGGERS } from './src/desk/pipeline.mjs';
 
 const log = logger('cli');
 
@@ -60,6 +61,9 @@ Options
   --json                    emit JSON instead of markdown
   --no-trace                hide the streamed stage trace
   --no-persist              do not write cards to the board state
+  --keep-board              demo: append to the persisted board instead of
+                            clearing it first (clearing is what makes
+                            docs/DEMO-TRANSCRIPT.md byte-reproducible)
   --out=<file>              also write the output to a file
   --status=<s>              board filter: active | quarantined | all
   --report                  print the full markdown review report
@@ -139,8 +143,9 @@ function describe(evt) {
       return `channels ${(p.channels || []).join('/')} | intents ${(p.intents || []).join(',')} | tickers ${(evt.resolvedTickers || []).join(',') || 'none'}`;
     }
     case 'plan:ticker-fallback': return evt.message;
+    case 'plan:widened': return evt.message;
     case 'ingest:corpus': return `${evt.count} documents (${(evt.kinds || []).join(', ')})`;
-    case 'ingest:data': return `${evt.snapshots} snapshots via ${(evt.intents || []).join(',')} [${(evt.origins || []).join('/')}]`;
+    case 'ingest:data': return evt.message || `${evt.snapshots} snapshots via ${(evt.intents || []).join(',')} [${(evt.origins || []).join('/')}]`;
     case 'extract': return `mode ${evt.mode}, ${evt.cards} candidate cards, trace ${(evt.trace || []).map((t) => `${t.stage}:${t.cards ?? 0}`).join(' -> ')}`;
     case 'verify': return `${evt.title} | pass ${evt.pass} fail ${evt.fail} unverifiable ${evt.unverifiable}${evt.quarantined ? ' | QUARANTINED' : ''}`;
     case 'verify:summary': return `ledger ${evt.itemsChecked} items, pass rate ${evt.passRate}%, ${evt.cardsQuarantined} quarantined`;
@@ -186,6 +191,23 @@ async function cmdAsk(question, flags) {
 
 async function cmdDemo(flags) {
   const desk = await newDesk();
+  /**
+   * Start from an empty board, every time.
+   *
+   * docs/DEMO-TRANSCRIPT.md is a reproducibility claim: the README says a judge
+   * can rebuild it byte-for-byte with a bare `node prism.mjs demo`. But the
+   * board autosaves to data/state/board.json, so anything run beforehand -
+   * `doctor`, `ask`, or simply a second `demo` - leaves cards behind, the board
+   * dump at the end of the transcript grows, and the claim silently fails for
+   * the one reader most likely to test it. Clearing first makes the command
+   * idempotent; --keep-board opts out for anyone who wants to append to a
+   * board they built by hand.
+   */
+  if (flags['keep-board'] !== true) {
+    const before = desk.board.status().total;
+    desk.board.clear();
+    if (before) process.stderr.write(`demo: cleared ${before} persisted card(s) so the transcript starts from an empty board (--keep-board to opt out)\n`);
+  }
   const only = flags.only ? String(flags.only).split(',').map((s) => s.trim()) : null;
   const scenarios = SCENARIOS.filter((s) => !only || only.includes(s.id));
   const out = [];
@@ -401,7 +423,10 @@ async function cmdDoctor(flags) {
     `data mode       ${hub.mode} (PRISM_DATA_MODE=${process.env.PRISM_DATA_MODE || 'unset -> auto'})`,
     `market provider state=${hub.market.state} url=${hub.market.url} liveTools=${hub.market.liveTools} resolved=${hub.market.resolvedIntents}/${hub.market.totalIntents} fixtures=${hub.market.fixtures}`,
     hub.market.error ? `market error    ${hub.market.error}` : null,
-    `signal skills   ${(hub.signal.skills || []).filter((k) => k.tool).length}/${(hub.signal.skills || []).length} resolved to live tools, ${(hub.signal.skills || []).filter((k) => k.fixture).length} fixture-backed (state=${hub.signal.state})`,
+    `signal skills   ${(hub.signal.skills || []).filter((k) => k.tool).length}/${(hub.signal.skills || []).length} resolved to live tools, ${(hub.signal.skills || []).filter((k) => k.fixture).length} fixture-backed, ${SKILL_TRIGGERS.length}/${(hub.signal.skills || []).length} wired to a channel (state=${hub.signal.state})`,
+    `agentkey        state=${hub.chainbase.state} configured=${hub.chainbase.configured} resolved=${hub.chainbase.resolvedIntents}/${hub.chainbase.totalIntents}`,
+    hub.chainbase.reason ? `agentkey note   ${hub.chainbase.reason}` : null,
+    hub.chainbase.error ? `agentkey error  ${hub.chainbase.error}` : null,
     `corpus          ${hub.corpus.documents} documents, ${hub.corpus.words} words, tickers ${hub.corpus.tickers.join(' ')}`,
     `prices          ${hub.prices.symbols} symbols, ${hub.prices.bars} bars, ${hub.prices.from} to ${hub.prices.to}`,
     `extractor       ${s.extractor?.mode} (LLM ${hub.llm.enabled ? `${hub.llm.model} @ ${hub.llm.baseUrl}` : 'not configured - deterministic rules'})`,

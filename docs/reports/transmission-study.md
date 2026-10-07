@@ -1,6 +1,6 @@
 # Macro transmission study
 
-Generated 2026-10-06T12:05:45.911Z by `npm run replay`. Real end-of-day prices from the bundled dataset; no network access required to reproduce.
+Generated 2026-10-07T10:49:27.733Z by `npm run replay`. Real end-of-day prices from the bundled dataset; no network access required to reproduce.
 
 ## Question
 

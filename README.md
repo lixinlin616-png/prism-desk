@@ -16,7 +16,7 @@
 
 **GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
 
-演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以页面上那 9 张卡、26 条核验项 / 88.5% 通过率、以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.138，都是引擎真实产出，与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的 14 项检查专门盯这个漂移）。
+演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以点开 `full-sweep` 后那一轮的 9 张卡、26 条核验项 / 88.5% 通过率，以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.138，都是引擎真实产出（右侧看板栏另有 11 张 active，来自 235 张的已提交 fixture，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的 14 项检查专门盯这个漂移）。
 
 有两件事静态页面**做不到**，而且它会明说、绝不假装成功：跑一个全新的自由提问（回放最接近的预录任务，并提示这是替换）、写入看板（粘贴文档 / 清空看板返回 409 并说明原因）。页面左下角有一枚永久的 `static replay` 徽标。
 
@@ -127,7 +127,9 @@ node prism.mjs doctor                    # 打印数据接线并自检
 node prism.mjs help                      # 帮助
 ```
 
-常用选项：`--as-of=<ISO>`（冻结桌面时钟，精确复现场景）· `--channels=<a,b>` · `--tickers=<A,B>` · `--json` · `--no-trace` · `--no-persist` · `--out=<file>`
+常用选项：`--as-of=<ISO>`（冻结桌面时钟，精确复现场景）· `--channels=<a,b>` · `--tickers=<A,B>` · `--json` · `--no-trace` · `--no-persist` · `--out=<file>` · `--keep-board`（仅 `demo`：往已持久化的看板上追加，而不是先清空）
+
+> `demo` 默认**先清空看板再跑**，这正是 `docs/DEMO-TRANSCRIPT.md` 能被裸跑逐字重建的前提 —— 否则先跑过 `doctor` 或 `ask` 的人会得到一份对不上的逐字稿。`tests/wiring.test.mjs` 连跑两遍并逐行比对，钉住这条幂等性。
 
 npm 脚本：`npm start` · `npm run dev` · `npm test` · `npm run validate` · `npm run replay` · `npm run demo` · `npm run seed` · `npm run review:seed` · `npm run xpost` · `npm run doctor` · `npm run export:static` · `npm run submission` · `npm run submission:check`
 
@@ -154,7 +156,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 ```
 
 - **PLAN** `src/desk/pipeline.mjs` — 自然语言问题（中/英）路由到频道与数据意图，解析 ticker，附带美股现金盘状态。
-- **INGEST** `src/ingest/` — 语料（`corpus.mjs`）+ Bitget MCP 行情（`bitget-market.mjs`）+ Bitget Signal Skills（`bitget-signal.mjs`）+ 真实价格库（`prices.mjs`）+ 离线 fixture（`fixtures.mjs`）。
+- **INGEST** `src/ingest/` — 语料（`corpus.mjs`）+ Bitget MCP 行情（`bitget-market.mjs`）+ Bitget Signal Skills（`bitget-signal.mjs`）+ 真实价格库（`prices.mjs`）+ 离线 fixture（`fixtures.mjs`）+ 可选外部 Partner 源 Chainbase AgentKey（`chainbase.mjs`，无 key 时 `disabled` 且零请求）。
 - **EXTRACT** `src/extract/` — 双抽取器：**确定性规则**（`rules.mjs` + `lexicon.mjs`）与**可选 LLM**（`llm.mjs` + `prompts.mjs`），二者经 `index.mjs` 对账（reconcile）。
 - **VERIFY** `src/verify/ledger.mjs` — 证据账本：每个数字回溯到文档字符偏移 / 快照字段 / 可复算代码；对不上则隔离。
 - **SCORE** `src/score/rubric.mjs` — 5 个加权因子，每个因子都附**可审计的文字理由**。
@@ -211,7 +213,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 | 离线 MCP fixture | 12 | Bitget MCP 与 Signal Skills 的录制响应 |
 | 评测集 | 10 extraction + 9 ledger cases | 含阴性对照与故意幻觉样本 |
 | 看板 fixture | 235 cards · 11 replay dates × 6 scenarios | `npm run seed` 重建，两次 SHA-256 相同（**实测**）——复盘报表据此复现 |
-| Demo 逐字记录 | 944 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
+| Demo 逐字记录 | 951 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
 
 **三种数据模式**（`PRISM_DATA_MODE`）：
 
@@ -220,7 +222,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 193 个测试（node:test，无第三方依赖）
+npm test           # 208 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
@@ -242,7 +244,8 @@ npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ -
 | `PRISM_LLM_API_KEY` | — | 该端点的 key |
 | `PRISM_LLM_MODEL` | `gpt-4o-mini` | 模型名（Qwen 用 `qwen3.8-max`） |
 | `PRISM_MCP_URL` | `https://agent.bitget.com/mcp` | Bitget MCP Server |
-| `CHAINBASE_AGENT_KEY` | — | 可选外部数据源 |
+| `CHAINBASE_AGENT_KEY` | — | 可选：Chainbase AgentKey（S2 外部 Partner 数据源，行情 / 链上 / 新闻 / 社媒）。**不配就完全不发请求**，`/api/status` 报 `disabled` |
+| `CHAINBASE_MCP_URL` | — | AgentKey 的端点，随 key 一起发放；仓库**刻意不设默认值**（不替别人的基础设施猜 URL）。有 key 无端点时报 `error` 并写出原因 |
 | `PRISM_HOST` / `PRISM_PORT` | `127.0.0.1` / `4310` | 服务绑定 |
 | `PRISM_MIN_SCORE` | `45` | 发布门槛 |
 | `PRISM_VERIFY_TOL` | `2.0` | 账本数值核验相对容差（%） |
@@ -280,7 +283,8 @@ src/
   config.mjs         环境与默认值
   schema.mjs         卡片 / 证据 / 频道的 schema 与校验
   util/              http json csv num stats time log
-  ingest/            corpus, bitget-market, bitget-signal, mcp-client, prices, fixtures
+  ingest/            corpus, bitget-market, bitget-signal, chainbase(可选外部源),
+                     mcp-client, prices, fixtures
   extract/           rules + lexicon（确定性）, llm + prompts（可选）, index（对账）
   verify/ledger.mjs  证据账本
   score/rubric.mjs   5 因子加权打分
@@ -291,7 +295,7 @@ web/                 index.html + app.js + styles.css + static-adapter.js（零�
 scripts/             validate, replay, build-seed, fetch-prices, record-fixtures, xpost,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               193 个 node:test 用例
+tests/               208 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 

@@ -28,7 +28,48 @@ const TICKER_RE = /\b([A-Z][A-Z0-9.\-]{0,9})\b/g;
 
 /** Index and ETF proxies - useful for macro context, wrong targets for issuer-level data. */
 const INDEX_AND_ETF = new Set(['SPY', 'QQQ', 'IWM', 'DIA', 'VTI', 'TLT', 'XLK', 'XLE', 'XLF', 'XLY', 'XLP', 'SMH', 'SOXX', 'IVV', 'VOO']);
+/**
+ * Phrases that mean "open the whole spectrum" on purpose.
+ *
+ * planQuestion() also opens the whole spectrum when NOTHING matched, and the two
+ * cases produce an identical channel list. They are not the same claim: one is
+ * the trader asking for a sweep, the other is the desk failing to parse the
+ * question. Conflating them lets a gibberish prompt come back as a confident
+ * seven-channel brief - the exact failure mode this desk exists to refuse. So
+ * sweep intent is detected explicitly and the fallback stays labelled as a
+ * fallback (`widened` below, surfaced by renderBrief and the trace).
+ */
+const SWEEP_TERMS = ['desk sweep', 'full sweep', 'sweep', 'every channel', 'all channels', 'all seven channels', 'whole spectrum', 'entire spectrum', 'everything', '全频道', '全部频道', '所有频道', '七个频道', '全面扫描', '扫描一遍', '全扫'];
+
 const STOPWORDS = new Set(['THE', 'AND', 'FOR', 'WITH', 'WHAT', 'WHY', 'HOW', 'IS', 'ARE', 'CAN', 'SHOULD', 'WOULD', 'THIS', 'THAT', 'FROM', 'INTO', 'AFTER', 'BEFORE', 'ABOUT', 'GIVE', 'SHOW', 'ME', 'MY', 'YOU', 'ALL', 'ANY', 'NOT', 'BUT', 'NOW', 'TODAY', 'WEEK', 'MONTH', 'YEAR', 'EPS', 'CPI', 'FOMC', 'GDP', 'NFP', 'PMI', 'IPO', 'ETF', 'AI', 'US', 'USA', 'VS', 'PER', 'ITS', 'THEIR', 'OUR', 'HAS', 'HAVE', 'HAD', 'BEEN', 'BEING', 'WAS', 'WERE', 'WILL', 'DID', 'DOES', 'MACRO', 'STOCK', 'STOCKS', 'SHARE', 'SHARES', 'PRICE', 'PRICES', 'NEWS', 'CALL', 'GUIDE', 'RATES', 'RATE']);
+
+/**
+ * Which bitget-signal skills each channel needs, and why.
+ *
+ * This map is the single source of truth for BOTH the ingest loop below and
+ * /api/capabilities, so the desk can never advertise a skill it does not call.
+ *
+ * `closed-window` triggers the crypto-side skills alongside `cross-asset`, and
+ * that is not padding: the entire argument of the closed-window channel is that
+ * an rToken keeps pricing a US macro print on crypto rails while the cash market
+ * is shut, which makes crypto-side regime data primary evidence for it. Gating
+ * those skills on `cross-asset` alone meant a question like "周末休市时 rToken
+ * 怎么定价" - the core S2 scenario - ran with no crypto-side data at all.
+ */
+export const SKILL_TRIGGERS = [
+  { skill: 'sentiment-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fear & Greed / funding / long-short ratio decide who is awake to trade the rToken outside cash hours' },
+  { skill: 'macro-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fed policy and BTC-vs-DXY/Nasdaq correlation frame how a US macro print transmits into a tokenized equity' },
+];
+
+/** Skills the plan should invoke for a set of channels. De-duplicated, order-stable. */
+export function skillsForChannels(channels = []) {
+  const out = [];
+  for (const trigger of SKILL_TRIGGERS) {
+    const wantedBy = trigger.channels.filter((c) => channels.includes(c));
+    if (wantedBy.length && !out.some((o) => o.skill === trigger.skill)) out.push({ ...trigger, wantedBy });
+  }
+  return out;
+}
 
 /** Question -> { tickers, channels, indicators, intents, intent }. */
 export function planQuestion(question) {
@@ -85,6 +126,12 @@ export function planQuestion(question) {
   if (has('analyst', 'target', 'upgrade', 'downgrade', '分析师', '目标价')) intents.add('analystTargetPrice');
   if (has('profile', 'business', 'company', '公司')) intents.add('profile');
 
+  // Captured BEFORE the fallback below: which channels the question actually
+  // named. Everything after this point can widen the set, so this is the only
+  // place the original parse result still exists.
+  const matched = CHANNEL_IDS.filter((c) => channels.has(c));
+  const sweepRequested = SWEEP_TERMS.some((t) => lower.includes(t));
+
   if (!channels.size) {
     // Nothing matched - open the whole spectrum and let the corpus decide.
     for (const c of CHANNEL_IDS) channels.add(c);
@@ -97,6 +144,10 @@ export function planQuestion(question) {
     tickers: tickerCandidates,
     tickerCandidates,
     channels: CHANNEL_IDS.filter((c) => channels.has(c)),
+    matched,
+    sweepRequested,
+    /** True when the spectrum was opened because nothing matched, not because it was asked for. */
+    widened: matched.length === 0 && !sweepRequested,
     intents: INTENTS.filter((i) => intents.has(i)),
     indicators: [...indicators],
     session,
@@ -164,6 +215,16 @@ export class Pipeline {
       resolvedTickers: resolved,
       rejectedTickers: rejected,
     });
+    if (plan.widened) {
+      // Said out loud, in the trace, before any card is shown. A question the
+      // planner could not parse must not come back wearing the same confident
+      // seven-channel brief as one the trader explicitly asked for.
+      emit('plan:widened', {
+        matched: plan.matched,
+        channels: plan.channels,
+        message: 'No channel keyword matched this question. All seven channels were opened and the corpus decided - read the result as a scan of what is in scope, not as an answer to a specific ask.',
+      });
+    }
 
     // ---- INGEST -----------------------------------------------------------
     const documents = this.hub.gather(question, {
@@ -202,34 +263,117 @@ export class Pipeline {
     const PER_NAME = new Set(['insiderTrades', 'institutionalHoldings', 'earningsCalendar', 'incomeStatement', 'balanceSheet', 'cashFlow', 'ratios', 'valuation', 'dividends', 'analystEstimates', 'analystTargetPrice', 'profile', 'etfHoldings']);
 
     const snapshots = [];
+    /**
+     * Every market intent the plan asked for, and what actually came back.
+     *
+     * A failed or unbacked fetch used to disappear silently: the trace only ever
+     * listed intents that returned data, so `risk-flag` could ask for
+     * balanceSheet and cashFlow, get neither offline, and still report a clean
+     * ingest. For a desk whose whole pitch is "show what you could not ground",
+     * an unreported gap is the same defect as an unreported hallucination.
+     */
+    const intentRequests = [];
     for (const intent of plan.intents.slice(0, 10)) {
       const targets = NO_TICKER.has(intent)
         ? [null]
         : (PER_NAME.has(intent) ? nameTickers : (dataTickers.length ? dataTickers.slice(0, 4) : []));
-      for (const t of targets) {
-        if (!t && !NO_TICKER.has(intent)) continue;
+      const usable = targets.filter((t) => t || NO_TICKER.has(intent));
+      if (!usable.length) {
+        intentRequests.push({ intent, calls: 0, served: 0, reason: 'no symbol in scope takes this intent' });
+        continue;
+      }
+      let calls = 0;
+      let served = 0;
+      let lastReason = null;
+      for (const t of usable) {
+        calls += 1;
         try {
           const snap = await this.hub.market.fetch(intent, t ? { ticker: t } : {});
-          if (snap.value !== null && snap.value !== undefined) snapshots.push(snap);
+          if (snap.value !== null && snap.value !== undefined) {
+            snapshots.push(snap);
+            served += 1;
+          } else {
+            lastReason = snap.error || `no live tool resolved and no offline fixture for '${intent}'`;
+          }
         } catch (err) {
+          lastReason = err.message;
           log.debug(`${intent}(${t}) failed: ${err.message}`);
         }
       }
+      intentRequests.push({ intent, calls, served, reason: served ? null : (lastReason || 'provider returned no value') });
     }
-    if (plan.channels.includes('cross-asset')) {
-      for (const skill of ['sentiment-analyst', 'macro-analyst']) {
-        try {
-          const r = await this.hub.signal.invoke(skill, { query: question });
-          if (r.value !== null) snapshots.push({ intent: `signal:${skill}`, skill, args: { query: question }, value: r.value, origin: r.origin });
-        } catch (err) {
-          log.debug(`signal ${skill} failed: ${err.message}`);
+
+    // bitget-signal skills, driven by SKILL_TRIGGERS so the capabilities endpoint
+    // and the ingest loop can never disagree about what is wired.
+    const skillCalls = [];
+    for (const trigger of skillsForChannels(plan.channels)) {
+      const base = { skill: trigger.skill, wantedBy: trigger.wantedBy, why: trigger.why };
+      try {
+        const r = await this.hub.signal.invoke(trigger.skill, { query: question });
+        if (r.value !== null && r.value !== undefined) {
+          snapshots.push({ intent: `signal:${trigger.skill}`, skill: trigger.skill, args: { query: question }, value: r.value, origin: r.origin });
+          skillCalls.push({ ...base, served: true, origin: r.origin });
+        } else {
+          skillCalls.push({ ...base, served: false, reason: `no live tool resolved and no offline fixture for '${trigger.skill}'` });
         }
+      } catch (err) {
+        log.debug(`signal ${trigger.skill} failed: ${err.message}`);
+        skillCalls.push({ ...base, served: false, reason: err.message });
       }
     }
+
+    const servedIntents = intentRequests.filter((r) => r.served).map((r) => r.intent);
+    const missing = intentRequests.filter((r) => !r.served).map((r) => ({ intent: r.intent, reason: r.reason }));
+    const skillsServed = skillCalls.filter((s) => s.served).map((s) => s.skill);
+    const skillsMissing = skillCalls.filter((s) => !s.served).map((s) => ({ skill: s.skill, reason: s.reason }));
+    /**
+     * Chainbase AgentKey - the optional external partner source.
+     *
+     * Queried only when it actually connected. With no CHAINBASE_AGENT_KEY the
+     * provider reports state 'disabled', this block is inert, and the offline
+     * demo is bit-for-bit what it would be without the provider existing - which
+     * is the point of gating on observed state rather than on config.
+     */
+    const agentKeyCalls = [];
+    if (this.hub.chainbase?.state === 'live') {
+      const want = new Set();
+      if (plan.intents.includes('news')) want.add('news');
+      if (plan.intents.includes('sentiment')) want.add('social');
+      if (plan.intents.includes('quote')) want.add('marketData');
+      // An rToken IS an on-chain object, so the channels that reason about one
+      // are the ones that should ask AgentKey for on-chain behaviour.
+      if (plan.channels.includes('cross-asset') || plan.channels.includes('closed-window')) want.add('onchain');
+      for (const akIntent of [...want].slice(0, 4)) {
+        const snap = await this.hub.chainbase.fetch(akIntent, dataTickers.length ? { symbol: dataTickers[0] } : {});
+        if (snap.value !== null && snap.value !== undefined) {
+          // Prefixed intent, so an AgentKey snapshot can never be mistaken for a
+          // bitget-mcp-server one by the ledger or by the card builders.
+          snapshots.push({ intent: `agentkey:${akIntent}`, args: snap.args, value: snap.value, origin: snap.origin });
+          agentKeyCalls.push({ intent: akIntent, served: true, origin: snap.origin });
+        } else {
+          agentKeyCalls.push({ intent: akIntent, served: false, reason: snap.error });
+        }
+      }
+    } else if (this.hub.chainbase?.configured) {
+      agentKeyCalls.push({ intent: '*', served: false, reason: this.hub.chainbase.reason || this.hub.chainbase.error || 'not connected' });
+    }
+
     emit('ingest:data', {
       snapshots: snapshots.length,
       origins: [...new Set(snapshots.map((s) => s.origin))],
       intents: [...new Set(snapshots.map((s) => s.intent))],
+      requested: intentRequests.map((r) => r.intent),
+      served: servedIntents,
+      missing,
+      skills: skillCalls,
+      agentKey: agentKeyCalls,
+      message: [
+        `${snapshots.length} snapshots; market intents ${servedIntents.length}/${intentRequests.length} served`,
+        missing.length ? `NOT served: ${missing.map((m) => m.intent).join(', ')}` : null,
+        skillCalls.length ? `bitget-signal: ${skillsServed.join(', ') || 'none served'}` : null,
+        skillsMissing.length ? `skills NOT served: ${skillsMissing.map((m) => m.skill).join(', ')}` : null,
+        agentKeyCalls.length ? `agentkey: ${agentKeyCalls.filter((c) => c.served).map((c) => c.intent).join(', ') || 'configured but not connected'}` : null,
+      ].filter(Boolean).join(' | '),
     });
     // ---- EXTRACT ----------------------------------------------------------
     const extraction = await this._extractor.run({
@@ -289,6 +433,17 @@ export class Pipeline {
       question,
       dataMode: this.hub.market.state,
       llm: this._extractor.llm.stats(),
+      plan: {
+        matched: plan.matched,
+        channels: plan.channels,
+        sweepRequested: plan.sweepRequested,
+        widened: plan.widened,
+        intentsRequested: plan.intents,
+        intentsServed: snapshots.filter((s) => !s.skill).map((s) => s.intent).filter((v, i, a) => a.indexOf(v) === i),
+        intentsMissing: intentRequests.filter((r) => !r.served).map((r) => ({ intent: r.intent, reason: r.reason })),
+        skills: skillCalls,
+        agentKey: agentKeyCalls,
+      },
     };
     const brief = renderBrief({ cards: published, quarantined, belowThreshold, context, ledger: this.ledger.summary(), coverage });
 
@@ -361,6 +516,9 @@ export class Pipeline {
 
 function describePlan(plan) {
   const bits = [];
+  if (plan.widened) bits.push('no channel keyword matched - spectrum widened to all seven (this is a scan, not a parsed ask)');
+  else if (plan.sweepRequested && !plan.matched.length) bits.push('full sweep requested - all seven channels');
+  else bits.push(`matched ${plan.matched.length}/7 channels`);
   if (plan.tickers.length) bits.push(`tickers ${plan.tickers.join(', ')}`);
   bits.push(`channels ${plan.channels.map((c) => CHANNELS[c].zh || c).join(' / ')}`);
   if (plan.indicators.length) bits.push(`macro indicators ${plan.indicators.join(', ')}`);

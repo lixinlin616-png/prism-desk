@@ -1,6 +1,6 @@
 # Prism Desk - demo transcript
 
-Generated 2026-10-06T11:22:14.633Z - data mode `offline`, extractor `rules`, LLM not configured (deterministic rule extractor).
+Generated 2026-10-07T10:49:26.644Z - data mode `offline`, extractor `rules`, LLM not configured (deterministic rule extractor).
 
 Corpus 14 documents / 2599 words. Price book 25 symbols, 41386 bars, 2019-01-02 to 2025-09-30.
 
@@ -10,7 +10,7 @@ Corpus 14 documents / 2599 words. Price book 25 symbols, 41386 bars, 2019-01-02 
 
 > Full desk sweep across every channel - what is actually tradeable right now?
 
-_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, macro-transmission, narrative-shift, flow-footprint, closed-window, cross-asset, risk-flag - 57ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, macro-transmission, narrative-shift, flow-footprint, closed-window, cross-asset, risk-flag - 58ms - extractor rules_
 
 **What it demonstrates.** Exercises all seven channels in one pass. Best first thing to run.
 
@@ -281,7 +281,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Walk me through the earnings expectation gaps in scope. Which print is wide enough versus consensus to actually reprice the name, and which is already discounted?
 
-_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, risk-flag - 30ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels earnings-gap, risk-flag - 31ms - extractor rules_
 
 **What it demonstrates.** Shows consensus-vs-actual, guidance stance classification and the beat-but-ugly case.
 
@@ -594,7 +594,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > A tariff framework just landed on a Saturday afternoon. The cash market is shut for 47 hours but the rToken still trades. How should I think about pricing that gap?
 
-_as-of 2025-09-13T15:00:00.000Z - channels closed-window, cross-asset - 32ms - extractor rules_
+_as-of 2025-09-13T15:00:00.000Z - channels closed-window, cross-asset - 35ms - extractor rules_
 
 **What it demonstrates.** The core S2 scenario: 7x24 tokenized equity versus a 6.5-hour cash session.
 
@@ -697,7 +697,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Any insider selling clusters or 13F position changes I should know about?
 
-_as-of 2025-09-19T20:00:00.000Z - channels flow-footprint - 32ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels flow-footprint - 31ms - extractor rules_
 
 **What it demonstrates.** Aggregates are recomputed from the raw snapshot by the evidence ledger.
 
@@ -784,7 +784,7 @@ _Prism produces research inputs. A human takes the trade._
 
 > Run the contrarian screen. Where is the language softening and where do the accounting ratios diverge from the narrative?
 
-_as-of 2025-09-19T20:00:00.000Z - channels narrative-shift, risk-flag - 30ms - extractor rules_
+_as-of 2025-09-19T20:00:00.000Z - channels narrative-shift, risk-flag - 32ms - extractor rules_
 
 **What it demonstrates.** Adverse-language and ratio-anomaly flags. Demo issuers are fictional by design.
 
@@ -792,6 +792,13 @@ _as-of 2025-09-19T20:00:00.000Z - channels narrative-shift, risk-flag - 30ms - e
 
 **As of** 2025-09-19 20:00 UTC · **US cash session** pre-market · **data** offline · **extractor** deterministic rules
 **Question** Run the contrarian screen. Where is the language softening and where do the accounting ratios diverge from the narrative?
+
+## Data I asked for and did not get
+
+- ⚠️ `balanceSheet` — no live tool resolved and no offline fixture for 'balanceSheet'
+- ⚠️ `cashFlow` — no live tool resolved and no offline fixture for 'cashFlow'
+
+Cards below are built from what *did* arrive. Nothing here was filled in to cover a gap.
 
 ## Asked about, but silent
 

@@ -384,7 +384,10 @@ function renderWiring() {
     ['mcp', `${esc(market.url || s.config?.mcpUrl || '-').replace(/^https?:\/\//, '')}`],
     ['mode', `<span class="${market.state === 'live' ? 'on' : 'off'}">${esc(String(market.state || '-'))}</span>`],
     ['intents', `${esc(String(market.resolvedIntents ?? 0))}/${esc(String(market.totalIntents ?? 0))} · live ${esc(String(live))} · fixture ${esc(String(fixtured))}`],
-    ['signal skills', `${esc(String((caps.skills || []).filter((k) => k.resolved).length))}/${esc(String((caps.skills || []).length))}`],
+    ['signal skills', `${esc(String((caps.skills || []).filter((k) => k.resolved || k.fixture).length))}/${esc(String((caps.skills || []).length))} · live ${esc(String((caps.skills || []).filter((k) => k.resolved).length))} · fixture ${esc(String((caps.skills || []).filter((k) => k.fixture).length))}`],
+    ['agentkey', caps.agentKey?.configured
+      ? `<span class="${caps.agentKey.state === 'live' ? 'on' : 'off'}">${esc(String(caps.agentKey.state))}</span> · ${esc(String((caps.agentKey.intents || []).filter((i) => i.resolved).length))}/${esc(String((caps.agentKey.intents || []).length))} intents`
+      : '<span class="off">no key</span> · optional partner source, inert'],
     ['corpus', `${esc(String(caps.corpus?.documents ?? 0))} docs · ${esc(String(caps.corpus?.words ?? 0))} words`],
     ['prices', `${esc(String(caps.prices?.symbols ?? 0))} symbols · ${esc(String(caps.prices?.bars ?? 0))} bars`],
     ['price range', `${esc(String(caps.prices?.from ?? '-'))} → ${esc(String(caps.prices?.to ?? '-'))}`],
@@ -522,6 +525,7 @@ function newTurn(question, asOf, { channels, note } = {}) {
 const STAGE_LABELS = {
   plan: 'PLAN',
   'plan:ticker-fallback': 'PLAN·tickers',
+  'plan:widened': 'PLAN·not parsed',
   'ingest:corpus': 'INGEST·corpus',
   'ingest:data': 'INGEST·mcp',
   extract: 'EXTRACT',
@@ -565,6 +569,8 @@ function describeStage(stage, evt) {
       const p = evt.plan || {};
       const bits = [];
       bits.push(`channels ${(p.channels || []).map((c) => state.channels[c]?.zh || c).join(' / ') || 'none matched'}`);
+      if (p.widened) bits.push('NOT PARSED - spectrum widened to all seven');
+      else if (p.matched?.length) bits.push(`matched ${p.matched.length}/7`);
       if (p.intents?.length) bits.push(`intents ${p.intents.join(', ')}`);
       if (p.indicators?.length) bits.push(`macro ${p.indicators.join(', ')}`);
       if (evt.resolvedTickers?.length) bits.push(`tickers ${evt.resolvedTickers.join(', ')}`);
@@ -574,10 +580,14 @@ function describeStage(stage, evt) {
     }
     case 'plan:ticker-fallback':
       return `question named no resolvable ticker - falling back to issuers in scope: ${(evt.tickers || []).join(', ')}`;
+    case 'plan:widened':
+      return evt.message || 'no channel keyword matched - all seven channels opened; this is a scan, not a parsed ask';
     case 'ingest:corpus':
       return `${evt.count} documents · kinds ${(evt.kinds || []).join(', ') || 'none'}`;
-    case 'ingest:data':
+    case 'ingest:data': {
+      if (evt.message) return evt.message;
       return `${evt.snapshots} data snapshots · intents ${(evt.intents || []).join(', ') || 'none'} · origin ${(evt.origins || []).join('/') || 'none'}`;
+    }
     case 'extract': {
       const t = (evt.trace || []).map((x) => `${x.stage}:${x.cards ?? 0}`).join(' → ');
       return `mode ${evt.mode} · ${evt.cards} candidate cards · ${t || 'no trace'}`;

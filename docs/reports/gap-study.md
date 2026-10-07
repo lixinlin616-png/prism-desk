@@ -1,6 +1,6 @@
 # Overnight and closed-window gap study
 
-Generated 2026-10-06T12:05:46.073Z by `npm run replay`. Real end-of-day prices from the bundled dataset.
+Generated 2026-10-07T10:49:27.893Z by `npm run replay`. Real end-of-day prices from the bundled dataset.
 
 ## Question
 

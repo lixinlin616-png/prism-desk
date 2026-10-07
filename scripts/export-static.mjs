@@ -37,14 +37,13 @@ import { initHub } from '../src/ingest/index.mjs';
 import { Pipeline } from '../src/desk/pipeline.mjs';
 import { SignalBoard } from '../src/desk/board.mjs';
 import { boardCsv, renderCard } from '../src/desk/brief.mjs';
-import { CHANNELS, CHANNEL_IDS, cardSummary } from '../src/schema.mjs';
-import { INTENTS, INTENT_DOCS } from '../src/ingest/bitget-market.mjs';
-import { SIGNAL_SKILLS, SIGNAL_SKILL_IDS } from '../src/ingest/bitget-signal.mjs';
+import { CHANNELS, cardSummary } from '../src/schema.mjs';
 import { runTransmissionStudy } from '../src/research/transmission.mjs';
 import { runGapStudy } from '../src/research/gap-study.mjs';
 import { runReview } from '../src/review/adjudicate.mjs';
 import { renderReviewReport } from '../src/review/report.mjs';
 import { SCENARIOS, serialiseRun } from '../server.mjs';
+import { capabilitiesPayload } from '../src/desk/capabilities.mjs';
 
 const log = logger('export-static');
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -93,17 +92,6 @@ function boardPayload(board, status) {
   };
 }
 
-function capabilitiesPayload(desk) {
-  return {
-    ok: true,
-    channels: CHANNEL_IDS.map((id) => ({ id, ...CHANNELS[id] })),
-    intents: INTENTS.map((id) => ({ id, description: INTENT_DOCS[id], resolved: desk.hub.market.resolution.get(id) ?? null, fixture: desk.hub.market.fixtures.has(id) })),
-    skills: SIGNAL_SKILL_IDS.map((id) => ({ id, ...SIGNAL_SKILLS[id], resolved: desk.hub.signal.resolution.get(id) ?? null })),
-    corpus: desk.hub.corpus.stats(),
-    prices: desk.hub.prices.stats(),
-  };
-}
-
 const write = (rel, body) => {
   const file = join(OUT, 'data', rel);
   mkdirSync(dirname(file), { recursive: true });
@@ -137,7 +125,7 @@ async function main() {
   await baseline.ready();
   const bytes = [];
   bytes.push(['api/status.json', write('api/status.json', statusPayload(baseline))]);
-  bytes.push(['api/capabilities.json', write('api/capabilities.json', capabilitiesPayload(baseline))]);
+  bytes.push(['api/capabilities.json', write('api/capabilities.json', capabilitiesPayload(baseline.hub))]);
   bytes.push(['api/scenarios.json', write('api/scenarios.json', { ok: true, scenarios: SCENARIOS })]);
   bytes.push(['api/corpus.json', write('api/corpus.json', {
     ok: true,

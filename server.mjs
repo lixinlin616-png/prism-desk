@@ -29,11 +29,10 @@ import { extname, join, normalize, resolve, sep } from 'node:path';
 import { config } from './src/config.mjs';
 import { logger } from './src/util/log.mjs';
 import { Pipeline } from './src/desk/pipeline.mjs';
+import { capabilitiesPayload } from './src/desk/capabilities.mjs';
 import { SignalBoard } from './src/desk/board.mjs';
 import { boardCsv, renderCard } from './src/desk/brief.mjs';
-import { CHANNELS, CHANNEL_IDS, cardSummary } from './src/schema.mjs';
-import { INTENTS, INTENT_DOCS } from './src/ingest/bitget-market.mjs';
-import { SIGNAL_SKILLS, SIGNAL_SKILL_IDS } from './src/ingest/bitget-signal.mjs';
+import { CHANNELS, cardSummary } from './src/schema.mjs';
 import { runTransmissionStudy } from './src/research/transmission.mjs';
 import { runGapStudy } from './src/research/gap-study.mjs';
 import { runReview } from './src/review/adjudicate.mjs';
@@ -225,15 +224,11 @@ export async function buildApp({ pipeline } = {}) {
       }
 
       // ------------------------------------------------------ capabilities
+      // Built by the one shared builder that scripts/export-static.mjs also
+      // uses, so the published static demo can never describe wiring the live
+      // backend disagrees with.
       if (path === '/api/capabilities' && req.method === 'GET') {
-        return send(res, 200, {
-          ok: true,
-          channels: CHANNEL_IDS.map((id) => ({ id, ...CHANNELS[id] })),
-          intents: INTENTS.map((id) => ({ id, description: INTENT_DOCS[id], resolved: desk.hub.market.resolution.get(id) ?? null, fixture: desk.hub.market.fixtures.has(id) })),
-          skills: SIGNAL_SKILL_IDS.map((id) => ({ id, ...SIGNAL_SKILLS[id], resolved: desk.hub.signal.resolution.get(id) ?? null })),
-          corpus: desk.hub.corpus.stats(),
-          prices: desk.hub.prices.stats(),
-        });
+        return send(res, 200, capabilitiesPayload(desk.hub));
       }
 
       if (path === '/api/scenarios' && req.method === 'GET') return send(res, 200, { ok: true, scenarios: SCENARIOS });

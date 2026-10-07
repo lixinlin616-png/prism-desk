@@ -101,6 +101,24 @@ export function renderBrief({ cards, quarantined = [], belowThreshold = [], cont
   if (context.question) L.push(`**Question** ${context.question}`);
   L.push('');
 
+  const plan = context.plan || null;
+  if (plan?.widened) {
+    L.push('## How I read this question');
+    L.push('');
+    L.push('No channel keyword matched, so the desk opened all seven and let the corpus decide. **Read what follows as a scan of what is currently in scope, not as an answer to a specific ask.** Name a ticker, an event or a channel (earnings / CPI / insider flows / weekend rToken window / risk) and the desk will narrow to it.');
+    L.push('');
+  }
+  if (plan?.intentsMissing?.length) {
+    L.push('## Data I asked for and did not get');
+    L.push('');
+    for (const m of plan.intentsMissing) L.push(`- ⚠️ \`${m.intent}\` — ${m.reason}`);
+    const missingSkills = (plan.skills || []).filter((s) => !s.served);
+    for (const s of missingSkills) L.push(`- ⚠️ bitget-signal \`${s.skill}\` — ${s.reason}`);
+    L.push('');
+    L.push('Cards below are built from what *did* arrive. Nothing here was filled in to cover a gap.');
+    L.push('');
+  }
+
   if (coverage?.silent?.length) {
     L.push('## Asked about, but silent');
     L.push('');

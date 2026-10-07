@@ -116,7 +116,16 @@
    ]
   },
   "chainbase": {
-   "enabled": false
+   "provider": "chainbase-agentkey",
+   "configured": false,
+   "state": "disabled",
+   "url": null,
+   "reason": "CHAINBASE_AGENT_KEY not set - AgentKey is an optional external partner source, so nothing was requested",
+   "error": null,
+   "liveTools": 0,
+   "resolvedIntents": 0,
+   "totalIntents": 5,
+   "calls": 0
   },
   "llm": {
    "enabled": false,
@@ -124,7 +133,8 @@
    "baseUrl": null
   },
   "intents": 20,
-  "signalSkills": 5
+  "signalSkills": 5,
+  "agentKeyIntents": 5
  },
  "extractor": {
   "mode": "rules",

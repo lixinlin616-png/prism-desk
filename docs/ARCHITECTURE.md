@@ -29,7 +29,7 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 设计上的三条硬约束：
 
 1. **零依赖。** 只用 Node ≥ 20 标准库。没有 `npm install`，没有构建步骤，评委 clone 下来就能跑。Web 前端是原生 HTML/CSS/JS。
-2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 193 个测试和 60 项验证检查成为可能。
+2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 208 个测试和 60 项验证检查成为可能。
 3. **LLM 不享有豁免权。** 配了 key 之后，LLM 抽取的卡片和规则抽取的卡片走**同一个证据账本、同一套打分规则**。模型说错数字，账本照样拦。
 
 ---
@@ -55,7 +55,8 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 | `corpus.mjs` | 加载 `data/corpus/*.json`，提供 `between(from, to)` 时间窗查询 |
 | `mcp-client.mjs` | MCP 传输层（JSON-RPC），带超时与 TTL 缓存 |
 | `bitget-market.mjs` | Bitget MCP Server：美股 / ETF 只读行情、财报日历、分析师预期 |
-| `bitget-signal.mjs` | Bitget Signal Skills：sentiment-analyst、macro-analyst 等 |
+| `bitget-signal.mjs` | Bitget Signal Skills：sentiment-analyst、macro-analyst 等。哪个频道调用哪个 Skill 由 `SKILL_TRIGGERS`（`src/desk/pipeline.mjs`）单点定义，`/api/capabilities` 也读它，所以不会声明一个从不调用的 Skill |
+| `chainbase.mjs` | 可选外部 Partner 源 Chainbase AgentKey（行情 / 链上 / 新闻 / 社媒）。无 key -> `disabled` 且不发任何请求；有 key 无端点 -> `error` 并说明原因；工具名一律走 `tools/list` 发现 + 模糊解析 |
 | `prices.mjs` | 真实日 OHLCV 价格库（`data/prices/*.csv`），供账本复算与事件研究使用 |
 | `fixtures.mjs` | 离线录制响应（`data/fixtures/mcp/`） |
 | `index.mjs` | `initHub()`：把上面这些装成一个 hub，并按 `PRISM_DATA_MODE` 决定 live / offline |
@@ -242,7 +243,7 @@ CLI `node prism.mjs review`（`--board` / `--as-of` / `--materiality` / `--json`
 ## 测试与验证
 
 ```bash
-npm test          # 193 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
+npm test          # 208 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
 npm run validate  # 60 项检查 -> docs/reports/validation.md
 npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 ```
@@ -268,7 +269,7 @@ src/
   config.mjs        环境与默认值（weights / 门槛 / 容差 / 路径）
   schema.mjs        卡片、证据、频道的 schema 与校验；CHANNELS 定义
   util/             http json csv num stats time log
-  ingest/           corpus mcp-client bitget-market bitget-signal prices fixtures index
+  ingest/           corpus mcp-client bitget-market bitget-signal chainbase prices fixtures index
   extract/          lexicon rules prompts llm index
   verify/ledger.mjs 证据账本
   score/rubric.mjs  五因子打分

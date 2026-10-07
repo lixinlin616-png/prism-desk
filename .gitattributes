@@ -1,0 +1,17 @@
+# This repo makes byte-level reproducibility claims about generated artefacts:
+#   "npm run seed twice -> identical SHA-256"
+#   "a bare `node prism.mjs demo` rebuilds docs/DEMO-TRANSCRIPT.md byte-for-byte"
+#   "npm run review:seed reproduces docs/reports/review.md from a fresh clone"
+#
+# Those claims are only checkable if git hands every clone the same bytes it
+# committed. With core.autocrlf=true (the Windows default) a fresh clone checks
+# out CRLF, the generators write LF, and the hashes differ for a reason that has
+# nothing to do with the engine - which is exactly the kind of unverifiable claim
+# this project exists to avoid. So: store LF, check out LF, everywhere.
+* text=auto eol=lf
+
+# Never touch these even if a future contributor's tooling disagrees.
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

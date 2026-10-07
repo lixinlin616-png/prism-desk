@@ -54,8 +54,17 @@ export const config = {
     cacheTtlMs: Number(process.env.PRISM_MCP_CACHE_TTL_MS ?? 60000),
   },
 
+  /**
+   * Chainbase AgentKey - the S2 external partner data source (optional).
+   *
+   * The endpoint is issued together with the key, so it has no default here:
+   * guessing a URL and shipping it would be an unverifiable claim about someone
+   * else's infrastructure. No key -> the provider reports itself disabled and
+   * never opens a socket.
+   */
   chainbase: {
     key: process.env.CHAINBASE_AGENT_KEY || '',
+    url: process.env.CHAINBASE_MCP_URL || '',
     get enabled() { return Boolean(this.key); },
   },
 

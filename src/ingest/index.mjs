@@ -5,6 +5,7 @@
  *   hub.signal    -> Bitget crypto research skills        (bitget-signal)
  *   hub.corpus    -> unstructured documents to distil     (data/corpus)
  *   hub.prices    -> local real daily OHLCV               (data/prices)
+ *   hub.chainbase -> optional external partner data       (Chainbase AgentKey)
  *
  * Every provider degrades to bundled offline data, so the demo, the tests and
  * the CI pipeline all run with no network and no keys.
@@ -16,6 +17,7 @@ import { BitgetMarketProvider, INTENTS, INTENT_DOCS } from './bitget-market.mjs'
 import { SignalProvider, SIGNAL_SKILLS, SIGNAL_SKILL_IDS } from './bitget-signal.mjs';
 import { Corpus } from './corpus.mjs';
 import { PriceBook } from './prices.mjs';
+import { ChainbaseProvider, AGENTKEY_INTENTS, AGENTKEY_INTENT_DOCS } from './chainbase.mjs';
 
 const log = logger('hub');
 
@@ -25,12 +27,12 @@ export class DataHub {
     this.signal = opts.signal ?? new SignalProvider();
     this.corpus = opts.corpus ?? new Corpus(config.paths.corpus).load();
     this.prices = opts.prices ?? new PriceBook(config.paths.prices).load();
-    this.chainbase = { enabled: config.chainbase.enabled };
+    this.chainbase = opts.chainbase ?? new ChainbaseProvider();
   }
 
   /** Best-effort connect of the network providers. Never throws in auto mode. */
   async connect() {
-    const results = await Promise.allSettled([this.market.connect(), this.signal.connect()]);
+    const results = await Promise.allSettled([this.market.connect(), this.signal.connect(), this.chainbase.connect()]);
     for (const r of results) if (r.status === 'rejected') log.warn(`provider connect failed: ${r.reason?.message}`);
     return this;
   }
@@ -62,19 +64,24 @@ export class DataHub {
       signal: this.signal.status(),
       corpus: this.corpus.stats(),
       prices: this.prices.stats(),
-      chainbase: this.chainbase,
+      chainbase: this.chainbase.status(),
       llm: { enabled: config.llm.enabled, model: config.llm.model, baseUrl: config.llm.baseUrl || null },
       intents: INTENTS.length,
       signalSkills: SIGNAL_SKILL_IDS.length,
+      agentKeyIntents: AGENTKEY_INTENTS.length,
     };
   }
 
-  capabilities() {
-    return {
-      intents: INTENTS.map((i) => ({ id: i, description: INTENT_DOCS[i] })),
-      skills: SIGNAL_SKILL_IDS.map((s) => ({ id: s, zh: SIGNAL_SKILLS[s].zh, capabilities: SIGNAL_SKILLS[s].capabilities })),
-    };
-  }
+  /**
+   * Deliberately no capabilities() here.
+   *
+   * There used to be one, uncalled, and server.mjs and scripts/export-static.mjs
+   * each carried their own copy of the same payload. Three hand-rolled versions
+   * of one contract is how the published demo ended up describing wiring the
+   * backend disagreed with. src/desk/capabilities.mjs is now the only builder;
+   * it cannot live here because it needs SKILL_TRIGGERS from the desk layer,
+   * which imports this module.
+   */
 }
 
 let singleton = null;
@@ -89,5 +96,6 @@ export async function initHub(opts = {}) {
   return hub;
 }
 
-export { INTENTS, INTENT_DOCS, SIGNAL_SKILLS, SIGNAL_SKILL_IDS };
+export { INTENTS, INTENT_DOCS, SIGNAL_SKILLS, SIGNAL_SKILL_IDS, AGENTKEY_INTENTS, AGENTKEY_INTENT_DOCS };
+export { ChainbaseProvider };
 export default DataHub;

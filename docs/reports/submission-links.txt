@@ -11,7 +11,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 193 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 208 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -21,11 +21,11 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 04. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-TRANSCRIPT.md
-    · 944 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
+    · 951 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
 
 05. [选交] 运行记录｜演示录屏（5 分钟评委动线）
     <video-url>
-    · 与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分
+    · 与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分。链接由参赛者提交时在表单填写，本仓库不托管视频
 
 06. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md
@@ -81,7 +81,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 18. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
     <xpost-url>
-    · 同一条链接另填在报名表独立的「X 传播推文链接」字段
+    · 必交且只能由参赛者本人发布：从 docs/X-POSTS.md 取第 1 帖发到 X 并引用转发官方指定推文，发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段；17 帖草稿与 86/86 合规校验见 docs/reports/x-posts.md
 
 19. [支撑] X 传播｜草稿全文与合规校验报表（17 / 17 帖 · 86 / 86 检查）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/X-POSTS.md
@@ -90,8 +90,8 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 —— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（9 张卡，账本 26 items / pass 22 / fail 0）
-node prism.mjs demo      # 逐字重建上面那份 944 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 193 / 193 · 0 跳过（全新 clone 亦然）
+node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）
+npm test                 # 208 / 208 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同

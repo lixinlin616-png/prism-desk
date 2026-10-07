@@ -68,7 +68,7 @@
 >
 > **刻意不做（2）模型不决定是否发布。** 发布由五因子加权打分（surprise 0.30 / corroboration 0.22 / asymmetry 0.20 / tradability 0.18 / freshness 0.10）与 45/100 门槛决定，**每个因子都返回一句可审计的书面理由**。此外 `hydrate()` 会**强制钳制模型的越界输出**：非法的 direction / horizon / instruments / conviction 被改写成合法值，超长 quote 被截断 —— 有专门的测试钉住这个行为。
 >
-> **二、架构：双抽取器 + 对账。** 确定性规则抽取器与 LLM 抽取器并行运行，由 `src/extract/index.mjs` 对账去重。**不配任何 key 时系统走纯规则路径，完整可运行**（193 个测试全部基于这条路径，`npm run validate` 60 项检查全绿）。这是刻意的：一个无法在没有模型时运行的投研工具，你没法测量它的模型部分究竟贡献了什么。有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
+> **二、架构：双抽取器 + 对账。** 确定性规则抽取器与 LLM 抽取器并行运行，由 `src/extract/index.mjs` 对账去重。**不配任何 key 时系统走纯规则路径，完整可运行**（208 个测试全部基于这条路径，`npm run validate` 60 项检查全绿）。这是刻意的：一个无法在没有模型时运行的投研工具，你没法测量它的模型部分究竟贡献了什么。有了确定性基线，LLM 路径才是可度量、可对比、可回退的增量。
 >
 > **三、用了哪些模型 / 接口。** 模型层是 **OpenAI 兼容端点**，可插拔：默认 `gpt-4o-mini`；通过 `PRISM_LLM_BASE_URL` / `PRISM_LLM_API_KEY` / `PRISM_LLM_MODEL` 三个环境变量切换到任意兼容模型。数据层接 **Bitget MCP Server**（`https://agent.bitget.com/mcp`，美股/ETF 行情、财报日历、分析师预期）与 **Bitget Signal Skills**（sentiment-analyst、macro-analyst），三种数据模式 `auto / live / offline`，每个数据快照都标注 origin，可追溯是实时端点还是录制 fixture。价格数据来自 Nasdaq 公开 chart API（25 symbols / 41,386 根真实日 K）。
 >
@@ -112,7 +112,7 @@ npm run submission -- ^
 | 官方必交材料（原文要点） | 本项目对应 | 状态 |
 |---|---|---|
 | **项目链接**：可访问的 Demo 或项目地址；GitHub 仓库须为 **public** 且含**完整 README**；若项目需登录才能访问，则必须另附演示视频 | 在线 Demo（**无需登录 / 无需 key**，因此不触发"必须另附视频"这条）+ public 仓库，`README.md` 含 30 秒上手、六场景表、命令表、HTTP API、架构概览、**诚实性声明 8 条**、数据与可复现性、文档索引、目录结构 | ✅ 仓库已 public；在线 Demo 已发布在 GitHub Pages（静态回放，无需登录，因此不触发"必须另附视频"这条） |
-| **运行记录**：AI Trading Desk 交**完整投研任务的演示或录屏** | `docs/DEMO-SCRIPT.md`（讲解版：提问 → PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT → REVIEW 逐环节拆解）+ `docs/DEMO-TRANSCRIPT.md`（944 行原始逐字稿，机器生成非手写，裸跑 `node prism.mjs demo` 可逐字重建）+ 录屏（选交） | ✅ |
+| **运行记录**：AI Trading Desk 交**完整投研任务的演示或录屏** | `docs/DEMO-SCRIPT.md`（讲解版：提问 → PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT → REVIEW 逐环节拆解）+ `docs/DEMO-TRANSCRIPT.md`（951 行原始逐字稿，机器生成非手写，裸跑 `node prism.mjs demo` 可逐字重建）+ 录屏（选交） | ✅ |
 | **回测报告须附生成该报告的代码或 notebook，不接受纯截图** | `docs/reports/review.md`（事后判分：235 卡 → 115 主张 → 34 决出，命中率 29.4%，rho -0.138 被系统自标 BLOCKER）**+ 生成它的代码** `prism.mjs`（`npm run review:seed`）与 `scripts/build-seed.mjs`（看板 fixture 连续两次重建 SHA-256 相同） | ✅ 全部为代码生成的 markdown，**零截图** |
 | **X 传播推文链接**（报名表独立字段） | 推文链接 + `docs/X-POSTS.md`（17 / 17 帖 · 86 / 86 检查：#BitgetHackathon、@Bitget_AI、实质性文案 ≥40 权重单位、长度、引用转发官方推文） | ⬜ 草稿与校验已就绪，**待发布后填 URL** |
 
