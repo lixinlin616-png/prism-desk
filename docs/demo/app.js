@@ -440,6 +440,11 @@ async function ask(question, { channels = null, note = null } = {}) {
     if (!run) throw new Error('stream closed without a run payload');
     state.lastRun = run;
     state.turns += 1;
+    if (run.replayNote) {
+      turn.body.prepend(el('div', { class: 'coverage' }, [
+        el('b', { text: 'Static replay' }), ` ${esc(run.replayNote)}`,
+      ]));
+    }
     renderRun(turn, run);
     await Promise.all([refreshBoard(), refreshStatus()]);
     renderChannels();
@@ -839,6 +844,7 @@ function closeDrawer() {
 /** The dossier: everything a reader needs to decide whether to trust the card. */
 async function openCard(id) {
   const body = openDrawer('Card dossier');
+  body.replaceChildren(el('div', { class: 'board-empty', text: 'loading the dossier bundle (about 2 MB the first time a card is opened)…' }));
   let data;
   try {
     data = await api(`/api/card/${encodeURIComponent(id)}`);

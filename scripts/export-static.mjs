@@ -254,10 +254,18 @@ async function main() {
   const html = readFileSync(join(OUT, 'index.html'), 'utf8');
   const moduleTag = '<script type="module" src="./app.js"></script>';
   if (!html.includes(moduleTag)) throw new Error('web/index.html no longer loads ./app.js the way the exporter expects');
-  writeFileSync(join(OUT, 'index.html'), html.replace(moduleTag,
+  let siteHtml = html.replace(moduleTag,
     '<!-- static replay: answers /api/* from ./data, recorded by scripts/export-static.mjs -->\n'
     + '<script src="./static-adapter.js"></script>\n'
-    + moduleTag), 'utf8');
+    + moduleTag);
+  // Cache-bust the mutable assets: a visitor holding a broken cached build must
+  // heal on a plain reload, not only on a hard refresh.
+  const { createHash } = await import('node:crypto');
+  const stamp = (file) => createHash('sha256').update(readFileSync(join(OUT, file))).digest('hex').slice(0, 10);
+  for (const [file, attr] of [['styles.css', 'href'], ['static-adapter.js', 'src'], ['app.js', 'src']]) {
+    siteHtml = siteHtml.split(`${attr}="./${file}"`).join(`${attr}="./${file}?v=${stamp(file)}`);
+  }
+  writeFileSync(join(OUT, 'index.html'), siteHtml, 'utf8');
   writeFileSync(join(OUT, '.nojekyll'), '', 'utf8');
   writeFileSync(join(ROOT, 'docs', '.nojekyll'), '', 'utf8');
 

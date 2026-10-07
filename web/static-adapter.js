@@ -133,7 +133,7 @@
       note(`as-of ${asOf} ignored - the bundle replays the recorded clock ${chosen.asOf}.`);
     }
     if (how !== 'exact question') note(`no recorded answer for that question; replaying "${chosen.label}" (${how}).`);
-    return { entry: chosen, bundle, run: runFrame.data };
+    return { entry: chosen, bundle, run: runFrame.data, how };
   }
 
   /** A real ReadableStream, so app.js's SSE parser is doing real work. */
@@ -177,8 +177,12 @@
         ledger: picked.run.ledger,
       });
       state.replayed = state.replayed.slice(0, 20);
-      if (body.stream === false) return jsonResponse({ ok: true, run: picked.run });
-      return sse(picked.bundle.frames);
+      const replayNote = `no live engine in the browser - replaying the recorded run "${picked.entry.label}" (${picked.how}); every number below is that run's real engine output`;
+      const annotated = picked.bundle.frames.map((f) => (f.event === 'run'
+        ? { ...f, data: { ...f.data, replayNote } }
+        : f));
+      if (body.stream === false) return jsonResponse({ ok: true, run: { ...picked.run, replayNote } });
+      return sse(annotated);
     }
 
     // Refused, not faked: a replay cannot distil a document it has never seen.

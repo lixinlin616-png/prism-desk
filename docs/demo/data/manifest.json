@@ -1,6 +1,6 @@
 {
  "builtBy": "scripts/export-static.mjs",
- "exportedAt": "2026-10-07T01:44:39.565Z",
+ "exportedAt": "2026-10-07T02:01:34.097Z",
  "engine": {
   "dataMode": "offline",
   "extractor": "rules",
@@ -88,57 +88,57 @@
  "runs": [
   {
    "scenarioId": "full-sweep",
-   "runId": "RUN-MUXG30Z4",
+   "runId": "RUN-MUXGORQC",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 9,
    "published": 9,
    "quarantined": 0,
-   "ms": 58
+   "ms": 59
   },
   {
    "scenarioId": "earnings-gap",
-   "runId": "RUN-MUXG3101",
+   "runId": "RUN-MUXGORR6",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 4,
    "published": 4,
    "quarantined": 0,
-   "ms": 31
+   "ms": 28
   },
   {
    "scenarioId": "macro-transmission",
-   "runId": "RUN-MUXG310Z",
+   "runId": "RUN-MUXGORS3",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 2,
    "published": 2,
    "quarantined": 0,
-   "ms": 30
+   "ms": 29
   },
   {
    "scenarioId": "closed-window",
-   "runId": "RUN-MUXG311V",
+   "runId": "RUN-MUXGORSZ",
    "asOf": "2025-09-13T15:00:00Z",
    "cards": 3,
    "published": 2,
    "quarantined": 0,
-   "ms": 31
+   "ms": 30
   },
   {
    "scenarioId": "flows",
-   "runId": "RUN-MUXG312R",
+   "runId": "RUN-MUXGORTW",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 2,
    "published": 2,
    "quarantined": 0,
-   "ms": 30
+   "ms": 31
   },
   {
    "scenarioId": "risk",
-   "runId": "RUN-MUXG313M",
+   "runId": "RUN-MUXGORUR",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
-   "ms": 30
+   "ms": 29
   }
  ],
  "review": {
