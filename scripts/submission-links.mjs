@@ -82,7 +82,7 @@ export const MANIFEST = [
     type: '运行记录｜演示录屏（5 分钟评委动线）',
     target: 'video',
     required: '选交',
-    what: '与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分',
+    what: '与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分。链接由参赛者提交时在表单填写，本仓库不托管视频',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -173,7 +173,7 @@ export const MANIFEST = [
     type: 'X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）',
     target: 'xpost',
     required: '必交',
-    what: '同一条链接另填在报名表独立的「X 传播推文链接」字段',
+    what: '必交且只能由参赛者本人发布：从 docs/X-POSTS.md 取第 1 帖发到 X 并引用转发官方指定推文，发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段；17 帖草稿与 86/86 合规校验见 docs/reports/x-posts.md',
   },
   {
     section: '必交 · X 传播',

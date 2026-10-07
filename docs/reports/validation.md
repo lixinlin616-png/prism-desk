@@ -1,6 +1,6 @@
 # Prism Desk - validation report
 
-Generated 2026-10-06T14:20:59.699Z by `npm run validate` in 820ms.
+Generated 2026-10-07T02:49:54.675Z by `npm run validate` in 799ms.
 
 **60/60 checks passed**. Node v24.21.0, data mode `offline`, extractor `rules`.
 
@@ -59,7 +59,7 @@ Generated 2026-10-06T14:20:59.699Z by `npm run validate` in 820ms.
 | PASS | `publish-floor` | no card is published below the configured threshold | threshold 45, lowest published 49 |
 | PASS | `quarantine-respected` | no quarantined card is marked active | 7 published, 0 quarantined among them |
 | PASS | `coverage-reported` | the run reports names it stayed silent on | 1 silent name(s) reported |
-| PASS | `brief-rendered` | the brief renders as markdown | 16301 chars of markdown with its heading |
+| PASS | `brief-rendered` | the brief renders as markdown | 16308 chars of markdown with its heading |
 
 ## determinism
 

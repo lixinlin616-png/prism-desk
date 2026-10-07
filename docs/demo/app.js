@@ -184,6 +184,7 @@ async function boot() {
     renderChannels();
     renderWiring();
     renderScenarios();
+    if (window.PRISM_STATIC_BUNDLE) coachStatic();
     await refreshBoard();
     toast(`Desk online - ${caps.corpus?.documents ?? 0} documents, ${caps.prices?.symbols ?? 0} symbols, ${(caps.intents || []).length} MCP intents wired`, 'ok');
   } catch (err) {
@@ -229,6 +230,17 @@ async function retryBoot() {
   await boot();
 }
 
+/** First-run guidance, static bundle only: a live server needs no coach. */
+function coachStatic() {
+  const empty = $('#emptyState');
+  if (!empty || empty.dataset.coached) return;
+  empty.dataset.coached = '1';
+  empty.append(el('p', {
+    class: 'dim',
+    html: '第一次打开？点上方 <b>Full desk sweep</b> 看「提问 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路；或直接在下面输入框打字后回车。<br />First time? Click <b>Full desk sweep</b> above, or type a question and press Enter.',
+  }));
+}
+
 function renderBootError(err) {
   const thread = $('#thread');
   thread.textContent = '';
@@ -272,9 +284,14 @@ function renderPills() {
 
   const data = $('#pillData');
   const stateName = market.state || s.config?.dataMode || 'unknown';
+  // On the published replay the mode is honestly 'offline'; say what that
+  // means here so the pill does not read as 'nothing is wired'.
+  const shownName = document.documentElement.dataset.prismStatic && stateName === 'offline'
+    ? 'offline · replay bundle'
+    : stateName;
   const live = stateName === 'live';
   data.className = `pill ${live ? 'ok' : stateName === 'fixture' || stateName === 'offline' ? 'warn' : 'live'}`;
-  data.innerHTML = `data <b>${esc(stateName)}</b> ${esc(String(market.resolvedIntents ?? 0))}/${esc(String(market.totalIntents ?? 0))} intents`;
+  data.innerHTML = `data <b>${esc(shownName)}</b> ${esc(String(market.resolvedIntents ?? 0))}/${esc(String(market.totalIntents ?? 0))} intents`;
   data.title = `mode ${esc(s.config?.dataMode || '?')} - ${esc(market.url || '')}${market.error ? `\nlast error: ${esc(market.error)}` : ''}`;
 
   const llm = $('#pillLlm');
