@@ -8,8 +8,8 @@
    "question": "Full desk sweep across every channel - what is actually tradeable right now?",
    "asOf": "2025-09-19T20:00:00Z",
    "channels": null,
-   "runId": "RUN-MUXIISJQ",
-   "ms": 60,
+   "runId": "RUN-MUXIOWTQ",
+   "ms": 58,
    "mode": "rules",
    "cards": 9,
    "published": 9,
@@ -36,7 +36,7 @@
     "earnings-gap",
     "risk-flag"
    ],
-   "runId": "RUN-MUXIISKM",
+   "runId": "RUN-MUXIOWUM",
    "ms": 30,
    "mode": "rules",
    "cards": 4,
@@ -63,8 +63,8 @@
    "channels": [
     "macro-transmission"
    ],
-   "runId": "RUN-MUXIISLL",
-   "ms": 30,
+   "runId": "RUN-MUXIOWVJ",
+   "ms": 28,
    "mode": "rules",
    "cards": 2,
    "published": 2,
@@ -91,8 +91,8 @@
     "closed-window",
     "cross-asset"
    ],
-   "runId": "RUN-MUXIISMI",
-   "ms": 31,
+   "runId": "RUN-MUXIOWWF",
+   "ms": 30,
    "mode": "rules",
    "cards": 3,
    "published": 2,
@@ -118,8 +118,8 @@
    "channels": [
     "flow-footprint"
    ],
-   "runId": "RUN-MUXIISNE",
-   "ms": 30,
+   "runId": "RUN-MUXIOWX9",
+   "ms": 28,
    "mode": "rules",
    "cards": 2,
    "published": 2,
@@ -146,8 +146,8 @@
     "risk-flag",
     "narrative-shift"
    ],
-   "runId": "RUN-MUXIISOA",
-   "ms": 30,
+   "runId": "RUN-MUXIOWY5",
+   "ms": 29,
    "mode": "rules",
    "cards": 3,
    "published": 3,

@@ -1,6 +1,6 @@
 # Signal review - what the desk actually got right
 
-Generated 2026-10-07T02:52:54.350Z by `node prism.mjs review`. Adjudicated as of 2025-09-30T23:59:59.000Z against the bundled real-price dataset; no network access required to reproduce.
+Generated 2026-10-07T02:57:39.829Z by `node prism.mjs review`. Adjudicated as of 2025-09-30T23:59:59.000Z against the bundled real-price dataset; no network access required to reproduce.
 
 ## Question
 
