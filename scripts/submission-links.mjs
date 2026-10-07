@@ -174,7 +174,7 @@ const FOOTER = [
   '—— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——',
   'git clone <repo-url> && cd prism-desk',
   'node prism.mjs doctor    # 数据接线自检 + smoke run（12 张卡，账本 29 items / pass 26 / fail 0）',
-  'node prism.mjs demo      # 逐字重建上面那份 951 行逐字稿（as-of 由场景钉死，无需传参）',
+  'node prism.mjs demo      # 逐字重建上面那份 1031 行逐字稿（as-of 由场景钉死，无需传参）',
   `npm test                 # ${TEST_COUNT} / ${TEST_COUNT} · 0 跳过（全新 clone 亦然）`,
   'npm run validate         # 60 / 60 -> docs/reports/validation.md',
   'npm run replay           # 重跑两份真实价格事件研究',
