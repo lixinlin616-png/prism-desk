@@ -37,7 +37,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 211;
+export const TEST_COUNT = 208;
 
 /**
  * The submission manifest, in the order it is printed.
