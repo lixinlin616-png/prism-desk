@@ -6,9 +6,33 @@ export function nowIso() {
   return new Date().toISOString();
 }
 
+/**
+ * A timestamp with no zone on it is read as UTC, never as host-local time.
+ *
+ * `new Date('2025-09-19T20:00')` is local time by spec, so an as-of that arrives
+ * zone-less - the web `datetime-local` format, a curl body, `--as-of=...` - would
+ * move the desk clock by the server's UTC offset. That silently changes the US
+ * session state (the input the closed-window channel runs on) and the freshness
+ * decay, so the same question returns different cards depending on where the
+ * server happens to be. Everything else in this project is UTC, so a bare time
+ * means UTC here too.
+ */
+const DATE_ONLY_RE = /^\d{4}-\d{2}-\d{2}$/;
+const ZONELESS_RE = /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?$/;
+
 export function parseDate(v) {
   if (v instanceof Date) return v;
-  const d = new Date(typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? `${v}T00:00:00Z` : v);
+  if (typeof v === 'string') {
+    const s = v.trim();
+    if (DATE_ONLY_RE.test(s)) return toDateOrNull(`${s}T00:00:00Z`);
+    if (ZONELESS_RE.test(s)) return toDateOrNull(`${s.replace(' ', 'T')}Z`);
+    return toDateOrNull(s);
+  }
+  return toDateOrNull(v);
+}
+
+function toDateOrNull(v) {
+  const d = new Date(v);
   return Number.isNaN(d.getTime()) ? null : d;
 }
 

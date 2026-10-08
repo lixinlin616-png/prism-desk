@@ -22,7 +22,7 @@
  *     --out=docs/reports/submission-links.txt
  */
 
-import { existsSync, readFileSync as fsRead, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync as fsRead, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -32,12 +32,27 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
 
 /**
- * The suite size. This is the ONE number in the submission box that cannot be
- * re-read from a generated artefact, so it is declared once here and interpolated
- * everywhere it appears; `npm test` is its authority and `--check` says so out
- * loud instead of implying it was verified.
+ * The suite size, counted from the test sources instead of being declared.
+ *
+ * Every case in tests/*.test.mjs is a top-level test(...) declaration, so counting
+ * those lines reproduces what `node --test` reports. This used to be a
+ * hand-written constant and it went stale - the submission box said 211 while the
+ * suite had 219 - which is exactly the drift this script exists to prevent.
+ * `npm test` remains the authority on whether they pass, and `--check` still says
+ * out loud that the count is declared, not executed.
  */
-export const TEST_COUNT = 219;
+export const TEST_COUNT = countDeclaredTests();
+
+function countDeclaredTests() {
+  const dir = resolve(ROOT, 'tests');
+  if (!existsSync(dir)) return 0;
+  let total = 0;
+  for (const name of readdirSync(dir).sort()) {
+    if (!name.endsWith('.test.mjs')) continue;
+    total += fsRead(join(dir, name), 'utf8').split('\n').filter((line) => /^test\(/.test(line)).length;
+  }
+  return total;
+}
 
 /**
  * The submission manifest, in the order it is printed.

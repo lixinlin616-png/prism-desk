@@ -38,6 +38,7 @@ import { runGapStudy } from './src/research/gap-study.mjs';
 import { runReview } from './src/review/adjudicate.mjs';
 import { renderReviewReport } from './src/review/report.mjs';
 import { sseFrame } from './src/util/http.mjs';
+import { parseDate } from './src/util/time.mjs';
 
 const log = logger('server');
 
@@ -201,12 +202,12 @@ export async function buildApp({ pipeline } = {}) {
    */
   function review(asOfParam) {
     const bookTo = desk.hub.prices.stats().to;
-    const parsed = asOfParam ? new Date(asOfParam) : new Date(`${bookTo}T23:59:59Z`);
+    const parsed = (asOfParam ? parseDate(asOfParam) : null) || new Date(`${bookTo}T23:59:59Z`);
     return runReview({
       board: desk.board,
       book: desk.hub.prices,
       corpus: desk.hub.corpus,
-      asOf: Number.isNaN(parsed.getTime()) ? new Date() : parsed,
+      asOf: parsed,
       persist: false,
     });
   }
@@ -238,7 +239,7 @@ export async function buildApp({ pipeline } = {}) {
         const body = await readBody(req);
         const question = String(body.question || '').trim();
         if (!question) return send(res, 400, { ok: false, error: 'question is required' });
-        const asOf = body.asOf ? new Date(body.asOf) : new Date();
+        const asOf = (body.asOf ? parseDate(body.asOf) : null) || new Date();
         const stream = body.stream !== false;
 
         if (!stream) {

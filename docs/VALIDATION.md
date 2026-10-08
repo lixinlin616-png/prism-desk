@@ -9,7 +9,7 @@
 
 | 指标 | 数值 | 类型 | 复现方式 |
 |---|---|---|---|
-| 单元/集成测试 | **219 / 219 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
+| 单元/集成测试 | **220 / 220 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过** | 实测 | `npm run validate` |
 | 价格数据集 | 25 symbols · **41,386** 根日 K · 2019-01-02 → 2025-09-30 | 实测 | `data/prices/*.csv` |
 | 语料 | 14 篇文档 · 2,599 词 | 实测 | `data/corpus/` |
@@ -263,7 +263,7 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 ## 7. 一键复现
 
 ```bash
-npm test            # 219 / 219
+npm test            # 220 / 220
 npm run validate    # 60 / 60 -> docs/reports/validation.md
 npm run replay      # 两份研究 -> docs/reports/transmission-study.md, gap-study.md
 npm run seed        # 重建看板 fixture（逐字节确定）-> data/fixtures/board-seed.json

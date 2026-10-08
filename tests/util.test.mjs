@@ -48,6 +48,21 @@ test('parseDate accepts ISO strings and bare dates, and rejects junk', () => {
   assert.equal(toDateStr('not a date'), null);
 });
 
+test('a zone-less timestamp is UTC, not the host timezone', () => {
+  // The web clock, a curl body and --as-of can all arrive with no zone on them.
+  // Read as host-local time they move the desk clock by the server's UTC offset,
+  // which changes the session state the closed-window channel runs on and the
+  // freshness decay - so the same question returns different cards in Shanghai
+  // than it does on a UTC box. Pinned here so that cannot come back.
+  for (const bare of ['2025-09-19T20:00', '2025-09-19T20:00:00', '2025-09-19 20:00:00', '2025-09-19T20:00:00.000']) {
+    assert.equal(parseDate(bare).toISOString(), '2025-09-19T20:00:00.000Z', `${bare} must parse as UTC`);
+    assert.equal(sessionState(bare).state, sessionState('2025-09-19T20:00:00Z').state, `${bare} must not shift the session`);
+    assert.equal(toDateStr(bare), '2025-09-19');
+  }
+  assert.equal(parseDate('2025-09-19T20:00:00Z').toISOString(), '2025-09-19T20:00:00.000Z');
+  assert.equal(parseDate('2025-09-13').toISOString(), '2025-09-13T00:00:00.000Z');
+});
+
 test('every horizon has an expiry and expiryFor applies it', () => {
   const from = '2025-09-13T15:00:00Z';
   for (const [label, h] of Object.entries(HORIZONS)) {

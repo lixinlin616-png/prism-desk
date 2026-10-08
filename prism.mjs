@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { config } from './src/config.mjs';
 import { logger } from './src/util/log.mjs';
-import { toDateStr } from './src/util/time.mjs';
+import { parseDate, toDateStr } from './src/util/time.mjs';
 import { Pipeline } from './src/desk/pipeline.mjs';
 import { boardCsv, renderCard } from './src/desk/brief.mjs';
 import { CHANNEL_IDS } from './src/schema.mjs';
@@ -98,8 +98,8 @@ function parseFlags(argv) {
 
 function asOfFrom(flags) {
   if (!flags['as-of']) return new Date();
-  const d = new Date(flags['as-of']);
-  if (Number.isNaN(d.getTime())) {
+  const d = parseDate(flags['as-of']);
+  if (!d) {
     log.warn(`could not parse --as-of="${flags['as-of']}", falling back to now`);
     return new Date();
   }
@@ -223,7 +223,7 @@ async function cmdDemo(flags) {
     // An explicit --as-of always wins; otherwise the scenario's pinned clock.
     // Scenarios are pinned to the bundled data window so that `demo` replays
     // identically whenever a judge runs it (see SCENARIOS in server.mjs).
-    const asOf = flags['as-of'] ? asOfFrom(flags) : (sc.asOf ? new Date(sc.asOf) : new Date());
+    const asOf = flags['as-of'] ? asOfFrom(flags) : ((sc.asOf ? parseDate(sc.asOf) : null) || new Date());
     const run = await desk.runTask({
       question: sc.question,
       asOf,

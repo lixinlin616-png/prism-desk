@@ -11,7 +11,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 211 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 220 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -67,7 +67,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 15. [支撑] 在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）
     https://github.com/lixinlin616-png/prism-desk/blob/main/scripts/export-static.mjs
-    · npm run export:static 用真实离线引擎跑完六个场景，并额外录下四条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
+    · npm run export:static 用真实离线引擎跑完六个场景，并额外录下七条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
 
 16. [支撑] 部署说明（五条上线路径，逐项标注本环境验证到什么程度）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEPLOY.md
@@ -83,7 +83,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（13 张卡，11 发布 / 2 低于阈值；账本 30 items / pass 27 / fail 0 / unverifiable 3 / 90%）
 node prism.mjs demo      # 逐字重建上面那份 1079 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 211 / 211 · 0 跳过（全新 clone 亦然）
+npm test                 # 220 / 220 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同
