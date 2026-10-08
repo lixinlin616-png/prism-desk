@@ -1,6 +1,6 @@
 # Signal review - what the desk actually got right
 
-Generated 2026-10-08T02:48:41.747Z by `node prism.mjs review`. Adjudicated as of 2025-09-30T23:59:59.000Z against the bundled real-price dataset; no network access required to reproduce.
+Generated 2026-10-08T05:40:56.213Z by `node prism.mjs review`. Adjudicated as of 2025-09-30T23:59:59.000Z against the bundled real-price dataset; no network access required to reproduce.
 
 ## Question
 
@@ -44,6 +44,7 @@ It answers two questions that are usually blurred together:
 | non-directional (neutral / hedge) | 29 |
 | measured through a declared demo proxy | 44 |
 | Spearman rho, score vs realised excess | **-0.137** (n=45) |
+| most inverted factor | **asymmetry** at -0.261 (weights unchanged) |
 
 ## Calibration - does the score rank?
 
@@ -80,6 +81,20 @@ Measured on 45 claims with a finite realised excess, drawn from 6 distinct infor
 | short | 17 | 12 | 1 | 8.3% | -2.876% |
 | long | 11 | 9 | 5 | 55.6% | 1.122% |
 | avoid | 2 | 2 | 2 | 100% | 5.947% |
+
+### Per-factor diagnosis - which term inverts the ranking
+
+Same 45 claims and the same realised excess as the total rho above, each factor correlated on its own. `w` is the weight the rubric actually uses; nothing in this table changes it.
+
+| factor | w | rho vs realised excess | n | reading |
+| --- | ---: | ---: | ---: | --- |
+| asymmetry | 0.2 | **-0.261** | 45 | INVERTED - higher factor score, worse realised outcome |
+| tradability | 0.18 | **-0.133** | 45 | INVERTED - higher factor score, worse realised outcome |
+| freshness | 0.1 | **-0.037** | 45 | no monotone signal |
+| corroboration | 0.22 | **-0.028** | 45 | no monotone signal |
+| surprise | 0.3 | **0.045** | 45 | no monotone signal |
+
+The most inverted factor is **asymmetry**. That is a diagnosis, not a fix: the weights stay where they are, because re-weighting against 45 non-independent claims would be fitting noise. The rubric branch that emits this factor is the thing to repair.
 
 ### Does the publish floor earn its place?
 
@@ -272,7 +287,13 @@ Each finding cites the measurement that produced it. Nothing here is applied aut
 
 - **Finding.** Spearman rho between card score and signed benchmark-excess return is -0.137 (n=45): higher scores realised WORSE signed excess returns - the rubric is miscalibrated in sign.
 - **Evidence.** `rho=-0.137, n=45`
-- **Action.** Find and repair the offending factor before publishing anything on this rubric.
+- **Action.** Find and repair the offending factor before publishing anything on this rubric. The per-factor diagnosis below names the candidate: asymmetry.
+
+### [BLOCKER] `factor-diagnosis`
+
+- **Finding.** Per-factor Spearman rho against realised signed excess, same 45 claims: asymmetry -0.261 (w=0.2, n=45); tradability -0.133 (w=0.18, n=45); freshness -0.037 (w=0.1, n=45); corroboration -0.028 (w=0.22, n=45); surprise 0.045 (w=0.3, n=45). The most inverted factor is asymmetry at -0.261; 0 of 5 point the right way (none).
+- **Evidence.** `rho[asymmetry]=-0.261,n=45 rho[tradability]=-0.133,n=45 rho[freshness]=-0.037,n=45 rho[corroboration]=-0.028,n=45 rho[surprise]=0.045,n=45`
+- **Action.** Weights unchanged on purpose. Re-read the asymmetry branch in src/score/rubric.mjs against the reason strings it emits and fix the scoring rule; do not re-weight to make the total look better on this sample.
 
 ### [WARNING] `coverage-gap`
 

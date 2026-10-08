@@ -1,8 +1,8 @@
 # Prism Desk - validation report
 
-Generated 2026-10-08T02:41:40.538Z by `npm run validate` in 935ms.
+Generated 2026-10-08T05:40:59.648Z by `npm run validate` in 589ms.
 
-**60/60 checks passed**. Node v22.23.3, data mode `offline`, extractor `rules`.
+**60/60 checks passed**. Node v24.21.0, data mode `offline`, extractor `rules`.
 
 | suite | checks | passed |
 | --- | ---: | ---: |
@@ -92,7 +92,7 @@ Generated 2026-10-08T02:41:40.538Z by `npm run validate` in 935ms.
 | PASS | `auditable` | every adjudicated claim carries a written basis | 11 claims, each with a human-readable basis naming the test that produced the verdict |
 | PASS | `lessons-cite-numbers` | every finding cites the measurement that produced it | 6 findings, each with a numeric evidence string and a concrete action |
 | PASS | `small-sample-flagged` | a sample too small to support a conclusion is flagged as a blocker | 2 decided claims - the report leads with a sample-too-small blocker rather than quoting the hit rate as a result |
-| PASS | `report-renders` | the review report renders as markdown with its caveats intact | 10692 characters; states plainly that it is not a backtest and that no costs are netted out |
+| PASS | `report-renders` | the review report renders as markdown with its caveats intact | 11377 characters; states plainly that it is not a backtest and that no costs are netted out |
 | PASS | `deterministic` | the same board at the same date gives the same verdicts | verdicts are reproducible, so a judge can regenerate this report from a clean clone |
 | PASS | `read-only-by-default` | reviewing never mutates stored card state unless asked | the default pass is read-only, so running the review cannot corrupt the demo board |
 

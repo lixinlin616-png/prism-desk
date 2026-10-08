@@ -10,6 +10,7 @@
  */
 
 import { config } from '../config.mjs';
+import { toDateStr } from '../util/time.mjs';
 import { logger } from '../util/log.mjs';
 import { McpClient } from './mcp-client.mjs';
 import { FixtureStore } from './fixtures.mjs';
@@ -72,8 +73,24 @@ export const INTENT_DOCS = {
   marketMovers: 'Top gainers / losers / most active',
 };
 
+/**
+ * Intents answered by computing over the bundled real daily OHLCV book rather
+ * than by replaying a recorded tool response.
+ *
+ * These two are the intents whose answer this repo already owns: data/prices is
+ * real end-of-day US equity/ETF data with its provenance and refresh procedure
+ * written down in scripts/fetch-prices.mjs. Serving them from a synthetic
+ * fixture would mean inventing prices in the same directory as real ones, so
+ * they are computed instead - and both honour the task clock, because a series
+ * that leaked bars past `asOf` would let a card see its own outcome.
+ */
+const COMPUTED_FROM_PRICE_BOOK = {
+  history: 'daily OHLCV bars sliced from the bundled real price book, cut at the task clock',
+  marketMovers: 'gainers / losers / most active ranked across the bundled price book on the task date',
+};
+
 export class BitgetMarketProvider {
-  constructor({ url = config.mcp.url, mode = config.mcp.mode, fixtureDir = config.paths.fixtures } = {}) {
+  constructor({ url = config.mcp.url, mode = config.mcp.mode, fixtureDir = config.paths.fixtures, prices = null } = {}) {
     this.url = url;
     this.mode = mode; // auto | live | offline
     this.client = new McpClient({ url, timeoutMs: config.mcp.timeoutMs });
@@ -81,6 +98,7 @@ export class BitgetMarketProvider {
     this.resolution = new Map(); // intent -> live tool name
     this.state = 'idle'; // idle | live | offline | error
     this.error = null;
+    this.prices = prices; // local real price book, for the computed intents
     this.cache = new Map();
     this.callLog = [];
   }
@@ -136,6 +154,155 @@ export class BitgetMarketProvider {
     return out;
   }
 
+  /**
+   * Hand the provider the local real price book.
+   *
+   * Called by DataHub after construction so an injected provider (the tests do
+   * this) gets the same computed intents as the default one, and so the book is
+   * loaded exactly once for the whole hub.
+   */
+  attachPrices(book) {
+    this.prices = book ?? null;
+    this.cache.clear();
+    return this;
+  }
+
+  /** Bars up to the task clock, never past it. */
+  _barsAsOf(symbol, args = {}) {
+    const cut = args.asOf || args.to || args.until || null;
+    const cutStr = cut ? toDateStr(cut) : null;
+    const bars = this.prices.bars(symbol);
+    return cutStr ? bars.filter((b) => b.date <= cutStr) : bars;
+  }
+
+  _computedHistory(args = {}) {
+    const symbol = String(args.ticker || '').toUpperCase();
+    if (!symbol || !this.prices?.has(symbol)) return null;
+    const bars = this._barsAsOf(symbol, args);
+    if (!bars.length) return null;
+    const want = Number(args.limit ?? args.count);
+    const slice = Number.isFinite(want) && want > 0 ? bars.slice(-want) : bars;
+    return {
+      symbol,
+      interval: '1d',
+      count: slice.length,
+      from: slice[0].date,
+      to: slice[slice.length - 1].date,
+      bars: slice.map((b) => ({ date: b.date, open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume })),
+      source: 'computed from data/prices (real bundled end-of-day OHLCV)',
+      synthetic: false,
+    };
+  }
+
+  /**
+   * Movers over the bundled book only.
+   *
+   * The universe is the repo's 25 price series, not "the US market", and the
+   * payload says so: a top-gainers list that quietly covered 25 names while
+   * reading like a market scan is the kind of overstatement this codebase exists
+   * to prevent.
+   */
+  _computedMovers(args = {}) {
+    if (!this.prices?.symbols?.().length) return null;
+    const want = Number(args.limit ?? args.count);
+    const limit = Number.isFinite(want) && want > 0 ? want : 5;
+    const rows = [];
+    for (const symbol of this.prices.symbols()) {
+      const bars = this._barsAsOf(symbol, args);
+      if (bars.length < 2) continue;
+      const last = bars[bars.length - 1];
+      const prev = bars[bars.length - 2];
+      if (!prev.close || !Number.isFinite(last.close)) continue;
+      rows.push({
+        symbol,
+        date: last.date,
+        close: last.close,
+        change: Number((last.close - prev.close).toFixed(4)),
+        changePercent: Number((((last.close - prev.close) / prev.close) * 100).toFixed(3)),
+        volume: last.volume,
+      });
+    }
+    if (!rows.length) return null;
+    const byPct = [...rows].sort((a, b) => b.changePercent - a.changePercent);
+    const byVol = [...rows].sort((a, b) => (b.volume ?? 0) - (a.volume ?? 0));
+    const dates = [...new Set(rows.map((r) => r.date))].sort();
+    return {
+      asOf: dates[dates.length - 1],
+      universe: rows.length,
+      universeNote: `the ${rows.length} symbols in the bundled data/prices book, not the whole market`,
+      gainers: byPct.slice(0, limit),
+      losers: byPct.slice(-limit).reverse(),
+      mostActive: byVol.slice(0, limit),
+      source: 'computed from data/prices (real bundled end-of-day OHLCV)',
+      synthetic: false,
+    };
+  }
+
+  /** Computed intents, or null when this intent is not one of them. */
+  _compute(intent, args = {}) {
+    if (!Object.hasOwn(COMPUTED_FROM_PRICE_BOOK, intent) || !this.prices) return null;
+    return intent === 'history' ? this._computedHistory(args) : this._computedMovers(args);
+  }
+
+  /**
+   * One checkable statement per intent about where its answer comes from.
+   *
+   * `resolved=0/20` printed next to `fixture-backed=10/20` left ten intents with
+   * no stated source at all, so a reader of the capabilities rail could not tell
+   * "answered from real bundled data" from "answered from an invented demo
+   * fixture" from "asked for and got nothing back". Every intent now resolves to
+   * exactly one of four kinds, and every count the UI prints is derived from
+   * this map instead of being written down beside it.
+   *
+   *   live      a resolved live tool answered (only in PRISM_DATA_MODE=live)
+   *   computed  derived here from data/prices - real end-of-day OHLCV
+   *   fixture   a bundled response; `synthetic` says whether it is invented
+   *   unserved  nothing offline can answer it, so the run trace must report it
+   */
+  provenance() {
+    const out = {};
+    for (const intent of INTENTS) {
+      const tool = this.resolution.get(intent) ?? null;
+      if (this.state === 'live' && tool) {
+        out[intent] = { kind: 'live', source: `bitget-mcp-server:${tool}`, synthetic: false, detail: 'answered by a resolved live tool' };
+        continue;
+      }
+      if (Object.hasOwn(COMPUTED_FROM_PRICE_BOOK, intent) && this.prices) {
+        out[intent] = { kind: 'computed', source: 'data/prices/*.csv', synthetic: false, detail: COMPUTED_FROM_PRICE_BOOK[intent] };
+        continue;
+      }
+      const entry = this.fixtures.entryFor(intent);
+      if (entry) {
+        const synthetic = entry.synthetic !== false;
+        out[intent] = {
+          kind: 'fixture',
+          source: entry.source ?? 'bundled fixture',
+          synthetic,
+          detail: `bundled demo fixture${synthetic ? ', labelled synthetic' : ', recorded from the live server'} (${entry._file ?? 'pack'})`,
+        };
+        continue;
+      }
+      out[intent] = {
+        kind: 'unserved',
+        source: null,
+        synthetic: null,
+        detail: 'no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace',
+      };
+    }
+    return out;
+  }
+
+  /** Counts by kind, derived from provenance() so no summary can drift from it. */
+  provenanceSummary() {
+    const summary = { total: INTENTS.length, live: 0, computed: 0, fixture: 0, unserved: 0, synthetic: 0 };
+    for (const p of Object.values(this.provenance())) {
+      summary[p.kind] += 1;
+      if (p.synthetic === true) summary.synthetic += 1;
+    }
+    summary.stated = summary.total - summary.unserved;
+    return summary;
+  }
+
   _cacheKey(intent, args) {
     return `${intent}:${JSON.stringify(args ?? {})}`;
   }
@@ -163,6 +330,16 @@ export class BitgetMarketProvider {
       } catch (err) {
         error = err.message;
         log.warn(`live call ${intent} -> ${tool} failed: ${err.message}`);
+      }
+    }
+
+    // Computed from the real bundled price book BEFORE the fixture pack: real
+    // data beats an invented recording of the same intent.
+    if (value === null || value === undefined) {
+      const computed = this._compute(intent, args);
+      if (computed !== null && computed !== undefined) {
+        value = computed;
+        origin = error ? 'computed:data/prices (live call failed)' : 'computed:data/prices';
       }
     }
 
@@ -201,6 +378,7 @@ export class BitgetMarketProvider {
   etfHoldings(ticker) { return this.fetch('etfHoldings', { ticker }); }
 
   status() {
+    const prov = this.provenanceSummary();
     return {
       mode: this.mode,
       state: this.state,
@@ -212,6 +390,12 @@ export class BitgetMarketProvider {
       fixtures: this.fixtures.countFor(INTENTS),
       fixtureEntries: this.fixtures.count(),
       calls: this.callLog.length,
+      // Stated sources, derived from provenance() rather than counted by hand.
+      stated: prov.stated,
+      computed: prov.computed,
+      unserved: prov.unserved,
+      syntheticFixtures: prov.synthetic,
+      live: prov.live,
     };
   }
 }

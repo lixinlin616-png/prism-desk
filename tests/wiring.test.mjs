@@ -339,3 +339,87 @@ test('a provider reports its own fixtures, not the whole shared pack', async () 
     `doctor still prints an ambiguous fixture count: ${line}`);
   assert.ok(!/fixtures=\d/.test(line), 'the ambiguous "fixtures=N" label is back');
 });
+
+// ------------------------------------------------------- intent provenance
+
+test('every intent states where its answer comes from, and the counts add up', async () => {
+  const hub = new DataHub();
+  await hub.connect();
+  const prov = hub.market.provenance();
+  const ids = Object.keys(prov);
+  assert.equal(ids.length, 20, 'one statement per declared intent');
+  const kinds = new Set(['live', 'computed', 'fixture', 'unserved']);
+  for (const id of ids) {
+    assert.ok(kinds.has(prov[id].kind), `${id} reports an unknown provenance kind`);
+    assert.ok(prov[id].detail && prov[id].detail.length > 10, `${id} states no detail`);
+    if (prov[id].kind === 'unserved') {
+      assert.equal(prov[id].source, null, 'an unserved intent must not claim a source');
+      assert.equal(hub.market.fixtures.has(id), false, '...and must not be counted as fixture-backed');
+    } else {
+      assert.ok(prov[id].source, `${id} claims a kind but names no source`);
+    }
+  }
+  const s = hub.market.provenanceSummary();
+  assert.equal(s.total, 20);
+  assert.equal(s.stated + s.unserved, s.total, 'stated sources plus honest gaps equals the whole intent list');
+  assert.equal(s.live + s.computed + s.fixture, s.stated);
+  assert.equal(s.synthetic, Object.values(prov).filter((p) => p.synthetic === true).length, 'the synthetic count is derived, not written down');
+});
+
+test('history is computed from the real bundled price book and never leaks past the task clock', async () => {
+  const hub = new DataHub();
+  await hub.connect();
+  const prov = hub.market.provenance();
+  assert.equal(prov.history.kind, 'computed');
+  assert.equal(prov.marketMovers.kind, 'computed');
+  assert.equal(prov.history.synthetic, false, 'real data is not synthetic');
+
+  const h = await hub.market.fetch('history', { ticker: 'AAPL', asOf: '2025-09-19T20:00:00Z', limit: 5 });
+  assert.match(h.origin, /^computed:data\/prices/, 'the envelope says where the bytes came from');
+  assert.equal(h.value.symbol, 'AAPL');
+  assert.equal(h.value.count, 5);
+  const expected = hub.prices.bars('AAPL').filter((b) => b.date <= '2025-09-19').slice(-5);
+  assert.deepEqual(
+    h.value.bars.map((b) => [b.date, b.open, b.high, b.low, b.close, b.volume]),
+    expected.map((b) => [b.date, b.open, b.high, b.low, b.close, b.volume]),
+    'the bars are the bundled real ones, not a recording of them',
+  );
+  assert.equal(h.value.bars.filter((b) => b.date > '2025-09-19').length, 0, 'a series past the task clock would let a card see its own outcome');
+});
+
+test('marketMovers is ranked over the bundled book and says how big that book is', async () => {
+  const hub = new DataHub();
+  await hub.connect();
+  const m = await hub.market.fetch('marketMovers', { asOf: '2025-09-19T20:00:00Z', limit: 3 });
+  assert.match(m.origin, /^computed:data\/prices/);
+  assert.equal(m.value.universe, hub.prices.symbols().length, 'the universe is the bundled book');
+  assert.match(m.value.universeNote, /not the whole market/, 'and the payload admits that instead of reading like a market scan');
+  const pct = (rows) => rows.map((r) => r.changePercent);
+  assert.equal(m.value.gainers.length, 3);
+  assert.deepEqual(pct(m.value.gainers), [...pct(m.value.gainers)].sort((a, b) => b - a), 'gainers are ranked best first');
+  assert.deepEqual(pct(m.value.losers), [...pct(m.value.losers)].sort((a, b) => a - b), 'losers are ranked worst first');
+  assert.deepEqual(
+    m.value.mostActive.map((r) => r.volume),
+    [...m.value.mostActive.map((r) => r.volume)].sort((a, b) => b - a),
+    'most active is ranked by volume',
+  );
+});
+
+test('the capabilities payload carries the provenance of all 20 intents, gaps included', async () => {
+  const hub = new DataHub();
+  await hub.connect();
+  const cap = capabilitiesPayload(hub);
+  assert.equal(cap.intents.length, 20);
+  for (const i of cap.intents) {
+    assert.ok(['live', 'computed', 'fixture', 'unserved'].includes(i.provenance), `${i.id} reports no provenance`);
+    assert.ok(i.synthetic === null || typeof i.synthetic === 'boolean', `${i.id} fudges whether its data is invented`);
+    if (i.provenance === 'fixture') assert.equal(i.fixture, true, 'a fixture-served intent is fixture-backed');
+    if (i.provenance === 'unserved') assert.equal(i.fixture, false, 'an unserved intent is not fixture-backed');
+  }
+  assert.equal(cap.intentProvenance.total, 20);
+  assert.equal(
+    cap.intentProvenance.unserved,
+    cap.intents.filter((i) => i.provenance === 'unserved').length,
+    'the summary is derived from the same map, so it cannot drift from it',
+  );
+});

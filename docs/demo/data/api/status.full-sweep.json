@@ -12,7 +12,12 @@
    "totalIntents": 20,
    "fixtures": 10,
    "fixtureEntries": 15,
-   "calls": 5
+   "calls": 5,
+   "stated": 12,
+   "computed": 2,
+   "unserved": 8,
+   "syntheticFixtures": 10,
+   "live": 0
   },
   "signal": {
    "state": "offline",

@@ -246,7 +246,7 @@ function coachStatic() {
   empty.dataset.coached = '1';
   empty.append(el('p', {
     class: 'dim',
-    html: '静态页会先回放 <b>全频道扫描</b>（提问 → 取数 → 抽取 → 核验 → 打分）。下面四条中文问题有独立录音，点了就是那一轮的真实输出。',
+    html: '静态页会先回放 <b>全频道扫描</b>（提问 → 取数 → 抽取 → 核验 → 打分）。下面七条中文问题有独立录音，点了就是那一轮的真实输出。',
   }));
 }
 
@@ -382,17 +382,40 @@ function renderChannels() {
   }));
 }
 
+/**
+ * Where the 20 market intents actually get their bytes.
+ *
+ * The rail used to print `resolved 0/20 · live 0 · fixture 10`, which reads as
+ * "ten intents work and ten are broken". The truth is three-way: two are
+ * computed here from the real bundled daily bars, ten are served by demo
+ * fixtures that say so out loud, and eight have no offline source at all - and
+ * every one of those eight is reported as a miss in the run trace rather than
+ * answered with nothing. Printing the split is the difference between a wiring
+ * panel and a claim about wiring.
+ */
+function intentProvenanceLine(caps, market) {
+  const intents = caps.intents || [];
+  const p = caps.intentProvenance || null;
+  const count = (kind) => (p ? (p[kind] ?? 0) : intents.filter((i) => i.provenance === kind).length);
+  const synthetic = p ? (p.synthetic ?? 0) : intents.filter((i) => i.synthetic === true).length;
+  const total = market.totalIntents ?? (p ? p.total : intents.length);
+  const parts = [`${esc(String(market.resolvedIntents ?? 0))}/${esc(String(total))} resolved to a live tool`];
+  if (count('computed')) parts.push(`<span class="on">${esc(String(count('computed')))} computed from the real daily bars</span>`);
+  if (count('fixture')) parts.push(`${esc(String(count('fixture')))} from bundled fixtures (${esc(String(synthetic))} labelled synthetic)`);
+  if (count('unserved')) parts.push(`<span class="off">${esc(String(count('unserved')))} unserved offline · reported as a miss, never faked</span>`);
+  return parts.join(' · ');
+}
+
 function renderWiring() {
   const s = state.status;
   const caps = state.capabilities;
   if (!s || !caps) return;
   const market = s.hub?.market || {};
   const live = (caps.intents || []).filter((i) => i.resolved && !i.fixture).length;
-  const fixtured = (caps.intents || []).filter((i) => i.fixture).length;
   const rows = [
     ['mcp', `${esc(market.url || s.config?.mcpUrl || '-').replace(/^https?:\/\//, '')}`],
     ['mode', `<span class="${market.state === 'live' ? 'on' : 'off'}">${esc(String(market.state || '-'))}</span>`],
-    ['intents', `${esc(String(market.resolvedIntents ?? 0))}/${esc(String(market.totalIntents ?? 0))} · live ${esc(String(live))} · fixture ${esc(String(fixtured))}`],
+    ['intents', intentProvenanceLine(caps, market)],
     ['signal skills', `${esc(String((caps.skills || []).filter((k) => k.resolved || k.fixture).length))}/${esc(String((caps.skills || []).length))} · live ${esc(String((caps.skills || []).filter((k) => k.resolved).length))} · fixture ${esc(String((caps.skills || []).filter((k) => k.fixture).length))}`],
     ['agentkey', caps.agentKey?.configured
       ? `<span class="${caps.agentKey.state === 'live' ? 'on' : 'off'}">${esc(String(caps.agentKey.state))}</span> · ${esc(String((caps.agentKey.intents || []).filter((i) => i.resolved).length))}/${esc(String((caps.agentKey.intents || []).length))} intents`

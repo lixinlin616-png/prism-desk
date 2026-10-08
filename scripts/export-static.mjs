@@ -14,7 +14,7 @@
  * including the SSE stage frames and the gaps between them. The same web/app.js
  * the live server uses then runs against web/static-adapter.js. On the static
  * page it notices the adapter and auto-plays the full sweep; a live server
- * stays quiet until asked. Four Chinese questions are recorded with no forced
+ * stays quiet until asked. Seven Chinese questions are recorded with no forced
  * channels, so those chips replay exactly.
  *
  * Nothing here is simulated. Cards, ledger totals, scores and review verdicts
@@ -207,6 +207,14 @@ async function main() {
     { id: 'zh-cpi', label: 'CPI 低于预期', zh: '传导', question: 'CPI 低于预期，哪些标的的传导最强？', asOf: '2025-09-19T20:00:00Z' },
     { id: 'zh-earnings', label: '撤回指引', zh: '财报预期差', question: 'HLXN 这份财报超预期但撤回了指引，该不该做空？', asOf: '2025-09-19T20:00:00Z' },
     { id: 'zh-flows', label: '内部人减持', zh: '资金足迹', question: '有没有内部人减持和机构资金变化', asOf: '2025-09-19T20:00:00Z' },
+    // Three more, each routed by the planner somewhere the four above do not go:
+    // cross-asset, risk-flag, and one that names no channel at all so the
+    // widened-spectrum notice is exercised in Chinese instead of being hidden.
+    // The risk one asks for balanceSheet and cashFlow, which have no offline
+    // source, so its trace shows unserved intents reported as misses.
+    { id: 'zh-cross', label: '加密与美股同向', zh: '跨资产', question: '加密资产和美股这次是不是同向？', asOf: '2025-09-19T20:00:00Z' },
+    { id: 'zh-risk', label: '暴雷与会计疑点', zh: '反向风险', question: '有没有暴雷风险或者会计上说不通的地方？', asOf: '2025-09-19T20:00:00Z' },
+    { id: 'zh-valuation', label: '估值贵不贵', zh: '估值', question: '这几只票现在估值贵不贵？', asOf: '2025-09-19T20:00:00Z' },
   ];
   for (const sc of LUI_PROMPTS) {
     const desk = new Pipeline({ hub, board });

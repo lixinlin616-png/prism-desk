@@ -28,6 +28,10 @@ export class DataHub {
     this.corpus = opts.corpus ?? new Corpus(config.paths.corpus).load();
     this.prices = opts.prices ?? new PriceBook(config.paths.prices).load();
     this.chainbase = opts.chainbase ?? new ChainbaseProvider();
+    // `history` and `marketMovers` are computed from the real bundled price book
+    // instead of being served from an invented fixture. Attached here, after
+    // construction, so an injected provider gets it too and the book loads once.
+    if (typeof this.market?.attachPrices === 'function') this.market.attachPrices(this.prices);
   }
 
   /** Best-effort connect of the network providers. Never throws in auto mode. */

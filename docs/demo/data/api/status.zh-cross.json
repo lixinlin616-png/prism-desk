@@ -12,7 +12,7 @@
    "totalIntents": 20,
    "fixtures": 10,
    "fixtureEntries": 15,
-   "calls": 11,
+   "calls": 31,
    "stated": 12,
    "computed": 2,
    "unserved": 8,
@@ -55,7 +55,7 @@
      "fixture": true
     }
    ],
-   "calls": 6
+   "calls": 19
   },
   "corpus": {
    "documents": 14,
@@ -146,7 +146,7 @@
   "mode": "rules",
   "stats": {
    "runs": 1,
-   "ruleCards": 5,
+   "ruleCards": 0,
    "llmCards": 0,
    "merged": 0,
    "conflicts": 0,
@@ -165,12 +165,12 @@
   }
  },
  "ledger": {
-  "cardsAudited": 5,
-  "itemsChecked": 17,
-  "pass": 14,
+  "cardsAudited": 2,
+  "itemsChecked": 2,
+  "pass": 2,
   "fail": 0,
-  "unverifiable": 3,
-  "passRate": 82.4,
+  "unverifiable": 0,
+  "passRate": 100,
   "cardsQuarantined": 0
  },
  "board": {

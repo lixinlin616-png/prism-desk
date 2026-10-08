@@ -68,6 +68,18 @@ export class FixtureStore {
     return this.get(intent, args) !== null;
   }
 
+  /**
+   * The bundled entry behind an intent, not just its payload.
+   *
+   * Provenance reporting needs the `synthetic` flag and the file the entry came
+   * from; `get()` deliberately throws that metadata away because callers only
+   * want the result.
+   */
+  entryFor(intent) {
+    this.load();
+    return this.entries.find((e) => e.intent === intent) ?? null;
+  }
+
   intents() {
     this.load();
     return [...new Set(this.entries.map((e) => e.intent))].sort();

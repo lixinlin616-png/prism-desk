@@ -368,6 +368,28 @@ function excessOver(book, benchmark, symbol, fromDate, toDate) {
  * Adjudicate one card. Never throws: an unmeasurable card is a legitimate
  * result and must be reported as such rather than quietly dropped.
  */
+/**
+ * The five rubric factor scores, lifted off the card exactly as scored.
+ *
+ * calibrate() needs them to say WHICH factor inverts the ranking. Without them
+ * the only honest statement is "the total is miscalibrated" - which is what the
+ * report said while its own BLOCKER asked the reader to go and find the
+ * offending factor, with no instrument to find it with.
+ *
+ * A factor that was never recorded is omitted, not zero-filled: a missing score
+ * must drop out of the correlation rather than vote as 0 and drag the rho.
+ */
+function factorScores(card) {
+  const breakdown = card?.scoreBreakdown;
+  if (!breakdown || typeof breakdown !== 'object') return {};
+  const out = {};
+  for (const [factor, entry] of Object.entries(breakdown)) {
+    const value = entry && typeof entry === 'object' ? entry.score : entry;
+    if (Number.isFinite(value)) out[factor] = value;
+  }
+  return out;
+}
+
 export function adjudicateCard(card, ctx) {
   const row = adjudicate(card, ctx);
   // Tag every row, including the early-return ones, so a caller can group by
@@ -396,6 +418,7 @@ function adjudicate(card, ctx) {
     expiresAt: card.expiresAt || null,
     invalidationLevel: card.invalidation?.level ?? null,
     tickers: [...(card.tickers || [])],
+    factors: factorScores(card),
     outcome: 'unmeasurable',
     riskTouch: 'n/a',
     invalidationTriggered: null,
@@ -626,6 +649,29 @@ export function calibrate(rows) {
   const pts = measurable.filter((r) => Number.isFinite(r.score)).map((r) => [r.score, r.signedExcessPct]);
   const rho = pts.length >= 5 ? spearman(pts.map((p) => p[0]), pts.map((p) => p[1])) : null;
 
+  // Per-factor diagnosis. The total rho is one number over a weighted sum, so it
+  // can say the ranking is inverted but never which term inverts it. Each factor
+  // is correlated against the SAME realised excess over the SAME rows, which
+  // makes the five directly comparable and makes the BLOCKER's own instruction
+  // ("find and repair the offending factor") something a reader can act on.
+  // The weights are read from config and reported, never adjusted here.
+  const factorRho = {};
+  for (const factor of Object.keys(config.scoring.weights)) {
+    const fpts = measurable
+      .filter((r) => Number.isFinite(r.factors?.[factor]) && Number.isFinite(r.signedExcessPct))
+      .map((r) => [r.factors[factor], r.signedExcessPct]);
+    const frho = fpts.length >= 5 ? spearman(fpts.map((p) => p[0]), fpts.map((p) => p[1])) : null;
+    factorRho[factor] = {
+      weight: config.scoring.weights[factor],
+      n: fpts.length,
+      rho: Number.isFinite(frho) ? round(frho, 3) : null,
+    };
+  }
+  const rankedFactors = Object.entries(factorRho)
+    .filter(([, v]) => Number.isFinite(v.rho))
+    .sort((a, b) => a[1].rho - b[1].rho);
+  const worstFactor = rankedFactors.length ? rankedFactors[0][0] : null;
+
   /** Cards sharing an information date move together; count clusters, not just rows. */
   const clusters = new Set(measurable.map((r) => (r.informationAt ? toDateStr(r.informationAt) : null)).filter(Boolean));
 
@@ -633,6 +679,8 @@ export function calibrate(rows) {
     n: measurable.length,
     clusters: clusters.size,
     scoreVsOutcomeRho: Number.isFinite(rho) ? round(rho, 3) : null,
+    factorRho,
+    worstFactor,
     byGrade,
     byChannel,
     byDirection,
@@ -678,8 +726,26 @@ export function deriveLessons(rows, summary, calibration, opts = {}) {
       action: Math.abs(rho) <= 0.1
         ? 'Re-examine the factor weights in src/score/rubric.mjs; a ranking that does not rank is decoration.'
         : rho < 0
-          ? 'Find and repair the offending factor before publishing anything on this rubric.'
+          ? `Find and repair the offending factor before publishing anything on this rubric. The per-factor diagnosis below names the candidate: ${calibration.worstFactor ?? 'none measurable'}.`
           : 'Keep the weights and re-measure as the sample grows.',
+    });
+  }
+
+  // Which term is responsible. This is a diagnosis and deliberately not a fix:
+  // re-weighting against a few dozen non-independent claims is fitting noise,
+  // which is exactly what docs/ROADMAP.md forbids. So the five rhos are printed,
+  // the worst is named, and the weights are left where they were.
+  const measuredFactors = Object.entries(calibration.factorRho ?? {}).filter(([, v]) => Number.isFinite(v.rho));
+  if (measuredFactors.length) {
+    const sortedFactors = [...measuredFactors].sort((a, b) => a[1].rho - b[1].rho);
+    const [worstName, worst] = sortedFactors[0];
+    const rightWay = sortedFactors.filter(([, v]) => v.rho > 0.1);
+    lessons.push({
+      id: 'factor-diagnosis',
+      severity: worst.rho < -0.1 ? 'blocker' : 'warning',
+      finding: `Per-factor Spearman rho against realised signed excess, same ${calibration.n} claims: ${sortedFactors.map(([f, v]) => `${f} ${v.rho} (w=${v.weight}, n=${v.n})`).join('; ')}. The most inverted factor is ${worstName} at ${worst.rho}; ${rightWay.length} of ${sortedFactors.length} point the right way (${rightWay.map(([f]) => f).join(', ') || 'none'}).`,
+      evidence: sortedFactors.map(([f, v]) => `rho[${f}]=${v.rho},n=${v.n}`).join(' '),
+      action: `Weights unchanged on purpose. Re-read the ${worstName} branch in src/score/rubric.mjs against the reason strings it emits and fix the scoring rule; do not re-weight to make the total look better on this sample.`,
     });
   }
 

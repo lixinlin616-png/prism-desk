@@ -1,6 +1,6 @@
 {
  "builtBy": "scripts/export-static.mjs",
- "exportedAt": "2026-10-08T02:48:41.764Z",
+ "exportedAt": "2026-10-08T05:40:56.317Z",
  "engine": {
   "dataMode": "offline",
   "extractor": "rules",
@@ -88,93 +88,120 @@
  "runs": [
   {
    "scenarioId": "full-sweep",
-   "runId": "RUN-MUYXT82G",
+   "runId": "RUN-MUZ3YQCZ",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 13,
    "published": 12,
    "quarantined": 0,
-   "ms": 116
+   "ms": 57
   },
   {
    "scenarioId": "earnings-gap",
-   "runId": "RUN-MUYXT83O",
+   "runId": "RUN-MUZ3YQDW",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 5,
    "published": 5,
    "quarantined": 0,
-   "ms": 42
+   "ms": 30
   },
   {
    "scenarioId": "macro-transmission",
-   "runId": "RUN-MUYXT84T",
+   "runId": "RUN-MUZ3YQEU",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
-   "ms": 39
+   "ms": 30
   },
   {
    "scenarioId": "closed-window",
-   "runId": "RUN-MUYXT862",
+   "runId": "RUN-MUZ3YQFR",
    "asOf": "2025-09-13T15:00:00Z",
    "cards": 4,
    "published": 3,
    "quarantined": 0,
-   "ms": 44
+   "ms": 31
   },
   {
    "scenarioId": "flows",
-   "runId": "RUN-MUYXT87B",
+   "runId": "RUN-MUZ3YQGM",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
-   "ms": 43
+   "ms": 29
   },
   {
    "scenarioId": "risk",
-   "runId": "RUN-MUYXT88K",
+   "runId": "RUN-MUZ3YQHI",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 5,
    "published": 4,
    "quarantined": 0,
-   "ms": 44
+   "ms": 30
   },
   {
    "scenarioId": "zh-weekend",
-   "runId": "RUN-MUYXT88T",
+   "runId": "RUN-MUZ3YQHP",
    "asOf": "2025-09-13T15:00:00Z",
    "cards": 3,
    "published": 2,
    "quarantined": 0,
-   "ms": 8
+   "ms": 5
   },
   {
    "scenarioId": "zh-cpi",
-   "runId": "RUN-MUYXT89W",
+   "runId": "RUN-MUZ3YQIH",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
-   "ms": 38
+   "ms": 26
   },
   {
    "scenarioId": "zh-earnings",
-   "runId": "RUN-MUYXT8A1",
+   "runId": "RUN-MUZ3YQIL",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 5,
    "published": 5,
    "quarantined": 0,
-   "ms": 4
+   "ms": 2
   },
   {
    "scenarioId": "zh-flows",
-   "runId": "RUN-MUYXT8A5",
+   "runId": "RUN-MUZ3YQIQ",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
    "ms": 3
+  },
+  {
+   "scenarioId": "zh-cross",
+   "runId": "RUN-MUZ3YQIU",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 2,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 2
+  },
+  {
+   "scenarioId": "zh-risk",
+   "runId": "RUN-MUZ3YQIY",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 2,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 2
+  },
+  {
+   "scenarioId": "zh-valuation",
+   "runId": "RUN-MUZ3YQJU",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 13,
+   "published": 12,
+   "quarantined": 0,
+   "ms": 30
   }
  ],
  "review": {

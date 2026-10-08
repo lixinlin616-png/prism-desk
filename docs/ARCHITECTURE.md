@@ -29,7 +29,7 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 设计上的三条硬约束：
 
 1. **零依赖。** 只用 Node ≥ 20 标准库。没有 `npm install`，没有构建步骤，评委 clone 下来就能跑。Web 前端是原生 HTML/CSS/JS。
-2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 211 个测试和 60 项验证检查成为可能。
+2. **确定性优先。** 不配 LLM key 时，系统走纯规则路径，**同样的输入必然产出同样的输出**。这让 219 个测试和 60 项验证检查成为可能。
 3. **LLM 不享有豁免权。** 配了 key 之后，LLM 抽取的卡片和规则抽取的卡片走**同一个证据账本、同一套打分规则**。模型说错数字，账本照样拦。
 
 ---
@@ -67,7 +67,17 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 - `live` — 强制真实端点，拿不到就报错
 - `offline` — 完全不联网
 
-每个快照都带 `origin`（`live` / `fixture` / `local`），trace 与卡片档案里都会显示。**评委能一眼看出哪些数字来自真实端点。**
+每个快照都带 `origin`（`live` / `computed:data/prices` / `fixture` / `local`），trace 与卡片档案里都会显示。**评委能一眼看出哪些数字来自真实端点。**
+
+**20 个市场意图，每一个都写明出处。** `/api/capabilities` 和 `node prism.mjs doctor` 报的是同一张表：`provenanceSummary()` 是唯一来源，UI 只读它，所以不会各说各话。
+
+| 出处 | 数量 | 含义 |
+|---|---:|---|
+| `computed` | **2** | `history` / `marketMovers` 由 `data/prices/*.csv` 的真实日 K **现算**，并且严格截到任务时钟 —— 越过 `asOf` 的 K 线一根都不返回，否则卡片就能看见自己的结果 |
+| `fixture` | **10** | 走 `data/fixtures/mcp/demo-fixture-pack.json`，每一条都带 `synthetic: true`，说明它是演示数据而不是录制下来的真实响应 |
+| `unserved` | **8** | 离线**没有**出处（`profile` / `management` / `balanceSheet` / `cashFlow` / `dividends` / `analystTargetPrice` / `etfInfo` / `etfHoldings`）。这一栏是故意留着的：请求了拿不到，就在 trace 里记成一次 miss，而不是静默返回空、更不是编一条 fixture 把它填上 |
+
+以前这里只印 `resolved 0/20 · fixture-backed 10/20`，读起来像“十个能用、十个坏了”；实际是三分法，而且那八个一直是在 trace 里报 miss 的。`marketMovers` 的 payload 里写着 `universe: 25` 和一句 "not the whole market" —— 一份只覆盖 25 个标的的涨跌幅榜，不能读起来像全市场扫描。
 
 ### 3. EXTRACT — `src/extract/`
 
@@ -129,6 +139,8 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 
 工具流动性表（`LIQUIDITY`）：`native-equity 1.0` · `etf 0.95` · `option 0.7` · `crypto 0.6` · **`rtoken 0.45`** · `cash 1.0`。
 rToken 流动性给 0.45 是刻意保守：代币化股票的盘口比原生股薄得多，且 mint/redeem 套利可能在你之前就抹平错位。
+
+**五个因子现在也各自被测量。** 复盘不止算总分的 rho，还把每个因子单独对实现超额做 Spearman 相关，结果写进 `docs/reports/review.md` 的 "Per-factor diagnosis" 表：`asymmetry -0.261` · `tradability -0.133` · `freshness -0.037` · `corroboration -0.028` · `surprise +0.045`（各 n=45）。最反向的是 `asymmetry`，BLOCKER 的 action 现在直接点名它，而不是只说“去找哪个因子坏了”。**权重一个都没改** —— 在 45 条互不独立的主张上重新配权就是拟合噪声。某个因子没被记录时（`scoreBreakdown` 缺项）它退出相关，不会被当成 0 参与计算。
 
 **freshness 为什么按 `informationAt` 而不是 `createdAt`：** 一张今天生成、但引用十天前信息的卡片，本质上是旧信息。按运行时墙上时钟算，`--as-of` 历史场景复现会完全失真（所有卡片都"刚刚生成"，freshness 永远满分）。改成按源文档时间戳之后，`--as-of` 才真正有意义，freshness 也才成为一个真实起作用的因子。
 
@@ -245,7 +257,7 @@ CLI `node prism.mjs review`（`--board` / `--as-of` / `--materiality` / `--json`
 ## 测试与验证
 
 ```bash
-npm test          # 211 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
+npm test          # 219 tests (node:test)，覆盖 schema / ledger / rubric / extract / util / research / server / static-demo
 npm run validate  # 60 项检查 -> docs/reports/validation.md
 npm run replay    # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 ```

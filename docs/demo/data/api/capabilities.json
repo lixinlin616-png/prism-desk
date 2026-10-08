@@ -106,123 +106,212 @@
    "id": "quote",
    "description": "Real-time last price, change, volume for a US equity / ETF",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "history",
    "description": "Historical OHLCV candles",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "computed",
+   "source": "data/prices/*.csv",
+   "synthetic": false,
+   "detail": "daily OHLCV bars sliced from the bundled real price book, cut at the task clock"
   },
   {
    "id": "profile",
    "description": "Company profile, sector, industry, description",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "management",
    "description": "Executive team and leadership",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "earningsCalendar",
    "description": "Upcoming / past earnings report dates",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "incomeStatement",
    "description": "Income statement (revenue, EPS, margins)",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "balanceSheet",
    "description": "Balance sheet (cash, debt, equity)",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "cashFlow",
    "description": "Cash flow statement (OCF, FCF, capex)",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "ratios",
    "description": "Financial ratios (ROE, current ratio, leverage)",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "valuation",
    "description": "Valuation multiples (P/E, EV/EBITDA, P/S)",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "dividends",
    "description": "Dividend history and yield",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "insiderTrades",
    "description": "Insider (Form 4) buy/sell transactions",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "institutionalHoldings",
    "description": "13F institutional holders and position changes",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "analystEstimates",
    "description": "Consensus forward EPS / revenue / EBITDA estimates",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "analystTargetPrice",
    "description": "Analyst price targets and ratings distribution",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "news",
    "description": "Company and market news headlines",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "sentiment",
    "description": "Market sentiment indicators",
    "resolved": null,
-   "fixture": true
+   "fixture": true,
+   "provenance": "fixture",
+   "source": "bitget-mcp-server",
+   "synthetic": true,
+   "detail": "bundled demo fixture, labelled synthetic (demo-fixture-pack.json)"
   },
   {
    "id": "etfInfo",
    "description": "ETF metadata, expense ratio, AUM",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "etfHoldings",
    "description": "ETF constituent holdings and weights",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "unserved",
+   "source": null,
+   "synthetic": null,
+   "detail": "no live tool, no computed source and no bundled fixture - a run that asks for it records the miss in its trace"
   },
   {
    "id": "marketMovers",
    "description": "Top gainers / losers / most active",
    "resolved": null,
-   "fixture": false
+   "fixture": false,
+   "provenance": "computed",
+   "source": "data/prices/*.csv",
+   "synthetic": false,
+   "detail": "gainers / losers / most active ranked across the bundled price book on the task date"
   }
  ],
+ "intentProvenance": {
+  "total": 20,
+  "live": 0,
+  "computed": 2,
+  "fixture": 10,
+  "unserved": 8,
+  "synthetic": 10,
+  "stated": 12
+ },
  "skills": [
   {
    "id": "macro-analyst",

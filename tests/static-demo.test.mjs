@@ -221,7 +221,19 @@ test('GET routes replay the recorded payloads', async () => {
       assert.equal(j.board.total, 345);
       assert.equal(j.ledger.itemsChecked, 0, 'a freshly booted desk has audited nothing yet');
     }],
-    ['/api/capabilities', (j) => { assert.equal(j.channels.length, 7); assert.ok(j.intents.length > 10); assert.equal(j.skills.length, 5); }],
+    ['/api/capabilities', (j) => {
+      assert.equal(j.channels.length, 7);
+      assert.equal(j.intents.length, 20, 'every declared market intent is listed');
+      assert.equal(j.skills.length, 5);
+      // The published bundle must carry the same provenance statement the live
+      // backend makes, or the page a judge reads contradicts the repo it came from.
+      for (const i of j.intents) {
+        assert.ok(['live', 'computed', 'fixture', 'unserved'].includes(i.provenance), i.id + ' ships with no stated source');
+      }
+      assert.equal(j.intentProvenance.total, 20);
+      assert.equal(j.intentProvenance.stated + j.intentProvenance.unserved, 20, 'stated sources plus admitted gaps equals the whole list');
+      assert.ok(j.intentProvenance.computed >= 2, 'history and marketMovers are computed from the real daily bars, not replayed from a fixture');
+    }],
     ['/api/scenarios', (j) => assert.equal(j.scenarios.length, 6)],
     ['/api/corpus', (j) => { assert.ok(j.documents.length > 0); assert.equal(j.stats.documents, j.documents.length); }],
     ['/api/board?status=active', (j) => { assert.ok(j.cards.length > 0); assert.ok(j.watchlist.length > 0); assert.ok(j.byChannel); }],
@@ -372,9 +384,17 @@ test('non-API requests are passed through untouched', async () => {
 test('every recorded run replays end to end', async () => {
   const { window } = bootAdapter();
   const index = readJson('api/ask/index.json');
-  assert.equal(index.runs.length, 10, 'six scenarios plus four recorded Chinese questions');
-  for (const id of ['zh-weekend', 'zh-cpi', 'zh-earnings', 'zh-flows']) {
+  assert.equal(index.runs.length, 13, 'six scenarios plus seven recorded Chinese questions');
+  const zh = ['zh-weekend', 'zh-cpi', 'zh-earnings', 'zh-flows', 'zh-cross', 'zh-risk', 'zh-valuation'];
+  for (const id of zh) {
     assert.ok(index.runs.some((r) => r.scenarioId === id), 'missing recorded Chinese question: ' + id);
+  }
+  assert.equal(index.runs.filter((r) => r.scenarioId.startsWith('zh-')).length, zh.length,
+    'the Chinese chips are exactly the recorded Chinese runs - no chip may point at an English scenario');
+  for (const r of index.runs.filter((x) => x.scenarioId.startsWith('zh-'))) {
+    assert.ok(/[\u4e00-\u9fff]/.test(r.question), r.scenarioId + ': a Chinese recording whose question is not Chinese is not a playback of what a judge typed');
+    assert.equal(r.channels, null, r.scenarioId + ': recorded with no forced channels, so the routing on screen is the planner\'s own');
+    assert.ok(r.cards > 0, r.scenarioId + ': an empty recording proves nothing');
   }
   for (const entry of index.runs) {
     const res = await call(window, '/api/ask', { method: 'POST', body: JSON.stringify({ question: entry.question, stream: true }) });

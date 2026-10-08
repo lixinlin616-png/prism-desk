@@ -524,6 +524,86 @@ test('calibration buckets every grade and reports the score-vs-outcome correlati
   assert.equal(cal.scoreVsOutcomeRho, null, 'rho is not computed below 5 points - a correlation on 3 points is noise');
 });
 
+test('a card\'s factor breakdown reaches the review row, so the diagnosis has something to diagnose', () => {
+  const c = card({ tickers: ['AAA'], score: { total: 70, grade: 'B', publishable: true } });
+  c.scoreBreakdown = {
+    surprise: { score: 80, weight: 0.3, reason: 'x' },
+    asymmetry: { score: 40, weight: 0.2, reason: 'y' },
+    notANumber: { score: 'eighty' },
+  };
+  const row = adjudicateCard(c, CTX);
+  assert.deepEqual(row.factors, { surprise: 80, asymmetry: 40 }, 'the recorded factors arrive, and a non-numeric one is dropped rather than coerced');
+});
+
+test('the review names the factor that inverts the ranking, and leaves the weights alone', () => {
+  // Six rows so the per-factor correlation clears the n>=5 floor. surprise
+  // tracks the outcome; asymmetry is inverted against it on purpose.
+  const rows = [10, 20, 30, 40, 50, 60].map((base, i) => ({
+    grade: gradeOf(base),
+    channel: 'earnings-gap',
+    direction: 'long',
+    score: base,
+    signedExcessPct: base / 10,
+    outcome: 'realized',
+    published: true,
+    informationAt: `2025-09-0${i + 2}`,
+    factors: { surprise: base, asymmetry: 100 - base, corroboration: 50, tradability: 50, freshness: 50 },
+  }));
+  const cal = calibrate(rows);
+  const weights = config.scoring.weights;
+  assert.deepEqual(Object.keys(cal.factorRho), Object.keys(weights), 'every weighted factor is diagnosed');
+  assert.equal(cal.factorRho.surprise.rho, 1, 'a factor that tracks the outcome correlates +1');
+  assert.equal(cal.factorRho.asymmetry.rho, -1, '...and an inverted one correlates -1');
+  assert.equal(cal.worstFactor, 'asymmetry', 'the most inverted factor is named');
+  for (const f of Object.keys(cal.factorRho)) {
+    assert.equal(cal.factorRho[f].weight, weights[f], 'the diagnosis reports the weight the rubric uses; it never edits it');
+  }
+  assert.equal(cal.factorRho.corroboration.rho, null, 'a constant factor has no rank correlation to report');
+
+  const lessons = deriveLessons(rows, summariseRows(rows), cal, {});
+  const diag = lessons.find((l) => l.id === 'factor-diagnosis');
+  assert.ok(diag, 'the diagnosis is written down as a finding, not just returned');
+  assert.match(diag.finding, /asymmetry -1/, 'and it cites the number that produced it');
+  assert.match(diag.action, /[Ww]eights unchanged/, 'the action is to repair the factor, not to re-weight around it');
+});
+
+test('a factor that was never scored drops out of the correlation instead of voting as zero', () => {
+  const rows = [10, 20, 30, 40, 50, 60].map((base, i) => ({
+    grade: gradeOf(base),
+    channel: 'earnings-gap',
+    direction: 'long',
+    score: base,
+    signedExcessPct: base / 10,
+    outcome: 'realized',
+    published: true,
+    informationAt: `2025-09-0${i + 2}`,
+    factors: { surprise: base },
+  }));
+  const cal = calibrate(rows);
+  assert.equal(cal.factorRho.surprise.n, 6);
+  assert.equal(cal.factorRho.asymmetry.n, 0, 'nothing was recorded for it');
+  assert.equal(cal.factorRho.asymmetry.rho, null, '...so it reports no correlation rather than a fabricated 0 that would look like a flat factor');
+});
+
+test('the report renders the per-factor table and says the weights did not move', () => {
+  const b = fixtureBoard();
+  for (const c of b.cards.values()) {
+    c.scoreBreakdown = {
+      surprise: { score: 70 }, corroboration: { score: 60 }, tradability: { score: 50 },
+      asymmetry: { score: 40 }, freshness: { score: 30 },
+    };
+  }
+  const md = renderReviewReport(runReview({ board: b, book: BOOK, asOf: AS_OF }));
+  assert.match(md, /### Per-factor diagnosis/);
+  for (const f of Object.keys(config.scoring.weights)) {
+    assert.ok(md.includes(`| ${f} |`), `factor ${f} is missing from the diagnosis table`);
+  }
+  assert.match(md, /weights unchanged/i);
+  assert.match(md, /nothing in this table changes it/);
+  assert.ok(!/NaN/.test(md), 'the diagnosis table renders a NaN');
+  assert.ok(!/undefined/.test(md), 'the diagnosis table renders an undefined');
+});
+
 test('a small sample is always flagged as a blocker before any other finding', () => {
   const rows = [{ grade: 'A', channel: 'c', direction: 'long', score: 80, signedExcessPct: 1, outcome: 'realized', published: true, informationAt: '2025-09-02' }];
   const summary = summariseRows(rows);

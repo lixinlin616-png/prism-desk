@@ -9,7 +9,7 @@
 
 | 指标 | 数值 | 类型 | 复现方式 |
 |---|---|---|---|
-| 单元/集成测试 | **211 / 211 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
+| 单元/集成测试 | **219 / 219 通过 · 0 跳过**（全新 clone 亦然） | 实测 | `npm test` |
 | 结构性与研究质量检查 | **60 / 60 通过** | 实测 | `npm run validate` |
 | 价格数据集 | 25 symbols · **41,386** 根日 K · 2019-01-02 → 2025-09-30 | 实测 | `data/prices/*.csv` |
 | 语料 | 14 篇文档 · 2,599 词 | 实测 | `data/corpus/` |
@@ -20,11 +20,13 @@
 | 该轮证据账本 | 30 items · pass 28 · **fail 0** · unverifiable 2 · **pass rate 93.3%** · 隔离 0 | 实测 | 同上 |
 | `doctor` smoke run 账本 | 30 items · pass 27 · **fail 0** · unverifiable 3 · **pass rate 90%** · 13 张卡（11 发布 / 2 低于阈值） | 实测 | `node prism.mjs doctor`（as-of 钉在 2025-09-13T15:00Z） |
 | 第三方依赖 | **0** | 实测 | `package.json` `"dependencies": {}` |
-| 在线演示（GitHub Pages 静态回放） | 6 场景 + 4 条中文提问 · **392** 份卡片档案 · 4.06 MB · 约 1 s 生成 | 实测 | `npm run export:static` 重建 -> `docs/demo/` |
+| 在线演示（GitHub Pages 静态回放） | 6 场景 + 7 条中文提问 · **409** 份卡片档案 · 4.37 MB · 约 1 s 生成 | 实测 | `npm run export:static` 重建 -> `docs/demo/` |
 | 演示包与引擎不漂移 | **14 项检查**（路由覆盖 / 场景一致 / 看板 = fixture / 复盘数字 = 报表 / SSE 回放） | 实测 | `npm test` -> `tests/static-demo.test.mjs` |
 | 复盘裁决样本 | 345 卡 → **162** 独立主张 → **39** 决出胜负 | 实测 | `npm run review:seed` |
 | **方向命中率**（对 SPY，±1% 实质性带；失效条件优先） | **25.6%**（Wilson 95% CI **14.6–41.1%**；精确 Clopper–Pearson 13–42.1%） | 实测 | 同上 · 见 §4 |
 | Spearman rho（分数 vs 实现超额） | **-0.137**（n=45）→ 标为 **BLOCKER** | 实测 | 同上 |
+| 逐因子 rho 诊断（把 BLOCKER 点名到因子） | asymmetry **-0.261** · tradability **-0.133** · freshness **-0.037** · corroboration **-0.028** · surprise **+0.045**（各 n=45）；**五个权重一个未动** | 实测 | 同上 · 见 §4.1 |
+| 20 个市场意图的出处 | **2** 个由真实日 K 现算（`history` / `marketMovers`）· **10** 个走 fixture（全部标注 synthetic）· **8** 个离线无出处，如实报为 miss | 实测 | `node prism.mjs doctor` · `/api/capabilities` |
 | 信号**扣费后净收益** | **未测量** | — | 见 §6「我们没有测的」 |
 
 > 上面两行账本**都是 30 items，但不是同一轮运行**：full-sweep 用 as-of 2025-09-19T20:00Z（问题里带 "what is actually tradeable right now?"），通过 28、无法核验 2；doctor 的 smoke run 用 2025-09-13T15:00Z 那个周六下午，问题是更短的 `Full desk sweep across every channel`，通过 27、无法核验 3。多出来的那一项仍是现金盘关闭时才出现的 ASTR 闭窗 `computed` 证据。逐项对照见 [`ARCHITECTURE.md`](ARCHITECTURE.md) 的 VERIFY 一节。
@@ -177,6 +179,18 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 
 ### 4.1 打分规则不排序 —— BLOCKER
 
+总 rho 只有一个数，它说的是“加权总分排错了序”，说不出**哪一项**排错了。所以复盘现在把五个因子分别对同一批 45 条主张、同一个实现超额做 Spearman 相关，结果写进 `docs/reports/review.md`：
+
+| 因子 | 权重 | rho vs 实现超额 | n | 读法 |
+|---|---:|---:|---:|---|
+| `asymmetry` | 0.20 | **-0.261** | 45 | 反向 —— 这一项给分越高，实现越差 |
+| `tradability` | 0.18 | **-0.133** | 45 | 反向 |
+| `freshness` | 0.10 | -0.037 | 45 | 无单调信号 |
+| `corroboration` | 0.22 | -0.028 | 45 | 无单调信号 |
+| `surprise` | 0.30 | **+0.045** | 45 | 方向对，但强度可忽略 |
+
+**这是诊断，不是修复。五个权重一个都没动。** 在 45 条互不独立的主张上重新配权就是拟合噪声（见 `ROADMAP.md`）。要做的是回到 `src/score/rubric.mjs` 的 `scoreAsymmetry()` 那条分支，对着它自己吐出的理由串检查评分规则：目前的写法是“盈亏比 2:1 就 60 分、给了可观测失效水平再 +6”，而实测是这套加分和实现超额反着走。五个因子里 **0 个** rho 超过 +0.1，也就是说这份 rubric 里没有任何一项在这个样本上证明了自己会排序。
+
 | grade | 主张 | 决出 | 命中率 | 平均超额 |
 |---|---:|---:|---:|---:|
 | A（≥75） | 10 | 9 | **22.2%** | -1.358% |
@@ -249,7 +263,7 @@ npm run review:seed  # 从该 fixture 生成 docs/reports/review.md
 ## 7. 一键复现
 
 ```bash
-npm test            # 211 / 211
+npm test            # 219 / 219
 npm run validate    # 60 / 60 -> docs/reports/validation.md
 npm run replay      # 两份研究 -> docs/reports/transmission-study.md, gap-study.md
 npm run seed        # 重建看板 fixture（逐字节确定）-> data/fixtures/board-seed.json

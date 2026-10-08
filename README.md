@@ -16,7 +16,7 @@
 
 **GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
 
-演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，并额外录下四条中文自由提问，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`。浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放。`web/app.js` 与实时后端是**同一份文件**：静态页检测到 adapter 后会自动回放全频道扫描，避免评委打开一个空线程。所以打开后那一轮是 **13 张卡（12 发布，1 低于阈值）、30 条核验项 / 93.3% 通过率**，以及复盘的 **39 条已裁决 / 25.6% 命中 / rho −0.137**，都是引擎真实产出（右侧看板来自 **345** 张已提交 fixture，其中 **14** 张 active，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的检查专门盯这个漂移）。四条中文芯片是独立录音，点了就是那一轮；没录过的问法会回放最接近的任务并明说。
+演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，并额外录下七条中文自由提问，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`。浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放。`web/app.js` 与实时后端是**同一份文件**：静态页检测到 adapter 后会自动回放全频道扫描，避免评委打开一个空线程。所以打开后那一轮是 **13 张卡（12 发布，1 低于阈值）、30 条核验项 / 93.3% 通过率**，以及复盘的 **39 条已裁决 / 25.6% 命中 / rho −0.137**，都是引擎真实产出（右侧看板来自 **345** 张已提交 fixture，其中 **14** 张 active，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的检查专门盯这个漂移）。四条中文芯片是独立录音，点了就是那一轮；没录过的问法会回放最接近的任务并明说。
 
 有两件事静态页面**做不到**，而且它会明说、绝不假装成功：跑一个全新的自由提问（回放最接近的预录任务，并提示这是替换）、写入看板（粘贴文档 / 清空看板返回 409 并说明原因）；这些「明说」以页面 toast 与回放 trace 里的 replayNote 出现，页面上不再放永久徽标。
 
@@ -222,7 +222,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 211 个测试（node:test，无第三方依赖）
+npm test           # 219 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
@@ -291,7 +291,7 @@ web/                 index.html + app.js + styles.css + static-adapter.js（零�
 scripts/             validate, replay, build-seed, fetch-prices, record-fixtures,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               211 个 node:test 用例
+tests/               219 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 

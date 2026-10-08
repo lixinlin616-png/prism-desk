@@ -29,15 +29,28 @@ import { SKILL_TRIGGERS } from './pipeline.mjs';
  * @returns {object} the /api/capabilities body
  */
 export function capabilitiesPayload(hub) {
+  const provenance = hub.market.provenance?.() ?? {};
+  const provenanceSummary = hub.market.provenanceSummary?.() ?? null;
   return {
     ok: true,
     channels: CHANNEL_IDS.map((id) => ({ id, ...CHANNELS[id] })),
-    intents: INTENTS.map((id) => ({
-      id,
-      description: INTENT_DOCS[id],
-      resolved: hub.market.resolution.get(id) ?? null,
-      fixture: hub.market.fixtures.has(id),
-    })),
+    intents: INTENTS.map((id) => {
+      const prov = provenance[id] ?? null;
+      return {
+        id,
+        description: INTENT_DOCS[id],
+        resolved: hub.market.resolution.get(id) ?? null,
+        fixture: hub.market.fixtures.has(id),
+        // `fixture: false` used to be the entire statement, which read as "not
+        // wired" for ten intents and hid the two that are computed from real
+        // data. This is the whole statement now.
+        provenance: prov?.kind ?? 'unserved',
+        source: prov?.source ?? null,
+        synthetic: prov?.synthetic ?? null,
+        detail: prov?.detail ?? null,
+      };
+    }),
+    intentProvenance: provenanceSummary,
     skills: SIGNAL_SKILL_IDS.map((id) => {
       const trigger = SKILL_TRIGGERS.find((t) => t.skill === id) ?? null;
       return {

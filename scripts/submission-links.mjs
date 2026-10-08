@@ -37,7 +37,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 211;
+export const TEST_COUNT = 219;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -151,7 +151,7 @@ export const MANIFEST = [
     type: '支撑｜在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）',
     target: 'scripts/export-static.mjs',
     required: '支撑',
-    what: 'npm run export:static 用真实离线引擎跑完六个场景，并额外录下四条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表',
+    what: 'npm run export:static 用真实离线引擎跑完六个场景，并额外录下七条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表',
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
@@ -216,6 +216,16 @@ export const CLAIMS = [
   { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 93.3' },
   { says: '在线演示录满 6 个场景', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "risk"' },
   { says: '在线演示录下中文 CPI 提问', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "zh-cpi"' },
+  { says: '在线演示录满七条中文提问', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "zh-valuation"' },
+  // The BLOCKER used to stop at "go and find the offending factor". These pin the
+  // diagnosis that names it, in both the report and the bundle the demo replays.
+  { says: '逐因子诊断点名 asymmetry，且权重未动', from: 'docs/reports/review.md', kind: 'has', expect: '| most inverted factor | **asymmetry** at -0.261 (weights unchanged) |' },
+  { says: 'asymmetry 因子 rho = -0.261 (n=45)', from: 'docs/reports/review.md', kind: 'has', expect: '| asymmetry | 0.2 | **-0.261** | 45 |' },
+  { says: '在线演示里也能看到逐因子诊断', from: 'docs/demo/data/api/export-review.md', kind: 'has', expect: 'Per-factor diagnosis' },
+  // Provenance of all 20 market intents, including the eight that have none.
+  { says: '20 个意图全部声明出处', from: 'docs/demo/data/api/capabilities.json', kind: 'has', expect: '"total": 20' },
+  { says: '其中 2 个由真实日 K 现算', from: 'docs/demo/data/api/capabilities.json', kind: 'has', expect: '"computed": 2' },
+  { says: '其中 8 个离线无出处，如实标注', from: 'docs/demo/data/api/capabilities.json', kind: 'has', expect: '"unserved": 8' },
 ];
 
 /**

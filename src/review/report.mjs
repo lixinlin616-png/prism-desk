@@ -77,6 +77,7 @@ export function renderReviewReport(review) {
   L.push(`| non-directional (neutral / hedge) | ${s.notDirectional} |`);
   L.push(`| measured through a declared demo proxy | ${s.viaProxy} |`);
   L.push(`| Spearman rho, score vs realised excess | **${num(cal.scoreVsOutcomeRho, 3)}** (n=${cal.n}) |`);
+  L.push(`| most inverted factor | **${cal.worstFactor ?? '-'}**${cal.worstFactor && Number.isFinite(cal.factorRho?.[cal.worstFactor]?.rho) ? ` at ${num(cal.factorRho[cal.worstFactor].rho, 3)}` : ''} (weights unchanged) |`);
   L.push('');
 
   L.push('## Calibration - does the score rank?');
@@ -109,6 +110,27 @@ export function renderReviewReport(review) {
     L.push(`| ${k} | ${v.rows} | ${v.decided} | ${v.hits} | ${pct(v.hitPct)} | ${pct(v.meanSignedExcessPct, 3)} |`);
   }
   L.push('');
+  L.push('### Per-factor diagnosis - which term inverts the ranking');
+  L.push('');
+  L.push(`Same ${cal.n} claims and the same realised excess as the total rho above, each factor correlated on its own. \`w\` is the weight the rubric actually uses; nothing in this table changes it.`);
+  L.push('');
+  L.push('| factor | w | rho vs realised excess | n | reading |');
+  L.push('| --- | ---: | ---: | ---: | --- |');
+  for (const [factor, v] of Object.entries(cal.factorRho ?? {}).sort((a, b) => (a[1].rho ?? 0) - (b[1].rho ?? 0))) {
+    const reading = !Number.isFinite(v.rho)
+      ? 'not measurable at this n'
+      : v.rho < -0.1
+        ? 'INVERTED - higher factor score, worse realised outcome'
+        : v.rho > 0.1
+          ? 'points the right way'
+          : 'no monotone signal';
+    L.push(`| ${factor} | ${num(v.weight, 2)} | **${num(v.rho, 3)}** | ${v.n} | ${reading} |`);
+  }
+  L.push('');
+  if (cal.worstFactor) {
+    L.push(`The most inverted factor is **${cal.worstFactor}**. That is a diagnosis, not a fix: the weights stay where they are, because re-weighting against ${cal.n} non-independent claims would be fitting noise. The rubric branch that emits this factor is the thing to repair.`);
+    L.push('');
+  }
   L.push('### Does the publish floor earn its place?');
   L.push('');
   L.push(`| cohort | claims | decided | won | hit rate | mean signed excess |`);

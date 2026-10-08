@@ -422,6 +422,7 @@ async function cmdDoctor(flags) {
     `node            ${process.version}`,
     `data mode       ${hub.mode} (PRISM_DATA_MODE=${process.env.PRISM_DATA_MODE || 'unset -> auto'})`,
     `market provider state=${hub.market.state} url=${hub.market.url} liveTools=${hub.market.liveTools} resolved=${hub.market.resolvedIntents}/${hub.market.totalIntents} fixture-backed=${hub.market.fixtures}/${hub.market.totalIntents} intents (pack: ${hub.market.fixtureEntries} entries, ${hub.market.fixtureEntries - hub.market.fixtures} of them signal skills)`,
+    `intent sources   ${hub.market.stated}/${hub.market.totalIntents} intents have a stated source: computed-from-real-prices=${hub.market.computed}, fixture=${hub.market.fixtures} (synthetic=${hub.market.syntheticFixtures}), live=${hub.market.live}, unserved=${hub.market.unserved}`,
     hub.market.error ? `market error    ${hub.market.error}` : null,
     `signal skills   ${(hub.signal.skills || []).filter((k) => k.tool).length}/${(hub.signal.skills || []).length} resolved to live tools, ${(hub.signal.skills || []).filter((k) => k.fixture).length} fixture-backed, ${SKILL_TRIGGERS.length}/${(hub.signal.skills || []).length} wired to a channel (state=${hub.signal.state})`,
     `agentkey        state=${hub.chainbase.state} configured=${hub.chainbase.configured} resolved=${hub.chainbase.resolvedIntents}/${hub.chainbase.totalIntents}`,

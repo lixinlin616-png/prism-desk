@@ -53,7 +53,7 @@
 
 ```bash
 node prism.mjs doctor                 # 数据接线自检
-npm test                              # 211 / 211
+npm test                              # 219 / 219
 npm run validate                      # 结构性 / 数据 / 研究质量检查
 node server.mjs                       # 另开一个终端
 ```
@@ -258,7 +258,7 @@ npm run export:static -- --serve   # 顺便在本机 4321 端口预览，看到�
 
 | 静态回放**能**做 | 静态回放**做不到**（页面会明说） |
 |---|---|
-| 六个预置场景的全链路回放（PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT），外加四条中文提问的精确回放 | 跑一个**全新**的自由提问：没有引擎，只能按意图路由到最接近的预录任务，并以 toast 与 trace 里的 replayNote 提示"这是替换" |
+| 六个预置场景的全链路回放（PLAN → INGEST → EXTRACT → VERIFY → SCORE → PRESENT），外加七条中文提问的精确回放 | 跑一个**全新**的自由提问：没有引擎，只能按意图路由到最接近的预录任务，并以 toast 与 trace 里的 replayNote 提示"这是替换" |
 | 卡片档案与逐条证据账本、隔离原因、失效条件 | 写入：粘贴文档 / 清空看板返回 **409** 并说明理由，**不假装成功** |
 | 看板（345 张卡 = 已提交 fixture，14 张 active）、watchlist、冲突标记 | 改 as-of 时钟：回放的永远是录制时钉死的那个 as-of，改了会提示被忽略 |
 | 复盘面板（39 条已裁决 / 25.6% 命中 / rho −0.137，与 `docs/reports/review.md` 逐条一致） | LLM 双通道抽取（录像走的是确定性规则路径，和文档里的所有数字同源） |
