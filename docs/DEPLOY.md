@@ -53,7 +53,7 @@
 
 ```bash
 node prism.mjs doctor                 # 数据接线自检
-npm test                              # 222 / 222
+npm test                              # 223 / 223
 npm run validate                      # 结构性 / 数据 / 研究质量检查
 node server.mjs                       # 另开一个终端
 ```

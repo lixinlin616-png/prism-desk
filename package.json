@@ -27,6 +27,9 @@
     "export:static": "node scripts/export-static.mjs",
     "export:static:serve": "node scripts/export-static.mjs --serve",
     "review:seed": "node prism.mjs review --board=data/fixtures/board-seed.json --out=docs/reports/review.md --report",
+    "live": "node scripts/live-wiring.mjs",
+    "live:record": "node scripts/live-wiring.mjs --record",
+    "live:check": "node scripts/live-wiring.mjs --check",
     "submission": "node scripts/submission-links.mjs",
     "submission:check": "node scripts/submission-links.mjs --check"
   },

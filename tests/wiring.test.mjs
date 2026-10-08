@@ -455,3 +455,12 @@ test('a named symbol the corpus holds no document for is reported as a coverage 
   });
   assert.deepEqual(read.coverage.noDocuments, [], 'HLXN has documents in scope');
 });
+test('the live-wiring probe is offline-safe and its report cannot drift from its recorded pack', () => {
+  // The probe itself needs network, but --check must run on a clean clone with no
+  // network and no evidence committed, and it must fail loudly if the report ever
+  // claims a connection the recorded pack does not back up.
+  const script = join(ROOT, 'scripts', 'live-wiring.mjs');
+  assert.ok(existsSync(script), 'scripts/live-wiring.mjs must exist');
+  const out = execFileSync(process.execPath, [script, '--check'], { cwd: ROOT, encoding: 'utf8' });
+  assert.match(out, /live-wiring: (OK|no committed evidence)/, out);
+});

@@ -15,7 +15,7 @@
  *   node prism.mjs serve
  */
 
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { config } from './src/config.mjs';
@@ -96,6 +96,21 @@ function parseFlags(argv) {
   return flags;
 }
 
+/**
+ * One line of the committed live-wiring evidence, so `doctor` can never imply a
+ * live call that did not happen. Regenerate it with `npm run live:record`.
+ */
+function liveWiringNote() {
+  const p = resolve(config.root, 'docs', 'reports', 'live-wiring.md');
+  if (!existsSync(p)) return 'live wiring     no evidence committed - run `npm run live:record` to probe the endpoint and record real responses';
+  const md = readFileSync(p, 'utf8');
+  const connected = /\*\*Connected\.\*\*/.test(md);
+  const resolved = (md.match(/market intents resolved \| \*\*(\d+\/\d+)\*\*/) || [])[1] || 'n/a';
+  const skills = (md.match(/bitget-signal skills resolved \| \*\*(\d+\/\d+)\*\*/) || [])[1] || 'n/a';
+  const when = (md.match(/^Generated (\S+) by/m) || [])[1] || 'n/a';
+  const verdict = connected ? 'CONNECTED intents ' + resolved + ', skills ' + skills : 'NOT CONNECTED (the report records why)';
+  return 'live wiring     ' + verdict + ' - ' + when + ' -> docs/reports/live-wiring.md';
+}
 function asOfFrom(flags) {
   if (!flags['as-of']) return new Date();
   const d = parseDate(flags['as-of']);
@@ -427,6 +442,7 @@ async function cmdDoctor(flags) {
     `signal skills   ${(hub.signal.skills || []).filter((k) => k.tool).length}/${(hub.signal.skills || []).length} resolved to live tools, ${(hub.signal.skills || []).filter((k) => k.fixture).length} fixture-backed, ${SKILL_TRIGGERS.length}/${(hub.signal.skills || []).length} wired to a channel (state=${hub.signal.state})`,
     `agentkey        state=${hub.chainbase.state} configured=${hub.chainbase.configured} resolved=${hub.chainbase.resolvedIntents}/${hub.chainbase.totalIntents}`,
     hub.chainbase.reason ? `agentkey note   ${hub.chainbase.reason}` : null,
+    liveWiringNote(),
     hub.chainbase.error ? `agentkey error  ${hub.chainbase.error}` : null,
     `corpus          ${hub.corpus.documents} documents, ${hub.corpus.words} words, tickers ${hub.corpus.tickers.join(' ')}`,
     `prices          ${hub.prices.symbols} symbols, ${hub.prices.bars} bars, ${hub.prices.from} to ${hub.prices.to}`,

@@ -136,7 +136,12 @@ export const config = {
     prices: join(ROOT, 'data', 'prices'),
     events: join(ROOT, 'data', 'events'),
     eval: join(ROOT, 'data', 'eval'),
-    fixtures: join(ROOT, 'data', 'fixtures', 'mcp'),
+    /**
+     * Offline fixture pack. Override it to run the desk on a recorded live pack
+     * (see scripts/live-wiring.mjs) without disturbing the synthetic demo pack the
+     * submitted artefacts were generated from.
+     */
+    fixtures: process.env.PRISM_FIXTURE_DIR ? resolve(ROOT, process.env.PRISM_FIXTURE_DIR) : join(ROOT, 'data', 'fixtures', 'mcp'),
   },
 };
 

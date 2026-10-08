@@ -11,7 +11,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 222 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 223 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -83,7 +83,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
 node prism.mjs doctor    # 数据接线自检 + smoke run（13 张卡，11 发布 / 2 低于阈值；账本 30 items / pass 27 / fail 0 / unverifiable 3 / 90%）
 node prism.mjs demo      # 逐字重建上面那份 1079 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 222 / 222 · 0 跳过（全新 clone 亦然）
+npm test                 # 223 / 223 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同

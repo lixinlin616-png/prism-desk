@@ -34,6 +34,7 @@ node server.mjs          # -> http://127.0.0.1:4310（零依赖，不需要 npm 
 零依赖，所以没有构建失败面：Runtime = Docker、Build Command 留空、Start Command = `node server.mjs`、Health Check = `/api/status`、环境变量 `PRISM_DATA_MODE=offline` 与 `PRISM_HOST=0.0.0.0`（蓝图里已写好）。
 
 > 免费实例 15 分钟无流量会休眠，首次加载约 5–10 秒（要载入 41,386 根日 K 的价格库）。**提交报名表前自己先点一次把实例唤醒**，别把冷启动留给评委。另外四条上线路径（Pages / Fly / VPS+Caddy / 临时隧道）见 [`docs/DEPLOY.md`](docs/DEPLOY.md)。
+| [`docs/reports/live-wiring.md`](docs/reports/live-wiring.md) | **Live 接线取证**：真实握手结果（工具名 / `resolved=N/20` / 录制条目数），或连不通时的失败证据。由 `npm run live:record` 生成，勿手改 |
 
 ---
 
@@ -222,7 +223,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 222 个测试（node:test，无第三方依赖）
+npm test           # 223 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
@@ -254,6 +255,18 @@ npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ -
 
 ---
 
+## Live 接线取证 / Live wiring evidence
+
+`doctor` 打印 `resolved=0/20`，因为**内置 fixture 全部标着 `"synthetic": true`**：接线本身（`tools/list` 发现 → intent 模糊解析 → 透明降级 → 逐 intent provenance）是真实实现且有测试覆盖，但仓库里没有一次成功 live 调用的证据。这种事不该靠一句声明，所以它有自己的取证脚本：
+
+```bash
+npm run live:record   # 真实握手 + 录制真实响应 -> data/fixtures/mcp-live/recorded.json（synthetic:false）
+                      # 并重写 docs/reports/live-wiring.md；连不通就把 DNS 结果 / 错误码 / HTTP 状态 / 响应体摘录写进去，退出码 1
+npm run live:check    # 断言报告与录制包一致（离线可跑，防止口径漂移）
+PRISM_FIXTURE_DIR=data/fixtures/mcp-live node server.mjs   # 让投研台直接跑在录制到的真实数据上
+```
+
+两种结果都能写进提交材料，区别只在于你手上有没有一份**可复现的 artefact**：连上了就是真实工具名、`resolved=N/20`、N 条 `synthetic:false` 响应；连不上就是带时间戳的失败证据。内置 demo 包继续保持 synthetic 并如此标注——已提交的逐字稿、看板 fixture 与研究报表都是从它生成的，换数据源会让它们全部漂移。
 ## 文档索引 / Docs
 
 | 文件 | 内容 |
@@ -291,7 +304,7 @@ web/                 index.html + app.js + styles.css + static-adapter.js（零�
 scripts/             validate, replay, build-seed, fetch-prices, record-fixtures,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               222 个 node:test 用例
+tests/               223 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 
