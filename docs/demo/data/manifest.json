@@ -1,6 +1,6 @@
 {
  "builtBy": "scripts/export-static.mjs",
- "exportedAt": "2026-10-07T14:07:03.801Z",
+ "exportedAt": "2026-10-08T02:48:41.764Z",
  "engine": {
   "dataMode": "offline",
   "extractor": "rules",
@@ -73,14 +73,14 @@
    "runs": 66,
    "note": "Committed fixture. node prism.mjs review --board=data/fixtures/board-seed.json reproduces docs/reports/review.md from a fresh clone."
   },
-  "total": 312,
+  "total": 345,
   "byStatus": {
-   "superseded": 274,
-   "draft": 24,
+   "superseded": 300,
+   "draft": 30,
    "expired": 1,
-   "active": 13
+   "active": 14
   },
-  "activeAvgScore": 56.7,
+  "activeAvgScore": 56.2,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -88,66 +88,102 @@
  "runs": [
   {
    "scenarioId": "full-sweep",
-   "runId": "RUN-MUY6LRC6",
+   "runId": "RUN-MUYXT82G",
    "asOf": "2025-09-19T20:00:00Z",
-   "cards": 12,
-   "published": 11,
+   "cards": 13,
+   "published": 12,
    "quarantined": 0,
-   "ms": 105
+   "ms": 116
   },
   {
    "scenarioId": "earnings-gap",
-   "runId": "RUN-MUY6LRDK",
+   "runId": "RUN-MUYXT83O",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 5,
    "published": 5,
    "quarantined": 0,
-   "ms": 39
+   "ms": 42
   },
   {
    "scenarioId": "macro-transmission",
-   "runId": "RUN-MUY6LREO",
-   "asOf": "2025-09-19T20:00:00Z",
-   "cards": 2,
-   "published": 2,
-   "quarantined": 0,
-   "ms": 36
-  },
-  {
-   "scenarioId": "closed-window",
-   "runId": "RUN-MUY6LRFV",
-   "asOf": "2025-09-13T15:00:00Z",
-   "cards": 3,
-   "published": 2,
-   "quarantined": 0,
-   "ms": 39
-  },
-  {
-   "scenarioId": "flows",
-   "runId": "RUN-MUY6LRGY",
+   "runId": "RUN-MUYXT84T",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 3,
    "published": 3,
    "quarantined": 0,
-   "ms": 35
+   "ms": 39
+  },
+  {
+   "scenarioId": "closed-window",
+   "runId": "RUN-MUYXT862",
+   "asOf": "2025-09-13T15:00:00Z",
+   "cards": 4,
+   "published": 3,
+   "quarantined": 0,
+   "ms": 44
+  },
+  {
+   "scenarioId": "flows",
+   "runId": "RUN-MUYXT87B",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 3,
+   "published": 3,
+   "quarantined": 0,
+   "ms": 43
   },
   {
    "scenarioId": "risk",
-   "runId": "RUN-MUY6LRHZ",
+   "runId": "RUN-MUYXT88K",
    "asOf": "2025-09-19T20:00:00Z",
    "cards": 5,
    "published": 4,
    "quarantined": 0,
-   "ms": 34
+   "ms": 44
+  },
+  {
+   "scenarioId": "zh-weekend",
+   "runId": "RUN-MUYXT88T",
+   "asOf": "2025-09-13T15:00:00Z",
+   "cards": 3,
+   "published": 2,
+   "quarantined": 0,
+   "ms": 8
+  },
+  {
+   "scenarioId": "zh-cpi",
+   "runId": "RUN-MUYXT89W",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 3,
+   "published": 3,
+   "quarantined": 0,
+   "ms": 38
+  },
+  {
+   "scenarioId": "zh-earnings",
+   "runId": "RUN-MUYXT8A1",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 5,
+   "published": 5,
+   "quarantined": 0,
+   "ms": 4
+  },
+  {
+   "scenarioId": "zh-flows",
+   "runId": "RUN-MUYXT8A5",
+   "asOf": "2025-09-19T20:00:00Z",
+   "cards": 3,
+   "published": 3,
+   "quarantined": 0,
+   "ms": 3
   }
  ],
  "review": {
   "asOf": "2025-09-30T23:59:59.000Z",
-  "cardsOnBoard": 312,
-  "distinctClaims": 148,
-  "judged": 91,
-  "decided": 34,
-  "hitPct": 29.4,
+  "cardsOnBoard": 345,
+  "distinctClaims": 162,
+  "judged": 105,
+  "decided": 39,
+  "hitPct": 25.6,
   "scoreVsOutcomeRho": -0.137,
   "report": "docs/reports/review.md"
  },

@@ -187,6 +187,15 @@ async function boot() {
     if (window.PRISM_STATIC_BUNDLE) coachStatic();
     await refreshBoard();
     toast(`Desk online - ${caps.corpus?.documents ?? 0} documents, ${caps.prices?.symbols ?? 0} symbols, ${(caps.intents || []).length} MCP intents wired`, 'ok');
+    // The page a judge opens is the static replay. An empty thread reads as a
+    // broken demo, so the first visit plays the full pipeline instead of waiting
+    // to be clicked. A live server stays quiet until asked.
+    const staticDemo = Boolean(document.querySelector('script[src*="static-adapter"]'));
+    if (staticDemo && !state.turns && !boot.autoRan) {
+      boot.autoRan = true;
+      const sweep = state.scenarios.find((s) => s.id === 'full-sweep') || state.scenarios[0];
+      if (sweep) runScenario(sweep);
+    }
   } catch (err) {
     renderBootError(err);
     toast(`Desk did not start: ${err.message}`, 'err');
@@ -237,7 +246,7 @@ function coachStatic() {
   empty.dataset.coached = '1';
   empty.append(el('p', {
     class: 'dim',
-    html: '第一次打开？点上方 <b>Full desk sweep</b> 看「提问 → 取数 → 抽取 → 核验 → 打分 → 可用判断」全链路；或直接在下面输入框打字后回车。<br />First time? Click <b>Full desk sweep</b> above, or type a question and press Enter.',
+    html: '静态页会先回放 <b>全频道扫描</b>（提问 → 取数 → 抽取 → 核验 → 打分）。下面四条中文问题有独立录音，点了就是那一轮的真实输出。',
   }));
 }
 
@@ -1509,6 +1518,13 @@ function wireEvents() {
     const question = $('#question').value;
     $('#question').value = '';
     ask(question);
+  });
+
+  $('#askChips')?.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('.chip-ask');
+    if (!btn) return;
+    if (btn.dataset.asof) $('#asOf').value = btn.dataset.asof;
+    ask(btn.dataset.q || '');
   });
 
   const question = $('#question');

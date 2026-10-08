@@ -11,9 +11,11 @@
  * script RECORDS the real thing: it boots the same offline pipeline the server
  * boots, runs every demo scenario against the committed board fixture, and
  * writes down exactly the bytes each /api/* route would have returned -
- * including the SSE stage frames and the gaps between them. web/app.js then
- * runs unchanged against web/static-adapter.js, which answers those routes from
- * the recording.
+ * including the SSE stage frames and the gaps between them. The same web/app.js
+ * the live server uses then runs against web/static-adapter.js. On the static
+ * page it notices the adapter and auto-plays the full sweep; a live server
+ * stays quiet until asked. Four Chinese questions are recorded with no forced
+ * channels, so those chips replay exactly.
  *
  * Nothing here is simulated. Cards, ledger totals, scores and review verdicts
  * are produced by the engine at export time; the adapter only replays them. The
@@ -195,6 +197,65 @@ async function main() {
       ledger: run.ledger,
     });
     log.info(`${sc.id}: ${run.cards.length} cards, ${run.published.length} published, ledger ${run.ledger.passRate}% over ${run.ledger.itemsChecked} items, ${frames.length} frames, ${run.ms}ms`);
+  }
+
+  // Free-form questions a Chinese-speaking judge will actually type. Recorded
+  // from the real planner (no forced channels), so the static page can answer
+  // them exactly instead of fuzzy-matching an English scenario.
+  const LUI_PROMPTS = [
+    { id: 'zh-weekend', label: '周末 rToken', zh: '周末休市定价', question: '周末休市期间 rToken 怎么定价', asOf: '2025-09-13T15:00:00Z' },
+    { id: 'zh-cpi', label: 'CPI 低于预期', zh: '传导', question: 'CPI 低于预期，哪些标的的传导最强？', asOf: '2025-09-19T20:00:00Z' },
+    { id: 'zh-earnings', label: '撤回指引', zh: '财报预期差', question: 'HLXN 这份财报超预期但撤回了指引，该不该做空？', asOf: '2025-09-19T20:00:00Z' },
+    { id: 'zh-flows', label: '内部人减持', zh: '资金足迹', question: '有没有内部人减持和机构资金变化', asOf: '2025-09-19T20:00:00Z' },
+  ];
+  for (const sc of LUI_PROMPTS) {
+    const desk = new Pipeline({ hub, board });
+    await desk.ready();
+    const frames = [];
+    let last = Date.now();
+    const push = (event, data) => {
+      const now = Date.now();
+      frames.push({ event, dt: now - last, data });
+      last = now;
+    };
+    const run = await desk.runTask({
+      question: sc.question,
+      asOf: new Date(sc.asOf),
+      channels: null,
+      limit: 14,
+      persist: false,
+      onEvent: (evt) => push('stage', evt),
+    });
+    push('run', serialiseRun(run));
+    push('done', { ok: true, runId: run.id });
+    for (const card of run.cards) runCards.set(card.id, card);
+    bytes.push([`api/ask/${sc.id}.json`, write(`api/ask/${sc.id}.json`, JSON.stringify({
+      scenarioId: sc.id,
+      label: sc.label,
+      zh: sc.zh,
+      note: 'Recorded free-form question. Channels come from the planner, not from a scenario override.',
+      recordedFrom: { question: sc.question, asOf: sc.asOf, channels: null, limit: 14, persist: false },
+      frames,
+    }))]);
+    bytes.push([`api/status.${sc.id}.json`, write(`api/status.${sc.id}.json`, statusPayload(desk))]);
+    index.push({
+      scenarioId: sc.id,
+      label: sc.label,
+      zh: sc.zh,
+      question: sc.question,
+      asOf: sc.asOf,
+      channels: null,
+      runId: run.id,
+      ms: run.ms,
+      mode: run.mode,
+      cards: run.cards.length,
+      published: run.published.length,
+      quarantined: run.quarantined.length,
+      belowThreshold: run.belowThreshold.length,
+      frames: frames.length,
+      ledger: run.ledger,
+    });
+    log.info(`${sc.id}: ${run.cards.length} cards, ${run.published.length} published, ledger ${run.ledger.passRate}% over ${run.ledger.itemsChecked} items`);
   }
   bytes.push(['api/ask/index.json', write('api/ask/index.json', { ok: true, runs: index })]);
 

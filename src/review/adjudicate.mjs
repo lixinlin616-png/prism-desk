@@ -272,6 +272,47 @@ export function walkInvalidation(book, symbol, win, { level, sign, recheckAt = n
 }
 
 /**
+ * Did a pair card's own spread hurdle fail?
+ *
+ * Macro cards state the condition in words ("pair spread < 50bp after 2
+ * sessions") and used to be reported untestable, so the review scored them on
+ * the whole window instead of on the test the card actually wrote. The spread
+ * is the raw long-leg return minus the short-leg return, in percent, over the
+ * first `sessions` forward bars - not the half-weighted figure the payoff uses.
+ * Failing the hurdle means the transmission the card required did not show up.
+ */
+export function walkPairSpread(book, legs, win, { minSpreadBp = 50, sessions = 2 } = {}) {
+  const long = (legs || []).find((l) => l.sign > 0);
+  const short = (legs || []).find((l) => l.sign < 0);
+  if (!long || !short) return { triggered: null, detail: 'pair invalidation needs both a long and a short leg' };
+  const longBars = book.bars(long.symbol);
+  const checkIdx = Math.min(win.refIdx + sessions, win.endIdx);
+  if (checkIdx <= win.refIdx) {
+    return { triggered: null, detail: `pair invalidation leaves no ${sessions}-session window before ${win.endDate}` };
+  }
+  const fromDate = win.refDate;
+  const toDate = longBars[checkIdx]?.date;
+  const ret = (symbol) => {
+    const p0 = book.closeOn(symbol, fromDate);
+    const p1 = book.closeOn(symbol, toDate);
+    if (!p0 || p1 === null || p1 === undefined) return null;
+    return ((p1 - p0) / p0) * 100;
+  };
+  const rLong = ret(long.symbol);
+  const rShort = ret(short.symbol);
+  if (rLong === null || rShort === null) {
+    return { triggered: null, detail: `pair spread not measurable ${long.symbol}/${short.symbol} ${fromDate} -> ${toDate}` };
+  }
+  const spreadPct = rLong - rShort;
+  const hurdle = minSpreadBp / 100;
+  const held = spreadPct >= hurdle;
+  const detail = `pair spread ${round(spreadPct, 3)}% (${long.symbol} ${round(rLong, 3)}% minus ${short.symbol} ${round(rShort, 3)}%) over ${sessions} sessions ${fromDate} -> ${toDate}; the card's own hurdle is ${minSpreadBp}bp`;
+  return held
+    ? { triggered: false, detail: `${detail} - hurdle cleared, falsification did not fire` }
+    : { triggered: true, detail: `${detail} - below the hurdle, the transmission the card required did not show up` };
+}
+
+/**
  * Walk the path against the card's RISK levels (tradeSketch stop / target).
  *
  * This answers a different question from `walkInvalidation`: not "was the thesis
@@ -411,7 +452,12 @@ function adjudicate(card, ctx) {
       sign: primarySign,
       recheckAt: card.invalidation?.recheckAt ?? null,
     })
-    : { triggered: null, detail: `${inst.kind} cards state their invalidation in prose, not as a single-name level` };
+    : (inst.kind === 'pair' && card.invalidation?.test?.kind === 'pair-spread')
+      ? walkPairSpread(book, inst.legs, win, {
+        minSpreadBp: card.invalidation.test.minSpreadBp,
+        sessions: card.invalidation.test.sessions,
+      })
+      : { triggered: null, detail: `${inst.kind} cards state their invalidation in prose, not as a machine-readable test` };
   row.invalidationTriggered = inv.triggered;
   row.invalidationDetail = inv.detail;
 
@@ -743,10 +789,12 @@ export function deriveLessons(rows, summary, calibration, opts = {}) {
   }
 
   if (summary.invalidationUntestable > 0) {
+    const sample = rows.find((r) => r.invalidationTriggered === null && r.outcome !== 'unmeasurable' && r.outcome !== 'not-directional' && r.invalidationLevel);
+    const quoted = sample?.invalidationLevel ? ` (for example "${sample.invalidationLevel}")` : '';
     lessons.push({
       id: 'untestable-falsification',
       severity: 'warning',
-      finding: `${summary.invalidationUntestable} of ${summary.scored} judged claims state their falsification condition in prose ("tone sign flip on >= 2 documents", "pair spread vs SPY < 50bp after 2 sessions") with no machine-testable level, so the desk's own words could not be checked and the verdict fell back to realised excess.`,
+      finding: `${summary.invalidationUntestable} of ${summary.scored} judged claims state their falsification condition in prose${quoted} with no machine-testable level, so the desk's own words could not be checked and the verdict fell back to realised excess.`,
       evidence: `untestable=${summary.invalidationUntestable}, tested=${summary.invalidationFired + rows.filter((r) => r.invalidationTriggered === false).length}`,
       action: 'Require every channel to emit a numeric invalidation level plus the series it refers to. A falsification condition nobody can evaluate is a rhetorical device, not a control.',
     });

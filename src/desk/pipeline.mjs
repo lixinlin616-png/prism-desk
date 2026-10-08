@@ -54,16 +54,23 @@ const STOPWORDS = new Set(['THE', 'AND', 'FOR', 'WITH', 'WHAT', 'WHY', 'HOW', 'I
  */
 const TYPO_ALIASES = {
   earinngs: 'earnings', earningss: 'earnings', ernings: 'earnings', earings: 'earnings',
-  earnigns: 'earnings', earnngs: 'earnings',
+  earnigns: 'earnings', earnngs: 'earnings', guidnace: 'guidance', guidane: 'guidance',
   iflation: 'inflation', inflatoin: 'inflation', inflationn: 'inflation', inflaton: 'inflation',
+  inflaction: 'inflation',
   recesion: 'recession', ressesion: 'recession', recesison: 'recession',
   payrol: 'payroll', payrroll: 'payroll',
   insder: 'insider', insiider: 'insider',
-  wekeend: 'weekend', weekdend: 'weekend', weekand: 'weekend',
+  wekeend: 'weekend', weekdend: 'weekend', weekand: 'weekend', weekened: 'weekend',
   rtokne: 'rtoken', rtoke: 'rtoken',
+  concensus: 'consensus', consenus: 'consensus', consensous: 'consensus',
+  fommc: 'fomc',
 };
+/** Explicit Chinese substitutions. Same rule as the English map: listed, not fuzzy. */
+const ZH_TYPOS = [['才报', '财报'], ['休事', '休市'], ['通涨', '通胀'], ['非衣', '非农']];
 function normalizeAsk(q) {
-  const lower = String(q || '').toLowerCase();
+  let text = String(q || '');
+  for (const [bad, good] of ZH_TYPOS) text = text.split(bad).join(good);
+  const lower = text.toLowerCase();
   return lower.replace(/[a-z][a-z'-]{3,}/g, (word) => TYPO_ALIASES[word] || word);
 }
 
@@ -82,7 +89,7 @@ function normalizeAsk(q) {
  */
 export const SKILL_TRIGGERS = [
   { skill: 'sentiment-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fear & Greed / funding / long-short ratio decide who is awake to trade the rToken outside cash hours' },
-  { skill: 'macro-analyst', channels: ['cross-asset', 'closed-window'], why: 'Fed policy and BTC-vs-DXY/Nasdaq correlation frame how a US macro print transmits into a tokenized equity' },
+  { skill: 'macro-analyst', channels: ['macro-transmission', 'cross-asset', 'closed-window'], why: 'A CPI or FOMC question is a macro-transmission question. Cut odds, the curve and BTC-vs-Nasdaq/DXY correlation are the bridge into an rToken, so the skill has to run on that channel and not only when the trader also says "crypto"' },
   { skill: 'market-intel', channels: ['flow-footprint'], why: 'Spot ETF flows, stablecoin supply and whale flow are the cross-market footprint behind position changes' },
   { skill: 'technical-analysis', channels: ['risk-flag'], why: 'RSI, distance from the 200-DMA and support/resistance flag a stretched tape as a risk, independent of the narrative' },
   { skill: 'news-briefing', channels: ['narrative-shift'], why: 'Trending boards and narrative synthesis detect when the story is turning before fundamentals confirm it' },
@@ -114,41 +121,48 @@ export function planQuestion(question, { asOf = null } = {}) {
   // them against the symbols the desk actually has data for before use.
   const tickerCandidates = [...new Set([...upper.matchAll(TICKER_RE)].map((m) => m[1]).filter((t) => !STOPWORDS.has(t) && t.length <= 6))];
   const lower = normalizeAsk(q);
-
+  // English matching is on word tokens, not substrings. "disclosed" used to open
+  // the closed-window channel, "print" turned every CPI question into an earnings
+  // question, "gaps" turned the expectation-gap thesis into an overnight-gap
+  // question, and "something" / "methodology" opened cross-asset via "eth".
+  // Chinese has no spaces, so those terms stay as explicit substrings.
+  const tokens = new Set(lower.match(/[a-z0-9]+/g) || []);
   const channels = new Set();
   const intents = new Set();
   const indicators = new Set();
+  const has = (...terms) => terms.some((t) => {
+    if (/[\u4e00-\u9fff]/.test(t) || /[\s/-]/.test(t)) return lower.includes(t);
+    return tokens.has(t);
+  });
 
-  const has = (...terms) => terms.some((t) => lower.includes(t));
-
-  if (has('earnings', 'eps', 'report', 'quarter', 'print', 'revenue', 'guidance', '电话会', '财报', '业绩')) {
+  if (has('earnings', 'eps', 'quarter', 'quarterly', 'revenue', 'guidance', 'consensus', '电话会', '财报', '财报季', '业绩', '指引', '一致预期', '超预期', '预期差')) {
     channels.add('earnings-gap');
     intents.add('earningsCalendar'); intents.add('analystEstimates'); intents.add('incomeStatement');
   }
-  if (has('cpi', 'inflation', '通胀', 'fomc', 'fed', 'rate', 'nfp', 'payroll', 'jobs', 'pmi', 'pce', 'macro', '宏观', 'yield', 'treasury')) {
+  if (has('cpi', 'inflation', '通胀', 'fomc', 'fed', 'rate', 'nfp', 'payroll', 'nonfarm', 'jobs', 'pmi', 'pce', 'macro', '宏观', 'yield', 'treasury', '非农', '美联储', '降息', '加息', '议息', '传导', '就业')) {
     channels.add('macro-transmission');
     intents.add('sentiment');
     if (has('cpi', '通胀', 'inflation')) indicators.add('cpi');
-    if (has('nfp', 'payroll', 'jobs', '就业')) indicators.add('nfp');
-    if (has('fomc', 'fed ', 'rate', '利率')) indicators.add('fomc');
+    if (has('nfp', 'payroll', 'nonfarm', 'jobs', '就业', '非农')) indicators.add('nfp');
+    if (has('fomc', 'fed', 'rate', '美联储', '降息', '加息', '议息', '利率')) indicators.add('fomc');
     if (has('pmi', 'ism', 'activity')) indicators.add('pmi');
   }
-  if (has('weekend', 'overnight', 'closed', 'rth', 'rtoken', 'r-token', 'tokenized', 'tokenised', '7x24', '24/7', '休市', '周末', '盘前', '盘后', 'gap')) {
+  if (has('weekend', 'overnight', 'closed', 'rth', 'rtoken', 'r-token', 'tokenized', 'tokenised', '7x24', '24/7', '休市', '周末', '盘前', '盘后', 'gap', '跳空', '隔夜', '代币化')) {
     channels.add('closed-window');
     intents.add('quote');
   }
-  if (has('insider', '13f', 'institutional', 'etf flow', 'flows', '内部人', '机构', '资金')) {
+  if (has('insider', '13f', 'institutional', 'etf flow', 'flows', '内部人', '机构', '资金', '减持', '增持', '持仓')) {
     channels.add('flow-footprint');
     intents.add('insiderTrades'); intents.add('institutionalHoldings');
   }
-  if (has('news', 'narrative', 'sentiment', 'story', 'rumor', 'rumour', '新闻', '叙事', '情绪', 'x ', 'twitter', 'reddit')) {
+  if (has('news', 'narrative', 'sentiment', 'story', 'rumor', 'rumour', '新闻', '叙事', '情绪', '传闻', 'twitter', 'reddit')) {
     channels.add('narrative-shift');
     intents.add('news'); intents.add('sentiment');
   }
-  if (has('crypto', 'btc', 'bitcoin', 'eth', 'funding', 'fear', 'greed', 'on-chain', 'onchain', '链上', '加密')) {
+  if (has('crypto', 'btc', 'bitcoin', 'eth', 'funding', 'fear', 'greed', 'on-chain', 'onchain', '链上', '加密', '比特币', '资金费率', '恐惧', '贪婪')) {
     channels.add('cross-asset');
   }
-  if (has('risk', 'short', 'bear', 'fraud', 'red flag', 'accounting', 'concern', '风险', '做空', '暴雷')) {
+  if (has('risk', 'short', 'bear', 'fraud', 'red flag', 'accounting', 'concern', '风险', '做空', '暴雷', '超买', '均线', '技术面', 'rsi')) {
     channels.add('risk-flag');
     intents.add('ratios'); intents.add('balanceSheet'); intents.add('cashFlow');
   }
@@ -365,7 +379,14 @@ export class Pipeline {
       try {
         const r = await this.hub.signal.invoke(trigger.skill, { query: question });
         if (r.value !== null && r.value !== undefined) {
-          snapshots.push({ intent: `signal:${trigger.skill}`, skill: trigger.skill, args: { query: question }, value: r.value, origin: r.origin });
+          snapshots.push({
+            intent: `signal:${trigger.skill}`,
+            skill: trigger.skill,
+            channels: trigger.wantedBy,
+            args: { query: question },
+            value: r.value,
+            origin: r.origin,
+          });
           skillCalls.push({ ...base, served: true, origin: r.origin });
         } else {
           skillCalls.push({ ...base, served: false, reason: `no live tool resolved and no offline fixture for '${trigger.skill}'` });

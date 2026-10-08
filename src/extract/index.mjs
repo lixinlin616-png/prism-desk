@@ -60,8 +60,13 @@ export function stampTime(cards, { asOf, documents = [] }) {
       .filter(Boolean)
       .map((d) => parseDate(d)?.getTime())
       .filter((ms) => Number.isFinite(ms));
+    const pinned = parseDate(card.provenance?.informationAt)?.getTime();
     // Newest source document, but never in the future relative to the run clock.
-    const infoMs = stamps.length ? Math.min(Math.max(...stamps), atMs) : atMs;
+    // A skill snapshot with no corpus document pins its own as-of instead of
+    // pretending the information was published at the moment the desk ran.
+    const infoMs = stamps.length
+      ? Math.min(Math.max(...stamps), atMs)
+      : (Number.isFinite(pinned) ? Math.min(pinned, atMs) : atMs);
     card.informationAt = new Date(infoMs).toISOString();
     card.createdAt = new Date(atMs).toISOString();
     card.expiresAt = expiryFor(card.horizon, card.createdAt);

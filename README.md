@@ -16,7 +16,7 @@
 
 **GitHub（public）：** https://github.com/lixinlin616-png/prism-desk
 
-演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`，浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放 —— `web/app.js` 一行都没改。所以点开 `full-sweep` 后那一轮的 12 张卡、29 条核验项 / 93.1% 通过率，以及复盘的 34 条已裁决 / 29.4% 命中 / rho −0.137，都是引擎真实产出（右侧看板栏另有 13 张 active，来自 312 张的已提交 fixture，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的检查专门盯这个漂移）。
+演示页发布在 GitHub Pages 上，是一份**静态回放**：`npm run export:static` 驱动真实的离线引擎跑完六个场景，并额外录下四条中文自由提问，把每一条 `/api/*` 响应（含 SSE 的逐帧节奏）录进 `docs/demo/data/`。浏览器端由 `web/static-adapter.js` 拦下 `window.fetch` 原样回放。`web/app.js` 与实时后端是**同一份文件**：静态页检测到 adapter 后会自动回放全频道扫描，避免评委打开一个空线程。所以打开后那一轮是 **13 张卡（12 发布，1 低于阈值）、30 条核验项 / 93.3% 通过率**，以及复盘的 **39 条已裁决 / 25.6% 命中 / rho −0.137**，都是引擎真实产出（右侧看板来自 **345** 张已提交 fixture，其中 **14** 张 active，是复盘的输入而不是某一轮的输出），与 `docs/reports/` 里已提交的报表逐条对得上（`tests/static-demo.test.mjs` 的检查专门盯这个漂移）。四条中文芯片是独立录音，点了就是那一轮；没录过的问法会回放最接近的任务并明说。
 
 有两件事静态页面**做不到**，而且它会明说、绝不假装成功：跑一个全新的自由提问（回放最接近的预录任务，并提示这是替换）、写入看板（粘贴文档 / 清空看板返回 409 并说明原因）；这些「明说」以页面 toast 与回放 trace 里的 replayNote 出现，页面上不再放永久徽标。
 
@@ -197,7 +197,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 
 **6. 统计结论带明确的 caveat。** 传导研究的样本只有 19/25 个事件，t 值按朴素独立假设计算，我们在报告里写明了这一点；跳空研究同时报告 **naive t 与按日期聚类的 clustered t**，并以 clustered 为准（更保守）。详见 [`docs/VALIDATION.md`](docs/VALIDATION.md)。
 
-**7. 我们公开了自己的判分记录，包括难看的那部分。** 复盘闭环拿真实价格回头裁决已发布的卡片：**312 张卡 → 148 个独立主张 → 34 条决出胜负，10 胜 24 负，命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）**。更要紧的是打分与实现超额收益的 Spearman rho = **-0.137**，A 级卡命中率（22.2%）**低于** C 级卡（50%）——也就是**分数越高、实现越差**，报告把这一条标成 **BLOCKER**。这些数字全部在 [`docs/reports/review.md`](docs/reports/review.md) 里，由 `npm run review:seed` 从一个**已提交的看板 fixture** 复现——除生成时间戳那一行外**逐字节相同（实测）**。机制与全部 caveat 见 [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md)。
+**7. 我们公开了自己的判分记录，包括难看的那部分。** 复盘闭环拿真实价格回头裁决已发布的卡片：**345 张卡 → 162 个独立主张 → 39 条决出胜负，10 胜 29 负，命中率 25.6%（Wilson 95% CI 14.6–41.1%；精确 Clopper–Pearson 13–42.1%）**。胜场仍是 10；命中率比「只按全窗口超额判」时更低，是因为宏观 pair 自己写的「2 个 session 内多头没有跑赢空头 50bp」现在会被机器检验，原先落在 ±1% 带内的失败被记成亏损。权重没有改。更要紧的是打分与实现超额收益的 Spearman rho = **-0.137**，A 级卡命中率（22.2%）**低于** C 级卡（50%）——也就是**分数越高、实现越差**，报告把这一条标成 **BLOCKER**。这些数字全部在 [`docs/reports/review.md`](docs/reports/review.md) 里，由 `npm run review:seed` 从一个**已提交的看板 fixture** 复现——除生成时间戳那一行外**逐字节相同（实测）**。机制与全部 caveat 见 [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md)。
 
 **8. 不是投资建议。** Prism Desk 输出的是**带证据和失效条件的研究判断**，不是下单指令。
 
@@ -210,10 +210,10 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 | 价格库 | 25 symbols · 41,386 bars · 2019-01-02 → 2025-09-30 | 真实日 OHLCV（Nasdaq 公开 API） |
 | 语料 | 14 documents · 2,599 words | 虚构发行主体 + 真实宏观文本，全部标注出处 |
 | 宏观事件 | 25 events | date / indicator / actual / consensus |
-| 离线 MCP fixture | 12 | Bitget MCP 与 Signal Skills 的录制响应 |
+| 离线 MCP fixture | 15 | Bitget MCP 与 Signal Skills 的录制响应 |
 | 评测集 | 10 extraction + 9 ledger cases | 含阴性对照与故意幻觉样本 |
-| 看板 fixture | 312 cards · 11 replay dates × 6 scenarios | `npm run seed` 重建，两次 SHA-256 相同（**实测**）——复盘报表据此复现 |
-| Demo 逐字记录 | 1031 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
+| 看板 fixture | 345 cards · 11 replay dates × 6 scenarios | `npm run seed` 重建，两次 SHA-256 相同（**实测**）——复盘报表据此复现 |
+| Demo 逐字记录 | 1079 行 · 6 场景 | `node prism.mjs demo` 重建，除生成时间戳与 6 处 `ms` 耗时外逐字相同（**实测**） |
 
 **三种数据模式**（`PRISM_DATA_MODE`）：
 
@@ -262,7 +262,7 @@ npm run export:static # 重建在线演示的静态回放包 -> docs/demo/（+ -
 | [`docs/DEMO-TRANSCRIPT.md`](docs/DEMO-TRANSCRIPT.md) | demo 的完整逐字输出（自动生成；从空看板重跑，除时间戳与每轮 ms 外逐字节相同，**实测**） |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | 管线、频道、账本、打分细则 |
 | [`docs/VALIDATION.md`](docs/VALIDATION.md) | 两份事件研究的实测数字与 caveat |
-| [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md) | 复盘闭环：三条轴、七个方法决定、以及我们 **10 胜 24 负**的实测判分 |
+| [`docs/REVIEW-LOOP.md`](docs/REVIEW-LOOP.md) | 复盘闭环：三条轴、方法决定、以及我们 **10 胜 29 负**的实测判分 |
 | [`docs/DEPLOY.md`](docs/DEPLOY.md) | 让 Demo 可公开访问（含本项目实际采用的 GitHub Pages 静态回放） |
 | [`docs/demo/`](docs/demo/) | 发布在 Pages 上的**静态回放演示包**：真实引擎的录像，勿手改，用 `npm run export:static` 重建 |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | 后续路线 |

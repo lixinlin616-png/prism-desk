@@ -12,7 +12,7 @@
    "totalIntents": 20,
    "fixtures": 10,
    "fixtureEntries": 15,
-   "calls": 5
+   "calls": 23
   },
   "signal": {
    "state": "offline",
@@ -50,7 +50,7 @@
      "fixture": true
     }
    ],
-   "calls": 5
+   "calls": 14
   },
   "corpus": {
    "documents": 14,
@@ -141,7 +141,7 @@
   "mode": "rules",
   "stats": {
    "runs": 1,
-   "ruleCards": 12,
+   "ruleCards": 3,
    "llmCards": 0,
    "merged": 0,
    "conflicts": 0,
@@ -160,12 +160,12 @@
   }
  },
  "ledger": {
-  "cardsAudited": 13,
-  "itemsChecked": 30,
-  "pass": 28,
+  "cardsAudited": 3,
+  "itemsChecked": 7,
+  "pass": 6,
   "fail": 0,
-  "unverifiable": 2,
-  "passRate": 93.3,
+  "unverifiable": 1,
+  "passRate": 85.7,
   "cardsQuarantined": 0
  },
  "board": {

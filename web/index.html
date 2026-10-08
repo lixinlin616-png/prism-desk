@@ -56,15 +56,21 @@
 
     <div class="thread" id="thread" role="log" aria-live="polite" aria-label="Research thread">
       <div class="empty" id="emptyState">
-        <h1>Ask the desk a question.</h1>
-        <p>Prism reads the corpus, pulls Bitget MCP data, extracts structured signal cards, grounds every number in the evidence ledger, scores them against a transparent rubric, and ranks what is actually tradeable.</p>
-        <p class="dim">Nothing here is a recommendation. Every card carries the condition that would prove it wrong.</p>
+        <h1>问一句。只要能被推翻的判断。</h1>
+        <p>给在 Bitget 做美股 rToken 的人。现金盘每天只开 6.5 小时，消息常在关门后落地。Prism 不给方向口号：预期差高于标题，每个数字对得回出处，对不上就隔离，每张卡写明失效价位和复检时点。人来下单。</p>
+        <p class="dim">Ask in Chinese or English. Nothing here is an order. Every card carries the condition that would prove it wrong.</p>
       </div>
     </div>
 
     <form class="composer" id="composer">
+      <div class="ask-chips" id="askChips" aria-label="Suggested questions">
+        <button type="button" class="chip-ask" data-q="周末休市期间 rToken 怎么定价" data-asof="2025-09-13T15:00">周末 rToken 怎么定价</button>
+        <button type="button" class="chip-ask" data-q="CPI 低于预期，哪些标的的传导最强？" data-asof="2025-09-19T20:00">CPI 低于预期</button>
+        <button type="button" class="chip-ask" data-q="HLXN 这份财报超预期但撤回了指引，该不该做空？" data-asof="2025-09-19T20:00">超预期但撤回指引</button>
+        <button type="button" class="chip-ask" data-q="有没有内部人减持和机构资金变化" data-asof="2025-09-19T20:00">内部人减持</button>
+      </div>
       <div class="composer-row">
-        <textarea id="question" rows="2" placeholder="e.g. The August CPI came in cool on the headline but hot on core — map the transmission and tell me who is most exposed." aria-label="Research question"></textarea>
+        <textarea id="question" rows="2" placeholder="例如：周末休市期间 rToken 怎么定价？  /  The August CPI came in cool — map the transmission." aria-label="Research question"></textarea>
         <button class="btn primary" type="submit" id="askBtn">Run<span class="kbd">⏎</span></button>
       </div>
       <div class="composer-meta">

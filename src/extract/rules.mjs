@@ -303,8 +303,15 @@ export class RuleExtractor {
       transmissionChain: chain,
       evidence: ev,
       invalidation: {
-        condition: `The transmission does not show up cross-sectionally: within two sessions the ${side === 'hot' ? 'most-exposed' : 'least-exposed'} basket does not underperform the benchmark, meaning the print was already priced or the channel is inactive in this regime.`,
-        level: 'pair spread vs SPY < 50bp after 2 sessions',
+        condition: `The transmission does not show up cross-sectionally: within two sessions the long leg does not beat the short leg by 50bp, meaning the print was already priced or the channel is inactive in this regime.`,
+        level: 'pair spread < 50bp after 2 sessions',
+        test: mostHurt[0] && mostHelped[0] ? {
+          kind: 'pair-spread',
+          long: mostHelped[0].symbol,
+          short: mostHurt[0].symbol,
+          minSpreadBp: 50,
+          sessions: 2,
+        } : null,
         recheckAt: addDays(asOf, 2),
       },
       tradeSketch: mostHurt[0] && mostHelped[0] ? {
@@ -529,6 +536,8 @@ export class RuleExtractor {
         cards.push(...this.fromTechnicalAnalysis(snap, asOf));
       } else if (snap.skill === 'news-briefing' || snap.intent === 'signal:news-briefing') {
         cards.push(...this.fromNewsBriefing(snap, asOf));
+      } else if (snap.skill === 'macro-analyst' || snap.intent === 'signal:macro-analyst') {
+        cards.push(...this.fromMacroAnalyst(snap, asOf));
       } else if (String(snap.intent || '').startsWith('signal:') || snap.skill) {
         cards.push(...this.fromCryptoSignal(snap, asOf));
       }
@@ -640,6 +649,65 @@ export class RuleExtractor {
       invalidation: { condition: 'Fear & Greed returns inside the 35-65 band and funding normalises, i.e. the crypto complex stops driving marginal rToken liquidity.', level: 'F&G in [35,65]', recheckAt: addDays(asOf, 1) },
       risks: ['Crypto sentiment is a liquidity proxy, not an equity fundamental.', 'The correlation between crypto regime and rToken mispricing is stable in stress and absent in calm.'],
       provenance: { extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin] },
+    })];
+  }
+
+  /**
+   * macro-analyst -> the bridge a US print uses to reach an rToken.
+   *
+   * The skill used to be fetched and then dropped: fromCryptoSignal only reads
+   * Fear & Greed / funding / ETF flow, and this payload has none of those, so a
+   * CPI question produced zero cards from the one skill that is about the print.
+   * The card is context, direction neutral, and it does not invent a consensus
+   * the skill did not return. Channel follows whichever channel actually asked.
+   */
+  fromMacroAnalyst(snap, asOf) {
+    const v = snap.value;
+    if (!v || typeof v !== 'object') return [];
+    const cut = Number(v.nextMeetingCutProbabilityPct);
+    const curve = Number(v.curve2s10sBp);
+    const corrNq = Number(v.btcVsNasdaqCorr90d);
+    const corrDxy = Number(v.btcVsDxyCorr90d);
+    const policy = Number(v.policyRateUpperPct);
+    if (!Number.isFinite(cut) && !Number.isFinite(corrNq)) return [];
+    const wanted = Array.isArray(snap.channels) ? snap.channels : [];
+    const channel = wanted.includes('macro-transmission')
+      ? 'macro-transmission'
+      : wanted.includes('cross-asset') ? 'cross-asset' : 'closed-window';
+    const bits = [];
+    if (Number.isFinite(policy)) bits.push(`policy upper bound ${policy}%`);
+    if (Number.isFinite(cut)) bits.push(`next-meeting cut odds ${cut}%`);
+    if (Number.isFinite(curve)) bits.push(`2s10s ${curve > 0 ? '+' : ''}${curve}bp`);
+    if (Number.isFinite(corrNq)) bits.push(`BTC/Nasdaq 90d corr ${corrNq}`);
+    if (Number.isFinite(corrDxy)) bits.push(`BTC/DXY 90d corr ${corrDxy}`);
+    return [emptyCard({
+      channel,
+      title: `Macro bridge, not a trade: cut odds ${Number.isFinite(cut) ? `${cut}%` : 'n/a'}, BTC/Nasdaq ${Number.isFinite(corrNq) ? corrNq : 'n/a'}`,
+      claim: `bitget-signal macro-analyst reads ${bits.join(', ')}. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.`,
+      direction: 'neutral',
+      horizon: 'days',
+      instruments: ['etf', 'rtoken'],
+      tickers: ['QQQ'],
+      conviction: 36,
+      evidence: [evidence({
+        id: 'E1', type: 'sentiment', source: snap.origin, locator: 'macro-analyst',
+        quote: bits.join('; '), value: Number.isFinite(cut) ? cut : corrNq, headline: true,
+        snapshotIntent: 'signal:macro-analyst',
+      })],
+      invalidation: {
+        condition: 'BTC/Nasdaq 90-day correlation falls through 0.20, or the priced probability of a cut drops by 25 points or more, before the next cash open - the bridge this card describes is no longer the one the rToken is trading.',
+        level: 'BTC/Nasdaq 90d corr < 0.20 or cut odds -25pt',
+        recheckAt: addDays(asOf, 2),
+      },
+      risks: [
+        'A correlation is not a forecast. 0.44 leaves most of the rToken move unexplained.',
+        'Cut odds are already in the cash index whenever the cash market is open.',
+        'This card is context for the transmission chain. It is not a position.',
+      ],
+      provenance: {
+        extractor: 'rules', llmModel: null, documents: [], tools: [snap.origin || 'bitget-signal:macro-analyst'],
+        informationAt: v.asOf || null,
+      },
     })];
   }
 

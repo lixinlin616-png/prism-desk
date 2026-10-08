@@ -102,6 +102,9 @@ test('the closed-window channel pulls crypto-side data, which is the whole argum
   assert.ok(forClosedWindow.includes('sentiment-analyst'), forClosedWindow.join(','));
   assert.ok(forClosedWindow.includes('macro-analyst'), forClosedWindow.join(','));
 
+  const forMacro = skillsForChannels(['macro-transmission']).map((s) => s.skill);
+  assert.ok(forMacro.includes('macro-analyst'), `a CPI question called none of the macro skill: ${forMacro.join(',')}`);
+
   assert.deepEqual(skillsForChannels(['earnings-gap']), [], 'an issuer-level question needs no crypto regime data');
   assert.equal(skillsForChannels(['closed-window', 'cross-asset']).length, forClosedWindow.length, 'a skill is invoked once even when two channels want it');
 });
@@ -131,6 +134,25 @@ test('data the plan asked for and did not receive is named, not silently dropped
   assert.ok(missingNames.includes('cashFlow'), `cashFlow went unreported: ${missingNames.join(',')}`);
   for (const m of ingest.missing) assert.ok(m.reason, `${m.intent} has no reason recorded`);
   assert.ok(!ingest.served.some((s) => missingNames.includes(s)), 'an intent cannot be both served and missing');
+});
+
+test('macro-analyst produces a verified card instead of being fetched and dropped', async () => {
+  const hub = await new DataHub().connect();
+  const desk = new Pipeline({ hub, board: new SignalBoard({ autosave: false }) });
+  await desk.ready();
+  const run = await desk.runTask({
+    question: 'The August CPI print came in cool on the headline but hot on core. Map the transmission chain.',
+    asOf: new Date('2025-09-19T20:00:00Z'),
+    channels: ['macro-transmission'],
+    persist: false,
+  });
+  const card = run.cards.find((c) => (c.evidence || []).some((e) => e.snapshotIntent === 'signal:macro-analyst' || e.locator === 'macro-analyst'));
+  assert.ok(card, 'macro-analyst returned data and no card was built from it');
+  assert.equal(card.channel, 'macro-transmission');
+  assert.equal(card.direction, 'neutral', 'a correlation is context, not a position');
+  const headline = card.evidence.find((e) => e.headline);
+  assert.equal(headline.verified, 'pass', headline.note || headline.checkedAgainst);
+  assert.equal(headline.value, 82);
 });
 
 test('the skills that actually ran are listed in the trace, with the channel that asked for them', async () => {

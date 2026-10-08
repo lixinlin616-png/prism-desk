@@ -383,6 +383,12 @@ body {
 
 /* ------------------------------------------------------------- composer */
 .composer { flex: 0 0 auto; border-top: 1px solid var(--line); background: var(--bg-raised); padding: 11px 16px 13px; }
+.ask-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.chip-ask {
+  appearance: none; border: 1px solid var(--line); background: var(--bg-sunk); color: var(--text-dim);
+  border-radius: 999px; padding: 3px 10px; font: inherit; font-size: 12px; cursor: pointer;
+}
+.chip-ask:hover { border-color: var(--accent-dim); color: var(--accent); }
 .composer-row { display: flex; gap: 9px; align-items: flex-end; }
 .composer textarea {
   flex: 1 1 auto;

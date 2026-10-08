@@ -25,7 +25,7 @@ import { SignalBoard } from '../src/desk/board.mjs';
 import { emptyCard } from '../src/schema.mjs';
 import {
   GRADE_BANDS, gradeOf, buildProxyIndex, resolveSymbol, resolveInstrument,
-  measurementWindow, walkInvalidation, walkRiskLevels, adjudicateCard,
+  measurementWindow, walkInvalidation, walkRiskLevels, walkPairSpread, adjudicateCard,
   summariseRows, dedupeClaims, calibrate, deriveLessons, runReview,
 } from '../src/review/adjudicate.mjs';
 import { renderReviewReport } from '../src/review/report.mjs';
@@ -339,6 +339,46 @@ test('a rising tape is not skill: excess is measured against the benchmark', () 
   assert.ok(Math.abs(r.signedExcessPct) < 1e-9, `expected zero excess, got ${r.signedExcessPct}`);
   assert.equal(r.outcome, 'inconclusive');
   assert.equal(r.benchmarkAdjusted, true);
+});
+
+test('a pair spread hurdle is the card\'s own test, not an untestable sentence', () => {
+  const win = { refIdx: 3, endIdx: 10, refDate: '2025-09-05', endDate: '2025-09-16' };
+  const cleared = walkPairSpread(BOOK, [{ symbol: 'AAA', sign: 1 }, { symbol: 'BBB', sign: -1 }], win, { minSpreadBp: 50, sessions: 2 });
+  assert.equal(cleared.triggered, false, cleared.detail);
+  const failed = walkPairSpread(BOOK, [{ symbol: 'BBB', sign: 1 }, { symbol: 'AAA', sign: -1 }], win, { minSpreadBp: 50, sessions: 2 });
+  assert.equal(failed.triggered, true, failed.detail);
+
+  const held = adjudicateCard(card({
+    channel: 'macro-transmission',
+    direction: 'pair',
+    tickers: ['AAA', 'BBB'],
+    tradeSketch: { pair: { long: 'AAA', short: 'BBB' }, riskPctOfPortfolio: 0.5 },
+    invalidation: {
+      condition: 'spread fails',
+      level: 'pair spread < 50bp after 2 sessions',
+      test: { kind: 'pair-spread', minSpreadBp: 50, sessions: 2 },
+      recheckAt: '2025-09-09T20:00:00Z',
+    },
+    createdAt: '2025-09-05T20:00:00Z',
+    expiresAt: '2025-09-16T20:00:00Z',
+  }), CTX);
+  assert.equal(held.invalidationTriggered, false, held.invalidationDetail);
+  const missed = adjudicateCard(card({
+    channel: 'macro-transmission',
+    direction: 'pair',
+    tickers: ['AAA', 'BBB'],
+    tradeSketch: { pair: { long: 'BBB', short: 'AAA' }, riskPctOfPortfolio: 0.5 },
+    invalidation: {
+      condition: 'spread fails',
+      level: 'pair spread < 50bp after 2 sessions',
+      test: { kind: 'pair-spread', minSpreadBp: 50, sessions: 2 },
+      recheckAt: '2025-09-09T20:00:00Z',
+    },
+    createdAt: '2025-09-05T20:00:00Z',
+    expiresAt: '2025-09-16T20:00:00Z',
+  }), CTX);
+  assert.equal(missed.invalidationTriggered, true, missed.invalidationDetail);
+  assert.equal(missed.outcome, 'invalidated');
 });
 
 test('a pair is measured as a spread, where the benchmark cancels by construction', () => {

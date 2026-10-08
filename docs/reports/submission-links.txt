@@ -11,7 +11,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 02. [必交] 项目链接｜GitHub 仓库（public，含完整 README）
     https://github.com/lixinlin616-png/prism-desk
-    · 源码 + 真实价格数据 + 208 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
+    · 源码 + 真实价格数据 + 211 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
@@ -21,15 +21,15 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 04. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-TRANSCRIPT.md
-    · 1031 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
+    · 1079 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
 
 05. [选交] 运行记录｜演示录屏（5 分钟评委动线）
-    <video-url>
+    https://x.com/lixinde_520/status/2108010882630562220
     · 与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分。链接由参赛者提交时在表单填写，本仓库不托管视频
 
 06. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md
-    · 312 张卡 → 148 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER
+    · 345 张卡 → 162 个独立主张 → 39 条决出胜负（10 胜 29 负），方向命中率 25.6%（Wilson 95% CI 14.6–41.1%；精确 Clopper–Pearson 13–42.1%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER。命中率低于只按全窗口超额判分时的 29.4%，是因为宏观 pair 自己写的 50bp/2 session 门槛现在会被机器检验；胜场仍是 10，权重没有改
 
 07. [必交] 运行记录｜生成上述报表的代码（官方要求"回测报告须附生成该报告的代码，不接受纯截图"）
     https://github.com/lixinlin616-png/prism-desk/blob/main/prism.mjs
@@ -43,9 +43,9 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 09. [支撑] 架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ARCHITECTURE.md
-    · 含两处常被混淆的账本数字的并列对照表（full-sweep 93.1% vs doctor smoke 89.7%，两轮恰好都是 29 items）
+    · 含两处常被混淆的账本数字的并列对照表（full-sweep 30 items / pass 28 / 93.3% vs doctor smoke 30 items / pass 27 / 90%，问题与时点不同，无法核验项 2 vs 3）
 
-10. [支撑] 复盘闭环说明（三条轴 / 七个方法决定 / 为什么绝不自动调权）
+10. [支撑] 复盘闭环说明（三条轴 / 方法决定 / 为什么绝不自动调权）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/REVIEW-LOOP.md
     · 解释为什么 rho = -0.137 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的
 
@@ -67,7 +67,7 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 
 15. [支撑] 在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）
     https://github.com/lixinlin616-png/prism-desk/blob/main/scripts/export-static.mjs
-    · npm run export:static 用真实离线引擎跑完六个场景，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/；web/static-adapter.js 在浏览器里回放，web/app.js 一行未改。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
+    · npm run export:static 用真实离线引擎跑完六个场景，并额外录下四条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
 
 16. [支撑] 部署说明（五条上线路径，逐项标注本环境验证到什么程度）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEPLOY.md
@@ -76,14 +76,14 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
 —— 必交 · X 传播 ——
 
 17. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
-    <xpost-url>
+    https://x.com/lixinde_520/status/2108010882630562220
     · 必交且只能由参赛者本人发布：发到 X 并引用转发官方指定推文，内容需实质介绍本项目（纯转发或无实质介绍 = 提交不完整），发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段
 
 —— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——
 git clone https://github.com/lixinlin616-png/prism-desk && cd prism-desk
-node prism.mjs doctor    # 数据接线自检 + smoke run（12 张卡，账本 29 items / pass 26 / fail 0）
-node prism.mjs demo      # 逐字重建上面那份 1031 行逐字稿（as-of 由场景钉死，无需传参）
-npm test                 # 208 / 208 · 0 跳过（全新 clone 亦然）
+node prism.mjs doctor    # 数据接线自检 + smoke run（13 张卡，11 发布 / 2 低于阈值；账本 30 items / pass 27 / fail 0 / unverifiable 3 / 90%）
+node prism.mjs demo      # 逐字重建上面那份 1079 行逐字稿（as-of 由场景钉死，无需传参）
+npm test                 # 211 / 211 · 0 跳过（全新 clone 亦然）
 npm run validate         # 60 / 60 -> docs/reports/validation.md
 npm run replay           # 重跑两份真实价格事件研究
 npm run seed             # 重建看板 fixture，连续两次 SHA-256 相同

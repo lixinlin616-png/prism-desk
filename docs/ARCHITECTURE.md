@@ -104,14 +104,14 @@ Prism Desk 是一条**单向管线**：信息进，可证伪的判断出。每�
 
 **隔离规则：** 若某张卡的**头条证据（`headline: true`）fail**，且 `PRISM_STRICT_VERIFY=true`（默认），整张卡进隔离区，**永不发布**。`unverifiable` 不会触发隔离，但会**扣 corroboration 分**，并在卡片档案里如实显示 —— 系统承认"这个数字我没能独立核对"，而不是悄悄放行。
 
-账本汇总每次运行都会输出。**两个常被引用的实测值来自不同的运行**，而且恰好都是 29 items，极易混淆，所以并列写清：
+账本汇总每次运行都会输出。**两个常被引用的实测值来自不同的运行**，条目数碰巧都是 30，但通过与无法核验的拆分不同，所以并列写清：
 
 | 命令 | as-of | 账本实测 |
 |---|---|---|
-| `node prism.mjs demo --only=full-sweep` | 2025-09-19T20:00Z（场景钉死，周五现金盘开盘） | `29 items · pass 27 · fail 0 · unverifiable 2 · 93.1%` · 12 张卡（11 发布，1 低于阈值） |
-| `node prism.mjs doctor` 的 smoke run | 钉死在周六下午（现金盘关闭） | `29 items · pass 26 · fail 0 · unverifiable 3 · 89.7%` · 12 张卡（10 发布，2 低于阈值） |
+| `node prism.mjs demo --only=full-sweep` | 2025-09-19T20:00Z（场景钉死，周五现金盘开盘；问题含 "what is actually tradeable right now?"） | `30 items · pass 28 · fail 0 · unverifiable 2 · 93.3%` · 13 张卡（12 发布，1 低于阈值） |
+| `node prism.mjs doctor` 的 smoke run | 2025-09-13T15:00Z（周六下午，现金盘关闭；问题是 `Full desk sweep across every channel`） | `30 items · pass 27 · fail 0 · unverifiable 3 · 90%` · 13 张卡（11 发布，2 低于阈值） |
 
-问题文本与时点不同，卡片组合就不同 —— 两边都是 29 items 属于巧合。两条共同的 unverifiable 是 HLXN / CRVS 两张虚构主体财报卡引用的 consensus `estimate`，账本给出的理由原文是 `no document or snapshot available to check this number against`；doctor 多出的第 3 个是 ASTR 闭窗卡的 `computed` 证据（44.9/D，低于发布阈值，理由是 `computed claim without a re-executable recipe`）——该卡只在现金盘关闭时出现，full-sweep 跑在现金盘开盘的周五，因此没有这一项。两轮 `fail` 均为 0、`quarantined` 均为 0：unverifiable 不触发隔离，只扣 corroboration 分并如实显示。
+问题文本与时点不同，卡片组合就不同。两边都是 30 items，是因为两轮都吃进了 macro-analyst 的桥接证据，不是同一轮运行。两条共同的 unverifiable 是 HLXN / CRVS 两张虚构主体财报卡引用的 consensus `estimate`，账本给出的理由原文是 `no document or snapshot available to check this number against`；doctor 多出的第 3 个是 ASTR 闭窗卡的 `computed` 证据（44.9/D，低于发布阈值，理由是 `computed claim without a re-executable recipe`）——该卡只在现金盘关闭时出现，full-sweep 跑在现金盘开盘的周五，因此没有这一项。两轮 `fail` 均为 0、`quarantined` 均为 0：unverifiable 不触发隔离，只扣 corroboration 分并如实显示。full-sweep 新发布的第 12 张是中性的 macro-analyst 桥接卡（QQQ，45.5/D，降息概率 82% 已对回快照），它不是方向性呼叫。
 
 > 评测集的 ledger 部分**故意掺入了编造的数字**（`data/eval/extraction-eval.json`），用来证明账本真的会拦截，而不是永远绿灯。
 

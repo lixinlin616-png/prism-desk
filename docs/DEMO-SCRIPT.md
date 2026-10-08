@@ -27,7 +27,7 @@ node prism.mjs ask --as-of=2025-09-13T15:00:00Z --channels=closed-window,cross-a
    for 47 hours but the rToken still trades. How should I think about pricing that gap?"
 ```
 
-中文同样可用，路由结果一致：
+中文同样可问。规划器（不强制频道）把「周末休市期间 rToken 怎么定价」只路由到 `closed-window`；上面那条英文命令用 `--channels` 额外打开了 `cross-asset`，所以两轮的卡片组合不完全相同。静态演示把这句中文单独录了一次，点芯片就是那一轮，不是英文场景的模糊匹配。
 
 ```bash
 node prism.mjs ask "周末休市期间 rToken 怎么定价"
@@ -156,20 +156,25 @@ node prism.mjs demo --only=full-sweep   # as-of 2025-09-19T20:00Z 由场景自�
 ```
 
 **问题：** `Full desk sweep across every channel - what is actually tradeable right now?`
-**耗时：** ~80ms（离线，纯规则抽取器；本机实测 77–83 ms。耗时随机器而异，其余数字不随机器变化）
-**证据账本：** 29 items · pass 27 · **fail 0** · unverifiable 2 · **pass rate 93.1%** · 0 张卡被隔离
+**耗时：** 随机器而异（本份逐字稿里这一轮是 143 ms）。其余数字不随机器变化。
+**证据账本：** 30 items · pass 28 · **fail 0** · unverifiable 2 · **pass rate 93.3%** · 0 张卡被隔离。共 13 张卡，12 张发布，1 张低于门槛。
 
 | # | 方向 | 频道 | 标的 | 分数 | 等级 | horizon | 核验率 |
 |---:|---|---|---|---:|---|---|---|
 | 1 | SHORT | 财报预期差 | HLXN | **75.5** | A | days | 75% |
 | 2 | LONG | 财报预期差 | CRVS | 70.6 | B | days | 75% |
 | 3 | PAIR | 宏观传导链路 | AMD TSLA COIN PFE XOM WMT | 68.0 | B | days | 100% |
-| 4 | SHORT | 财报预期差 | ASTR | 63.4 | B | intraday | 75% |
+| 4 | SHORT | 财报预期差 | ASTR | 67.9 | B | intraday | 100% |
 | 5 | PAIR | 宏观传导链路 | COIN TSLA PLTR PFE XOM WMT | 61.3 | C | days | 100% |
 | 6 | AVOID | 反向风险旗 | BLWF | 59.4 | C | weeks | 100% |
-| 7 | LONG | 叙事转向 | NWCL | 54.9 | C | weeks | 100% |
-| 8 | SHORT | 叙事转向 | HLXN | 53.3 | C | weeks | 100% |
-| 9 | WATCH | 跨资产联动 | BTC ETH | 49.0 | C | intraday | 100% |
+| 7 | WATCH | 资金足迹 | BTC ETH | 55.7 | C | days | 100% |
+| 8 | LONG | 叙事转向 | NWCL | 54.9 | C | weeks | 100% |
+| 9 | SHORT | 叙事转向 | HLXN | 53.3 | C | weeks | 100% |
+| 10 | WATCH | 跨资产联动 | BTC ETH | 49.0 | C | intraday | 100% |
+| 11 | WATCH | 反向风险旗 | CRVS | 46.7 | D | days | 100% |
+| 12 | WATCH | 宏观传导链路 | QQQ | 45.5 | D | days | 100% |
+
+第 7 行是 market-intel 的跨市场资金足迹，第 11 行是 technical-analysis 的超买风险（RSI 78.6），第 12 行是 macro-analyst 的中性桥接卡：政策利率上限 4.25%、下次会议降息概率 82%、2s10s +59bp、BTC/Nasdaq 90 日相关 0.44。82 这个数字对回了技能快照，方向是 `neutral`，不假装成一笔交易。低于门槛的那一张是叙事热度卡 41.8/D。
 
 ### Headline 卡片：HLXN SHORT 75.5/A
 

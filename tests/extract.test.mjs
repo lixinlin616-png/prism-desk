@@ -42,6 +42,7 @@ test('an earnings question routes to earnings-gap and pulls the right intents', 
 test('a CPI question routes to macro-transmission and identifies the indicator', () => {
   const p = planQuestion('The August CPI inflation print came in cool - map the transmission.');
   assert.ok(p.channels.includes('macro-transmission'));
+  assert.ok(!p.matched.includes('earnings-gap'), 'the word "print" is not an earnings print');
   assert.ok(p.indicators.includes('cpi'));
   assert.ok(p.docKinds.includes('macro-print'));
 });
@@ -71,6 +72,30 @@ test('Chinese questions route to the same channels as their English equivalents'
   assert.ok(planQuestion('周末休市期间 rToken 怎么定价').channels.includes('closed-window'));
   assert.ok(planQuestion('有没有内部人减持和机构资金变化').channels.includes('flow-footprint'));
   assert.ok(planQuestion('这个标的有什么做空风险和暴雷迹象').channels.includes('risk-flag'));
+  assert.ok(planQuestion('非农不及预期，传导到谁').matched.includes('macro-transmission'));
+  assert.ok(planQuestion('美联储如果降息，久期怎么走').matched.includes('macro-transmission'));
+  assert.ok(planQuestion('代币化美股周末跳空怎么定价').matched.includes('closed-window'));
+  assert.ok(planQuestion('这份财报超预期但撤回了指引').matched.includes('earnings-gap'));
+  assert.ok(planQuestion('技术面超买，离 200 日均线太远').matched.includes('risk-flag'));
+  assert.ok(planQuestion('才报和业绩指引怎么样').matched.includes('earnings-gap'), '才报 is a listed typo for 财报');
+  assert.ok(planQuestion('CPI 低于预期，哪些标的的传导最强？').matched.includes('macro-transmission'));
+  assert.ok(!planQuestion('CPI 低于预期，哪些标的的传导最强？').matched.includes('earnings-gap'));
+});
+
+test('english substring traps do not open the wrong channel', () => {
+  const disclosed = planQuestion('The company disclosed a material weakness in its controls.');
+  assert.ok(!disclosed.matched.includes('closed-window'), 'disclosed must not match closed');
+  const method = planQuestion('Is there a methodology for something like position sizing?');
+  assert.ok(!method.matched.includes('cross-asset'), `methodology/something opened ${method.matched.join(',')}`);
+  const feedback = planQuestion('Any feedback on the product roadmap?');
+  assert.ok(!feedback.matched.includes('macro-transmission'), 'feedback must not match fed');
+  const cpi = planQuestion('The August CPI print came in cool on the headline but hot on core.');
+  assert.deepEqual(cpi.matched, ['macro-transmission']);
+  const earn = planQuestion('Walk me through the earnings expectation gaps in scope.');
+  assert.ok(earn.matched.includes('earnings-gap'));
+  assert.ok(!earn.matched.includes('closed-window'), 'expectation gaps are not the overnight gap');
+  const typo = planQuestion('earinngs guidnace versus concensus');
+  assert.ok(typo.matched.includes('earnings-gap'));
 });
 
 test('uppercase ordinary words are candidates only, and are rejected at resolution', async () => {

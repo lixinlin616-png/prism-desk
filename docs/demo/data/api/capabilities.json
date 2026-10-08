@@ -243,10 +243,11 @@
    "fixture": true,
    "wired": true,
    "invokedBy": [
+    "macro-transmission",
     "cross-asset",
     "closed-window"
    ],
-   "why": "Fed policy and BTC-vs-DXY/Nasdaq correlation frame how a US macro print transmits into a tokenized equity"
+   "why": "A CPI or FOMC question is a macro-transmission question. Cut odds, the curve and BTC-vs-Nasdaq/DXY correlation are the bridge into an rToken, so the skill has to run on that channel and not only when the trader also says \"crypto\""
   },
   {
    "id": "market-intel",

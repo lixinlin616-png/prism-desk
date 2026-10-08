@@ -92,6 +92,22 @@
     let chosen = runs.find((r) => (r.question || '').trim().toLowerCase() === q) || null;
     let how = 'exact question';
     if (!chosen) {
+      // Intent before overlap. A Chinese paraphrase shares no English words with
+      // the recorded scenario, so overlap used to replay a random task and call
+      // it the closest. Route to the channel the question is actually about,
+      // and say that this is a routing decision, not an exact answer.
+      const zh = /[\u4e00-\u9fff]/.test(q);
+      const order = (zhId, enId) => (zh ? [zhId, enId] : [enId, zhId]);
+      const prefer = [];
+      if (/休市|周末|rtoken|跳空|代币|tokenized|weekend/.test(q)) prefer.push(...order('zh-weekend', 'closed-window'));
+      else if (/cpi|通胀|非农|传导|美联储|降息|加息|inflation/.test(q)) prefer.push(...order('zh-cpi', 'macro-transmission'));
+      else if (/财报|业绩|指引|超预期|earnings|earning|consensus|eps/.test(q)) prefer.push(...order('zh-earnings', 'earnings-gap'));
+      else if (/内部人|减持|13f|机构资金|insider/.test(q)) prefer.push(...order('zh-flows', 'flows'));
+      else if (/做空|暴雷|超买|风险|bear|red flag/.test(q)) prefer.push('risk');
+      chosen = prefer.map((id) => runs.find((r) => r.scenarioId === id)).find(Boolean) || null;
+      if (chosen) how = `routed to the recorded ${chosen.label} task (no exact recording of this wording)`;
+    }
+    if (!chosen) {
       const asked = words(q);
       let best = 0;
       for (const r of runs) {

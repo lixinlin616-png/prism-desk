@@ -1,14 +1,14 @@
 {
  "ok": true,
  "status": {
-  "total": 312,
+  "total": 345,
   "byStatus": {
-   "superseded": 274,
-   "draft": 24,
+   "superseded": 300,
+   "draft": 30,
    "expired": 1,
-   "active": 13
+   "active": 14
   },
-  "activeAvgScore": 56.7,
+  "activeAvgScore": 56.2,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -16,7 +16,7 @@
  "byChannel": {
   "earnings-gap": [
    {
-    "id": "SIG-MG6ZERK0-892",
+    "id": "SIG-MG6ZERK0-923",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -35,7 +35,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-894",
+    "id": "SIG-MG6ZERK0-925",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -54,7 +54,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-886",
+    "id": "SIG-MG6ZERK0-917",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -75,7 +75,7 @@
   ],
   "macro-transmission": [
    {
-    "id": "SIG-MG6ZERK0-900",
+    "id": "SIG-MG6ZERK0-931",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -99,7 +99,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-909",
+    "id": "SIG-MG6ZERK0-940",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -125,7 +125,7 @@
   ],
   "narrative-shift": [
    {
-    "id": "SIG-MG6ZERK0-946",
+    "id": "SIG-MG6ZERK0-979",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -144,7 +144,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-944",
+    "id": "SIG-MG6ZERK0-977",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -165,7 +165,7 @@
   ],
   "flow-footprint": [
    {
-    "id": "SIG-MG6ZERK0-939",
+    "id": "SIG-MG6ZERK0-972",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -185,7 +185,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-936",
+    "id": "SIG-MG6ZERK0-969",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -204,7 +204,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-938",
+    "id": "SIG-MG6ZERK0-971",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -226,7 +226,7 @@
   "closed-window": [],
   "cross-asset": [
    {
-    "id": "SIG-MG6ZERK0-922",
+    "id": "SIG-MG6ZERK0-954",
     "channel": "cross-asset",
     "channelName": "Cross-Asset Linkage",
     "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -244,11 +244,30 @@
     "expiresAt": "2025-10-01T04:00:00.000Z",
     "verifiedRatio": 1,
     "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MG6ZERK0-955",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 48.6,
+    "status": "active",
+    "createdAt": "2025-09-30T20:00:00.000Z",
+    "expiresAt": "2025-10-05T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
    }
   ],
   "risk-flag": [
    {
-    "id": "SIG-MG6ZERK0-950",
+    "id": "SIG-MG6ZERK0-983",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -267,7 +286,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-952",
+    "id": "SIG-MG6ZERK0-985",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -503,11 +522,26 @@
    "conflict": false,
    "directions": {},
    "netRead": "constructive"
+  },
+  {
+   "ticker": "QQQ",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 48.6,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
   }
  ],
  "cards": [
   {
-   "id": "SIG-MG6ZERK0-892",
+   "id": "SIG-MG6ZERK0-923",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -526,7 +560,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-894",
+   "id": "SIG-MG6ZERK0-925",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -545,7 +579,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-900",
+   "id": "SIG-MG6ZERK0-931",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -569,7 +603,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-909",
+   "id": "SIG-MG6ZERK0-940",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -593,7 +627,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-886",
+   "id": "SIG-MG6ZERK0-917",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -612,7 +646,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-950",
+   "id": "SIG-MG6ZERK0-983",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -631,7 +665,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-939",
+   "id": "SIG-MG6ZERK0-972",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -651,7 +685,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-936",
+   "id": "SIG-MG6ZERK0-969",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -670,7 +704,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-946",
+   "id": "SIG-MG6ZERK0-979",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -689,7 +723,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-944",
+   "id": "SIG-MG6ZERK0-977",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -708,7 +742,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-922",
+   "id": "SIG-MG6ZERK0-954",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -728,7 +762,26 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-938",
+   "id": "SIG-MG6ZERK0-955",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 48.6,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-971",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -747,7 +800,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-952",
+   "id": "SIG-MG6ZERK0-985",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",

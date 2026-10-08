@@ -37,7 +37,7 @@ const URL_KEYS = ['repo', 'demo', 'xpost', 'video'];
  * everywhere it appears; `npm test` is its authority and `--check` says so out
  * loud instead of implying it was verified.
  */
-export const TEST_COUNT = 208;
+export const TEST_COUNT = 211;
 
 /**
  * The submission manifest, in the order it is printed.
@@ -74,7 +74,7 @@ export const MANIFEST = [
     type: '运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）',
     target: 'docs/DEMO-TRANSCRIPT.md',
     required: '必交',
-    what: '1031 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
+    what: '1079 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -88,7 +88,7 @@ export const MANIFEST = [
     type: '运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）',
     target: 'docs/reports/review.md',
     required: '必交',
-    what: '312 张卡 → 148 个独立主张 → 34 条决出胜负（10 胜 24 负），方向命中率 29.4%（Wilson 95% CI 16.8–46.2%；精确 Clopper–Pearson 15.1–47.5%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER',
+    what: '345 张卡 → 162 个独立主张 → 39 条决出胜负（10 胜 29 负），方向命中率 25.6%（Wilson 95% CI 14.6–41.1%；精确 Clopper–Pearson 13–42.1%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER。命中率低于只按全窗口超额判分时的 29.4%，是因为宏观 pair 自己写的 50bp/2 session 门槛现在会被机器检验；胜场仍是 10，权重没有改',
   },
   {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
@@ -109,11 +109,11 @@ export const MANIFEST = [
     type: '支撑｜架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）',
     target: 'docs/ARCHITECTURE.md',
     required: '支撑',
-    what: '含两处常被混淆的账本数字的并列对照表（full-sweep 93.1% vs doctor smoke 89.7%，两轮恰好都是 29 items）',
+    what: '含两处常被混淆的账本数字的并列对照表（full-sweep 30 items / pass 28 / 93.3% vs doctor smoke 30 items / pass 27 / 90%，问题与时点不同，无法核验项 2 vs 3）',
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
-    type: '支撑｜复盘闭环说明（三条轴 / 七个方法决定 / 为什么绝不自动调权）',
+    type: '支撑｜复盘闭环说明（三条轴 / 方法决定 / 为什么绝不自动调权）',
     target: 'docs/REVIEW-LOOP.md',
     required: '支撑',
     what: '解释为什么 rho = -0.137 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的',
@@ -151,7 +151,7 @@ export const MANIFEST = [
     type: '支撑｜在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）',
     target: 'scripts/export-static.mjs',
     required: '支撑',
-    what: 'npm run export:static 用真实离线引擎跑完六个场景，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/；web/static-adapter.js 在浏览器里回放，web/app.js 一行未改。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表',
+    what: 'npm run export:static 用真实离线引擎跑完六个场景，并额外录下四条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表',
   },
   {
     section: '支撑材料 · 研究质量与工程可信度',
@@ -173,8 +173,8 @@ export const MANIFEST = [
 const FOOTER = [
   '—— 本地一键复现（上面每一个数字评委都可自行验证，全部离线 / 零依赖 / 零 key）——',
   'git clone <repo-url> && cd prism-desk',
-  'node prism.mjs doctor    # 数据接线自检 + smoke run（12 张卡，账本 29 items / pass 26 / fail 0）',
-  'node prism.mjs demo      # 逐字重建上面那份 1031 行逐字稿（as-of 由场景钉死，无需传参）',
+  'node prism.mjs doctor    # 数据接线自检 + smoke run（13 张卡，11 发布 / 2 低于阈值；账本 30 items / pass 27 / fail 0 / unverifiable 3 / 90%）',
+  'node prism.mjs demo      # 逐字重建上面那份 1079 行逐字稿（as-of 由场景钉死，无需传参）',
   `npm test                 # ${TEST_COUNT} / ${TEST_COUNT} · 0 跳过（全新 clone 亦然）`,
   'npm run validate         # 60 / 60 -> docs/reports/validation.md',
   'npm run replay           # 重跑两份真实价格事件研究',
@@ -199,22 +199,23 @@ const FOOTER = [
  * 41,386 / 15,478 / en-dash form. Both sides are normalised before comparison.
  */
 export const CLAIMS = [
-  { says: '1031 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 1031 },
-  { says: '312 张卡的看板 fixture', from: 'data/fixtures/board-seed.json', kind: 'cards', expect: 312 },
+  { says: '1079 行逐字稿', from: 'docs/DEMO-TRANSCRIPT.md', kind: 'lines', expect: 1079 },
+  { says: '345 张卡的看板 fixture', from: 'data/fixtures/board-seed.json', kind: 'cards', expect: 345 },
   { says: '11 个固定 as-of × 6 个场景 = 66 次回放', from: 'data/fixtures/board-seed.json', kind: 'replay', expect: [11, 6, 66] },
-  { says: '148 个独立主张', from: 'docs/reports/review.md', kind: 'has', expect: '| distinct claims | 148 |' },
-  { says: '34 条决出胜负', from: 'docs/reports/review.md', kind: 'has', expect: '| decided (won / lost) | **34** |' },
-  { says: '命中率 29.4%', from: 'docs/reports/review.md', kind: 'has', expect: '**29.4%**' },
+  { says: '162 个独立主张', from: 'docs/reports/review.md', kind: 'has', expect: '| distinct claims | 162 |' },
+  { says: '39 条决出胜负', from: 'docs/reports/review.md', kind: 'has', expect: '| decided (won / lost) | **39** |' },
+  { says: '命中率 25.6%', from: 'docs/reports/review.md', kind: 'has', expect: '**25.6%**' },
   { says: 'rho = -0.137 (n=45)', from: 'docs/reports/review.md', kind: 'has', expect: '**-0.137** (n=45)' },
   { says: '60 项验证检查', from: 'docs/reports/validation.md', kind: 'has', expect: '**60/60 checks passed**' },
   { says: '25 symbols · 41,386 根真实日 K', from: 'docs/reports/validation.md', kind: 'has', expect: '25 symbols, 41386 bars' },
   { says: '15,478 个真实跳空', from: 'docs/reports/gap-study.md', kind: 'has', expect: '15478' },
   // The published demo is a recording, so its numbers are claims too: if the
   // bundle drifts from the reports it replays, the demo contradicts the repo.
-  { says: '在线演示的复盘裁决数', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"decided":34' },
+  { says: '在线演示的复盘裁决数', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"decided":39' },
   { says: '在线演示的 Spearman rho', from: 'docs/demo/data/api/review.json', kind: 'has', expect: '"scoreVsOutcomeRho":-0.137' },
-  { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 93.1' },
+  { says: '在线演示的 full-sweep 账本', from: 'docs/demo/data/api/status.full-sweep.json', kind: 'has', expect: '"passRate": 93.3' },
   { says: '在线演示录满 6 个场景', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "risk"' },
+  { says: '在线演示录下中文 CPI 提问', from: 'docs/demo/data/api/ask/index.json', kind: 'has', expect: '"scenarioId": "zh-cpi"' },
 ];
 
 /**
@@ -224,7 +225,7 @@ export const CLAIMS = [
  */
 export const UNVERIFIED_HERE = [
   { says: `${TEST_COUNT} / ${TEST_COUNT} 测试通过`, authority: 'npm test' },
-  { says: '~60 ms 全频道扫描耗时', authority: 'node prism.mjs demo --only=full-sweep（耗时随机器而异）' },
+  { says: '~百毫秒级全频道扫描耗时，随机器而异', authority: 'node prism.mjs demo --only=full-sweep（本份逐字稿为 143 ms）' },
   { says: '看板 fixture 连续两次重建 SHA-256 相同', authority: 'npm run seed（跑两次比对哈希）' },
 ];
 

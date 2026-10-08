@@ -218,7 +218,7 @@ test('GET routes replay the recorded payloads', async () => {
     ['/api/status', (j) => {
       assert.equal(j.ok, true);
       assert.equal(j.runs, 0);
-      assert.equal(j.board.total, 312);
+      assert.equal(j.board.total, 345);
       assert.equal(j.ledger.itemsChecked, 0, 'a freshly booted desk has audited nothing yet');
     }],
     ['/api/capabilities', (j) => { assert.equal(j.channels.length, 7); assert.ok(j.intents.length > 10); assert.equal(j.skills.length, 5); }],
@@ -226,10 +226,10 @@ test('GET routes replay the recorded payloads', async () => {
     ['/api/corpus', (j) => { assert.ok(j.documents.length > 0); assert.equal(j.stats.documents, j.documents.length); }],
     ['/api/board?status=active', (j) => { assert.ok(j.cards.length > 0); assert.ok(j.watchlist.length > 0); assert.ok(j.byChannel); }],
     ['/api/board?status=quarantined', (j) => assert.ok(Array.isArray(j.cards))],
-    ['/api/board?status=all', (j) => assert.equal(j.status.total, 312)],
+    ['/api/board?status=all', (j) => assert.equal(j.status.total, 345)],
     ['/api/research/transmission', (j) => assert.ok(j.events || j.summary || j.rows)],
     ['/api/research/gaps', (j) => assert.ok(j.summary)],
-    ['/api/review', (j) => { assert.equal(j.summary.decided, 34); assert.equal(j.calibration.scoreVsOutcomeRho, -0.137); assert.ok(j.claims.length > 0); }],
+    ['/api/review', (j) => { assert.equal(j.summary.decided, 39); assert.equal(j.calibration.scoreVsOutcomeRho, -0.137); assert.ok(j.claims.length > 0); }],
     ['/api/runs', (j) => assert.deepEqual(j.runs, [], 'nothing has been replayed yet')],
   ];
   for (const [path, check] of checks) {
@@ -295,17 +295,17 @@ test('POST /api/ask replays a recorded run as a real SSE stream', async () => {
   assert.ok(runFrame, 'the run payload frame is what renders the cards');
   assert.equal(runFrame.data.cards.length, sweep.cards);
   assert.equal(runFrame.data.published.length, sweep.published);
-  assert.equal(runFrame.data.ledger.itemsChecked, 29);
-  assert.equal(runFrame.data.ledger.passRate, 93.1);
+  assert.equal(runFrame.data.ledger.itemsChecked, 30);
+  assert.equal(runFrame.data.ledger.passRate, 93.3);
   assert.equal(done.data.ok, true);
   assert.equal(done.data.runId, runFrame.data.id);
 
   // The desk now looks like a server that has answered exactly that question.
   const status = await (await call(window, '/api/status')).json();
   assert.equal(status.runs, 1);
-  assert.equal(status.ledger.itemsChecked, 29);
-  assert.equal(status.ledger.passRate, 93.1);
-  assert.equal(status.board.total, 312, 'the board is the committed fixture and a replay does not write to it');
+  assert.equal(status.ledger.itemsChecked, 30);
+  assert.equal(status.ledger.passRate, 93.3);
+  assert.equal(status.board.total, 345, 'the board is the committed fixture and a replay does not write to it');
 
   const runs = await (await call(window, '/api/runs')).json();
   assert.equal(runs.runs.length, 1);
@@ -372,7 +372,10 @@ test('non-API requests are passed through untouched', async () => {
 test('every recorded run replays end to end', async () => {
   const { window } = bootAdapter();
   const index = readJson('api/ask/index.json');
-  assert.equal(index.runs.length, 6);
+  assert.equal(index.runs.length, 10, 'six scenarios plus four recorded Chinese questions');
+  for (const id of ['zh-weekend', 'zh-cpi', 'zh-earnings', 'zh-flows']) {
+    assert.ok(index.runs.some((r) => r.scenarioId === id), 'missing recorded Chinese question: ' + id);
+  }
   for (const entry of index.runs) {
     const res = await call(window, '/api/ask', { method: 'POST', body: JSON.stringify({ question: entry.question, stream: true }) });
     assert.equal(res.status, 200, entry.scenarioId);

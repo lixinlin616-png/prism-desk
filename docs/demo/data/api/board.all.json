@@ -1,14 +1,14 @@
 {
  "ok": true,
  "status": {
-  "total": 312,
+  "total": 345,
   "byStatus": {
-   "superseded": 274,
-   "draft": 24,
+   "superseded": 300,
+   "draft": 30,
    "expired": 1,
-   "active": 13
+   "active": 14
   },
-  "activeAvgScore": 56.7,
+  "activeAvgScore": 56.2,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -35,7 +35,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-024",
+    "id": "SIG-MF79EGW0-025",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -54,7 +54,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-093",
+    "id": "SIG-MFB3NBK0-096",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -73,7 +73,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-109",
+    "id": "SIG-MFB3NBK0-113",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -92,7 +92,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-178",
+    "id": "SIG-MFEELQ80-184",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -111,7 +111,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-194",
+    "id": "SIG-MFEELQ80-201",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -130,7 +130,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-263",
+    "id": "SIG-MFH9HFK0-272",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -149,7 +149,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-279",
+    "id": "SIG-MFH9HFK0-289",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -168,7 +168,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-348",
+    "id": "SIG-MFIE7HC0-360",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -187,7 +187,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-367",
+    "id": "SIG-MFIE7HC0-380",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -206,7 +206,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-451",
+    "id": "SIG-MFMJ64W0-466",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -225,7 +225,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-467",
+    "id": "SIG-MFMJ64W0-483",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -244,7 +244,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-536",
+    "id": "SIG-MFOAEDC0-554",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -263,7 +263,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-552",
+    "id": "SIG-MFOAEDC0-571",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -301,7 +301,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-026",
+    "id": "SIG-MF79EGW0-027",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -320,7 +320,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-095",
+    "id": "SIG-MFB3NBK0-098",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -339,7 +339,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-111",
+    "id": "SIG-MFB3NBK0-115",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -358,7 +358,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-621",
+    "id": "SIG-MFR9KE80-642",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -377,7 +377,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-637",
+    "id": "SIG-MFR9KE80-659",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -396,7 +396,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-180",
+    "id": "SIG-MFEELQ80-186",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -415,7 +415,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-196",
+    "id": "SIG-MFEELQ80-203",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -434,7 +434,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-706",
+    "id": "SIG-MFWZBSW0-730",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -453,7 +453,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-722",
+    "id": "SIG-MFWZBSW0-747",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -472,7 +472,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-265",
+    "id": "SIG-MFH9HFK0-274",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -491,7 +491,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-281",
+    "id": "SIG-MFH9HFK0-291",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -510,7 +510,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-791",
+    "id": "SIG-MG19NCW0-818",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -529,7 +529,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-807",
+    "id": "SIG-MG19NCW0-835",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -548,7 +548,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-350",
+    "id": "SIG-MFIE7HC0-362",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -567,7 +567,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-369",
+    "id": "SIG-MFIE7HC0-382",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -586,7 +586,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-876",
+    "id": "SIG-MG6ZERK0-906",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -605,7 +605,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-892",
+    "id": "SIG-MG6ZERK0-923",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "HLXN: EPS miss, guide lower",
@@ -624,7 +624,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-453",
+    "id": "SIG-MFMJ64W0-468",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -643,7 +643,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-469",
+    "id": "SIG-MFMJ64W0-485",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -681,7 +681,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-087",
+    "id": "SIG-MFB3NBK0-090",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -700,7 +700,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-172",
+    "id": "SIG-MFEELQ80-178",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -719,7 +719,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-257",
+    "id": "SIG-MFH9HFK0-266",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -738,7 +738,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-538",
+    "id": "SIG-MFOAEDC0-556",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -757,7 +757,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-554",
+    "id": "SIG-MFOAEDC0-573",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -776,7 +776,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-342",
+    "id": "SIG-MFIE7HC0-354",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -795,7 +795,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-623",
+    "id": "SIG-MFR9KE80-644",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -814,7 +814,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-639",
+    "id": "SIG-MFR9KE80-661",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -833,7 +833,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-445",
+    "id": "SIG-MFMJ64W0-460",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -852,7 +852,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-708",
+    "id": "SIG-MFWZBSW0-732",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -871,7 +871,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-724",
+    "id": "SIG-MFWZBSW0-749",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -890,7 +890,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-530",
+    "id": "SIG-MFOAEDC0-548",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -909,7 +909,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-793",
+    "id": "SIG-MG19NCW0-820",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -928,7 +928,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-809",
+    "id": "SIG-MG19NCW0-837",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -947,7 +947,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-615",
+    "id": "SIG-MFR9KE80-636",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -966,7 +966,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-878",
+    "id": "SIG-MG6ZERK0-908",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -985,7 +985,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-894",
+    "id": "SIG-MG6ZERK0-925",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "CRVS: EPS beat, guide raise",
@@ -1004,7 +1004,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-018",
+    "id": "SIG-MF79EGW0-019",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1023,7 +1023,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-103",
+    "id": "SIG-MFB3NBK0-107",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1042,7 +1042,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-188",
+    "id": "SIG-MFEELQ80-195",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1061,7 +1061,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-273",
+    "id": "SIG-MFH9HFK0-283",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1080,7 +1080,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-361",
+    "id": "SIG-MFIE7HC0-374",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1099,7 +1099,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-700",
+    "id": "SIG-MFWZBSW0-724",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1118,7 +1118,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-785",
+    "id": "SIG-MG19NCW0-812",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1137,7 +1137,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-461",
+    "id": "SIG-MFMJ64W0-477",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1156,7 +1156,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-870",
+    "id": "SIG-MG6ZERK0-900",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1175,7 +1175,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-546",
+    "id": "SIG-MFOAEDC0-565",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1194,7 +1194,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-631",
+    "id": "SIG-MFR9KE80-653",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1213,7 +1213,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-716",
+    "id": "SIG-MFWZBSW0-741",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1232,7 +1232,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-801",
+    "id": "SIG-MG19NCW0-829",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1251,7 +1251,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-886",
+    "id": "SIG-MG6ZERK0-917",
     "channel": "earnings-gap",
     "channelName": "Earnings Expectation Gap",
     "title": "ASTR: EPS miss, guide withdraw",
@@ -1296,7 +1296,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-032",
+    "id": "SIG-MF79EGW0-033",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1320,7 +1320,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-088",
+    "id": "SIG-MFB3NBK0-091",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1344,7 +1344,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-117",
+    "id": "SIG-MFB3NBK0-121",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1368,7 +1368,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-173",
+    "id": "SIG-MFEELQ80-179",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1392,7 +1392,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-202",
+    "id": "SIG-MFEELQ80-209",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1416,7 +1416,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-258",
+    "id": "SIG-MFH9HFK0-267",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1440,7 +1440,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-287",
+    "id": "SIG-MFH9HFK0-297",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1464,7 +1464,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-343",
+    "id": "SIG-MFIE7HC0-355",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1488,7 +1488,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-378",
+    "id": "SIG-MFIE7HC0-391",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1512,7 +1512,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-446",
+    "id": "SIG-MFMJ64W0-461",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1536,7 +1536,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-475",
+    "id": "SIG-MFMJ64W0-491",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1584,7 +1584,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-041",
+    "id": "SIG-MF79EGW0-042",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1608,7 +1608,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-531",
+    "id": "SIG-MFOAEDC0-549",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1632,7 +1632,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-560",
+    "id": "SIG-MFOAEDC0-579",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1656,7 +1656,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-616",
+    "id": "SIG-MFR9KE80-637",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1680,7 +1680,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-645",
+    "id": "SIG-MFR9KE80-667",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1704,7 +1704,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-701",
+    "id": "SIG-MFWZBSW0-725",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1728,7 +1728,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-730",
+    "id": "SIG-MFWZBSW0-755",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1752,7 +1752,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-097",
+    "id": "SIG-MFB3NBK0-100",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1776,7 +1776,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-126",
+    "id": "SIG-MFB3NBK0-130",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1800,7 +1800,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-786",
+    "id": "SIG-MG19NCW0-813",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1824,7 +1824,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-815",
+    "id": "SIG-MG19NCW0-843",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1848,7 +1848,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-871",
+    "id": "SIG-MG6ZERK0-901",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1872,7 +1872,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-900",
+    "id": "SIG-MG6ZERK0-931",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -1896,7 +1896,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-182",
+    "id": "SIG-MFEELQ80-188",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1920,7 +1920,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-211",
+    "id": "SIG-MFEELQ80-218",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1944,7 +1944,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-267",
+    "id": "SIG-MFH9HFK0-276",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1968,7 +1968,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-296",
+    "id": "SIG-MFH9HFK0-306",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -1992,7 +1992,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-352",
+    "id": "SIG-MFIE7HC0-364",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2016,7 +2016,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-387",
+    "id": "SIG-MFIE7HC0-400",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2040,7 +2040,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-455",
+    "id": "SIG-MFMJ64W0-470",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2064,7 +2064,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-484",
+    "id": "SIG-MFMJ64W0-500",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2088,7 +2088,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-540",
+    "id": "SIG-MFOAEDC0-558",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2112,7 +2112,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-569",
+    "id": "SIG-MFOAEDC0-588",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2136,7 +2136,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-625",
+    "id": "SIG-MFR9KE80-646",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2160,7 +2160,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-654",
+    "id": "SIG-MFR9KE80-676",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2184,7 +2184,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-710",
+    "id": "SIG-MFWZBSW0-734",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2208,7 +2208,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-739",
+    "id": "SIG-MFWZBSW0-764",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2232,7 +2232,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-795",
+    "id": "SIG-MG19NCW0-822",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2256,7 +2256,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-824",
+    "id": "SIG-MG19NCW0-852",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2280,7 +2280,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-880",
+    "id": "SIG-MG6ZERK0-910",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2304,7 +2304,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-909",
+    "id": "SIG-MG6ZERK0-940",
     "channel": "macro-transmission",
     "channelName": "Macro Transmission Chain",
     "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -2349,7 +2349,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-078",
+    "id": "SIG-MF79EGW0-081",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2368,7 +2368,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-092",
+    "id": "SIG-MFB3NBK0-095",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2387,7 +2387,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-163",
+    "id": "SIG-MFB3NBK0-169",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2406,7 +2406,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-177",
+    "id": "SIG-MFEELQ80-183",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2425,7 +2425,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-248",
+    "id": "SIG-MFEELQ80-257",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2444,7 +2444,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-262",
+    "id": "SIG-MFH9HFK0-271",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2463,7 +2463,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-333",
+    "id": "SIG-MFH9HFK0-345",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2501,7 +2501,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-076",
+    "id": "SIG-MF79EGW0-079",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2520,7 +2520,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-090",
+    "id": "SIG-MFB3NBK0-093",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2539,7 +2539,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-161",
+    "id": "SIG-MFB3NBK0-167",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2558,7 +2558,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-175",
+    "id": "SIG-MFEELQ80-181",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2577,7 +2577,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-246",
+    "id": "SIG-MFEELQ80-255",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2596,7 +2596,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-347",
+    "id": "SIG-MFIE7HC0-359",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2615,7 +2615,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-433",
+    "id": "SIG-MFIE7HC0-448",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2634,7 +2634,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-260",
+    "id": "SIG-MFH9HFK0-269",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2653,7 +2653,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-331",
+    "id": "SIG-MFH9HFK0-343",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2672,7 +2672,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-345",
+    "id": "SIG-MFIE7HC0-357",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2691,7 +2691,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-431",
+    "id": "SIG-MFIE7HC0-446",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "HLXN: narrative turning negative",
@@ -2710,7 +2710,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-450",
+    "id": "SIG-MFMJ64W0-465",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2729,7 +2729,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-521",
+    "id": "SIG-MFMJ64W0-539",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2748,7 +2748,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-535",
+    "id": "SIG-MFOAEDC0-553",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2767,7 +2767,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-606",
+    "id": "SIG-MFOAEDC0-627",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2786,7 +2786,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-620",
+    "id": "SIG-MFR9KE80-641",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2805,7 +2805,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-691",
+    "id": "SIG-MFR9KE80-715",
     "channel": "narrative-shift",
     "channelName": "Narrative Shift",
     "title": "NWCL: narrative turning constructive",
@@ -2817,139 +2817,6 @@
     ],
     "conviction": 80,
     "score": 54.9,
-    "status": "superseded",
-    "createdAt": "2025-09-19T20:00:00.000Z",
-    "expiresAt": "2025-10-10T20:00:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFMJ64W0-448",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "HLXN: narrative turning negative",
-    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-    "direction": "short",
-    "horizon": "weeks",
-    "tickers": [
-     "HLXN"
-    ],
-    "conviction": 74,
-    "score": 54.8,
-    "status": "superseded",
-    "createdAt": "2025-09-16T12:30:00.000Z",
-    "expiresAt": "2025-10-07T12:30:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFMJ64W0-519",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "HLXN: narrative turning negative",
-    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-    "direction": "short",
-    "horizon": "weeks",
-    "tickers": [
-     "HLXN"
-    ],
-    "conviction": 74,
-    "score": 54.8,
-    "status": "superseded",
-    "createdAt": "2025-09-16T12:30:00.000Z",
-    "expiresAt": "2025-10-07T12:30:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFOAEDC0-533",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "HLXN: narrative turning negative",
-    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-    "direction": "short",
-    "horizon": "weeks",
-    "tickers": [
-     "HLXN"
-    ],
-    "conviction": 74,
-    "score": 54.2,
-    "status": "superseded",
-    "createdAt": "2025-09-17T18:00:00.000Z",
-    "expiresAt": "2025-10-08T18:00:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFOAEDC0-604",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "HLXN: narrative turning negative",
-    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-    "direction": "short",
-    "horizon": "weeks",
-    "tickers": [
-     "HLXN"
-    ],
-    "conviction": 74,
-    "score": 54.2,
-    "status": "superseded",
-    "createdAt": "2025-09-17T18:00:00.000Z",
-    "expiresAt": "2025-10-08T18:00:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFWZBSW0-705",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "NWCL: narrative turning constructive",
-    "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-    "direction": "long",
-    "horizon": "weeks",
-    "tickers": [
-     "NWCL"
-    ],
-    "conviction": 80,
-    "score": 53.5,
-    "status": "superseded",
-    "createdAt": "2025-09-23T20:00:00.000Z",
-    "expiresAt": "2025-10-14T20:00:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFWZBSW0-776",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "NWCL: narrative turning constructive",
-    "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-    "direction": "long",
-    "horizon": "weeks",
-    "tickers": [
-     "NWCL"
-    ],
-    "conviction": 80,
-    "score": 53.5,
-    "status": "superseded",
-    "createdAt": "2025-09-23T20:00:00.000Z",
-    "expiresAt": "2025-10-14T20:00:00.000Z",
-    "verifiedRatio": 1,
-    "hasInvalidation": true
-   },
-   {
-    "id": "SIG-MFR9KE80-618",
-    "channel": "narrative-shift",
-    "channelName": "Narrative Shift",
-    "title": "HLXN: narrative turning negative",
-    "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-    "direction": "short",
-    "horizon": "weeks",
-    "tickers": [
-     "HLXN"
-    ],
-    "conviction": 74,
-    "score": 53.3,
     "status": "superseded",
     "createdAt": "2025-09-19T20:00:00.000Z",
     "expiresAt": "2025-10-10T20:00:00.000Z",
@@ -2959,7 +2826,7 @@
   ],
   "flow-footprint": [
    {
-    "id": "SIG-MF79EGW0-014",
+    "id": "SIG-MF79EGW0-015",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -2979,7 +2846,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-071",
+    "id": "SIG-MF79EGW0-074",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -2999,7 +2866,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-099",
+    "id": "SIG-MFB3NBK0-103",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3019,7 +2886,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-156",
+    "id": "SIG-MFB3NBK0-162",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3039,7 +2906,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-184",
+    "id": "SIG-MFEELQ80-191",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3059,7 +2926,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-241",
+    "id": "SIG-MFEELQ80-250",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3079,7 +2946,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-269",
+    "id": "SIG-MFH9HFK0-279",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3099,7 +2966,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-326",
+    "id": "SIG-MFH9HFK0-338",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3119,7 +2986,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-357",
+    "id": "SIG-MFIE7HC0-370",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3139,7 +3006,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-426",
+    "id": "SIG-MFIE7HC0-441",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3159,7 +3026,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-457",
+    "id": "SIG-MFMJ64W0-473",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3179,7 +3046,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-514",
+    "id": "SIG-MFMJ64W0-532",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3199,7 +3066,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-542",
+    "id": "SIG-MFOAEDC0-561",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3219,7 +3086,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-599",
+    "id": "SIG-MFOAEDC0-620",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3239,7 +3106,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-627",
+    "id": "SIG-MFR9KE80-649",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3259,7 +3126,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-684",
+    "id": "SIG-MFR9KE80-708",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3279,7 +3146,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-712",
+    "id": "SIG-MFWZBSW0-737",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3299,7 +3166,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-769",
+    "id": "SIG-MFWZBSW0-796",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3319,7 +3186,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-797",
+    "id": "SIG-MG19NCW0-825",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3339,7 +3206,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-854",
+    "id": "SIG-MG19NCW0-884",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3359,7 +3226,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-882",
+    "id": "SIG-MG6ZERK0-913",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3379,7 +3246,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-939",
+    "id": "SIG-MG6ZERK0-972",
     "channel": "flow-footprint",
     "channelName": "Flow Footprint",
     "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -3401,7 +3268,7 @@
   ],
   "closed-window": [
    {
-    "id": "SIG-MFIE7HC0-355",
+    "id": "SIG-MFIE7HC0-367",
     "channel": "closed-window",
     "channelName": "Closed-Window Pricing",
     "title": "closed window: SPY has no cash price discovery",
@@ -3420,7 +3287,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-405",
+    "id": "SIG-MFIE7HC0-419",
     "channel": "closed-window",
     "channelName": "Closed-Window Pricing",
     "title": "closed window: SPY has no cash price discovery",
@@ -3439,7 +3306,141 @@
     "hasInvalidation": true
    }
   ],
-  "cross-asset": [],
+  "cross-asset": [
+   {
+    "id": "SIG-MF79EGW0-057",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-05T20:00:00.000Z",
+    "expiresAt": "2025-09-10T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFB3NBK0-145",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-08T12:30:00.000Z",
+    "expiresAt": "2025-09-13T12:30:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFEELQ80-233",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-10T20:00:00.000Z",
+    "expiresAt": "2025-09-15T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFH9HFK0-321",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-12T20:00:00.000Z",
+    "expiresAt": "2025-09-17T20:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFIE7HC0-421",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-13T15:00:00.000Z",
+    "expiresAt": "2025-09-18T15:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFMJ64W0-515",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-16T12:30:00.000Z",
+    "expiresAt": "2025-09-21T12:30:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   },
+   {
+    "id": "SIG-MFOAEDC0-603",
+    "channel": "cross-asset",
+    "channelName": "Cross-Asset Linkage",
+    "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+    "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+    "direction": "neutral",
+    "horizon": "days",
+    "tickers": [
+     "QQQ"
+    ],
+    "conviction": 36,
+    "score": 57.5,
+    "status": "superseded",
+    "createdAt": "2025-09-17T18:00:00.000Z",
+    "expiresAt": "2025-09-22T18:00:00.000Z",
+    "verifiedRatio": 1,
+    "hasInvalidation": true
+   }
+  ],
   "risk-flag": [
    {
     "id": "SIG-MF79EGW0-011",
@@ -3461,7 +3462,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-027",
+    "id": "SIG-MF79EGW0-028",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3480,7 +3481,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MF79EGW0-082",
+    "id": "SIG-MF79EGW0-085",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3499,7 +3500,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-096",
+    "id": "SIG-MFB3NBK0-099",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3518,7 +3519,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-112",
+    "id": "SIG-MFB3NBK0-116",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3537,7 +3538,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFB3NBK0-167",
+    "id": "SIG-MFB3NBK0-173",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3556,7 +3557,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-181",
+    "id": "SIG-MFEELQ80-187",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3575,7 +3576,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-197",
+    "id": "SIG-MFEELQ80-204",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3594,7 +3595,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFEELQ80-252",
+    "id": "SIG-MFEELQ80-261",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3613,7 +3614,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-266",
+    "id": "SIG-MFH9HFK0-275",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3632,7 +3633,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-282",
+    "id": "SIG-MFH9HFK0-292",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3651,7 +3652,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFH9HFK0-337",
+    "id": "SIG-MFH9HFK0-349",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3670,7 +3671,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-351",
+    "id": "SIG-MFIE7HC0-363",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3689,7 +3690,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-370",
+    "id": "SIG-MFIE7HC0-383",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3708,7 +3709,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFIE7HC0-437",
+    "id": "SIG-MFIE7HC0-452",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3727,7 +3728,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-454",
+    "id": "SIG-MFMJ64W0-469",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3746,7 +3747,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-470",
+    "id": "SIG-MFMJ64W0-486",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3765,7 +3766,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFMJ64W0-525",
+    "id": "SIG-MFMJ64W0-543",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3784,7 +3785,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-539",
+    "id": "SIG-MFOAEDC0-557",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3803,7 +3804,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-555",
+    "id": "SIG-MFOAEDC0-574",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3822,7 +3823,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFOAEDC0-610",
+    "id": "SIG-MFOAEDC0-631",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3841,7 +3842,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-624",
+    "id": "SIG-MFR9KE80-645",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3860,7 +3861,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-640",
+    "id": "SIG-MFR9KE80-662",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3879,7 +3880,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFR9KE80-695",
+    "id": "SIG-MFR9KE80-719",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3898,7 +3899,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-709",
+    "id": "SIG-MFWZBSW0-733",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3917,7 +3918,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-725",
+    "id": "SIG-MFWZBSW0-750",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3936,7 +3937,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MFWZBSW0-780",
+    "id": "SIG-MFWZBSW0-807",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3955,7 +3956,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-794",
+    "id": "SIG-MG19NCW0-821",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3974,7 +3975,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-810",
+    "id": "SIG-MG19NCW0-838",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -3993,7 +3994,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG19NCW0-865",
+    "id": "SIG-MG19NCW0-895",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -4012,7 +4013,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-879",
+    "id": "SIG-MG6ZERK0-909",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -4031,7 +4032,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-895",
+    "id": "SIG-MG6ZERK0-926",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -4050,7 +4051,7 @@
     "hasInvalidation": true
    },
    {
-    "id": "SIG-MG6ZERK0-950",
+    "id": "SIG-MG6ZERK0-983",
     "channel": "risk-flag",
     "channelName": "Contrarian Risk Flag",
     "title": "BLWF: 14 contrarian risk flag(s)",
@@ -4286,6 +4287,21 @@
    "conflict": false,
    "directions": {},
    "netRead": "constructive"
+  },
+  {
+   "ticker": "QQQ",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 48.6,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
   }
  ],
  "cards": [
@@ -4309,7 +4325,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-024",
+   "id": "SIG-MF79EGW0-025",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4328,7 +4344,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-093",
+   "id": "SIG-MFB3NBK0-096",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4347,7 +4363,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-109",
+   "id": "SIG-MFB3NBK0-113",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4366,7 +4382,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-178",
+   "id": "SIG-MFEELQ80-184",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4385,7 +4401,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-194",
+   "id": "SIG-MFEELQ80-201",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4404,7 +4420,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-263",
+   "id": "SIG-MFH9HFK0-272",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4423,7 +4439,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-279",
+   "id": "SIG-MFH9HFK0-289",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4442,7 +4458,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-348",
+   "id": "SIG-MFIE7HC0-360",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4461,7 +4477,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-367",
+   "id": "SIG-MFIE7HC0-380",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4480,7 +4496,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-451",
+   "id": "SIG-MFMJ64W0-466",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4499,7 +4515,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-467",
+   "id": "SIG-MFMJ64W0-483",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4518,7 +4534,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-536",
+   "id": "SIG-MFOAEDC0-554",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4537,7 +4553,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-552",
+   "id": "SIG-MFOAEDC0-571",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4575,7 +4591,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-026",
+   "id": "SIG-MF79EGW0-027",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4594,7 +4610,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-095",
+   "id": "SIG-MFB3NBK0-098",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4613,7 +4629,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-111",
+   "id": "SIG-MFB3NBK0-115",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4632,7 +4648,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-621",
+   "id": "SIG-MFR9KE80-642",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4651,7 +4667,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-637",
+   "id": "SIG-MFR9KE80-659",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4670,7 +4686,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-180",
+   "id": "SIG-MFEELQ80-186",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4689,7 +4705,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-196",
+   "id": "SIG-MFEELQ80-203",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4732,7 +4748,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-032",
+   "id": "SIG-MF79EGW0-033",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -4756,7 +4772,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-088",
+   "id": "SIG-MFB3NBK0-091",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -4780,7 +4796,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-117",
+   "id": "SIG-MFB3NBK0-121",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -4804,7 +4820,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-173",
+   "id": "SIG-MFEELQ80-179",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -4828,7 +4844,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-202",
+   "id": "SIG-MFEELQ80-209",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -4852,7 +4868,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-706",
+   "id": "SIG-MFWZBSW0-730",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4871,7 +4887,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-722",
+   "id": "SIG-MFWZBSW0-747",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4890,7 +4906,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-265",
+   "id": "SIG-MFH9HFK0-274",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4909,7 +4925,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-281",
+   "id": "SIG-MFH9HFK0-291",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4928,7 +4944,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-791",
+   "id": "SIG-MG19NCW0-818",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4947,7 +4963,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-807",
+   "id": "SIG-MG19NCW0-835",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -4966,7 +4982,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-350",
+   "id": "SIG-MFIE7HC0-362",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -4985,7 +5001,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-369",
+   "id": "SIG-MFIE7HC0-382",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5004,7 +5020,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-258",
+   "id": "SIG-MFH9HFK0-267",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5028,7 +5044,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-287",
+   "id": "SIG-MFH9HFK0-297",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5052,7 +5068,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-876",
+   "id": "SIG-MG6ZERK0-906",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -5071,7 +5087,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-892",
+   "id": "SIG-MG6ZERK0-923",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "HLXN: EPS miss, guide lower",
@@ -5090,7 +5106,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-343",
+   "id": "SIG-MFIE7HC0-355",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5114,7 +5130,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-378",
+   "id": "SIG-MFIE7HC0-391",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5138,7 +5154,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-453",
+   "id": "SIG-MFMJ64W0-468",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5157,7 +5173,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-469",
+   "id": "SIG-MFMJ64W0-485",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5195,7 +5211,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-087",
+   "id": "SIG-MFB3NBK0-090",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5214,7 +5230,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-172",
+   "id": "SIG-MFEELQ80-178",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5233,7 +5249,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-257",
+   "id": "SIG-MFH9HFK0-266",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5252,7 +5268,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-538",
+   "id": "SIG-MFOAEDC0-556",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5271,7 +5287,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-554",
+   "id": "SIG-MFOAEDC0-573",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5290,7 +5306,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-342",
+   "id": "SIG-MFIE7HC0-354",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5309,7 +5325,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-623",
+   "id": "SIG-MFR9KE80-644",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5328,7 +5344,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-639",
+   "id": "SIG-MFR9KE80-661",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5347,7 +5363,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-446",
+   "id": "SIG-MFMJ64W0-461",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5371,7 +5387,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-475",
+   "id": "SIG-MFMJ64W0-491",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5419,7 +5435,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-041",
+   "id": "SIG-MF79EGW0-042",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -5443,7 +5459,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-445",
+   "id": "SIG-MFMJ64W0-460",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5462,7 +5478,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-708",
+   "id": "SIG-MFWZBSW0-732",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5481,7 +5497,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-724",
+   "id": "SIG-MFWZBSW0-749",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5500,7 +5516,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-531",
+   "id": "SIG-MFOAEDC0-549",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5524,7 +5540,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-560",
+   "id": "SIG-MFOAEDC0-579",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5548,7 +5564,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-530",
+   "id": "SIG-MFOAEDC0-548",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5567,7 +5583,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-793",
+   "id": "SIG-MG19NCW0-820",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5586,7 +5602,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-809",
+   "id": "SIG-MG19NCW0-837",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5605,7 +5621,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-616",
+   "id": "SIG-MFR9KE80-637",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5629,7 +5645,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-645",
+   "id": "SIG-MFR9KE80-667",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5653,7 +5669,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-615",
+   "id": "SIG-MFR9KE80-636",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5672,7 +5688,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-878",
+   "id": "SIG-MG6ZERK0-908",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5691,7 +5707,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-894",
+   "id": "SIG-MG6ZERK0-925",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "CRVS: EPS beat, guide raise",
@@ -5710,7 +5726,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-018",
+   "id": "SIG-MF79EGW0-019",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5729,7 +5745,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-103",
+   "id": "SIG-MFB3NBK0-107",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5748,7 +5764,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-188",
+   "id": "SIG-MFEELQ80-195",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5767,7 +5783,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-273",
+   "id": "SIG-MFH9HFK0-283",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5786,7 +5802,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-361",
+   "id": "SIG-MFIE7HC0-374",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5805,7 +5821,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-701",
+   "id": "SIG-MFWZBSW0-725",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5829,7 +5845,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-730",
+   "id": "SIG-MFWZBSW0-755",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5853,7 +5869,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-097",
+   "id": "SIG-MFB3NBK0-100",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -5877,7 +5893,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-126",
+   "id": "SIG-MFB3NBK0-130",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -5901,7 +5917,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-700",
+   "id": "SIG-MFWZBSW0-724",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5920,7 +5936,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-786",
+   "id": "SIG-MG19NCW0-813",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5944,7 +5960,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-815",
+   "id": "SIG-MG19NCW0-843",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -5968,7 +5984,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-785",
+   "id": "SIG-MG19NCW0-812",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -5987,7 +6003,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-871",
+   "id": "SIG-MG6ZERK0-901",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -6011,7 +6027,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-900",
+   "id": "SIG-MG6ZERK0-931",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "CPI Y/Y (AUG 2025) cool: Cooler inflation pulls the terminal policy rate lower",
@@ -6035,7 +6051,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-461",
+   "id": "SIG-MFMJ64W0-477",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6054,7 +6070,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-182",
+   "id": "SIG-MFEELQ80-188",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6078,7 +6094,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-211",
+   "id": "SIG-MFEELQ80-218",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6102,7 +6118,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-870",
+   "id": "SIG-MG6ZERK0-900",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6121,7 +6137,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-546",
+   "id": "SIG-MFOAEDC0-565",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6140,7 +6156,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-267",
+   "id": "SIG-MFH9HFK0-276",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6164,7 +6180,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-296",
+   "id": "SIG-MFH9HFK0-306",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6188,7 +6204,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-631",
+   "id": "SIG-MFR9KE80-653",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6207,7 +6223,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-352",
+   "id": "SIG-MFIE7HC0-364",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6231,7 +6247,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-387",
+   "id": "SIG-MFIE7HC0-400",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6274,7 +6290,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-027",
+   "id": "SIG-MF79EGW0-028",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6293,7 +6309,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-082",
+   "id": "SIG-MF79EGW0-085",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6312,7 +6328,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-096",
+   "id": "SIG-MFB3NBK0-099",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6331,7 +6347,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-112",
+   "id": "SIG-MFB3NBK0-116",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6350,7 +6366,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-167",
+   "id": "SIG-MFB3NBK0-173",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6369,7 +6385,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-455",
+   "id": "SIG-MFMJ64W0-470",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6393,7 +6409,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-484",
+   "id": "SIG-MFMJ64W0-500",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6417,7 +6433,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-716",
+   "id": "SIG-MFWZBSW0-741",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6436,7 +6452,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-181",
+   "id": "SIG-MFEELQ80-187",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6455,7 +6471,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-197",
+   "id": "SIG-MFEELQ80-204",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6474,7 +6490,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-252",
+   "id": "SIG-MFEELQ80-261",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6493,7 +6509,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-540",
+   "id": "SIG-MFOAEDC0-558",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6517,7 +6533,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-569",
+   "id": "SIG-MFOAEDC0-588",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6541,7 +6557,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-625",
+   "id": "SIG-MFR9KE80-646",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6565,7 +6581,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-654",
+   "id": "SIG-MFR9KE80-676",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6589,7 +6605,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-266",
+   "id": "SIG-MFH9HFK0-275",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6608,7 +6624,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-282",
+   "id": "SIG-MFH9HFK0-292",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6627,7 +6643,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-337",
+   "id": "SIG-MFH9HFK0-349",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6646,7 +6662,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-351",
+   "id": "SIG-MFIE7HC0-363",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6665,7 +6681,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-370",
+   "id": "SIG-MFIE7HC0-383",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6684,7 +6700,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-437",
+   "id": "SIG-MFIE7HC0-452",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6703,7 +6719,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-801",
+   "id": "SIG-MG19NCW0-829",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -6722,7 +6738,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-710",
+   "id": "SIG-MFWZBSW0-734",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6746,7 +6762,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-739",
+   "id": "SIG-MFWZBSW0-764",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6789,7 +6805,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-078",
+   "id": "SIG-MF79EGW0-081",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -6808,7 +6824,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-092",
+   "id": "SIG-MFB3NBK0-095",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -6827,7 +6843,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-163",
+   "id": "SIG-MFB3NBK0-169",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -6846,7 +6862,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-177",
+   "id": "SIG-MFEELQ80-183",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -6865,7 +6881,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-248",
+   "id": "SIG-MFEELQ80-257",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -6884,7 +6900,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-795",
+   "id": "SIG-MG19NCW0-822",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6908,7 +6924,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-824",
+   "id": "SIG-MG19NCW0-852",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6932,7 +6948,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-880",
+   "id": "SIG-MG6ZERK0-910",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6956,7 +6972,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-909",
+   "id": "SIG-MG6ZERK0-940",
    "channel": "macro-transmission",
    "channelName": "Macro Transmission Chain",
    "title": "NONFARM PAYROLLS (AUG 2025) cool: A cooling labor market raises easing odds but also recession risk - a two-sided shock.",
@@ -6980,7 +6996,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-454",
+   "id": "SIG-MFMJ64W0-469",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -6999,7 +7015,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-470",
+   "id": "SIG-MFMJ64W0-486",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7018,7 +7034,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-525",
+   "id": "SIG-MFMJ64W0-543",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7037,7 +7053,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-886",
+   "id": "SIG-MG6ZERK0-917",
    "channel": "earnings-gap",
    "channelName": "Earnings Expectation Gap",
    "title": "ASTR: EPS miss, guide withdraw",
@@ -7056,7 +7072,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-539",
+   "id": "SIG-MFOAEDC0-557",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7075,7 +7091,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-555",
+   "id": "SIG-MFOAEDC0-574",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7094,7 +7110,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-610",
+   "id": "SIG-MFOAEDC0-631",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7113,7 +7129,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-624",
+   "id": "SIG-MFR9KE80-645",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7132,7 +7148,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-640",
+   "id": "SIG-MFR9KE80-662",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7151,7 +7167,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-695",
+   "id": "SIG-MFR9KE80-719",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7170,7 +7186,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-262",
+   "id": "SIG-MFH9HFK0-271",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -7189,7 +7205,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-333",
+   "id": "SIG-MFH9HFK0-345",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -7227,7 +7243,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-076",
+   "id": "SIG-MF79EGW0-079",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -7246,7 +7262,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-090",
+   "id": "SIG-MFB3NBK0-093",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -7265,7 +7281,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-161",
+   "id": "SIG-MFB3NBK0-167",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -7284,7 +7300,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-175",
+   "id": "SIG-MFEELQ80-181",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -7303,7 +7319,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-246",
+   "id": "SIG-MFEELQ80-255",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -7322,7 +7338,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-347",
+   "id": "SIG-MFIE7HC0-359",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -7341,7 +7357,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-433",
+   "id": "SIG-MFIE7HC0-448",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -7360,7 +7376,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-709",
+   "id": "SIG-MFWZBSW0-733",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7379,7 +7395,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-725",
+   "id": "SIG-MFWZBSW0-750",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7398,7 +7414,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-780",
+   "id": "SIG-MFWZBSW0-807",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7417,7 +7433,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-355",
+   "id": "SIG-MFIE7HC0-367",
    "channel": "closed-window",
    "channelName": "Closed-Window Pricing",
    "title": "closed window: SPY has no cash price discovery",
@@ -7436,7 +7452,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-405",
+   "id": "SIG-MFIE7HC0-419",
    "channel": "closed-window",
    "channelName": "Closed-Window Pricing",
    "title": "closed window: SPY has no cash price discovery",
@@ -7455,7 +7471,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-794",
+   "id": "SIG-MG19NCW0-821",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7474,7 +7490,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-810",
+   "id": "SIG-MG19NCW0-838",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7493,7 +7509,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-865",
+   "id": "SIG-MG19NCW0-895",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "BLWF: 14 contrarian risk flag(s)",
@@ -7512,228 +7528,18 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-260",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 57.3,
-   "status": "superseded",
-   "createdAt": "2025-09-12T20:00:00.000Z",
-   "expiresAt": "2025-10-03T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFH9HFK0-331",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 57.3,
-   "status": "superseded",
-   "createdAt": "2025-09-12T20:00:00.000Z",
-   "expiresAt": "2025-10-03T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MG6ZERK0-879",
-   "channel": "risk-flag",
-   "channelName": "Contrarian Risk Flag",
-   "title": "BLWF: 14 contrarian risk flag(s)",
-   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
-   "direction": "avoid",
-   "horizon": "weeks",
-   "tickers": [
-    "BLWF"
-   ],
-   "conviction": 75,
-   "score": 57.3,
-   "status": "superseded",
-   "createdAt": "2025-09-30T20:00:00.000Z",
-   "expiresAt": "2025-10-21T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MG6ZERK0-895",
-   "channel": "risk-flag",
-   "channelName": "Contrarian Risk Flag",
-   "title": "BLWF: 14 contrarian risk flag(s)",
-   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
-   "direction": "avoid",
-   "horizon": "weeks",
-   "tickers": [
-    "BLWF"
-   ],
-   "conviction": 75,
-   "score": 57.3,
-   "status": "superseded",
-   "createdAt": "2025-09-30T20:00:00.000Z",
-   "expiresAt": "2025-10-21T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MG6ZERK0-950",
-   "channel": "risk-flag",
-   "channelName": "Contrarian Risk Flag",
-   "title": "BLWF: 14 contrarian risk flag(s)",
-   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
-   "direction": "avoid",
-   "horizon": "weeks",
-   "tickers": [
-    "BLWF"
-   ],
-   "conviction": 75,
-   "score": 57.3,
-   "status": "active",
-   "createdAt": "2025-09-30T20:00:00.000Z",
-   "expiresAt": "2025-10-21T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFIE7HC0-345",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 56.7,
-   "status": "superseded",
-   "createdAt": "2025-09-13T15:00:00.000Z",
-   "expiresAt": "2025-10-04T15:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFIE7HC0-431",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 56.7,
-   "status": "superseded",
-   "createdAt": "2025-09-13T15:00:00.000Z",
-   "expiresAt": "2025-10-04T15:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFMJ64W0-450",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "NWCL: narrative turning constructive",
-   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-   "direction": "long",
-   "horizon": "weeks",
-   "tickers": [
-    "NWCL"
-   ],
-   "conviction": 80,
-   "score": 56.6,
-   "status": "superseded",
-   "createdAt": "2025-09-16T12:30:00.000Z",
-   "expiresAt": "2025-10-07T12:30:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFMJ64W0-521",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "NWCL: narrative turning constructive",
-   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-   "direction": "long",
-   "horizon": "weeks",
-   "tickers": [
-    "NWCL"
-   ],
-   "conviction": 80,
-   "score": 56.6,
-   "status": "superseded",
-   "createdAt": "2025-09-16T12:30:00.000Z",
-   "expiresAt": "2025-10-07T12:30:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFOAEDC0-535",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "NWCL: narrative turning constructive",
-   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-   "direction": "long",
-   "horizon": "weeks",
-   "tickers": [
-    "NWCL"
-   ],
-   "conviction": 80,
-   "score": 55.9,
-   "status": "superseded",
-   "createdAt": "2025-09-17T18:00:00.000Z",
-   "expiresAt": "2025-10-08T18:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFOAEDC0-606",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "NWCL: narrative turning constructive",
-   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-   "direction": "long",
-   "horizon": "weeks",
-   "tickers": [
-    "NWCL"
-   ],
-   "conviction": 80,
-   "score": 55.9,
-   "status": "superseded",
-   "createdAt": "2025-09-17T18:00:00.000Z",
-   "expiresAt": "2025-10-08T18:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MF79EGW0-014",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "id": "SIG-MF79EGW0-057",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
    "direction": "neutral",
    "horizon": "days",
    "tickers": [
-    "BTC",
-    "ETH"
+    "QQQ"
    ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 36,
+   "score": 57.5,
    "status": "superseded",
    "createdAt": "2025-09-05T20:00:00.000Z",
    "expiresAt": "2025-09-10T20:00:00.000Z",
@@ -7741,39 +7547,18 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-071",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "id": "SIG-MFB3NBK0-145",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
    "direction": "neutral",
    "horizon": "days",
    "tickers": [
-    "BTC",
-    "ETH"
+    "QQQ"
    ],
-   "conviction": 30,
-   "score": 55.7,
-   "status": "superseded",
-   "createdAt": "2025-09-05T20:00:00.000Z",
-   "expiresAt": "2025-09-10T20:00:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFB3NBK0-099",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
-   "direction": "neutral",
-   "horizon": "days",
-   "tickers": [
-    "BTC",
-    "ETH"
-   ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 36,
+   "score": 57.5,
    "status": "superseded",
    "createdAt": "2025-09-08T12:30:00.000Z",
    "expiresAt": "2025-09-13T12:30:00.000Z",
@@ -7781,39 +7566,18 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-156",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "id": "SIG-MFEELQ80-233",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
    "direction": "neutral",
    "horizon": "days",
    "tickers": [
-    "BTC",
-    "ETH"
+    "QQQ"
    ],
-   "conviction": 30,
-   "score": 55.7,
-   "status": "superseded",
-   "createdAt": "2025-09-08T12:30:00.000Z",
-   "expiresAt": "2025-09-13T12:30:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFEELQ80-184",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
-   "direction": "neutral",
-   "horizon": "days",
-   "tickers": [
-    "BTC",
-    "ETH"
-   ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 36,
+   "score": 57.5,
    "status": "superseded",
    "createdAt": "2025-09-10T20:00:00.000Z",
    "expiresAt": "2025-09-15T20:00:00.000Z",
@@ -7821,67 +7585,452 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-241",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "id": "SIG-MFH9HFK0-321",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
    "direction": "neutral",
    "horizon": "days",
    "tickers": [
-    "BTC",
-    "ETH"
+    "QQQ"
    ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 36,
+   "score": 57.5,
    "status": "superseded",
-   "createdAt": "2025-09-10T20:00:00.000Z",
-   "expiresAt": "2025-09-15T20:00:00.000Z",
+   "createdAt": "2025-09-12T20:00:00.000Z",
+   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-421",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 57.5,
+   "status": "superseded",
+   "createdAt": "2025-09-13T15:00:00.000Z",
+   "expiresAt": "2025-09-18T15:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-515",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 57.5,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-09-21T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFOAEDC0-603",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 57.5,
+   "status": "superseded",
+   "createdAt": "2025-09-17T18:00:00.000Z",
+   "expiresAt": "2025-09-22T18:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
   {
    "id": "SIG-MFH9HFK0-269",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
-   "direction": "neutral",
-   "horizon": "days",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
    "tickers": [
-    "BTC",
-    "ETH"
+    "HLXN"
    ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 74,
+   "score": 57.3,
    "status": "superseded",
    "createdAt": "2025-09-12T20:00:00.000Z",
-   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "expiresAt": "2025-10-03T20:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-326",
-   "channel": "flow-footprint",
-   "channelName": "Flow Footprint",
-   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
-   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
-   "direction": "neutral",
-   "horizon": "days",
+   "id": "SIG-MFH9HFK0-343",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
    "tickers": [
-    "BTC",
-    "ETH"
+    "HLXN"
    ],
-   "conviction": 30,
-   "score": 55.7,
+   "conviction": 74,
+   "score": 57.3,
    "status": "superseded",
    "createdAt": "2025-09-12T20:00:00.000Z",
-   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "expiresAt": "2025-10-03T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-909",
+   "channel": "risk-flag",
+   "channelName": "Contrarian Risk Flag",
+   "title": "BLWF: 14 contrarian risk flag(s)",
+   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
+   "direction": "avoid",
+   "horizon": "weeks",
+   "tickers": [
+    "BLWF"
+   ],
+   "conviction": 75,
+   "score": 57.3,
+   "status": "superseded",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-926",
+   "channel": "risk-flag",
+   "channelName": "Contrarian Risk Flag",
+   "title": "BLWF: 14 contrarian risk flag(s)",
+   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
+   "direction": "avoid",
+   "horizon": "weeks",
+   "tickers": [
+    "BLWF"
+   ],
+   "conviction": 75,
+   "score": 57.3,
+   "status": "superseded",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-983",
+   "channel": "risk-flag",
+   "channelName": "Contrarian Risk Flag",
+   "title": "BLWF: 14 contrarian risk flag(s)",
+   "claim": "BLWF carries 11 adverse-language flag(s) (material weakness, restatement, delayed filing, investigation) and 3 accounting-ratio flag(s). This is a do-not-own / hedge signal, not a short recommendation on its own.",
+   "direction": "avoid",
+   "horizon": "weeks",
+   "tickers": [
+    "BLWF"
+   ],
+   "conviction": 75,
+   "score": 57.3,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-21T20:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
   {
    "id": "SIG-MFIE7HC0-357",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 74,
+   "score": 56.7,
+   "status": "superseded",
+   "createdAt": "2025-09-13T15:00:00.000Z",
+   "expiresAt": "2025-10-04T15:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-446",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 74,
+   "score": 56.7,
+   "status": "superseded",
+   "createdAt": "2025-09-13T15:00:00.000Z",
+   "expiresAt": "2025-10-04T15:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-465",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 56.6,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-10-07T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-539",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 56.6,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-10-07T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFOAEDC0-553",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 55.9,
+   "status": "superseded",
+   "createdAt": "2025-09-17T18:00:00.000Z",
+   "expiresAt": "2025-10-08T18:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFOAEDC0-627",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 55.9,
+   "status": "superseded",
+   "createdAt": "2025-09-17T18:00:00.000Z",
+   "expiresAt": "2025-10-08T18:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-015",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-05T20:00:00.000Z",
+   "expiresAt": "2025-09-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-074",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-05T20:00:00.000Z",
+   "expiresAt": "2025-09-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFB3NBK0-103",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-08T12:30:00.000Z",
+   "expiresAt": "2025-09-13T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFB3NBK0-162",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-08T12:30:00.000Z",
+   "expiresAt": "2025-09-13T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFEELQ80-191",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-10T20:00:00.000Z",
+   "expiresAt": "2025-09-15T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFEELQ80-250",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-10T20:00:00.000Z",
+   "expiresAt": "2025-09-15T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFH9HFK0-279",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-12T20:00:00.000Z",
+   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFH9HFK0-338",
+   "channel": "flow-footprint",
+   "channelName": "Flow Footprint",
+   "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
+   "claim": "The cross-market flow footprint reads spot BTC ETF -$184M, spot ETH ETF $62M, stablecoin supply 24h $1.10B, whale net -$740M. ETF and stablecoin flows show where marginal capital is moving; a single print confirms or questions a footprint but is too noisy to trade on its own.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "BTC",
+    "ETH"
+   ],
+   "conviction": 30,
+   "score": 55.7,
+   "status": "superseded",
+   "createdAt": "2025-09-12T20:00:00.000Z",
+   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-370",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -7901,7 +8050,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-426",
+   "id": "SIG-MFIE7HC0-441",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -7921,7 +8070,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-457",
+   "id": "SIG-MFMJ64W0-473",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -7941,7 +8090,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-514",
+   "id": "SIG-MFMJ64W0-532",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -7961,7 +8110,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-542",
+   "id": "SIG-MFOAEDC0-561",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -7981,7 +8130,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-599",
+   "id": "SIG-MFOAEDC0-620",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8001,7 +8150,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-627",
+   "id": "SIG-MFR9KE80-649",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8021,7 +8170,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-684",
+   "id": "SIG-MFR9KE80-708",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8041,7 +8190,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-712",
+   "id": "SIG-MFWZBSW0-737",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8061,7 +8210,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-769",
+   "id": "SIG-MFWZBSW0-796",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8081,7 +8230,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-797",
+   "id": "SIG-MG19NCW0-825",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8101,7 +8250,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-854",
+   "id": "SIG-MG19NCW0-884",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8121,7 +8270,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-882",
+   "id": "SIG-MG6ZERK0-913",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8141,7 +8290,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-939",
+   "id": "SIG-MG6ZERK0-972",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "Cross-market flow footprint: spot BTC ETF -$184M | spot ETH ETF $62M",
@@ -8161,7 +8310,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-620",
+   "id": "SIG-MFR9KE80-641",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8176,68 +8325,87 @@
    "status": "superseded",
    "createdAt": "2025-09-19T20:00:00.000Z",
    "expiresAt": "2025-10-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFR9KE80-715",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "NWCL: narrative turning constructive",
+   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
+   "direction": "long",
+   "horizon": "weeks",
+   "tickers": [
+    "NWCL"
+   ],
+   "conviction": 80,
+   "score": 54.9,
+   "status": "superseded",
+   "createdAt": "2025-09-19T20:00:00.000Z",
+   "expiresAt": "2025-10-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-463",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 74,
+   "score": 54.8,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-10-07T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-537",
+   "channel": "narrative-shift",
+   "channelName": "Narrative Shift",
+   "title": "HLXN: narrative turning negative",
+   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
+   "direction": "short",
+   "horizon": "weeks",
+   "tickers": [
+    "HLXN"
+   ],
+   "conviction": 74,
+   "score": 54.8,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-10-07T12:30:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
   {
    "id": "SIG-MFR9KE80-691",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "NWCL: narrative turning constructive",
-   "claim": "demo wire (synthetic scenario) coverage of NWCL scores 1 on the desk tone scale from 8 weighted term hits (8 positive / 0 negative), with 2 of 2 adjacent documents agreeing.",
-   "direction": "long",
-   "horizon": "weeks",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
    "tickers": [
-    "NWCL"
+    "QQQ"
    ],
-   "conviction": 80,
-   "score": 54.9,
+   "conviction": 36,
+   "score": 54.6,
    "status": "superseded",
    "createdAt": "2025-09-19T20:00:00.000Z",
-   "expiresAt": "2025-10-10T20:00:00.000Z",
+   "expiresAt": "2025-09-24T20:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-448",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 54.8,
-   "status": "superseded",
-   "createdAt": "2025-09-16T12:30:00.000Z",
-   "expiresAt": "2025-10-07T12:30:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFMJ64W0-519",
-   "channel": "narrative-shift",
-   "channelName": "Narrative Shift",
-   "title": "HLXN: narrative turning negative",
-   "claim": "demo wire (synthetic scenario) coverage of HLXN scores -1 on the desk tone scale from 12 weighted term hits (0 positive / 12 negative), with 1 of 1 adjacent documents agreeing.",
-   "direction": "short",
-   "horizon": "weeks",
-   "tickers": [
-    "HLXN"
-   ],
-   "conviction": 74,
-   "score": 54.8,
-   "status": "superseded",
-   "createdAt": "2025-09-16T12:30:00.000Z",
-   "expiresAt": "2025-10-07T12:30:00.000Z",
-   "verifiedRatio": 1,
-   "hasInvalidation": true
-  },
-  {
-   "id": "SIG-MFOAEDC0-533",
+   "id": "SIG-MFOAEDC0-551",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8256,7 +8424,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-604",
+   "id": "SIG-MFOAEDC0-625",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8275,7 +8443,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-705",
+   "id": "SIG-MFWZBSW0-729",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8294,7 +8462,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-776",
+   "id": "SIG-MFWZBSW0-803",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8313,7 +8481,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-618",
+   "id": "SIG-MFR9KE80-639",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8332,7 +8500,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-689",
+   "id": "SIG-MFR9KE80-713",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8351,7 +8519,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-790",
+   "id": "SIG-MG19NCW0-817",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8370,7 +8538,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-861",
+   "id": "SIG-MG19NCW0-891",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8389,7 +8557,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-068",
+   "id": "SIG-MF79EGW0-071",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8408,7 +8576,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-153",
+   "id": "SIG-MFB3NBK0-159",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8427,7 +8595,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-238",
+   "id": "SIG-MFEELQ80-247",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8446,7 +8614,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-323",
+   "id": "SIG-MFH9HFK0-335",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8465,7 +8633,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-423",
+   "id": "SIG-MFIE7HC0-438",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8484,7 +8652,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-511",
+   "id": "SIG-MFMJ64W0-529",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8503,7 +8671,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-596",
+   "id": "SIG-MFOAEDC0-617",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8522,7 +8690,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-681",
+   "id": "SIG-MFR9KE80-705",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8541,7 +8709,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-766",
+   "id": "SIG-MFWZBSW0-793",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8560,7 +8728,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-851",
+   "id": "SIG-MG19NCW0-881",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8579,7 +8747,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-875",
+   "id": "SIG-MG6ZERK0-905",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8598,7 +8766,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-936",
+   "id": "SIG-MG6ZERK0-969",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "HLXN: 4 insider sale(s) vs 1 purchase(s)",
@@ -8617,7 +8785,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-946",
+   "id": "SIG-MG6ZERK0-979",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "NWCL: narrative turning constructive",
@@ -8636,7 +8804,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-703",
+   "id": "SIG-MFWZBSW0-727",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8655,7 +8823,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-774",
+   "id": "SIG-MFWZBSW0-801",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8674,7 +8842,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-788",
+   "id": "SIG-MG19NCW0-815",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8693,7 +8861,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-859",
+   "id": "SIG-MG19NCW0-889",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8712,7 +8880,26 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-873",
+   "id": "SIG-MFWZBSW0-779",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 51.1,
+   "status": "superseded",
+   "createdAt": "2025-09-23T20:00:00.000Z",
+   "expiresAt": "2025-09-28T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-903",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8731,7 +8918,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-944",
+   "id": "SIG-MG6ZERK0-977",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "HLXN: narrative turning negative",
@@ -8746,6 +8933,25 @@
    "status": "active",
    "createdAt": "2025-09-30T20:00:00.000Z",
    "expiresAt": "2025-10-21T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG19NCW0-867",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 49.6,
+   "status": "superseded",
+   "createdAt": "2025-09-26T20:00:00.000Z",
+   "expiresAt": "2025-10-01T20:00:00.000Z",
    "verifiedRatio": 1,
    "hasInvalidation": true
   },
@@ -8770,7 +8976,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-054",
+   "id": "SIG-MF79EGW0-056",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8790,7 +8996,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-098",
+   "id": "SIG-MFB3NBK0-101",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8810,7 +9016,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-139",
+   "id": "SIG-MFB3NBK0-144",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8830,7 +9036,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-183",
+   "id": "SIG-MFEELQ80-189",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8850,7 +9056,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-224",
+   "id": "SIG-MFEELQ80-232",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8870,7 +9076,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-268",
+   "id": "SIG-MFH9HFK0-277",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8890,7 +9096,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-309",
+   "id": "SIG-MFH9HFK0-320",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8910,7 +9116,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-356",
+   "id": "SIG-MFIE7HC0-368",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8930,7 +9136,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-406",
+   "id": "SIG-MFIE7HC0-420",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8950,7 +9156,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-456",
+   "id": "SIG-MFMJ64W0-471",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8970,7 +9176,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-497",
+   "id": "SIG-MFMJ64W0-514",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -8990,7 +9196,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-541",
+   "id": "SIG-MFOAEDC0-559",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9010,7 +9216,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-582",
+   "id": "SIG-MFOAEDC0-602",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9030,7 +9236,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-626",
+   "id": "SIG-MFR9KE80-647",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9050,7 +9256,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-667",
+   "id": "SIG-MFR9KE80-690",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9070,7 +9276,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-711",
+   "id": "SIG-MFWZBSW0-735",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9090,7 +9296,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-752",
+   "id": "SIG-MFWZBSW0-778",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9110,7 +9316,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-796",
+   "id": "SIG-MG19NCW0-823",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9130,7 +9336,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-837",
+   "id": "SIG-MG19NCW0-866",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9150,7 +9356,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-881",
+   "id": "SIG-MG6ZERK0-911",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9170,7 +9376,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-922",
+   "id": "SIG-MG6ZERK0-954",
    "channel": "cross-asset",
    "channelName": "Cross-Asset Linkage",
    "title": "Crypto regime: Fear & Greed 41 (Fear) | BTC funding 0.0081 | US spot BTC ETF flow -184000000",
@@ -9190,7 +9396,292 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-070",
+   "id": "SIG-MG6ZERK0-955",
+   "channel": "cross-asset",
+   "channelName": "Cross-Asset Linkage",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 48.6,
+   "status": "active",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-014",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-05T20:00:00.000Z",
+   "expiresAt": "2025-09-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-043",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-05T20:00:00.000Z",
+   "expiresAt": "2025-09-10T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFB3NBK0-102",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-08T12:30:00.000Z",
+   "expiresAt": "2025-09-13T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFB3NBK0-131",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-08T12:30:00.000Z",
+   "expiresAt": "2025-09-13T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFEELQ80-190",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-10T20:00:00.000Z",
+   "expiresAt": "2025-09-15T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFEELQ80-219",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-10T20:00:00.000Z",
+   "expiresAt": "2025-09-15T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFH9HFK0-278",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-12T20:00:00.000Z",
+   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFH9HFK0-307",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-12T20:00:00.000Z",
+   "expiresAt": "2025-09-17T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-369",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-13T15:00:00.000Z",
+   "expiresAt": "2025-09-18T15:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-404",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-13T15:00:00.000Z",
+   "expiresAt": "2025-09-18T15:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-472",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-09-21T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFMJ64W0-501",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-16T12:30:00.000Z",
+   "expiresAt": "2025-09-21T12:30:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFOAEDC0-560",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-17T18:00:00.000Z",
+   "expiresAt": "2025-09-22T18:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFOAEDC0-589",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 47.9,
+   "status": "superseded",
+   "createdAt": "2025-09-17T18:00:00.000Z",
+   "expiresAt": "2025-09-22T18:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-073",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9209,7 +9700,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-155",
+   "id": "SIG-MFB3NBK0-161",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9228,7 +9719,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-240",
+   "id": "SIG-MFEELQ80-249",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9247,7 +9738,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-325",
+   "id": "SIG-MFH9HFK0-337",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9266,7 +9757,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-425",
+   "id": "SIG-MFIE7HC0-440",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9285,7 +9776,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-513",
+   "id": "SIG-MFMJ64W0-531",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9304,7 +9795,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-598",
+   "id": "SIG-MFOAEDC0-619",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9323,7 +9814,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-683",
+   "id": "SIG-MFR9KE80-707",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9342,7 +9833,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-768",
+   "id": "SIG-MFWZBSW0-795",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9361,7 +9852,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-853",
+   "id": "SIG-MG19NCW0-883",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9380,7 +9871,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-938",
+   "id": "SIG-MG6ZERK0-971",
    "channel": "flow-footprint",
    "channelName": "Flow Footprint",
    "title": "NWCL: 13F shows 3 builder(s) vs 2 trimmer(s)",
@@ -9399,7 +9890,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-015",
+   "id": "SIG-MF79EGW0-016",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9418,7 +9909,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-029",
+   "id": "SIG-MF79EGW0-030",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9437,7 +9928,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-084",
+   "id": "SIG-MF79EGW0-087",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9456,7 +9947,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-100",
+   "id": "SIG-MFB3NBK0-104",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9475,7 +9966,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-114",
+   "id": "SIG-MFB3NBK0-118",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9494,7 +9985,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-169",
+   "id": "SIG-MFB3NBK0-175",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9513,7 +10004,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-185",
+   "id": "SIG-MFEELQ80-192",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9532,7 +10023,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-199",
+   "id": "SIG-MFEELQ80-206",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9551,7 +10042,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-254",
+   "id": "SIG-MFEELQ80-263",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9570,7 +10061,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-270",
+   "id": "SIG-MFH9HFK0-280",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9589,7 +10080,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-284",
+   "id": "SIG-MFH9HFK0-294",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9608,7 +10099,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-339",
+   "id": "SIG-MFH9HFK0-351",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9627,7 +10118,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-358",
+   "id": "SIG-MFIE7HC0-371",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9646,7 +10137,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-375",
+   "id": "SIG-MFIE7HC0-388",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9665,7 +10156,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-442",
+   "id": "SIG-MFIE7HC0-457",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9684,7 +10175,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-458",
+   "id": "SIG-MFMJ64W0-474",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9703,7 +10194,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-472",
+   "id": "SIG-MFMJ64W0-488",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9722,7 +10213,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-527",
+   "id": "SIG-MFMJ64W0-545",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9741,7 +10232,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-543",
+   "id": "SIG-MFOAEDC0-562",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9760,7 +10251,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-557",
+   "id": "SIG-MFOAEDC0-576",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9779,7 +10270,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-612",
+   "id": "SIG-MFOAEDC0-633",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9798,7 +10289,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-628",
+   "id": "SIG-MFR9KE80-650",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9817,7 +10308,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-642",
+   "id": "SIG-MFR9KE80-664",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9836,7 +10327,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-697",
+   "id": "SIG-MFR9KE80-721",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9855,7 +10346,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-713",
+   "id": "SIG-MFWZBSW0-738",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9874,7 +10365,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-727",
+   "id": "SIG-MFWZBSW0-752",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9893,7 +10384,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-782",
+   "id": "SIG-MFWZBSW0-809",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9912,7 +10403,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-798",
+   "id": "SIG-MG19NCW0-826",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9931,7 +10422,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-812",
+   "id": "SIG-MG19NCW0-840",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9950,7 +10441,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-867",
+   "id": "SIG-MG19NCW0-897",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9969,7 +10460,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-883",
+   "id": "SIG-MG6ZERK0-914",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -9988,7 +10479,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-897",
+   "id": "SIG-MG6ZERK0-928",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -10007,7 +10498,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-952",
+   "id": "SIG-MG6ZERK0-985",
    "channel": "risk-flag",
    "channelName": "Contrarian Risk Flag",
    "title": "CRVS: stretched tape (RSI(14) 78.6, +34.2% vs 200-DMA)",
@@ -10026,7 +10517,45 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-354",
+   "id": "SIG-MFR9KE80-648",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 45.5,
+   "status": "superseded",
+   "createdAt": "2025-09-19T20:00:00.000Z",
+   "expiresAt": "2025-09-24T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFR9KE80-677",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 45.5,
+   "status": "superseded",
+   "createdAt": "2025-09-19T20:00:00.000Z",
+   "expiresAt": "2025-09-24T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFIE7HC0-366",
    "channel": "closed-window",
    "channelName": "Closed-Window Pricing",
    "title": "closed window: ASTR has no cash price discovery",
@@ -10045,7 +10574,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-404",
+   "id": "SIG-MFIE7HC0-418",
    "channel": "closed-window",
    "channelName": "Closed-Window Pricing",
    "title": "closed window: ASTR has no cash price discovery",
@@ -10064,7 +10593,45 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-016",
+   "id": "SIG-MFWZBSW0-736",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 42.3,
+   "status": "draft",
+   "createdAt": "2025-09-23T20:00:00.000Z",
+   "expiresAt": "2025-09-28T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MFWZBSW0-765",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 42.3,
+   "status": "draft",
+   "createdAt": "2025-09-23T20:00:00.000Z",
+   "expiresAt": "2025-09-28T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MF79EGW0-017",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10084,7 +10651,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MF79EGW0-085",
+   "id": "SIG-MF79EGW0-088",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10104,7 +10671,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-101",
+   "id": "SIG-MFB3NBK0-105",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10124,7 +10691,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFB3NBK0-170",
+   "id": "SIG-MFB3NBK0-176",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10144,7 +10711,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-186",
+   "id": "SIG-MFEELQ80-193",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10164,7 +10731,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFEELQ80-255",
+   "id": "SIG-MFEELQ80-264",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10184,7 +10751,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-271",
+   "id": "SIG-MFH9HFK0-281",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10204,7 +10771,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFH9HFK0-340",
+   "id": "SIG-MFH9HFK0-352",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10224,7 +10791,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-359",
+   "id": "SIG-MFIE7HC0-372",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10244,7 +10811,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFIE7HC0-443",
+   "id": "SIG-MFIE7HC0-458",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10264,7 +10831,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-459",
+   "id": "SIG-MFMJ64W0-475",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10284,7 +10851,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFMJ64W0-528",
+   "id": "SIG-MFMJ64W0-546",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10304,7 +10871,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-544",
+   "id": "SIG-MFOAEDC0-563",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10324,7 +10891,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFOAEDC0-613",
+   "id": "SIG-MFOAEDC0-634",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10344,7 +10911,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-629",
+   "id": "SIG-MFR9KE80-651",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10364,7 +10931,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFR9KE80-698",
+   "id": "SIG-MFR9KE80-722",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10384,7 +10951,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-714",
+   "id": "SIG-MFWZBSW0-739",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10404,7 +10971,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MFWZBSW0-783",
+   "id": "SIG-MFWZBSW0-810",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10424,7 +10991,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-799",
+   "id": "SIG-MG19NCW0-827",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10444,7 +11011,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG19NCW0-868",
+   "id": "SIG-MG19NCW0-898",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10464,7 +11031,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-884",
+   "id": "SIG-MG6ZERK0-915",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10484,7 +11051,7 @@
    "hasInvalidation": true
   },
   {
-   "id": "SIG-MG6ZERK0-953",
+   "id": "SIG-MG6ZERK0-986",
    "channel": "narrative-shift",
    "channelName": "Narrative Shift",
    "title": "Trending narrative: Fed September cut fully priced, December path in doubt",
@@ -10497,6 +11064,82 @@
    ],
    "conviction": 32,
    "score": 41.8,
+   "status": "draft",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG19NCW0-824",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 40.8,
+   "status": "draft",
+   "createdAt": "2025-09-26T20:00:00.000Z",
+   "expiresAt": "2025-10-01T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG19NCW0-853",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 40.8,
+   "status": "draft",
+   "createdAt": "2025-09-26T20:00:00.000Z",
+   "expiresAt": "2025-10-01T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-912",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 39.6,
+   "status": "draft",
+   "createdAt": "2025-09-30T20:00:00.000Z",
+   "expiresAt": "2025-10-05T20:00:00.000Z",
+   "verifiedRatio": 1,
+   "hasInvalidation": true
+  },
+  {
+   "id": "SIG-MG6ZERK0-941",
+   "channel": "macro-transmission",
+   "channelName": "Macro Transmission Chain",
+   "title": "Macro bridge, not a trade: cut odds 82%, BTC/Nasdaq 0.44",
+   "claim": "bitget-signal macro-analyst reads policy upper bound 4.25%, next-meeting cut odds 82%, 2s10s +59bp, BTC/Nasdaq 90d corr 0.44, BTC/DXY 90d corr -0.31. That correlation is the bridge a US macro print uses to reach an rToken while cash is shut. It is regime context for the transmission cards, not a directional call, and it does not invent a consensus the skill did not return.",
+   "direction": "neutral",
+   "horizon": "days",
+   "tickers": [
+    "QQQ"
+   ],
+   "conviction": 36,
+   "score": 39.6,
    "status": "draft",
    "createdAt": "2025-09-30T20:00:00.000Z",
    "expiresAt": "2025-10-05T20:00:00.000Z",

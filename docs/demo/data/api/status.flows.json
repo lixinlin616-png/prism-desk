@@ -50,7 +50,7 @@
      "fixture": true
     }
    ],
-   "calls": 9
+   "calls": 10
   },
   "corpus": {
    "documents": 14,
@@ -169,14 +169,14 @@
   "cardsQuarantined": 0
  },
  "board": {
-  "total": 312,
+  "total": 345,
   "byStatus": {
-   "superseded": 274,
-   "draft": 24,
+   "superseded": 300,
+   "draft": 30,
    "expired": 1,
-   "active": 13
+   "active": 14
   },
-  "activeAvgScore": 56.7,
+  "activeAvgScore": 56.2,
   "conflicts": 0,
   "events": 200,
   "persisted": true

@@ -1,14 +1,14 @@
 {
  "ok": true,
  "status": {
-  "total": 312,
+  "total": 345,
   "byStatus": {
-   "superseded": 274,
-   "draft": 24,
+   "superseded": 300,
+   "draft": 30,
    "expired": 1,
-   "active": 13
+   "active": 14
   },
-  "activeAvgScore": 56.7,
+  "activeAvgScore": 56.2,
   "conflicts": 0,
   "events": 200,
   "persisted": true
@@ -238,6 +238,21 @@
    "conflict": false,
    "directions": {},
    "netRead": "constructive"
+  },
+  {
+   "ticker": "QQQ",
+   "cards": 1,
+   "long": 0,
+   "short": 0,
+   "hedge": 0,
+   "avoid": 0,
+   "bestScore": 48.6,
+   "channels": [
+    "cross-asset"
+   ],
+   "conflict": false,
+   "directions": {},
+   "netRead": "mixed"
   }
  ],
  "cards": []
