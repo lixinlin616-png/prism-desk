@@ -222,7 +222,7 @@ PLAN -> INGEST -> EXTRACT -> VERIFY -> SCORE -> PRESENT -> REVIEW
 - `offline` — 完全不联网，只用 fixture。**本项目 demo 与测试全部在 offline 下可复现。**
 
 ```bash
-npm test           # 220 个测试（node:test，无第三方依赖）
+npm test           # 222 个测试（node:test，无第三方依赖）
 npm run validate   # 60 项结构性 / 数据完整性 / 研究质量 / 复盘检查 -> docs/reports/validation.md
 npm run replay     # 重跑两份事件研究 -> docs/reports/{transmission,gap}-study.md
 npm run seed       # 重建看板 fixture -> data/fixtures/board-seed.json（逐字节确定）
@@ -291,7 +291,7 @@ web/                 index.html + app.js + styles.css + static-adapter.js（零�
 scripts/             validate, replay, build-seed, fetch-prices, record-fixtures,
                      submission-links, export-static（生成 GitHub Pages 上的静态演示包）
 data/                prices/ corpus/ events/ fixtures/ eval/ state/(gitignored)
-tests/               220 个 node:test 用例
+tests/               222 个 node:test 用例
 docs/                上述文档 + demo/（Pages 发布的静态回放演示包，由 npm run export:static 生成）
 ```
 

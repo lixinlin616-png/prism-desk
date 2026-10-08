@@ -82,6 +82,23 @@ test('Chinese questions route to the same channels as their English equivalents'
   assert.ok(!planQuestion('CPI 低于预期，哪些标的的传导最强？').matched.includes('earnings-gap'));
 });
 
+test('a company named in Chinese resolves to its ticker instead of falling back to the issuers in scope', () => {
+  // TICKER_RE sees Latin letters only, so before the alias list "英伟达财报" resolved
+  // zero tickers and the desk answered with whatever issuers were in scope.
+  assert.deepEqual(planQuestion('英伟达下周财报前该怎么 positioning').tickers, ['NVDA']);
+  assert.deepEqual(planQuestion('苹果和微软的估值贵不贵').tickers, ['AAPL', 'MSFT']);
+  assert.deepEqual(planQuestion('特斯拉这次跳空多大').tickers, ['TSLA']);
+  assert.deepEqual(planQuestion('标普500ETF 和纳指ETF 谁更强').tickers, ['SPY', 'QQQ']);
+  // A named ticker means the question was parsed, so it must not be reported as
+  // off-domain (a scan is not an answer to a specific ask).
+  assert.equal(planQuestion('英伟达有什么风险').offDomain, false);
+  // Mixed Chinese and Latin still resolves once, and a plain Latin name is unaffected.
+  assert.deepEqual(planQuestion('英伟达 NVDA 的预期差').tickers, ['NVDA']);
+  assert.deepEqual(planQuestion('怎么看 CRVS 这份财报').tickers, ['CRVS']);
+  // No name, no ticker: the fallback stays a labelled fallback.
+  assert.deepEqual(planQuestion('这份财报超预期但撤回了指引').tickers, []);
+});
+
 test('english substring traps do not open the wrong channel', () => {
   const disclosed = planQuestion('The company disclosed a material weakness in its controls.');
   assert.ok(!disclosed.matched.includes('closed-window'), 'disclosed must not match closed');

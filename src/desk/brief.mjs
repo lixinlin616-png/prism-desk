@@ -132,10 +132,18 @@ export function renderBrief({ cards, quarantined = [], belowThreshold = [], cont
   }
 
   if (coverage?.silent?.length) {
+    const noDocs = coverage.noDocuments ?? [];
+    const readButSilent = coverage.readButSilent ?? coverage.silent.filter((t) => !noDocs.includes(t));
     L.push('## Asked about, but silent');
     L.push('');
-    L.push(`No card was produced for **${coverage.silent.join(', ')}**. That means nothing in scope cleared the evidence ledger and the publish threshold - it is not an endorsement and it is not a rejection. Widen the corpus or the data window and ask again.`);
-    L.push('');
+    if (noDocs.length) {
+      L.push(`**${noDocs.join(', ')}** - the corpus in scope holds no document naming ${noDocs.length === 1 ? 'it' : 'them'}, so nothing was read and nothing can be said. That is a coverage gap, not a verdict on the name. Paste a document (\`POST /api/corpus\`) or run against live data, then ask again.`);
+      L.push('');
+    }
+    if (readButSilent.length) {
+      L.push(`No card was produced for **${readButSilent.join(', ')}**. That means nothing in scope cleared the evidence ledger and the publish threshold - it is not an endorsement and it is not a rejection. Widen the corpus or the data window and ask again.`);
+      L.push('');
+    }
   }
 
   if (!cards.length) {

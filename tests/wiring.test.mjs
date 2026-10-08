@@ -423,3 +423,35 @@ test('the capabilities payload carries the provenance of all 20 intents, gaps in
     'the summary is derived from the same map, so it cannot drift from it',
   );
 });
+
+test('a named symbol the corpus holds no document for is reported as a coverage gap, not as a research result', async () => {
+  // corpus.gather() keeps the whole pool when nothing matches a ticker, so a
+  // question about a real name the bundled corpus does not cover used to come
+  // back as cards about whoever else was in scope, described as "nothing cleared
+  // the ledger". Those are different claims and the desk must not blur them.
+  const desk = new Pipeline();
+  await desk.ready();
+  const events = [];
+  const run = await desk.runTask({
+    question: '英伟达下周财报前该怎么 positioning',
+    asOf: new Date('2025-09-19T20:00:00Z'),
+    persist: false,
+    onEvent: (e) => events.push(e),
+  });
+  assert.deepEqual(run.plan.tickersResolved, ['NVDA'], 'the Chinese name must resolve to its ticker');
+  assert.ok(run.coverage.silent.includes('NVDA'), 'NVDA produced no card');
+  assert.deepEqual(run.coverage.noDocuments, ['NVDA'], 'and the reason is that nothing was read, not that it failed');
+  const gap = events.find((e) => e.stage === 'corpus:coverage-gap');
+  assert.ok(gap, 'the trace must carry the coverage gap');
+  assert.match(gap.message, /no document naming NVDA/);
+  const md = run.brief.markdown;
+  assert.match(md, /coverage gap, not a verdict/);
+  assert.ok(!/No card was produced for \*\*NVDA\*\*/.test(md), 'NVDA must not be described as having failed the ledger');
+  // A name the corpus does hold is still judged on its evidence.
+  const read = await desk.runTask({
+    question: 'HLXN 这份财报超预期但撤回了指引，该不该做空？',
+    asOf: new Date('2025-09-19T20:00:00Z'),
+    persist: false,
+  });
+  assert.deepEqual(read.coverage.noDocuments, [], 'HLXN has documents in scope');
+});

@@ -75,6 +75,34 @@ function normalizeAsk(q) {
 }
 
 /**
+ * Chinese company / ETF names -> the symbol in the bundled price book.
+ *
+ * TICKER_RE only sees Latin letters, so "英伟达下周财报怎么看" resolved zero
+ * tickers and runTask() fell back to whichever issuers were in scope: a question
+ * about NVDA came back as cards about a fictional issuer. Honestly labelled, but
+ * it is not an answer. Same rule as the typo map above - an explicit list, never
+ * fuzzy matching - and the result joins the ordinary candidate list, so it still
+ * goes through the known-symbol filter and an alias the desk has no data for is
+ * reported as rejected rather than silently implying coverage.
+ */
+const ZH_TICKER_ALIASES = [
+  ['英伟达', 'NVDA'], ['苹果', 'AAPL'], ['微软', 'MSFT'], ['谷歌', 'GOOGL'], ['字母表', 'GOOGL'],
+  ['亚马逊', 'AMZN'], ['脸书', 'META'], ['特斯拉', 'TSLA'], ['博通', 'AVGO'], ['奈飞', 'NFLX'],
+  ['网飞', 'NFLX'], ['摩根大通', 'JPM'], ['小摩', 'JPM'], ['埃克森美孚', 'XOM'], ['埃克森', 'XOM'],
+  ['沃尔玛', 'WMT'], ['辉瑞', 'PFE'], ['卡特彼勒', 'CAT'],
+  ['标普500etf', 'SPY'], ['标普etf', 'SPY'], ['标普500', 'SPY'], ['标普指数', 'SPY'],
+  ['纳指etf', 'QQQ'], ['纳指100', 'QQQ'], ['纳斯达克100', 'QQQ'], ['罗素2000', 'IWM'],
+  ['半导体etf', 'SMH'], ['能源etf', 'XLE'], ['金融etf', 'XLF'], ['科技etf', 'XLK'],
+  ['长期国债etf', 'TLT'], ['美债etf', 'TLT'], ['国债etf', 'TLT'],
+];
+
+function tickersNamedInChinese(lower) {
+  const out = [];
+  for (const [name, ticker] of ZH_TICKER_ALIASES) if (lower.includes(name)) out.push(ticker);
+  return out;
+}
+
+/**
  * Which bitget-signal skills each channel needs, and why.
  *
  * This map is the single source of truth for BOTH the ingest loop below and
@@ -116,11 +144,14 @@ export function skillsForChannels(channels = []) {
 export function planQuestion(question, { asOf = null } = {}) {
   const q = String(question || '');
   const upper = q.toUpperCase();
+  const lower = normalizeAsk(q);
   // These are CANDIDATES. Uppercase words in a question look exactly like
   // tickers ("Full desk sweep" yields FULL, DESK, SWEEP), so runTask() filters
   // them against the symbols the desk actually has data for before use.
-  const tickerCandidates = [...new Set([...upper.matchAll(TICKER_RE)].map((m) => m[1]).filter((t) => !STOPWORDS.has(t) && t.length <= 6))];
-  const lower = normalizeAsk(q);
+  const tickerCandidates = [...new Set([
+    ...[...upper.matchAll(TICKER_RE)].map((m) => m[1]).filter((t) => !STOPWORDS.has(t) && t.length <= 6),
+    ...tickersNamedInChinese(lower),
+  ])];
   // English matching is on word tokens, not substrings. "disclosed" used to open
   // the closed-window channel, "print" turned every CPI question into an earnings
   // question, "gaps" turned the expectation-gap thesis into an overnight-gap
@@ -301,6 +332,19 @@ export class Pipeline {
       kinds: plan.docKinds,
     });
     emit('ingest:corpus', { count: documents.length, ids: documents.map((d) => d.id), kinds: [...new Set(documents.map((d) => d.kind))] });
+
+    // A named symbol the corpus holds no document for is a coverage gap, not a
+    // research result. corpus.gather() keeps the whole pool when nothing matches a
+    // ticker, so without this the desk answers a question about NVDA with cards
+    // about whoever else happens to be in scope and never says so.
+    const noDocuments = resolved.filter((t) => this.hub.corpus.byTicker(t).length === 0);
+    if (noDocuments.length) {
+      emit('corpus:coverage-gap', {
+        tickers: noDocuments,
+        documents: documents.length,
+        message: `The corpus in scope holds no document naming ${noDocuments.join(', ')}. The ${documents.length} documents read are about other issuers, so nothing below is an answer about ${noDocuments.join(', ')} - paste a document (POST /api/corpus) or run against live data to cover it.`,
+      });
+    }
 
     // If the question named no resolvable ticker, pull data for the issuers the
     // desk is actually reading about. A flow question with no ticker should still
@@ -501,6 +545,11 @@ export class Pipeline {
       answered: asked.filter((t) => covered.has(t)),
       silent: asked.filter((t) => !covered.has(t)),
     };
+    // "Silent" has two causes and they must not be blurred: a name the corpus holds
+    // no document for (nothing was ever read - a coverage gap) and a name that was
+    // read and produced nothing that cleared the ledger (a research result).
+    coverage.noDocuments = coverage.silent.filter((t) => this.hub.corpus.byTicker(t).length === 0);
+    coverage.readButSilent = coverage.silent.filter((t) => !coverage.noDocuments.includes(t));
 
     const context = {
       asOf: asOf instanceof Date ? asOf.toISOString() : asOf,
