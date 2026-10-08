@@ -52,13 +52,14 @@ const NO_TICKER = new Set(['news', 'sentiment', 'marketMovers']);
 const PER_NAME = ['quote', 'analystEstimates', 'earningsCalendar', 'incomeStatement', 'insiderTrades', 'institutionalHoldings', 'ratios', 'valuation'];
 
 function parseArgs(argv) {
-  const out = { tickers: ['NVDA'], record: false, check: false, out: REPORT, json: false };
+  const out = { tickers: ['NVDA'], record: false, check: false, out: REPORT, json: false, control: 'https://api.github.com/zen' };
   for (const a of argv) {
     if (a === '--record') out.record = true;
     else if (a === '--check') out.check = true;
     else if (a === '--json') out.json = true;
     else if (a.startsWith('--tickers=')) out.tickers = a.slice(10).split(',').map((t) => t.trim().toUpperCase()).filter(Boolean);
     else if (a.startsWith('--out=')) out.out = resolve(a.slice(6));
+    else if (a.startsWith('--control=')) out.control = a.slice(10);
   }
   return out;
 }
@@ -84,13 +85,38 @@ async function probeDns(host) {
   }
 }
 
-async function probe() {
+/**
+ * Reach a host we have no reason to be blocked by, in the same minute as the real
+ * probe. Without this a failed handshake is ambiguous: it could mean the endpoint
+ * refused us, or that this machine had no egress at all. The control says which.
+ */
+async function probeControl(url) {
+  const t = Date.now();
+  try {
+    const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+    await res.text().catch(() => {});
+    return { ok: res.ok, url, status: res.status, ms: Date.now() - t };
+  } catch (err) {
+    return { ok: false, url, ms: Date.now() - t, ...describeFailure(err) };
+  }
+}
+
+function controlLine(c) {
+  if (!c) return 'not probed';
+  if (c.ok) {
+    return '' + c.url + ' answered HTTP ' + c.status + ' in ' + c.ms + ' ms at the same moment - general egress worked, so the failure above is specific to the MCP host (or to how it treats this network), not to this machine being offline';
+  }
+  return '' + c.url + ' also failed (' + (c.code || c.status || '') + ' ' + (c.message || '') + ') - this machine had no usable egress at all, so the result above says nothing about the endpoint';
+}
+
+async function probe(controlUrl) {
   const url = config.mcp.url;
   const host = new URL(url).hostname;
   const started = new Date().toISOString();
   const evidence = { startedAt: started, url, host, protocolVersion: null, serverInfo: null, tools: [], dns: null, handshake: null, market: null, signal: null, calls: [], recorded: [] };
 
   evidence.dns = await probeDns(host);
+  evidence.control = await probeControl(controlUrl);
 
   const client = new McpClient({ url, timeoutMs: config.mcp.timeoutMs, clientName: 'prism-desk-live-wiring' });
   const t0 = Date.now();
@@ -193,6 +219,7 @@ function renderReport(e) {
     L.push(`| tools discovered | ${e.tools.length} |`);
     L.push(`| market intents resolved | **${e.market.resolved}/${e.market.total}** |`);
     L.push(`| bitget-signal skills resolved | **${e.signal.resolved ?? 0}/${e.signal.total}** |`);
+    L.push('| control egress | ' + controlLine(e.control) + ' |');
     L.push(`| real responses recorded | ${e.recorded.length} (\`synthetic: false\`) |`);
     L.push(`| calls that failed | ${e.calls.filter((c) => !c.ok).length} |`);
   } else {
@@ -203,6 +230,7 @@ function renderReport(e) {
     L.push(`| DNS \`${e.host}\` | ${e.dns?.ok ? `resolved ${e.dns.addresses.join(', ')} (${e.dns.ms} ms)` : `**${e.dns?.code || 'failed'}** - ${e.dns?.message || ''} (${e.dns?.ms} ms)`} |`);
     L.push(`| MCP \`initialize\` | **failed after ${e.handshake?.ms} ms** - ${e.handshake?.code || e.handshake?.status || ''} ${e.handshake?.message || ''} |`);
     if (e.handshake?.body) L.push(`| response body | \`${e.handshake.body.replace(/\|/g, '/')}\` |`);
+    L.push('| control egress | ' + controlLine(e.control) + ' |');
     L.push(`| market intents resolved | 0/${INTENTS.length} (endpoint unreachable) |`);
     L.push(`| bitget-signal skills resolved | 0/${SIGNAL_SKILL_IDS.length} (endpoint unreachable) |`);
   }
@@ -286,7 +314,7 @@ function check() {
 const args = parseArgs(process.argv.slice(2));
 if (args.check) process.exit(check());
 
-const { client, provider, signal, evidence } = await probe();
+const { client, provider, signal, evidence } = await probe(args.control);
 if (evidence.handshake.ok && args.record) {
   await record({ client, provider, signal, evidence }, args.tickers);
   if (evidence.recorded.length) {
@@ -301,7 +329,7 @@ try { await client.close(); } catch { /* best effort */ }
 const ok = evidence.handshake.ok;
 const line = ok
   ? `live-wiring: CONNECTED ${evidence.url} | tools ${evidence.tools.length} | market intents ${evidence.market.resolved}/${INTENTS.length} | signal skills ${evidence.signal?.resolved ?? 0}/${SIGNAL_SKILL_IDS.length} | recorded ${evidence.recorded.length}`
-  : `live-wiring: NOT CONNECTED ${evidence.url} | dns ${evidence.dns?.ok ? 'ok' : (evidence.dns?.code || 'failed')} | ${evidence.handshake?.code || evidence.handshake?.status || ''} ${evidence.handshake?.message || ''}`;
+  : `live-wiring: NOT CONNECTED ${evidence.url} | dns ${evidence.dns?.ok ? 'ok' : (evidence.dns?.code || 'failed')} | control ${evidence.control?.ok ? 'HTTP ' + evidence.control.status : 'also failed'} | ${evidence.handshake?.code || evidence.handshake?.status || ''} ${evidence.handshake?.message || ''}`;
 if (args.json) console.log(JSON.stringify(evidence, null, 2));
 else console.log(line);
 console.log(`report: ${args.out}`);

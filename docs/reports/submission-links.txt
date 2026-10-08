@@ -13,69 +13,73 @@ Base Camp S2 · 赛道三 AI Trading Desk → 子主题：信息提炼与信号�
     https://github.com/lixinlin616-png/prism-desk
     · 源码 + 真实价格数据 + 223 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）
 
+03. [支撑] 项目链接｜Live 接线取证报告（bitget-mcp-server / bitget-signal 真实握手结果）
+    https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/live-wiring.md
+    · 由 `npm run live:record` 生成的 artefact，而不是一句声明：记录真实 DNS 解析结果、MCP `initialize` 的成败与耗时、一次对照出口探测（证明失败不是本机断网）、`resolved=N/20` intents 与 `N/5` skills，以及录制到的 `"synthetic": false` 响应条数；`npm run live:check` 断言报告与录制包一致，连不通时退出码为 1
+
 —— 必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏） ——
 
-03. [必交] 运行记录｜完整投研任务演示 · 讲解版（提问 → 可用判断）
+04. [必交] 运行记录｜完整投研任务演示 · 讲解版（提问 → 可用判断）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-SCRIPT.md
     · 七个阶段逐环节拆解：PLAN 路由 / INGEST 取数 / EXTRACT 抽取 / VERIFY 证据账本 / SCORE 五因子打分 / PRESENT 简报 / REVIEW 事后判分
 
-04. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
+05. [必交] 运行记录｜完整投研任务演示 · 原始逐字稿（机器生成，非手写）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEMO-TRANSCRIPT.md
     · 1079 行，六个场景的全部原始输出。评委裸跑 `node prism.mjs demo`（无需任何参数）即可逐字重建，实测仅生成时间戳 1 行与 6 处 ms 计时不同
 
-05. [选交] 运行记录｜演示录屏（5 分钟评委动线）
+06. [选交] 运行记录｜演示录屏（5 分钟评委动线）
     https://x.com/lixinde_520/status/2108010882630562220
     · 与上面两份文字演示同一条动线；若在线 Demo 需登录才必须附，本项目 Demo 无需登录，故此项为加分。链接由参赛者提交时在表单填写，本仓库不托管视频
 
-06. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
+07. [必交] 运行记录｜事后判分报表（本项目最接近回测报告的一份，含全部 caveat）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/review.md
     · 345 张卡 → 162 个独立主张 → 39 条决出胜负（10 胜 29 负），方向命中率 25.6%（Wilson 95% CI 14.6–41.1%；精确 Clopper–Pearson 13–42.1%）；打分与实现超额的 Spearman rho = -0.137 被系统自己标为 BLOCKER。命中率低于只按全窗口超额判分时的 29.4%，是因为宏观 pair 自己写的 50bp/2 session 门槛现在会被机器检验；胜场仍是 10，权重没有改
 
-07. [必交] 运行记录｜生成上述报表的代码（官方要求"回测报告须附生成该报告的代码，不接受纯截图"）
+08. [必交] 运行记录｜生成上述报表的代码（官方要求"回测报告须附生成该报告的代码，不接受纯截图"）
     https://github.com/lixinlin616-png/prism-desk/blob/main/prism.mjs
     · 入口 `npm run review:seed`（= `node prism.mjs review --board=data/fixtures/board-seed.json`）。看板 fixture 由 scripts/build-seed.mjs 用 11 个固定 as-of × 6 个场景回放生成，连续两次重建 SHA-256 相同（实测），报表除时间戳行外逐字节可复现
 
 —— 支撑材料 · 研究质量与工程可信度 ——
 
-08. [支撑] 验证数据与关键指标（全部实测数字 + 逐项 caveat + 明确列出「我们没有测的」）
+09. [支撑] 验证数据与关键指标（全部实测数字 + 逐项 caveat + 明确列出「我们没有测的」）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/VALIDATION.md
     · 一页速览表把每个数字标注为 实测 / 估算 / 目标，并给出各自的复现命令
 
-09. [支撑] 架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）
+10. [支撑] 架构说明（七阶段管线含复盘回路 / 7 频道 / 证据账本 / 五因子打分 / 看板状态机）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ARCHITECTURE.md
     · 含两处常被混淆的账本数字的并列对照表（full-sweep 30 items / pass 28 / 93.3% vs doctor smoke 30 items / pass 27 / 90%，问题与时点不同，无法核验项 2 vs 3）
 
-10. [支撑] 复盘闭环说明（三条轴 / 方法决定 / 为什么绝不自动调权）
+11. [支撑] 复盘闭环说明（三条轴 / 方法决定 / 为什么绝不自动调权）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/REVIEW-LOOP.md
     · 解释为什么 rho = -0.137 被如实公开而不是悄悄调权：自动调权等于拟合噪声，且之后没人能分辨规则是被证据改的还是被运气改的
 
-11. [支撑] 真实价格数据研究：宏观传导（25 个真实事件逐条明细）
+12. [支撑] 真实价格数据研究：宏观传导（25 个真实事件逐条明细）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/transmission-study.md
     · 跑在 25 symbols · 41,386 根真实日 K 上（2019-01-02 → 2025-09-30，Nasdaq 公开 API），是 surprise 权重 0.30 的实证依据；`npm run replay` 可重跑
 
-12. [支撑] 真实价格数据研究：隔夜与休市窗口跳空（15,478 个真实跳空）
+13. [支撑] 真实价格数据研究：隔夜与休市窗口跳空（15,478 个真实跳空）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/gap-study.md
     · 支撑 closed-window 频道；同时报告 naive t 与按日期聚类的 clustered t，并以更保守的 clustered 为准
 
-13. [支撑] 自动校验报表：结构性 / 数据完整性 / 研究质量检查（60 / 60）
+14. [支撑] 自动校验报表：结构性 / 数据完整性 / 研究质量检查（60 / 60）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/reports/validation.md
     · 由 `npm run validate` 生成，可直接作为 CI 门禁（任何一项失败即退出非零）
 
-14. [支撑] 路线图（每一项都挂在一个已实测数字上，含明确的 non-goals）
+15. [支撑] 路线图（每一项都挂在一个已实测数字上，含明确的 non-goals）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/ROADMAP.md
     · BLOCKER（打分符号反转）的四步修法，以及性价比最高的一项：把 invalidation 收紧成四字段必填
 
-15. [支撑] 在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）
+16. [支撑] 在线演示的生成代码（静态回放包的录制器 + 浏览器端适配器 + 防漂移测试）
     https://github.com/lixinlin616-png/prism-desk/blob/main/scripts/export-static.mjs
     · npm run export:static 用真实离线引擎跑完六个场景，并额外录下七条中文自由提问，把每条 /api/* 响应（含 SSE 帧间隔）录进 docs/demo/。web/static-adapter.js 在浏览器里回放。web/app.js 与实时后端是同一份，静态页检测到 adapter 后自动回放全频道扫描。tests/static-demo.test.mjs 的 14 项检查保证它与引擎不漂移：路由覆盖、场景深度相等、看板 = 已提交 fixture、复盘数字 = 已提交报表
 
-16. [支撑] 部署说明（五条上线路径，逐项标注本环境验证到什么程度）
+17. [支撑] 部署说明（五条上线路径，逐项标注本环境验证到什么程度）
     https://github.com/lixinlin616-png/prism-desk/blob/main/docs/DEPLOY.md
     · 含只读根文件系统的 PRISM_STATE_FILE、HOST/PORT 识别、反向代理会静默缓冲 SSE 流这个本机测不出来的坑，以及第 7 节 GitHub Pages 静态回放的完整能与不能对照表
 
 —— 必交 · X 传播 ——
 
-17. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
+18. [必交] X 传播｜推文链接（含 #BitgetHackathon + @Bitget_AI，已引用转发官方指定推文）
     https://x.com/lixinde_520/status/2108010882630562220
     · 必交且只能由参赛者本人发布：发到 X 并引用转发官方指定推文，内容需实质介绍本项目（纯转发或无实质介绍 = 提交不完整），发布后用 --xpost= 回填本行与报名表「X 传播推文链接」字段
 

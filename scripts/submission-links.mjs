@@ -78,6 +78,13 @@ export const MANIFEST = [
     what: `源码 + 真实价格数据 + ${TEST_COUNT} 个测试 + 60 项验证检查 + 逐字节可复现的看板 fixture；零第三方依赖，clone 后 node server.mjs 即可跑起带后端的完整版（默认 127.0.0.1:4310，端口被占会自动让位并提示 PRISM_PORT）`,
   },
   {
+    section: '必交 · 项目链接',
+    type: '项目链接｜Live 接线取证报告（bitget-mcp-server / bitget-signal 真实握手结果）',
+    target: 'docs/reports/live-wiring.md',
+    required: '支撑',
+    what: '由 `npm run live:record` 生成的 artefact，而不是一句声明：记录真实 DNS 解析结果、MCP `initialize` 的成败与耗时、一次对照出口探测（证明失败不是本机断网）、`resolved=N/20` intents 与 `N/5` skills，以及录制到的 `"synthetic": false` 响应条数；`npm run live:check` 断言报告与录制包一致，连不通时退出码为 1',
+  },
+  {
     section: '必交 · 运行记录（赛道三 AI Trading Desk：完整投研任务的演示或录屏）',
     type: '运行记录｜完整投研任务演示 · 讲解版（提问 → 可用判断）',
     target: 'docs/DEMO-SCRIPT.md',
