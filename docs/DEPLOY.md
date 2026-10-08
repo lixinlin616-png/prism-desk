@@ -254,7 +254,7 @@ npm run export:static              # 用真实离线引擎跑完六个场景 -> 
 npm run export:static -- --serve   # 顺便在本机 4321 端口预览，看到的就是 Pages 会发的东西
 ```
 
-`scripts/export-static.mjs` 启动的正是 `server.mjs` 启动的那条管线（同一个 hub、同一份语料、同一本价格库、同一块 `data/fixtures/board-seed.json` 看板），把每条 `/api/*` 路由**本来会返回的字节**录下来，包括 SSE 的每一个 stage 帧和帧间隔。六个场景之外，还录了四条中文自由提问（规划器自己选频道，不强制）。`web/static-adapter.js` 在浏览器里拦下 `window.fetch`，用这份录像回答 `/api/*`，其余请求原样放行。`web/app.js` 与实时后端是同一份：静态页检测到 adapter 脚本后会自动回放全频道扫描。
+`scripts/export-static.mjs` 启动的正是 `server.mjs` 启动的那条管线（同一个 hub、同一份语料、同一本价格库、同一块 `data/fixtures/board-seed.json` 看板），把每条 `/api/*` 路由**本来会返回的字节**录下来，包括 SSE 的每一个 stage 帧和帧间隔。六个场景之外，还录了七条中文自由提问（规划器自己选频道，不强制）。`web/static-adapter.js` 在浏览器里拦下 `window.fetch`，用这份录像回答 `/api/*`，其余请求原样放行。`web/app.js` 与实时后端是同一份：静态页检测到 adapter 脚本后会自动回放全频道扫描。
 
 | 静态回放**能**做 | 静态回放**做不到**（页面会明说） |
 |---|---|
